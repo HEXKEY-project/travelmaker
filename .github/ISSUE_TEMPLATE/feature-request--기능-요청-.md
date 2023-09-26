@@ -3,7 +3,7 @@ name: Feature request (기능 요청)
 about: Suggest an idea for this project
 title: ''
 labels: ''
-assignees: ''
+assignees: ctmeou
 
 ---
 
