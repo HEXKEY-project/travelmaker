@@ -1,6 +1,6 @@
 ---
 name: Feature
-about: Create a report to help us improve
+about: 작업 사항 적어주세요.
 title: ''
 labels: ''
 assignees: ''
