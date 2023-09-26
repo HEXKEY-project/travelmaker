@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+html {
+    font-size: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    width: 100%;
+    height: fit-content;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+#root {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    width: 1920px;
+    height: 64px;
+    -webkit-box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 90%);
+}
+
+
+.upper-buttons-justify {
+    margin: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-logo {
+    margin-right: 400px;
+}
+
+.middle-side-buttons {
+    font-size: 16px;
+    display: inline-flex;
+    gap: 48px;
+    align-items: center;
+    text-align: center;
+    margin-right: 400px;
+}
+
+.middle-side-buttons a {
+    text-decoration: black;
+}
+
+.right-buttons-justify {
+    display: inline-flex;
+    gap: 32px;
+}
+
+.right-buttons-justify img {
+    width: 23px;
+    height: 23px;
+    object-fit: cover;
+}
+
+.button-style {
+    transform: scale(1)
+    rotate(0deg);
+    opacity: 1;
+}
