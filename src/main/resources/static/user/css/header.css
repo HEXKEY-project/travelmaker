@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+/* 헤더 아래 콘텐츠 추가시 최상단 속성
+* 아래와 같이 적용 해주세요~!
+ margin-top : 64px;
+ position: inherit;
+*/
+
 html {
     font-size: 100%;
     font-family: 'Noto Sans KR', sans-serif;
@@ -54,6 +60,43 @@ a{
 .middle-side-buttons a {
     text-decoration: black;
 }
+
+/* 드롭다운 메뉴*/
+
+.add-cate {
+    display: block;
+    position: relative;
+}
+
+.add-sub {
+    visibility: hidden;
+    display: block;
+    width: 150px;
+    background-color: white;
+    position: absolute;
+    z-index: 200;
+    transform: translate(-30px, 30px);
+}
+
+.add-sub#soft {
+
+    transform: translate(120px, 30px);
+}
+
+{
+    display: block;
+}
+
+li.add-cate:hover ul.add-sub {
+    visibility: visible;
+}
+
+li.add-sub:hover ul.add-sub {
+    visibility: visible;
+}
+
+
+
 
 .right-buttons-justify {
     display: inline-flex;

@@ -5,7 +5,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
-    <link href="/user/css/01_style.css" rel="stylesheet" type="text/css">
+    <link href="/user/css/header.css" rel="stylesheet" type="text/css">
     <link href="https://unpkg.com/ress/dist/ress.min.css" rel="stylesheet" type="text/css">
     <title>header</title>
 </head>
@@ -19,14 +19,33 @@
             </a>
         </div>
 
-        <div class="middle-side-buttons">
-            <a href=#>BEST</a>
-            <a href=#>캐리어</a>
-            <a href=#>가방</a>
-            <a href=#>여행용품</a>
-            <a href=#>이벤트</a>
-            <a href=#>커뮤니티</a>
-        </div>
+        <ul class="middle-side-buttons">
+
+            <li><a href=#>BEST</a></li>
+
+            <li class="add-cate">
+                <a id="carrier" href=#>캐리어</a>
+                    <ul class="add-sub" id="hard">
+                    <li class="sub_a"><a href=# style="opacity:1;">하드</a></li>
+                        <li><a href=#>기내 (21형 이하)</a></li>
+                        <li><a href=#>중형 (22~26형)</a></li>
+                        <li><a href=#>대형 (27형 이상)</a></li>
+                    </ul>
+                    <ul class="add-sub" id="soft">
+                    <li class="sub_a"><a href=# style="opacity:1;">소프트</a></li>
+                        <li><a href=#>기내 (21형 이하)</a></li>
+                        <li><a href=#>중형 (22~26형)</a></li>
+                        <li><a href=#>대형 (27형 이상)</a></li>
+                    </ul>
+            </li>
+
+            <li><a href=#>가방</a></li>
+            <li><a href=#>여행용품</a></li>
+            <li><a href=#>이벤트</a></li>
+            <li><a href=#>커뮤니티</a></li>
+
+
+        </ul>
 
         <div class="right-buttons-justify">
 
@@ -50,9 +69,10 @@
                     <img src="/user/images/top_search.png">
                 </a>
             </div>
-
         </div>
+
     </div>
+</div>
 
 </div>
 </body>
