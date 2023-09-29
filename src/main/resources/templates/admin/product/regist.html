@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>regist</title>
     <link rel="stylesheet" type="text/css" href="/admin/css/regist.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/admin/js/regist.js" type="text/javascript"></script>
 
 </head>
@@ -16,8 +17,8 @@
         <p class="regist_content">기본 정보</p>
     </div>
     <div class="regist_form" id="wrapper">
-    <form name="regist" id="regist" action="admin/product/regist" method="post">
-        <diㅗv class="regist_tbl">
+    <form name="regist" id="regist" action="admin/product/regist" enctype="multipart/form-data" method="post">
+        <div class="regist_tbl">
             <table class="tal_regist">
                 <tbody>
                 <tr>
@@ -70,12 +71,26 @@
                 <tr>
                     <th class="th_content" scope="row">상품 옵션</th>
                     <td colspan="3">
-                    <select class="product_select" name="product_option">
-                        <option value>1차 옵션</option>
+                    <select id="product_option" class="product_select" name="product_option">
+                        <option value="firstOption">1차 옵션</option>
                         <option value="color">색상</option>
                         <option value="size">사이즈</option>
+                        <option value="inch">인치</option>
                         <option value="etc">기타</option>
                     </select>
+                    <select id="careerSize" name="careerSize">
+                        <option value="21">21인치 이하</option>
+                        <option value="22~26">22~26형</option>
+                        <option value="27">27형 이상</option>
+                    </select>
+                    <select id="etcSize" name="etcSize">
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    <input type="text" id="variableColor" name="variableColor" placeholder="색상">
+                    <input type="text" id="etcOption" name="etcOption" placeholder="기타옵션">
                     </td>
                 </tr>
                 <tr>
@@ -94,19 +109,34 @@
                     </td>
                     <td colspan="2">
                         <div>
-                        <label class="form_file">1</label><input type="file" name="product_content" placeholder="예)상세 페이지.jpg">
+                        <label class="form_file">1</label>
+                            <input class="img-area" type="text" placeholder="예)상세 페이지.jpg">
+                            <input class="file_input" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                        <button class="file_button">찾아보기</button>
                         </div>
                         <div>
-                        <label class="form_file">2</label><input type="file" name="product_content" placeholder="예)상세 페이지.jpg">
+                            <label class="form_file">2</label>
+                            <input class="img-area" type="text" placeholder="예)상세 페이지.jpg">
+                            <input class="file_input" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <button class="file_button">찾아보기</button>
                         </div>
                         <div>
-                        <label class="form_file">3</label><input type="file" name="product_content" placeholder="예)상세 페이지.jpg">
+                            <label class="form_file">3</label>
+                            <input class="img-area" type="text" placeholder="예)상세 페이지.jpg">
+                            <input class="file_input" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <button class="file_button">찾아보기</button>
                         </div>
                         <div>
-                        <label class="form_file">4</label><input type="file" name="product_content" placeholder="예)상세 페이지.jpg">
+                            <label class="form_file">4</label>
+                            <input class="img-area" type="text" placeholder="예)상세 페이지.jpg">
+                            <input class="file_input" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <button class="file_button">찾아보기</button>
                         </div>
                         <div>
-                        <label class="form_file">5</label><input type="file" name="product_content" placeholder="예)상세 페이지.jpg">
+                            <label class="form_file">5</label>
+                            <input class="img-area" type="text" placeholder="예)상세 페이지.jpg">
+                            <input class="file_input" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <button class="file_button">찾아보기</button>
                         </div>
                         <div id="add_content"><button type="button">이미지 추가하기</button></div>
                     </td>
@@ -115,26 +145,41 @@
                     <th scope="row">상품이미지</th>
                     <td colspan="3">
                         <div>
-                        <label class="form_img">대표 이미지</label><input type="file" name="product_img" placeholder="예)정면.jpg">
+                            <label class="form_file">대표 이미지</label>
+                            <input class="img-area" type="text" placeholder="예)상세 페이지.jpg">
+                            <input class="file_input" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <button class="file_button">찾아보기</button>
                         </div>
                         <div>
-                        <label class="form_img">각도별 이미지</label><input type="file" name="product_img" placeholder="예)각도별.jpg">
+                            <label class="form_file">각도별 이미지</label>
+                            <input class="img-area" type="text" placeholder="예)상세 페이지.jpg">
+                            <input class="file_input" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <button class="file_button">찾아보기</button>
                         </div>
                         <div>
-                        <label class="form_img">각도별 이미지</label><input type="file" name="product_img" placeholder="예)각도별.jpg">
+                            <label class="form_file">각도별 이미지</label>
+                            <input class="img-area" type="text" placeholder="예)상세 페이지.jpg">
+                            <input class="file_input" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <button class="file_button">찾아보기</button>
                         </div>
                         <div>
-                        <label class="form_img">각도별 이미지</label><input type="file" name="product_img" placeholder="예)각도별.jpg">
+                            <label class="form_file">각도별 이미지</label>
+                            <input class="img-area" type="text" placeholder="예)상세 페이지.jpg">
+                            <input class="file_input" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <button class="file_button">찾아보기</button>
                         </div>
                         <div>
-                        <label class="form_img">각도별 이미지</label><input type="file" name="product_img" placeholder="예)각도별.jpg">
+                            <label class="form_file">각도별 이미지</label>
+                            <input class="img-area" type="text" placeholder="예)상세 페이지.jpg">
+                            <input class="file_input" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <button class="file_button">찾아보기</button>
                         </div>
                         <div id="add_img"><button type="button">이미지 추가하기</button></div>
                     </td>
                 </tr>
                 </tbody>
             </table>
-        </diㅗv>
+        </div>
         <input type="submit" value="상품등록">
     </form>
     </div>

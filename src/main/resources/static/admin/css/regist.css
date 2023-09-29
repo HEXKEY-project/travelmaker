@@ -157,5 +157,17 @@ select {
     padding: 60px;
 }
 
+#add_img {
+    display: flex;
+    width: 212px;
+    height: 30px;
+    padding: 60px;
+    justify-content: center;
+    align-items: center;
+}
+
+.file_input {
+    display: none;
+}
 
 
