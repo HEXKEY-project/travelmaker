@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.memberListtTitle{
+    padding-top: 40px;
+    padding-left: 24px;
+
+}
+
+.Main{
+    display: flex;
+}
+
+.Main > .memberList {
+    width: 1556px;
+    height: 1890px;
+}
+
+.memberList >.inputSerch {
+    width: 80%;
+    margin: 100px;
+}
+.inputSerch .test {
+    display: flex;
+    height: 50px;
+}
+
+
+
+
+
+

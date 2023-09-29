@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 회원리스트</title>
+    <!-- 외부 스타일 시트 -->
+    <link href="/admin/css/style.css" rel="stylesheet" type="text/css">
+    <!-- test-->
+    <link href="/admin/css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!--header 영역-->
+    <div th:replace="common/admin/header.html"></div>
+    <!-- Main 영역 -->
+    <div class="Main">
+        <!--nav영역 -->
+        <div class="headerBar" th:replace="common/admin/nav.html"></div>
+
+        <div class="memberList">
+            <div class="memberListtTitle">
+                <h1>회원 관리</h1>
+            </div>
+            <div class="memberListtTitle test">
+                <h2>회원정보 조회</h2>
+            </div>
+
+            <div class="inputSerch">
+                <hr>
+                <div>
+                    <div class="inputSerch test">
+                        <div class="inputSerch test1">
+                            아이디
+                        </div>
+                        <div class="inputSerch tset2">
+                            <input type="text" name="id">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="inputSerch test">
+                        회원등급
+                    </div>
+                    <hr>
+                    <div class="inputSerch test">
+                        가입일
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
