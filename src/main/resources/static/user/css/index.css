@@ -1,0 +1,34 @@
+table {
+    width: 100%;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+input, select, button {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.form_img {
+    text-align: center;
+}
+
+label.form_img {
+    width: 72px;
+    display: inline-flex;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+th, td {
+    border: 1px solid;
+    height: 50px;
+}
+
+th {
+    width: 90px;
+}
+
+td#form_product_description {
+    width: 90px;
+}
