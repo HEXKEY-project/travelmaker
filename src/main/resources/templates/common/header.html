@@ -79,9 +79,14 @@
                 </a>
             </div>
             <div class="myshop">
-                <a href=#>
+                <a class="cate" id="myshop" href=#>
                     <img src="/user/images/top_myshop.png">
                 </a>
+                <ul class="add-sub-my">
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
+                    <li><a href="#">주문조회</a></li>
+                </ul>
             </div>
             <div class="cart">
                 <a href=#>
@@ -186,6 +191,38 @@
     });
 
     addSubCom.forEach((submenu) => {
+        submenu.addEventListener("mouseenter", () => {
+            clearTimeout(timeoutId);
+            submenu.style.display = "block";
+        });
+
+        submenu.addEventListener("mouseleave", () => {
+            timeoutId = setTimeout(() => {
+                submenu.style.display = "none";
+            }, 300);
+        });
+    });
+
+    /* myshop */
+    const addMy = document.getElementById("myshop");
+    const addSubMy = document.querySelectorAll(".add-sub-my");
+
+    addMy.addEventListener("mouseenter", () => {
+        clearTimeout(timeoutId);
+        addSubMy.forEach((submenu) => {
+            submenu.style.display = "block";
+        });
+    });
+
+    addMy.addEventListener("mouseleave", () => {
+        timeoutId = setTimeout(() => {
+            addSubMy.forEach((submenu) => {
+                submenu.style.display = "none";
+            });
+        }, 300);
+    });
+
+    addSubMy.forEach((submenu) => {
         submenu.addEventListener("mouseenter", () => {
             clearTimeout(timeoutId);
             submenu.style.display = "block";

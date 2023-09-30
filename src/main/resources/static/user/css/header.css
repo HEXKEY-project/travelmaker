@@ -158,6 +158,38 @@ a{
     background-color: #f0f0f0;
 }
 
+/* myshop */
+
+.add-sub-my {
+    display: none;
+}
+
+.add-sub-my {
+    transform: translate(-30px, 15px);
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+}
+
+.add-sub-my li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.add-sub-my li a {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.add-sub-my li a:hover {
+    background-color: #f0f0f0;
+}
+
 /* -------------------------------------- */
 
 .right-buttons-justify {
