@@ -122,6 +122,7 @@ window.onload = function () {
     }
 
 
+
 }
 
 $(function (){
@@ -183,34 +184,75 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-/* 찾아보기 버튼 누를 시 이미지 파일 불러오기 */
-// $(function (){
-//    $('#content_button1').click(function (e){
-//       e.preventDefault();
-//       $('#content_input1').click();
-//    });
-// });
-$(document).ready(function() {
-    // 찾아보기 버튼 클릭 시 input 엘리먼트 클릭 이벤트를 전달
-    $(".file_button").click(function() {
-        $(this).prev(".file_input").click();
-    });
 
-    // 파일 input의 값이 변경되었을 때, 해당 값을 img-area에 표시
-    $(".file_input").change(function() {
-        var filename = $(this).val().split('\\').pop(); // 파일 경로에서 파일 이름 추출
-        $(this).prev(".img-area").val(filename);
+document.addEventListener("DOMContentLoaded", function() {
+    // 모든 input 요소에 대한 이벤트 리스너 등록
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+    fileInputs.forEach(function(fileInput) {
+        fileInput.addEventListener('change', function() {
+            // 해당하는 .img-area 요소를 찾아 파일 이름 업데이트
+            const imgArea = this.parentElement.querySelector('.img-area');
+            if (this.files.length > 0) {
+                imgArea.value = this.files[0].name;
+            } else {
+                imgArea.value = "예)상세 페이지.jpg";
+            }
+        });
     });
 });
 
+/* 각 이미지 div별 label생성 */
+document.addEventListener("DOMContentLoaded", function () {
+    const imgContentInputs = document.querySelectorAll(".img-input");
+
+    imgContentInputs.forEach(function (imgContentInputs, index) {
+        const labelText = document.createElement("label");
+        labelText.className = "text";
+        labelText.textContent = index === 0 ? "대표 이미지" : "각도별 이미지";
+        labelText.style.marginLeft = "16px";
+        imgContentInputs.insertBefore(labelText, imgContentInputs.firstChild);
+
+    });
+});
+
+/* 이미지 추가하기 버튼 클릭시 이벤트 */
+document.addEventListener("DOMContentLoaded", function () {
+
+    const addButton = document.querySelector("#add_content");
+
+    addButton.addEventListener("click", function (){
+
+        const contentInput = document.createElement("div");
+        contentInput.classList.add("content-input");
+
+        const imgArea = document.createElement("input");
+        imgArea.classList.add("img-area");
+
+        imgArea.setAttribute("value", "예)상세 페이지.jpg");
+        imgArea.setAttribute("placeholder", "예)상세 페이지.jpg");
+
+        const counterId = "productContent" + (document.querySelectorAll(".content-input").length + 1);
+
+        const productContent = document.createElement("input");
+        productContent.setAttribute("type", "file");
+        productContent.setAttribute("name", "product_content");
+        productContent.setAttribute("accept", "image/gif,image/jpeg,image/png");
+        productContent.setAttribute("id", counterId);
+
+        const fileButton = document.createElement("label");
 
 
+        fileButton.setAttribute("for", counterId);
+        fileButton.classList.add("file_button");
+        fileButton.textContent = "찾아보기";
 
+        contentInput.appendChild(imgArea);
+        contentInput.appendChild(productContent);
+        contentInput.appendChild(fileButton);
 
+        const newContentInput = document.querySelector(".content-input");
+        newContentInput.lastChild
 
+    });
 
-
-
-
-
-
+});

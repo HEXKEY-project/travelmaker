@@ -153,25 +153,212 @@ select {
     line-height: 24px;
 }
 
+#div_add_content {
+    display: flex;
+    width: 338px;
+    height: 62px;
+    padding: 16px 86px 16px 40px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#div_add_img {
+    display: flex;
+    width: 338px;
+    height: 62px;
+    padding: 16px 86px 16px 40px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
 #add_content {
-    padding: 60px;
+    display: flex;
+    height: 30px;
+    margin-left: 4px;
+    padding: var(--borderRadius, 4px) 75px var(--borderRadius, 4px) 60px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    color: var(--components-backdrop-fill, rgba(0, 0, 0, 0.50));
+
+
+    /* button/small */
+    font-family: Roboto;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 169.231% */
+    letter-spacing: 0.46px;
+    text-transform: uppercase;
 }
 
 #add_img {
     display: flex;
-    width: 212px;
     height: 30px;
-    padding: 60px;
+    padding: var(--borderRadius, 4px) 75px var(--borderRadius, 4px) 60px;
+    margin-left: 86px;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
+    color: var(--components-backdrop-fill, rgba(0, 0, 0, 0.50));
+
+    /* button/small */
+    font-family: Roboto;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 169.231% */
+    letter-spacing: 0.46px;
+    text-transform: uppercase;
 }
 
-.file_input {
-    display: none;
+
+:root {
+    --borderRadius: 4px; /* 변수를 정의하고 값을 할당합니다. */
+    --components-backdrop-fill: rgba(0, 0, 0, 0.50);
+    --5: var(--5, 40px);
+    --1: var(--1, 8px);
+    --2: var(--2, 16px);
+    --text-primary: rgba(0, 0, 0, 0.87);
 }
 
-.file_button {
+.content-input .img-area {
     border-radius: 4px;
+    border: 1px solid  rgba(0, 0, 0, 0.23);
+
+    width: 212px;
+    height: var(--5, 40px);
+    padding: 0px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+
+    color: rgba(0, 0, 0, 0.23);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Noto Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 171.429% */
+    letter-spacing: 0.15px;
+}
+
+
+.content-input .file_button {
+
+    padding: var(--borderRadius, 4px) 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--components-backdrop-fill, rgba(0, 0, 0, 0.50));
+
+    border-radius: var(--borderRadius, 4px);
     border: 1px solid rgba(0, 0, 0, 0.28);
     background: #EDEDED;
+
+    /* button/small */
+    font-family: Roboto;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 169.231% */
+    letter-spacing: 0.46px;
+    text-transform: uppercase;
+}
+
+.content-input input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.img-input .img-area {
+    border-radius: 4px;
+    border: 1px solid  rgba(0, 0, 0, 0.23);
+
+    width: 212px;
+    height: var(--5, 40px);
+    padding: 0px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+
+    color: rgba(0, 0, 0, 0.23);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Noto Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 171.429% */
+    letter-spacing: 0.15px;
+}
+
+.img-input .file_button{
+    padding: var(--borderRadius, 4px) 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--components-backdrop-fill, rgba(0, 0, 0, 0.50));
+
+    border-radius: var(--borderRadius, 4px);
+    border: 1px solid rgba(0, 0, 0, 0.28);
+    background: #EDEDED;
+
+    /* button/small */
+    font-family: Roboto;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 169.231% */
+    letter-spacing: 0.46px;
+    text-transform: uppercase;
+}
+
+.img-input input[type="file"] {
+
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+#productRegist {
+    display: flex;
+    padding: var(--1, 8px) var(--2, 16px);
+    align-items: flex-start;
+    gap: var(--borderRadius, 4px);
+    margin-left: 1063px;
+
+    border-radius: var(--1, 8px);
+    background: #0075BD;
+
+    color: #FFF;
+    text-align: right;
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* Button */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+}
+
+.text {
+    color: var(--text-primary, rgba(0, 0, 0, 0.87));
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* typography/body2 */
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 143%; /* 20.02px */
+    letter-spacing: 0.17px;
 }
