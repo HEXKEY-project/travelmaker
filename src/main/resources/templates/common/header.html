@@ -24,26 +24,50 @@
             <li><a href=#>BEST</a></li>
 
             <li class="add-cate">
-                <a id="carrier" href=#>캐리어</a>
-                    <ul class="add-sub" id="hard">
-                    <li class="sub_a"><a href=# style="opacity:1;">하드</a></li>
+                <a class="cate" id="carrier" href=#>캐리어</a>
+                    <ul class="add-sub">
+                    <li class="sub_a"><a href=#>하드</a></li>
                         <li><a href=#>기내 (21형 이하)</a></li>
                         <li><a href=#>중형 (22~26형)</a></li>
                         <li><a href=#>대형 (27형 이상)</a></li>
-                    </ul>
-                    <ul class="add-sub" id="soft">
-                    <li class="sub_a"><a href=# style="opacity:1;">소프트</a></li>
+                        <br>
+                    <li class="sub_a"><a href=#>소프트</a></li>
                         <li><a href=#>기내 (21형 이하)</a></li>
                         <li><a href=#>중형 (22~26형)</a></li>
                         <li><a href=#>대형 (27형 이상)</a></li>
                     </ul>
             </li>
 
-            <li><a href=#>가방</a></li>
+            <li class="add-cate">
+                <a class="cate" id="bags" href="#">가방</a>
+                <ul class="add-sub-bags">
+                    <li class="sub_a"><a href="#">배낭</a></li>
+                        <li><a href="#">여행 배낭</a></li>
+                        <li><a href="#">배낭 용품</a></li>
+                        <li><a href="#">백팩</a></li>
+                        <br>
+                    <li class="sub_a"><a href="#">보조가방</a></li>
+                        <li><a href="#">접이식 | 폴딩백</a></li>
+                        <li><a href="#">보스턴 | 더플백</a></li>
+                        <li><a href="#">크로스 | 숄더백</a></li>
+                        <li><a href="#">도난방지백</a></li>
+                        <li><a href="#">기타 백</a></li>
+                </ul>
+            </li>
+
             <li><a href=#>여행용품</a></li>
             <li><a href=#>이벤트</a></li>
-            <li><a href=#>커뮤니티</a></li>
 
+            <li class="add-cate">
+                <a class="cate" id="community" href=#>커뮤니티</a>
+                <ul class="add-sub-com">
+                    <li class="sub_a"><a href="#">게시판</a></li>
+                    <li><a href="#">ABOUT US</a></li>
+                    <li><a href="#">NOTICE</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Q&A</a></li>
+                </ul>
+            </li>
 
         </ul>
 
@@ -75,5 +99,106 @@
 </div>
 
 </div>
+
+<script>
+    const addCate = document.getElementById("carrier");
+    const addSubMenus = document.querySelectorAll(".add-sub");
+
+    let timeoutId;
+
+    addCate.addEventListener("mouseenter", () => {
+        clearTimeout(timeoutId);
+        addSubMenus.forEach((submenu) => {
+            submenu.style.display = "block";
+        });
+    });
+
+    addCate.addEventListener("mouseleave", () => {
+        timeoutId = setTimeout(() => {
+            addSubMenus.forEach((submenu) => {
+                submenu.style.display = "none";
+            });
+        }, 300);
+    });
+
+    addSubMenus.forEach((submenu) => {
+        submenu.addEventListener("mouseenter", () => {
+            clearTimeout(timeoutId);
+            submenu.style.display = "block";
+        });
+
+        submenu.addEventListener("mouseleave", () => {
+            timeoutId = setTimeout(() => {
+                submenu.style.display = "none";
+            }, 300);
+        });
+    });
+
+    /* bags */
+    const addBags = document.getElementById("bags");
+    const addSubBags = document.querySelectorAll(".add-sub-bags");
+
+    addBags.addEventListener("mouseenter", () => {
+        clearTimeout(timeoutId);
+        addSubBags.forEach((submenu) => {
+            submenu.style.display = "block";
+        });
+    });
+
+    addBags.addEventListener("mouseleave", () => {
+        timeoutId = setTimeout(() => {
+            addSubBags.forEach((submenu) => {
+                submenu.style.display = "none";
+            });
+        }, 300);
+    });
+
+    addSubBags.forEach((submenu) => {
+        submenu.addEventListener("mouseenter", () => {
+            clearTimeout(timeoutId);
+            submenu.style.display = "block";
+        });
+
+        submenu.addEventListener("mouseleave", () => {
+            timeoutId = setTimeout(() => {
+                submenu.style.display = "none";
+            }, 300);
+        });
+    });
+
+    /* community */
+    const addCom = document.getElementById("community");
+    const addSubCom = document.querySelectorAll(".add-sub-com");
+
+    addCom.addEventListener("mouseenter", () => {
+        clearTimeout(timeoutId);
+        addSubCom.forEach((submenu) => {
+            submenu.style.display = "block";
+        });
+    });
+
+    addCom.addEventListener("mouseleave", () => {
+        timeoutId = setTimeout(() => {
+            addSubCom.forEach((submenu) => {
+                submenu.style.display = "none";
+            });
+        }, 300);
+    });
+
+    addSubCom.forEach((submenu) => {
+        submenu.addEventListener("mouseenter", () => {
+            clearTimeout(timeoutId);
+            submenu.style.display = "block";
+        });
+
+        submenu.addEventListener("mouseleave", () => {
+            timeoutId = setTimeout(() => {
+                submenu.style.display = "none";
+            }, 300);
+        });
+    });
+
+</script>
+
 </body>
 </html>

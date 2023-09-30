@@ -51,52 +51,114 @@ a{
 .middle-side-buttons {
     font-size: 16px;
     display: inline-flex;
+    height: 64px;
     gap: 48px;
     align-items: center;
     text-align: center;
     margin-right: 400px;
 }
 
-.middle-side-buttons a {
-    text-decoration: black;
-}
-
 /* 드롭다운 메뉴*/
 
-.add-cate {
-    display: block;
-    position: relative;
+.sub_a {
+    font-weight: bolder;
 }
 
 .add-sub {
-    visibility: hidden;
-    display: block;
-    width: 150px;
-    background-color: white;
+    display: none;
+}
+
+.add-sub {
+    transform: translate(-50px, 44px);
     position: absolute;
-    z-index: 200;
-    transform: translate(-30px, 30px);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
 }
 
-.add-sub#soft {
-
-    transform: translate(120px, 30px);
+.add-sub li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-{
+.add-sub li a {
     display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
 }
 
-li.add-cate:hover ul.add-sub {
-    visibility: visible;
+.add-sub li a:hover {
+    background-color: #f0f0f0;
 }
 
-li.add-sub:hover ul.add-sub {
-    visibility: visible;
+/* ---- 가방 ---- */
+
+.add-sub-bags {
+    display: none;
 }
 
+.add-sub-bags {
+    transform: translate(-20px, 44px);
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+}
 
+.add-sub-bags li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
 
+.add-sub-bags li a {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.add-sub-bags li a:hover {
+    background-color: #f0f0f0;
+}
+
+/* ---- 커뮤니티 ---- */
+
+.add-sub-com {
+    display: none;
+}
+
+.add-sub-com {
+    transform: translate(-20px, 44px);
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+}
+
+.add-sub-com li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.add-sub-com li a {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.add-sub-com li a:hover {
+    background-color: #f0f0f0;
+}
+
+/* -------------------------------------- */
 
 .right-buttons-justify {
     display: inline-flex;
