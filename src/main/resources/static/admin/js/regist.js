@@ -1,9 +1,3 @@
-/*window.onload = function() {
-    const $button = document.querySelector('#add_content');
-    $button.onclick = function () {
-        alert('이미지추가하는 코드 만드는중')
-    };
-}*/
 window.onload = function () {
     let big = ['', 'CR', 'BG', 'TI'];
     let middle = [['2차 분류'],
@@ -127,11 +121,6 @@ window.onload = function () {
 
     }
 
-    /* 찾아보기 버튼 누를 시 이미지 파일 불러오기 */
-    const fileInput = document.querySelector('.file_input');
-    const fileButton = document.querySelector('.file_button');
-
-    fileButton.addEventListener('click', () => fileInput.click());
 
 }
 
@@ -181,13 +170,44 @@ $(function (){
 
 });
 
-/*(function (){
+/* label별 index 화면 표시 */
+document.addEventListener("DOMContentLoaded", function () {
+    const imgContentInputs = document.querySelectorAll(".content-input");
 
-    const imgArea = document.querySelectorAll(".img-area");
-    const fileElements = document.querySelectorAll("[type=file]");
-    imgArea.forEach(item => item.addEventListener('click', open));
+    imgContentInputs.forEach(function (imgContentInputs, index) {
+        const labelNumber = document.createElement("label");
+        labelNumber.className = "number";
+        labelNumber.textContent = index + 1;
+        labelNumber.style.marginLeft = "16px";
+        imgContentInputs.insertBefore(labelNumber, imgContentInputs.firstChild);
+    });
+});
 
-})();*/
+/* 찾아보기 버튼 누를 시 이미지 파일 불러오기 */
+// $(function (){
+//    $('#content_button1').click(function (e){
+//       e.preventDefault();
+//       $('#content_input1').click();
+//    });
+// });
+$(document).ready(function() {
+    // 찾아보기 버튼 클릭 시 input 엘리먼트 클릭 이벤트를 전달
+    $(".file_button").click(function() {
+        $(this).prev(".file_input").click();
+    });
+
+    // 파일 input의 값이 변경되었을 때, 해당 값을 img-area에 표시
+    $(".file_input").change(function() {
+        var filename = $(this).val().split('\\').pop(); // 파일 경로에서 파일 이름 추출
+        $(this).prev(".img-area").val(filename);
+    });
+});
+
+
+
+
+
+
 
 
 
