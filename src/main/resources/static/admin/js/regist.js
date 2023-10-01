@@ -181,7 +181,10 @@ document.addEventListener("DOMContentLoaded", function () {
         labelNumber.textContent = index + 1;
         labelNumber.style.marginLeft = "16px";
         imgContentInputs.insertBefore(labelNumber, imgContentInputs.firstChild);
+
+
     });
+
 });
 
 
@@ -215,12 +218,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-/* 이미지 추가하기 버튼 클릭시 이벤트 */
+/* 상세설명 이미지 추가하기 버튼 클릭시 이벤트 */
 document.addEventListener("DOMContentLoaded", function () {
 
     const addButton = document.querySelector("#add_content");
 
+    let counter = 6;
+
     addButton.addEventListener("click", function (){
+
 
         const contentInput = document.createElement("div");
         contentInput.classList.add("content-input");
@@ -246,12 +252,112 @@ document.addEventListener("DOMContentLoaded", function () {
         fileButton.classList.add("file_button");
         fileButton.textContent = "찾아보기";
 
+
+        const labelNumber = document.createElement("label");
+
+        labelNumber.setAttribute("class", "number");
+        labelNumber.className = "number";
+        labelNumber.textContent = counter;
+        labelNumber.style.marginLeft = "16px";
+
+        counter++;
+
+        contentInput.appendChild(labelNumber);
         contentInput.appendChild(imgArea);
         contentInput.appendChild(productContent);
         contentInput.appendChild(fileButton);
 
-        const newContentInput = document.querySelector(".content-input");
-        newContentInput.lastChild
+
+        const divAddContent = document.getElementById("div_add_content");
+
+        divAddContent.parentNode.insertBefore(contentInput, divAddContent);
+
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        fileInputs.forEach(function(fileInput) {
+            fileInput.addEventListener('change', function() {
+                // 해당하는 .img-area 요소를 찾아 파일 이름 업데이트
+                const imgArea = this.parentElement.querySelector('.img-area');
+                if (this.files.length > 0) {
+                    imgArea.value = this.files[0].name;
+                } else {
+                    imgArea.value = "예)상세 페이지.jpg";
+                }
+            });
+        });
+
+
+    });
+
+});
+
+
+/* 상품 이미지 추가하기 버튼 클릭시 이벤트 */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const addImgButton = document.querySelector("#add_img");
+
+
+    addImgButton.addEventListener("click", function (){
+
+
+        const imgInput = document.createElement("div");
+        imgInput.classList.add("img-input");
+
+        const imgArea2 = document.createElement("input");
+        imgArea2.classList.add("img-area2");
+
+        imgArea2.setAttribute("value", "예) 각도별 이미지.jpg");
+        imgArea2.setAttribute("placeholder", "예) 각도별 이미지.jpg");
+
+        const counterId2 = "productImg" + (document.querySelectorAll(".img-input").length + 1);
+
+        const productImg = document.createElement("input");
+        productImg.setAttribute("type", "file");
+        productImg.setAttribute("name", "product_content");
+        productImg.setAttribute("accept", "image/gif,image/jpeg,image/png");
+        productImg.setAttribute("id", counterId2);
+
+        const fileButton2 = document.createElement("label");
+
+
+        fileButton2.setAttribute("for", counterId2);
+        fileButton2.classList.add("file_button");
+        fileButton2.textContent = "찾아보기";
+
+
+        const labelName = document.createElement("label");
+
+        labelName.setAttribute("class", "text");
+        labelName.className = "text";
+        labelName.textContent = "각도별 이미지";
+        labelName.style.marginLeft = "16px";
+
+
+
+        imgInput.appendChild(labelName);
+        imgInput.appendChild(imgArea2);
+        imgInput.appendChild(productImg);
+        imgInput.appendChild(fileButton2);
+
+
+        const divAddImg = document.getElementById("div_add_img");
+
+        divAddImg.parentNode.insertBefore(imgInput, divAddImg);
+
+        const imgFileInputs = document.querySelectorAll('input[type="file"]');
+        imgFileInputs.forEach(function(imgFileInput) {
+            imgFileInput.addEventListener('change', function() {
+                // 해당하는 .img-area 요소를 찾아 파일 이름 업데이트
+                const imgArea2 = this.parentElement.querySelector('.img-area2');
+                if (this.files.length > 0) {
+                    imgArea2.value = this.files[0].name;
+                } else {
+                    imgArea2.value = "예) 각도별 이미지.jpg";
+                }
+            });
+        });
+
 
     });
 

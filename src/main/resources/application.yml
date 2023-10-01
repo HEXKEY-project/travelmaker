@@ -6,8 +6,13 @@ spring:
     username: C##TRAVELMAKER
     password: TRAVELMAKER
 
-  # file upload config
+# file upload config
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+      location: C:/Lecture/SubProject/TravelMaker/
+
+# image upload dir
+image:
+  image-dir: src/main/resources/static/admin/images/
