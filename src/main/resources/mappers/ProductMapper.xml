@@ -80,12 +80,12 @@
         )
         VALUES
         (
-          SEQ_FILE_CODE
+          SEQ_FILE_CODE.NEXTVAL
         , #{ fileType }
         , #{ originalName }
         , #{ savedName }
         , #{ filePath }
-        , #{ productSeq }
+        , SEQ_PRODUCT_SEQ.NEXTVAL
         )
     </insert>
 </mapper>

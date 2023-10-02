@@ -314,7 +314,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const productImg = document.createElement("input");
         productImg.setAttribute("type", "file");
-        productImg.setAttribute("name", "product_content");
+        productImg.setAttribute("name", "product_img");
         productImg.setAttribute("accept", "image/gif,image/jpeg,image/png");
         productImg.setAttribute("id", counterId2);
 
