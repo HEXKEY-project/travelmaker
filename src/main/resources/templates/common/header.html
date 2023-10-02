@@ -93,17 +93,103 @@
                     <img src="/user/images/top_cart.png">
                 </a>
             </div>
-            <div class="search">
+            <div id="searchBtn" class="search" onclick="slideDown()">
                 <a href=#>
                     <img src="/user/images/top_search.png">
                 </a>
             </div>
         </div>
-
     </div>
-</div>
+
+    <div id="keyword-search" class="slide-search">
+        <a href="#" id="closeBtn" class="closebtn" onclick="closeSlide()">
+            <img src="/user/images/search_close.png">
+        </a>
+
+        <div class="search-inner">
+            <form id="searchForm" action="/search.html" method="get" target="_self">
+                <fieldset title="검색어를 입력해주세요.">
+                <input id="keyword" name="keyword" class="inputTypeText" placeholder="검색어를 입력하세요."
+                       value="검색어를 입력하세요." type="text">
+                <input type="image" src="/user/images/top_search.png" class="btn-src" alt="검색이미지"
+                       onclick="submitSearch(this); return false">
+                </fieldset>
+            </form>
+
+            <div class="hot-keyword">
+                <div class="search-title">인기 검색어</div>
+                <div class="search-tag">
+                    <a href="#" class="tag">#캐리어</a>
+                    <a href="#" class="tag">#캐리어커버</a>
+                    <a href="#" class="tag">#캐리어벨트</a>
+                    <a href="#" class="tag">#와이어</a>
+                    <a href="#" class="tag">#배낭</a>
+                    <a href="#" class="tag">#도난방지</a>
+                    <a href="#" class="tag">#복대</a>
+                    <a href="#" class="tag">#네임택</a>
+                    <a href="#" class="tag">#여권케이스</a>
+                    <a href="#" class="tag">#</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const searchBtn = document.getElementById("searchBtn");
+        const slide = document.getElementById("keyword-search");
+        let currentY = -350;
+        const targetY = 0;
+        let isAnimating = false;
+
+        searchBtn.addEventListener("click", () => {
+            if (!isAnimating) {
+                animateElement();
+            }
+        });
+
+        function animateElement() {
+            isAnimating = true;
+            function animate() {
+                currentY +=20;
+
+                slide.style.top = currentY + "px";
+
+                if (currentY < targetY) {
+                    requestAnimationFrame(animate);
+                } else {
+                    slide.style.top = 0 + "px";
+                    isAnimating = false;
+                }
+            }
+            animate();
+        }
+
+        function closeSlide() {
+            let before = parseInt(getComputedStyle(slide).top);
+            const after = -350
+            isAnimating = true;
+
+            function animate() {
+                before -= 20;
+
+                slide.style.top = before + "px";
+
+                if (before > after) {
+                    requestAnimationFrame(animate);
+                } else {
+                    slide.style.top = -350 + "px";
+                    isAnimating = false;
+                }
+            }
+            animate();
+        }
+    </script>
+
 
 </div>
+
+
+
 
 <script>
     const addCate = document.getElementById("carrier");
@@ -234,6 +320,8 @@
             }, 300);
         });
     });
+
+
 
 </script>
 
