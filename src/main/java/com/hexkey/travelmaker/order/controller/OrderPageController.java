@@ -9,4 +9,11 @@ public class OrderPageController {
     @GetMapping("/order/page")
     public void orderPage () {}
 
+    @GetMapping("/map/map")
+    public void map () {}
+
+    @GetMapping("/order/pay")
+    public void pay () {}
+
+
 }
