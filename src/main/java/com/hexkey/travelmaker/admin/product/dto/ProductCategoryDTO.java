@@ -12,5 +12,4 @@ public class ProductCategoryDTO {
     private Long categoryCode;
     private String categoryName;
     private Long refCategoryCode;
-    private String categoryClass;
 }
