@@ -1,6 +1,28 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+#point_use_button:hover {
+      cursor: pointer;
+}
+
+#p_final {
+      font-size: 85%;
+}
+
+#h2_final {
+      margin: 0 auto;
+}
+
+#button_final {
+      cursor: pointer;
+      width: 100%;
+      height: 50px;
+      background-color: #3971FF;
+      text-align: center;
+      color: #fff;
+      border: none;
+}
+
 .tail {
       background-color: #f2f2f2;
       padding: 0px;
@@ -15,9 +37,18 @@
 
 }
 
+
+.ship_click {
+      background-color: black;
+}
+
+#title_ship, #title_discount, #title_product, #title_pay, #title_pay_kind, #title_point {
+      position: relative;
+}
+
 #title_h2_span {
       position: absolute;
-      left: 40px;
+      left: 20px;
       content: '';
       width: 10px; /* 사이즈 */
       height: 10px; /* 사이즈 */
@@ -25,18 +56,11 @@
       border-right: 3px solid #000; /* 선 두께 */
       transform: rotate(225deg); /* 각도 */
       transition: 0.3s ;
-      bottom: 22px;
+      top: 25px;
+      cursor: pointer;
 }
 
-.ship_click {
-      background-color: black;
-}
-
-#title_ship, #title_discount, #title_product {
-      position: relative;
-}
-
-#ship_h2_span, #product_h2_span, #discount_h2_span {
+#ship_h2_span, #product_h2_span, #discount_h2_span, #pay_h2_span, #point_h2_span, #pay_kind_h2_span {
       position: absolute;
       right: 40px;
       content: '';
@@ -44,12 +68,12 @@
       height: 10px; /* 사이즈 */
       border-top: 3px solid #000; /* 선 두께 */
       border-right: 3px solid #000; /* 선 두께 */
-      transform: rotate(135deg); /* 각도 */
+      transform: rotate(315deg); /* 각도 */
       transition: 0.3s ;
       top: 8px;
 }
 
-#ship_h2:hover, #product_h2:hover, #discount_h2:hover {
+#ship_h2:hover, #product_h2:hover, #discount_h2:hover, #pay_h2, #pay_kind_h2, #point_h2 {
       cursor: pointer;
 }
 
@@ -92,6 +116,7 @@ hr {
       background-color: #dbdbdb;
       padding: 5px;
       opacity: 50%;
+      margin: 0 auto;
 }
 
 .main {

@@ -16,7 +16,7 @@
 <div class="main" id="main">
 
     <div id="title">
-        <h2> <span id="title_h2_span"> </span> 트래블 메이커</h2>
+        <h2><span id="title_h2_span"> </span> 트래블 메이커</h2>
     </div>
     <div id="sub_title">
         <h2>주문/결제</h2>
@@ -161,7 +161,7 @@
                 <div class="contents" id="contents_discount">
                     적립금
                     <input type="text">
-                    <button>전액 사용</button>
+                    <input id="point_use_button" type="button" value="전액 사용">
                 </div>
                 <div>
                     보유잔액 :
@@ -180,11 +180,11 @@
 
         <hr>
         <div class="area">
-            <div class="title">
-                <h2>결제정보 </h2>
+            <div class="title" id="title_pay">
+                <h2 id="pay_h2">결제정보 <span id="pay_h2_span"> </span> </h2>
             </div>
 
-            <div>
+            <div id="pay_body">
                 <table>
                     <tr>
                         <th>주문상품</th>
@@ -199,23 +199,24 @@
                         <td>-0</td>
                     </tr>
                 </table>
+                <div class="tail">
+                    <h3>최종 결제 금액</h3>
+                </div>
             </div>
 
-            <div class="tail">
-                <h3 >최종 결제 금액</h3>
-            </div>
+
 
         </div>
 
 
         <hr>
         <div class="area">
-            <div class="title">
-                <h2>결제수단</h2>
-                결제수단 선택
+            <div class="title" id="title_pay_kind">
+                <h2 id="pay_kind_h2">결제수단 <span id="pay_kind_h2_span"> </span></h2>
             </div>
 
-            <div>
+            <div id="pay_kind_body">
+                <h3>결제수단 선택</h3>
                 <div>신용카드</div>
                 <div>계좌이체</div>
                 <div>페이코</div>
@@ -224,30 +225,38 @@
 
         <hr>
         <div class="area">
-            <div class="title">
-                <h2>적립 혜택</h2>
+            <div class="title" id="title_point">
+                <h2 id="point_h2">적립 혜택<span id="point_h2_span"> </span></h2>
             </div>
 
-            <div>
+            <div id="point_body">
                 <span>상품 적립금</span>
                 <span>245원</span>
             </div>
         </div>
 
         <hr>
-        <div class="area">
-            <div class="title">
-                <span>총 결제 금액</span><span> 결제하기</span>
-            </div>
-        </div>
-
     </div>
+    <div>
+        <button id="button_final" onclick="requestPay()">
+            <h2 id="h2_final"><span>20,000</span> 결제하기</h2>
+        </button>
+    </div>
+    <div>
+        <p id="p_final">
+            - 무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을 동시에 구매할 경우 전체 주문 상품 금액에 대해 무이자할부가 적용되지 않습니다.
+            <br> - 무이자할부를 원하시는 경우 장바구니에서 무이자할부 상품만 선택하여 주문하여 주시기 바랍니다.
+            <br> - 최소 결제 가능 금액은 결제금액에서 배송비를 제외한 금액입니다.
+        </p>
+    </div>
+
+
 </div>
 
 
 </body>
 
-
+<!--====================== 주소지 API ======================-->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -307,11 +316,42 @@
     }
 </script>
 
+<!--====================== 결제 API ======================-->
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script>
+    var IMP = window.IMP;
+    IMP.init("imp67011510");
 
+    var today = new Date();
+    var hours = today.getHours(); // 시
+    var minutes = today.getMinutes();  // 분
+    var seconds = today.getSeconds();  // 초
+    var milliseconds = today.getMilliseconds();
+    var makeMerchantUid = hours + minutes + seconds + milliseconds;
 
-<!--<script>-->
-<!--    const inp = document.getElementById("area_ship");-->
-<!--    inp.style.backgroundColor = "black";-->
-<!--</script>-->
+    function requestPay() {
+        IMP.request_pay({
+            pg: 'kcp',
+            pay_method: 'card',
+            merchant_uid: "IMP" + makeMerchantUid,
+            name: '당근 10kg',
+            amount: 104,
+            buyer_email: 'Iamport@chai.finance',
+            buyer_name: '아임포트 기술지원팀',
+            buyer_tel: '010-1234-5678',
+            buyer_addr: '서울특별시 강남구 삼성동',
+            buyer_postcode: '123-456'
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                console.log(rsp);
+            } else {
+                console.log(rsp);
+            }
+        });
+    }
+</script>
 
 </html>
