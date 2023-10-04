@@ -16,7 +16,7 @@
 
     </resultMap>
 
-    <resultMap type="com.hexkey.travelmaker.admin.product.dto.ProductDTO" id="productFileResultMap">
+   <!-- <resultMap type="com.hexkey.travelmaker.admin.product.dto.ProductDTO" id="productFileResultMap">
         <id property="productSeq" column="PRODUCT_SEQ"/>
         <result property="productName" column="PRODUCT_NAME"/>
         <result property="price" column="PRICE"/>
@@ -39,9 +39,9 @@
         <result property="productSeq" column="PRODUCT_SEQ"/>
         <result property="reviewCode" column="REVIEW_CODE"/>
         <result property="qnaCode" column="QNA_CODE"/>
-    </resultMap>
+    </resultMap>-->
 
-    <insert id="insertProductContent">
+    <insert id="insertProduct">
         INSERT
         INTO TBL_PRODUCT
         (
@@ -61,13 +61,13 @@
         , #{ price }
         , #{ registDate }
         , #{ modifyDate }
-        , #{ categoryCode }
+        , #{ productCategory.categoryCode }
         , #{ serialNo }
         , #{ status }
         )
     </insert>
 
-    <insert id="insertFile">
+    <!--<insert id="insertFile">
         INSERT
         INTO TBL_FILE
         (
@@ -87,5 +87,5 @@
         , #{ filePath }
         , SEQ_PRODUCT_SEQ.NEXTVAL
         )
-    </insert>
+    </insert>-->
 </mapper>

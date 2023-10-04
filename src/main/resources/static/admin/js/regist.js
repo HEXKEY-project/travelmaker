@@ -6,16 +6,16 @@ window.onload = function () {
         ['2차 분류', 'AC', 'SS', 'AY', 'AS']];
     let little = [[['3차 분류']],
         [['3차 분류'],
-            [['3차 분류'], ['OD'], ['ME'], ['LE']],
-            [['3차 분류'], ['OD'], ['ME'], ['LE']]],
+            ['3차 분류', 'OD', 'ME', 'LE'],
+            ['3차 분류', 'OD', 'ME', 'LE']],
         [['3차 분류'],
-            [['3차 분류'], ['TE'], ['BS'], ['BE']],
-            [['3차 분류'], ['FF'], ['BD'], ['CS'], ['AB'], ['EB']]],
+            ['3차 분류', 'TE', 'BS', 'BE'],
+            ['3차 분류', 'FF', 'BD', 'CS', 'AB', 'EB']],
         [['3차 분류'],
-            [['3차 분류'], ['TP'], ['EN'], ['WU'], ['CF'], ['AY']],
-            [['3차 분류'], ['CB'], ['SW'], ['LW'], ['SF'], ['BC']],
-            [['3차 분류'], ['PN'], ['EE'], ['TI'], ['TS'], ['SR']],
-            [['3차 분류'], ['CH'], ['GF'], ['RD'], ['AS'], ['SM']]]
+            ['3차 분류', 'TP', 'EN', 'WU', 'CF', 'AY'],
+            ['3차 분류', 'CB', 'SW', 'LW', 'SF', 'BC'],
+            ['3차 분류', 'PN', 'EE', 'TI', 'TS', 'SR'],
+            ['3차 분류', 'CH', 'GF', 'RD', 'AS', 'SM']]
     ]
 
     let big_category_serial = document.getElementById('big_category_serial')
@@ -36,7 +36,9 @@ window.onload = function () {
         for (let mcs of middle[bigIndex]) {
             let opt = document.createElement('option');
             let txt = document.createTextNode(mcs);
+            opt.value = mcs;
             opt.appendChild(txt);
+
             middle_category_serial.appendChild(opt);
         }
 
@@ -55,6 +57,7 @@ window.onload = function () {
         for (let lcs of little[bigIndex][middleIndex]) {
             let opt = document.createElement('option');
             let txt = document.createTextNode(lcs);
+            opt.value = lcs;
             opt.appendChild(txt);
             little_category_serial.appendChild(opt);
         }
@@ -62,23 +65,25 @@ window.onload = function () {
 
 
     let first = ['', '캐리어', '가방', '여행용품'];
-    let second = [['2차 분류'],
-        ['2차 분류', '하드', '소프트'],
-        ['2차 분류', '배낭', '보조가방'],
-        ['2차 분류', '수납|편의', '안전|위생', '악세서리', '액티비티|시즌']];
-    let third = [[['3차 분류']],
-        [['3차 분류'],
-            [['3차 분류'], ['기내(21형 이하)'], ['중형(22~26형)'], ['대형(27형 이상)']],
-            [['3차 분류'], ['기내(21형 이하)'], ['중형(22~26형)'], ['대형(27형 이상)']]],
-        [['3차 분류'],
-            [['3차 분류'], ['여행배낭'], ['배낭용품'], ['백팩']],
-            [['3차 분류'], ['접이식|폴딩백'], ['보스턴|더플백'], ['크로스|숄더백'], ['도난방지 백'], ['기타 백']]],
-        [['3차 분류'],
-            [['3차 분류'], ['트래블팩|파우치'], ['안대|목베개'], ['와이파이|유심'], ['간편식품'], ['편의용품']],
-            [['3차 분류'], ['캐리어커버|벨트'], ['안전복대|지갑'], ['자물쇠|와이어'], ['보안|구급용품'], ['뷰티케어']],
-            [['3차 분류'], ['여권커버|네임택'], ['전자|전기용품'], ['여행아이템'], ['여행문구'], ['기념품']],
-            [['3차 분류'], ['캠핑|등산'], ['골프'], ['래쉬가드'], ['아쿠아슈즈'], ['스웜']]]
-    ]
+    let second = [['2차 분류' ],
+        [{ categoryName : '2차 분류'}, { categoryCode : 4, categoryName : '하드' }, { categoryCode : 5, categoryName : '소프트' }],
+        [{ categoryName : '2차 분류'}, { categoryCode : 6, categoryName : '배낭' }, { categoryCode : 7, categoryName : '보조가방' }],
+        [{ categoryName : '2차 분류'}, { categoryCode : 8, categoryName : '수납|편의' }, { categoryCode : 9, categoryName : '안전|위생'},
+                                      { categoryCode : 10, categoryName : '악세서리'}, { categoryCode : 11, categoryName : '액티비티|시즌' }]];
+    let third = [[[ '3차 분류' ]],
+        [['3차 분류' ],
+            [{ categoryName : '3차 분류' }, { categoryCode : 12, categoryName : '기내(21형 이하)' }, { categoryCode : 13, categoryName : '중형(22~26형)' }, { categoryCode : 14, categoryName : '대형(27형 이상)' }],
+            [{ categoryName : '3차 분류' }, { categoryCode : 15, categoryName : '기내(21형 이하)' }, { categoryCode : 16, categoryName : '중형(22~26형)' }, { categoryCode : 17, categoryName :'대형(27형 이상)' }]],
+        [[ '3차 분류' ],
+            [{ categoryName : '3차 분류' }, { categoryCode : 18, categoryName : '여행배낭' }, { categoryCode : 19, categoryName : '배낭용품' }, { categoryCode : 20, categoryName : '백팩' }],
+            [{ categoryName : '3차 분류' }, { categoryCode : 21, categoryName : '접이식|폴딩백' }, { categoryCode : 22, categoryName : '보스턴|더플백' }, { categoryCode : 23, categoryName : '크로스|숄더백' }, { categoryCode : 24, categoryName : '도난방지 백' }, { categoryCode : 25, categoryName : '기타 백' }]],
+        [[ '3차 분류' ],
+            [{ categoryName : '3차 분류' }, { categoryCode : 26, categoryName : '트래블팩|파우치' }, { categoryCode : 27, categoryName : '안대|목베개' }, { categoryCode : 28, categoryName : '와이파이|유심' }, { categoryCode : 29, categoryName : '간편식품' }, { categoryCode : 30, categoryName : '편의용품' }],
+            [{ categoryName : '3차 분류' }, { categoryCode : 31, categoryName : '캐리어커버|벨트' }, { categoryCode : 32, categoryName : '안전복대|지갑' }, { categoryCode : 33, categoryName : '자물쇠|와이어' }, { categoryCode : 34, categoryName : '보안|구급용품' }, { categoryCode : 35, categoryName : '뷰티케어' }],
+            [{ categoryName : '3차 분류' }, { categoryCode : 36, categoryName : '여권커버|네임택' }, { categoryCode : 37, categoryName : '전자|전기용품' }, { categoryCode : 38, categoryName : '여행아이템' }, { categoryCode : 39, categoryName : '여행문구' }, { categoryCode : 40, categoryName : '기념품' }],
+            [{ categoryName : '3차 분류' }, { categoryCode : 41, categoryName : '캠핑|등산' }, { categoryCode : 42, categoryName : '골프' }, { categoryCode : 43, categoryName : '래쉬가드' }, { categoryCode : 44, categoryName : '아쿠아슈즈' }, { categoryCode : 45, categoryName : '스웜' }]]
+            ]
+
 
     let big_category = document.getElementById('big_category')
     let middle_category = document.getElementById('middle_category')
@@ -95,12 +100,12 @@ window.onload = function () {
 
         for (let mc of second[bcIndex]) {
             let opt = document.createElement('option');
-            let txt = document.createTextNode(mc);
-            opt.appendChild(txt)
+            let txt = document.createTextNode(mc.categoryName);
+            opt.value = mc.categoryCode;
+            opt.appendChild(txt);
             middle_category.appendChild(opt);
         }
 
-    }
 
     middle_category.addEventListener('change', thirdCategory)
 
@@ -113,11 +118,15 @@ window.onload = function () {
         }
 
         for (let lc of third[bcIndex][mcIndex]) {
+            console.log(lc);
             let opt = document.createElement('option')
-            let txt = document.createTextNode(lc)
-            opt.appendChild(txt)
+            let txt = document.createTextNode(lc.categoryName);
+            opt.value = lc.categoryCode;
+            opt.appendChild(txt);
             little_category.appendChild(opt);
         }
+
+    }
 
     }
 
@@ -134,31 +143,31 @@ $(function (){
     $("#product_option").change(function (){
 
         switch ($("#product_option").val()){
-            case "firstOption" :
+            case "1차옵션" :
                 $("#variableColor").hide();
                 $("#careerSize").hide();
                 $("#etcSize").hide();
                 $("#etcOption").hide();
                 break
-            case "color" :
+            case "색상" :
                 $("#variableColor").show();
                 $("#careerSize").hide();
                 $("#etcSize").hide();
                 $("#etcOption").hide();
                 break
-            case "size" :
+            case "사이즈" :
                 $("#etcSize").show();
                 $("#variableColor").hide();
                 $("#careerSize").hide();
                 $("#etcOption").hide();
                 break
-            case "inch" :
+            case "인치" :
                 $("#careerSize").show();
                 $("#etcSize").hide();
                 $("#etcOption").hide();
                 $("#variableColor").hide();
                 break
-            case "etc" :
+            case "기타" :
                 $("#etcOption").show();
                 $("#variableColor").hide();
                 $("#careerSize").hide();
@@ -187,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
+/* 상품 설명이미지 파일 불러오기시 input값에 해당 파일명이 뜬다. */
 document.addEventListener("DOMContentLoaded", function() {
     // 모든 input 요소에 대한 이벤트 리스너 등록
     const fileInputs = document.querySelectorAll('input[type="file"]');
@@ -203,6 +212,24 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+/* 상품 대표 이미지 파일 불러오기시 input값에 해당 파일명이 뜬다. */
+document.addEventListener("DOMContentLoaded", function() {
+    // 모든 input 요소에 대한 이벤트 리스너 등록
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+    fileInputs.forEach(function(fileInput) {
+        fileInput.addEventListener('change', function() {
+            // 해당하는 .img-area 요소를 찾아 파일 이름 업데이트
+            const imgArea = this.parentElement.querySelector('.img-area2');
+            if (this.files.length > 0) {
+                imgArea.value = this.files[0].name;
+            } else {
+                imgArea.value = "예) 각도별 이미지.jpg";
+            }
+        });
+    });
+});
+
 
 /* 각 이미지 div별 label생성 */
 document.addEventListener("DOMContentLoaded", function () {

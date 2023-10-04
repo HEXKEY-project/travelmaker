@@ -36,19 +36,18 @@
                 <tr>
                     <th class="th_content" scope="row">시리얼 넘버</th>
                     <td colspan="3">
-                        <select class="serial_select" id="big_category_serial" name="serialNo">
+                        <select class="serial_select" id="big_category_serial" name="serialNo1">
                         <option value>1차 분류</option>
-                        <option value="cr">CR</option>
-                        <option value="bg">BG</option>
-                        <option value="ti">TI</option>
+                        <option value="CR">CR</option>
+                        <option value="BG">BG</option>
+                        <option value="TI">TI</option>
                     </select>
-                    <select class="serial_select"  id="middle_category_serial" name="serialNo">
+                    <select class="serial_select"  id="middle_category_serial" name="serialNo2">
                         <option value>2차 분류</option>
                     </select>
-                    <select class="serial_select" id="little_category_serial" name="serialNo">
+                    <select class="serial_select" id="little_category_serial" name="serialNo3">
                         <option value>3차 분류</option>
                     </select>
-                    <input type="text" name="productSeq" id="productSeq" placeholder="상품 시퀀스">
                     </td>
                 </tr>
                 <tr>
@@ -56,9 +55,9 @@
                     <td colspan="3">
                         <select class="category_select" id="big_category" name="productCategory.categoryCode">
                             <option value>1차 분류</option>
-                            <option value="캐리어">캐리어</option>
-                            <option value="가방">가방</option>
-                            <option value="여행용품">여행용품</option>
+                            <option value="1">캐리어</option>
+                            <option value="2">가방</option>
+                            <option value="3">여행용품</option>
                         </select>
                         <select class="category_select" id="middle_category" name="productCategory.categoryCode">
                             <option value>2차 분류</option>
@@ -71,19 +70,19 @@
                 <tr>
                     <th class="th_content" scope="row">상품 옵션</th>
                     <td colspan="3">
-                    <select id="product_option" class="product_select" name="productOption.optionCode">
-                        <option value="firstOption">1차 옵션</option>
+                    <select id="product_option" class="product_select" name="productOption.optionName">
+                        <option value="1차옵션">1차 옵션</option>
                         <option value="색상">색상</option>
                         <option value="사이즈">사이즈</option>
                         <option value="인치">인치</option>
                         <option value="기타">기타</option>
                     </select>
-                    <select id="careerSize" name="productOption.optionCode">
+                    <select id="careerSize" name="productOption.optionName">
                         <option value="21인치 이하">21인치 이하</option>
                         <option value="22~26형">22~26형</option>
                         <option value="27형 이상">27형 이상</option>
                     </select>
-                    <select id="etcSize" name="productOption.optionCode">
+                    <select id="etcSize" name="productOption.optionName">
                         <option value="S">S</option>
                         <option value="M">M</option>
                         <option value="L">L</option>
