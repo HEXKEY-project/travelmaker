@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>regist</title>
+    <link rel="stylesheet" type="text/css" href="/admin/css/regist.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/admin/js/regist.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+    <div th:include="common/admin/header.html"></div>
+
+    <div class="regist-header">
+        <p class="regist_title">상품 등록 및 수정</p>
+        <p class="regist_content">기본 정보</p>
+    </div>
+    <div class="regist_form" id="wrapper">
+    <form name="regist" id="regist" action="/admin/product/regist" enctype="multipart/form-data" method="post">
+        <div class="regist_tbl">
+            <table class="tal_regist">
+                <tbody>
+                <tr>
+                    <th class="th_content">상품명</th>
+                    <td colspan="3">
+                        <input type="text" name="productName" id="productName" placeholder="예)트래블메이커 스탠다드 폴딩 보스턴백">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th_content" scope="row">판매가</th>
+                    <td colspan="3">
+                    <input type="number" name="price" id="price" min="0" step="10" placeholder="가격"> 원
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th_content" scope="row">시리얼 넘버</th>
+                    <td colspan="3">
+                        <select class="serial_select" id="big_category_serial" name="serialNo">
+                        <option value>1차 분류</option>
+                        <option value="cr">CR</option>
+                        <option value="bg">BG</option>
+                        <option value="ti">TI</option>
+                    </select>
+                    <select class="serial_select"  id="middle_category_serial" name="serialNo">
+                        <option value>2차 분류</option>
+                    </select>
+                    <select class="serial_select" id="little_category_serial" name="serialNo">
+                        <option value>3차 분류</option>
+                    </select>
+                    <input type="text" name="productSeq" id="productSeq" placeholder="상품 시퀀스">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th_content" scope="row">카테고리</th>
+                    <td colspan="3">
+                        <select class="category_select" id="big_category" name="productCategory.categoryCode">
+                            <option value>1차 분류</option>
+                            <option value="캐리어">캐리어</option>
+                            <option value="가방">가방</option>
+                            <option value="여행용품">여행용품</option>
+                        </select>
+                        <select class="category_select" id="middle_category" name="productCategory.categoryCode">
+                            <option value>2차 분류</option>
+                        </select>
+                        <select class="category_select" id="little_category" name="productCategory.categoryCode">
+                            <option value>3차 분류</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th_content" scope="row">상품 옵션</th>
+                    <td colspan="3">
+                    <select id="product_option" class="product_select" name="productOption.optionCode">
+                        <option value="firstOption">1차 옵션</option>
+                        <option value="색상">색상</option>
+                        <option value="사이즈">사이즈</option>
+                        <option value="인치">인치</option>
+                        <option value="기타">기타</option>
+                    </select>
+                    <select id="careerSize" name="productOption.optionCode">
+                        <option value="21인치 이하">21인치 이하</option>
+                        <option value="22~26형">22~26형</option>
+                        <option value="27형 이상">27형 이상</option>
+                    </select>
+                    <select id="etcSize" name="productOption.optionCode">
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    <input type="text" id="variableColor" name="productOption.optionName" placeholder="색상">
+                    <input type="text" id="etcOption" name="productOption.optionName" placeholder="기타옵션">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th_content" scope="row">상품 상태</th>
+                    <td colspan="3">
+                        <select name="status">
+                            <option value>판매중</option>
+                            <option value="stopcell">판매중지</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">상세설명</th>
+                    <td id="form_product_description">
+                        상품 설명이미지
+                    </td>
+                    <td id="td_add_content" colspan="2">
+                        <div class="content-input">
+                            <input class="img-area" value="예)상세 페이지.jpg" placeholder="예)상세 페이지.jpg">
+                            <input id="productContent1" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <label for="productContent1" class="file_button" >찾아보기</label>
+                        </div>
+                        <div class="content-input">
+                            <input class="img-area" value="예)상세 페이지.jpg" placeholder="예)상세 페이지.jpg">
+                            <input id="productContent2" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <label for="productContent2" class="file_button" >찾아보기</label>
+                        </div>
+                        <div class="content-input">
+                            <input class="img-area" value="예)상세 페이지.jpg" placeholder="예)상세 페이지.jpg">
+                            <input id="productContent3" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <label for="productContent3" class="file_button" >찾아보기</label>
+                        </div>
+                        <div class="content-input">
+                            <input class="img-area" value="예)상세 페이지.jpg" placeholder="예)상세 페이지.jpg">
+                            <input id="productContent4" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <label for="productContent4" class="file_button" >찾아보기</label>
+                        </div>
+                        <div class="content-input">
+                            <input class="img-area" value="예)상세 페이지.jpg" placeholder="예)상세 페이지.jpg">
+                            <input id="productContent5" type="file" name="product_content" accept="image/gif,image/jpeg,image/png">
+                            <label for="productContent5" class="file_button" >찾아보기</label>
+                        </div>
+                        <div id="div_add_content"><button type="button" id="add_content">이미지 추가하기</button></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">상품이미지</th>
+                    <td colspan="3">
+                        <div class="img-input">
+                            <input class="img-area2" value="예) 대표 이미지.jpg" placeholder="예)대표 이미지.jpg">
+                            <input id="productImg1" type="file" name="product_img" accept="image/gif,image/jpeg,image/png">
+                            <label for="productImg1" class="file_button" >찾아보기</label>
+                        </div>
+                        <div class="img-input">
+                            <input class="img-area2" value="예) 각도별 이미지.jpg" placeholder="예)각도별 이미지.jpg">
+                            <input id="productImg2" type="file" name="product_img" accept="image/gif,image/jpeg,image/png">
+                            <label for="productImg2" class="file_button" >찾아보기</label>
+                        </div>
+                        <div class="img-input">
+                            <input class="img-area2" value="예) 각도별 이미지.jpg" placeholder="예)각도별 이미지.jpg">
+                            <input id="productImg3" type="file" name="product_img" accept="image/gif,image/jpeg,image/png">
+                            <label for="productImg3" class="file_button" >찾아보기</label>
+                        </div>
+                        <div class="img-input">
+                            <input class="img-area2" value="예) 각도별 이미지.jpg" placeholder="예)각도별 이미지.jpg">
+                            <input id="productImg4" type="file" name="product_img" accept="image/gif,image/jpeg,image/png">
+                            <label for="productImg4" class="file_button" >찾아보기</label>
+                        </div>
+                        <div class="img-input">
+                            <input class="img-area2" value="예) 각도별 이미지.jpg" placeholder="예)각도별 이미지.jpg">
+                            <input id="productImg5" type="file" name="product_img" accept="image/gif,image/jpeg,image/png">
+                            <label for="productImg5" class="file_button" >찾아보기</label>
+                        </div>
+                        <div id="div_add_img"><button type="button" id="add_img">이미지 추가하기</button></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" id="productRegist">상품등록</button>
+    </form>
+    </div>
+</body>
+</html>
