@@ -1,0 +1,96 @@
+body{
+    margin:auto;
+    text-align:center;
+}
+
+.noticesListLineTop{
+    margin-top: 40px;
+    margin-bottom: 0;
+    width: 852px;
+    border-bottom: 1px solid black;
+}
+
+.noticesListLine{
+    margin-top: 94px;
+    margin-bottom: 0;
+}
+
+.noticesListTitle{
+    margin-top: 94px;
+    margin-bottom: 0;
+    width: 852px;
+    border-bottom: 1px solid #B3B3B3;
+}
+
+.noticesListLineBottom{
+    margin-top: 94px;
+    margin-bottom: 0;
+    width: 852px;
+    border-bottom: 1px solid black;
+}
+
+.search{
+    margin-top: 160px;
+    text-align:center;
+}
+
+input {
+    width: 268px;
+    border: 1px solid black;
+    border-radius: 0;
+    height: 40px;
+    padding: 0px;
+    font-size: 16px;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    text-indent: 8px;
+}
+
+input:focus {
+    border-color: black;
+    outline: none;
+    border-radius: 0;
+}
+
+button {
+    width: 62px;
+    height: 40px;
+    padding: 8px;
+    border: 0;
+    border-radius: 2px;
+    font-size: 16px;
+    margin: auto;
+    background-color: #0075BD;
+    color: white;
+    display:inline-block;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+#searchCondition{
+    width: 72px;
+    border: 1px solid black;
+    border-radius: 0;
+    height: 40px;
+    padding: 0px;
+    font-size: 16px;
+    margin: 0 auto;
+    display:inline-block;
+    vertical-align: middle;
+    text-indent: 4px;
+}
+
+#searchCondition:focus{
+    border-color: black;
+    outline: none;
+    border-radius: 0;
+}
+
+input, select, button
+{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
