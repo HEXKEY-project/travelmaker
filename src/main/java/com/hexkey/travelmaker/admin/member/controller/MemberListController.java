@@ -19,28 +19,9 @@ import java.util.Objects;
 @RequestMapping("/admin")
 public class MemberListController {
 
-    private final MemberService memberService;
-
-    public MemberListController(MemberService memberService) {
-        this.memberService = memberService;
-    }
 
     @GetMapping("/adminMemberList")
-    public String getadminMemberList(@RequestParam(defaultValue = "1") int page,
-                                     @RequestParam(required = false) String searchCondition,
-                                     @RequestParam(required = false) String searchValue,
-                                        Model model) {
-
-        log.info("adminMemberList: {}", page);
-        log.info("adminMemberList searchCondition : {}", searchCondition);
-        log.info("adminMemberList searchValue : {}", searchValue);
-
-        Map<String,String> searchMap = new HashMap<>();
-        searchMap.put("searchCondition", searchCondition);
-        searchMap.put("searchValue", searchValue);
-
-         Map<String, Objects> memberListAndPaging =  memberService.selectMemberList(searchMap,page);
-
+    public String getadminMemberList() {
 
 
         return "admin/adminMemberList";
