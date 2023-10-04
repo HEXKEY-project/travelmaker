@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexkey.travelmaker.admin.dao.MemberMapper">
+
+    <resultMap type="com.hexkey.travelmaker.admin.dto.MemberDTO" id="memberResultMap">
+        <id property="memberCode" column="MEMBER_CODE"/>
+        <result property="memberName" column="MEMBER_NAME"/>
+        <result property="phone" column="PHONE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="memberId" column="MEMBER_ID"/>
+        <result property="memberPwd" column="MEMBER_PWD"/>
+        <result property="smsYn" column="SMS_YN"/>
+        <result property="emailYn" column="EMAIL_YN"/>
+        <result property="mileage" column="MILEAGE"/>
+        <result property="policyYn" column="POLICY_YN"/>
+        <result property="privateYn" column="PRIVATE_YN"/>
+        <result property="promotionYn" column="PROMOTION_YN"/>
+        <result property="gradeCode" column="GRADE_CODE"/>
+        <result property="loginType" column="LOGIN_TYPE"/>
+        <result property="tell" column="TEL"/>
+        <result property="joinDay" column="JOIN_DAY"/>
+    </resultMap>
+
+    <resultMap type="com.hexkey.travelmaker.admin.dto.MemberGradeDTO" id="MemberGradeResultMap">
+        <id property="gradeCode" column="GRADE_CODE"/>
+        <result property="gradeName" column="GRADE_NAME"/>
+        <result property="mileageRate" column="MILEAGE_RATE"/>
+    </resultMap>
+
+
+</mapper>

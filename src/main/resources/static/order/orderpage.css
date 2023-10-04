@@ -1,0 +1,176 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+#point_use_button:hover {
+      cursor: pointer;
+}
+
+#p_final {
+      font-size: 85%;
+}
+
+#h2_final {
+      margin: 0 auto;
+}
+
+#button_final {
+      cursor: pointer;
+      width: 100%;
+      height: 50px;
+      background-color: #3971FF;
+      text-align: center;
+      color: #fff;
+      border: none;
+}
+
+.tail {
+      background-color: #f2f2f2;
+      padding: 0px;
+}
+
+.title {
+      color: black;
+}
+
+#title {
+      position: relative;
+
+}
+
+
+.ship_click {
+      background-color: black;
+}
+
+#title_ship, #title_discount, #title_product, #title_pay, #title_pay_kind, #title_point {
+      position: relative;
+}
+
+#title_h2_span {
+      position: absolute;
+      left: 20px;
+      content: '';
+      width: 10px; /* 사이즈 */
+      height: 10px; /* 사이즈 */
+      border-top: 3px solid #000; /* 선 두께 */
+      border-right: 3px solid #000; /* 선 두께 */
+      transform: rotate(225deg); /* 각도 */
+      transition: 0.3s ;
+      top: 25px;
+      cursor: pointer;
+}
+
+#ship_h2_span, #product_h2_span, #discount_h2_span, #pay_h2_span, #point_h2_span, #pay_kind_h2_span {
+      position: absolute;
+      right: 40px;
+      content: '';
+      width: 10px; /* 사이즈 */
+      height: 10px; /* 사이즈 */
+      border-top: 3px solid #000; /* 선 두께 */
+      border-right: 3px solid #000; /* 선 두께 */
+      transform: rotate(315deg); /* 각도 */
+      transition: 0.3s ;
+      top: 8px;
+}
+
+#ship_h2:hover, #product_h2:hover, #discount_h2:hover, #pay_h2, #pay_kind_h2, #point_h2 {
+      cursor: pointer;
+}
+
+body {
+      margin: 0;
+      font-family: 'Noto Sans KR',  sans-serif;
+      color: #383838;
+}
+
+#button-address {
+      cursor: pointer;
+}
+
+
+th {
+      text-align: left;
+}
+
+#special {
+      margin: 10px;
+}
+
+
+
+select {
+      width: 100%;
+      height: 40px;
+      padding: 0 20px 0 15px;
+      margin-bottom: 10px;
+      font-family: 'Noto Sans KR', sans-serif;
+}
+
+input {
+      padding: 10px 11px 10px 10px;
+      border: 1px solid #d4d4d4;
+      margin: 5px 0 5px 0;
+}
+
+hr {
+      background-color: #dbdbdb;
+      padding: 5px;
+      opacity: 50%;
+      margin: 0 auto;
+}
+
+.main {
+      width: 900px;
+      margin: 0 auto;
+      border-left: 1px solid #d7d5d5;
+      border-right: 1px solid #d7d5d5;
+}
+
+h2 {
+      font-size: 20px;
+      font-weight: 500;
+}
+
+#title h2{
+      text-align: center;
+      margin: 0;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: 500;
+}
+
+#sub_title h2{
+      background-color: #595959;
+      text-align: center;
+      margin: 0;
+      padding: 15px;
+      color: white;
+
+
+}
+
+.area {
+      background-color: white;
+      margin: 20px;
+}
+
+.contents {
+      margin-bottom: 10px;
+}
+
+#ship_col1 {
+      width: 102px;
+}
+
+#input_ship1, #sample4_roadAddress, #sample4_detailAddress {
+      width: 652px;
+}
+
+.input_phone {
+      width: 194px;
+}
+
+.input_email {
+      width: 304px;
+}
+
+
