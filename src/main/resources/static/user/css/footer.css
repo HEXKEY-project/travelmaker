@@ -1,13 +1,15 @@
-
 html {
     font-size: 0.9em;
     font-family: 'Noto Sans KR', sans-serif;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 body {
     position: relative;
     width: 100%;
     height: fit-content;
+    color: #353535;
 }
 
 ul, li {
@@ -51,6 +53,7 @@ ul, li {
 }
 
 .footer-contact {
+    margin-top: 8px;
     line-height: 1.8;
 }
 
