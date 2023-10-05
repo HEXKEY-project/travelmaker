@@ -1,0 +1,159 @@
+/* 웹폰트 연결 */
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+/* 제목영역 */
+.memberListtTitle{
+    padding-top: 40px;
+    padding-left: 24px;
+
+}
+/* 영역옆으로 오게하기 */
+.Main{
+    display: flex;
+}
+/* 회원목록 영역잡기*/
+.Main > .memberList {
+    width: 1556px;
+    height: 1890px;
+}
+/* 전체입력칸 영역잡기*/
+.memberList >.inputSerch {
+    width: 80%;
+    margin: 100px;
+}
+/*  입력칸 영역잡기 */
+.inputSerch .box {
+    display: flex;
+    height: 50px;
+}
+/*  이름입력칸 영역잡기 */
+.box1 {
+    width: 102px;
+    padding: 15px;
+    background-color: #F5F5F5;
+}
+/*  입력칸 영역잡기 */
+.box2 {
+    width: 242px;
+    padding: 16px;
+}
+/* 회원등급 셀렉트영역*/
+.memberGradeList{
+    width: 150px;
+    height: auto;
+}
+/* 회원등급 캘린더영역*/
+.join-start {
+
+    width: 150px;
+}
+/* 회원정보 조회 버튼영역*/
+.btnSubmitBox {
+    width: 80%;
+    height: 5%;
+    padding-left: 100px;
+    text-align:  center;
+    display :inline-block;
+}
+/* 회원정보 조회 버튼*/
+.btnSubmit {
+     width: 94px;
+    height: 24px;
+    background-color: #0075BD;
+    color: white;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: none;
+
+}
+/* 회원목록과 버튼 같은영역 배치*/
+.memberListBox {
+    display: flex;
+}
+/* 제목영역*/
+.memberListTitleBox {
+    width: 30%;
+    height: 100px;
+    padding-left: 200px;
+}
+/* 버튼들 영역*/
+.memberButton {
+    margin-left: 200px;
+    display: flex;
+    width: 50%;
+    height: 100px;
+}
+
+.memberButton div {
+    padding-right: 16px;
+}
+
+.memberListTitleBox2 {
+    display: flex;
+}
+
+.memberListTitleBox2 div {
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    background-color: #F5F5F5;
+}
+
+.memberListTitleBox2 .imgBox {
+    width: 50px;
+    height: 65px;
+}
+.memberListTitleBox3 .imgBox {
+    width: 40px;
+}
+
+
+.memberListTitleBox2 > .nember {
+    padding-top: 15px;
+}
+
+
+
+.memberListTitleBox1 {
+    padding-left: 100px;
+    width: 80%;
+}
+
+div .details {
+    width: 400px;
+    padding-top: 15px;
+}
+
+div .phoneNember {
+    width: 200px;
+    padding-top: 15px;
+}
+div div .phoneNember {
+    width: 200px;
+}
+
+
+.memberListTitleBox3 div {
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.memberListTitleBox3  {
+    display: flex;
+}
+
+.orderBtn {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.memberListTitleBox3 input {
+    padding-right: 10px;
+}
+

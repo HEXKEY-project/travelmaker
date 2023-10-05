@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 회원리스트</title>
+    <!-- header영역 스타일 -->
+    <link href="/admin/css/style.css" rel="stylesheet" type="text/css">
+    <!-- adminMemberList스타일-->
+    <link href="/admin/css/style1.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!--header 영역-->
+    <div th:replace="common/admin/header.html"></div>
+    <!-- Main 영역 -->
+    <div class="Main">
+        <!--nav영역 -->
+        <div class="headerBar" th:replace="common/admin/nav.html"></div>
+
+        <div class="memberList">
+            <div class="memberListtTitle">
+                <h1>회원 관리</h1>
+            </div>
+            <div class="memberListtTitle test">
+                <h2>회원정보 조회</h2>
+            </div>
+
+            <div class="inputSerch">
+                <hr>
+                <div>
+                    <div class="inputSerch box">
+                        <div class="inputSerch box1">
+                            아이디
+                        </div>
+                        <div class="inputSerch box2">
+                            <input type="search"  name="searchValue">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="inputSerch box">
+                        <div class="inputSerch box1">
+                            회원등급
+                        </div>
+                        <div class="inputSerch box2">
+                            <select name="memberGradeList" class="memberGradeList">
+                                <option disabled selected>전체</option>
+                                <option value="gold">골드</option>
+                                <option value="silver">실버</option>
+                                <option value="bronze">브론즈</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="inputSerch box">
+                        <div class="inputSerch box1">
+                            가입일
+                        </div>
+                        <div class="inputSerch box2">
+                            <input type="date" id="start" class="join-start" value="가입일"/>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="btnSubmitBox">
+                    <button type="submit" class="btnSubmit" >회원정보 조회 </button>
+                </div>
+            </div>
+            <div class="memberListBox">
+                <div class="memberListTitleBox">
+                    <h3>회원 목록</h3>
+                </div>
+                <div class="memberButton">
+                    <div>
+                        <button type="submit" class="btnSubmit" >회원정보 삭제 </button>
+                    </div>
+                    <div>
+                        <button type="submit" class="btnSubmit" >회원정보 수정 </button>
+                    </div>
+                    <div>
+                        <button type="submit" class="btnSubmit " >회원등급 해제 </button>
+                    </div>
+                    <div>
+                        <button type="submit" class="btnSubmit " >적립금 일괄지급 </button>
+                    </div>
+                </div>
+            </div>
+            <div class="memberListTitleBox1">
+            <hr>
+                <div class="memberListTitleBox2">
+                    <div class="imgBox">
+                        <img class="menu_title" src="/admin/images/hidden.svg" alt="hidden_img">
+                    </div>
+                    <div class="nember">
+                        no
+                    </div>
+                    <div class="nember">
+                        등록일
+                    </div >
+                    <div class="nember">
+                        이름
+                    </div>
+                    <div class="nember">
+                        아이디
+                    </div>
+                    <div class="nember">
+                        등급
+                    </div>
+                    <div class="phoneNember">
+                        휴대전화
+                    </div>
+                    <div class="details">
+                        관련 내역보기
+                    </div>
+                </div>
+            </div>
+            <div class="memberListTitleBox1">
+                <hr>
+                <div class="memberListTitleBox3">
+                    <div class="imgBox">
+                    <input type="checkbox" class="xxx">
+                    </div>
+                    <div>
+                        01
+                    </div>
+                    <div >
+                        2023-10-25
+                    </div>
+                    <div >
+                        정민교
+                    </div>
+                    <div>
+                         test01
+                    </div>
+                    <div >
+                        일반회원
+                    </div>
+                    <div class="phoneNember">
+                        010-1234-4561
+                    </div>
+                    <div class="orderBtn">
+                            <button type="submit" class="btnSubmit" >주문 </button>
+                    </div>
+                    <div>
+                            <button type="submit" class="btnSubmit " >적립금 </button>
+                    </div>
+                </div>
+                <hr>
+                <div class="memberListTitleBox3">
+                    <div class="imgBox">
+                        <input type="checkbox" class="xxx">
+                    </div>
+                    <div>
+                        01
+                    </div>
+                    <div>
+                        2023-10-25
+                    </div>
+                    <div>
+                        정민교
+                    </div>
+                    <div>
+                        test01
+                    </div>
+                    <div>
+                        일반회원
+                    </div>
+                    <div class="phoneNember">
+                        010-1234-4561
+                    </div>
+                    <div class="orderBtn">
+                        <button type="submit" class="btnSubmit" >주문 </button>
+                    </div>
+                    <div>
+                        <button type="submit" class="btnSubmit " >적립금 </button>
+                    </div>
+                </div>
+                <hr>
+                <div class="memberListTitleBox3">
+                    <div class="imgBox">
+                        <input type="checkbox" class="xxx">
+                    </div>
+                    <div>
+                        01
+                    </div>
+                    <div>
+                        2023-10-25
+                    </div>
+                    <div>
+                        정민교
+                    </div>
+                    <div>
+                        test01
+                    </div>
+                    <div>
+                        일반회원
+                    </div>
+                    <div class="phoneNember">
+                        010-1234-4561
+                    </div>
+                    <div class="orderBtn">
+                        <button type="submit" class="btnSubmit" >주문 </button>
+                    </div>
+                    <div>
+                        <button type="submit" class="btnSubmit " >적립금 </button>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+</body>
+</html>
