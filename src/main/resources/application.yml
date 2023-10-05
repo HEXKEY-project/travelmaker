@@ -1,0 +1,17 @@
+# database config
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: C##TRAVELMAKER
+    password: TRAVELMAKER
+
+# file upload config
+servlet:
+  multipart:
+    max-file-size: 100MB
+    max-request-size: 100MB
+
+# Mybatis config
+mybatis:
+  mapper-locations: mappers/**/*.xml
