@@ -13,7 +13,6 @@
         <result property="categoryCode" column="CATEGORY_CODE"/>
         <result property="serialNo" column="SERIAL_NO"/>
         <result property="status" column="ORDERABLE_STATUS"/>
-
     </resultMap>
 
    <!-- <resultMap type="com.hexkey.travelmaker.admin.product.dto.ProductDTO" id="productFileResultMap">
@@ -59,8 +58,7 @@
           SEQ_PRODUCT_SEQ.NEXTVAL
         , #{ productName }
         , #{ price }
-        , #{ registDate }
-        , #{ modifyDate }
+        , to_date(sysdate, 'yyyy,mm.dd hh24:mi'))
         , #{ productCategory.categoryCode }
         , #{ serialNo }
         , #{ status }
@@ -85,7 +83,7 @@
         , #{ originalName }
         , #{ savedName }
         , #{ filePath }
-        , SEQ_PRODUCT_SEQ.NEXTVAL
+        , SEQ_PRODUCT_SEQ.CURRVAL
         )
     </insert>
 </mapper>

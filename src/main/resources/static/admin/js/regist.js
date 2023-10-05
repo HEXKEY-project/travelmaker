@@ -131,54 +131,68 @@ window.onload = function () {
     }
 
 
-
 }
 
-$(function (){
-    $("#variableColor").hide();
-    $("#careerSize").hide();
-    $("#etcSize").hide();
-    $("#etcOption").hide();
+/* 상품 옵션 +버튼 클릭시 옵션명 input 만들기 */
 
-    $("#product_option").change(function (){
+document.addEventListener("DOMContentLoaded", function (){
+    // + 버튼 클릭 시 옵션명 입력 필드와 + 버튼을 추가
+    let optionCount = 2; // 옵션의 숫자를 초기화
 
-        switch ($("#product_option").val()){
-            case "1차옵션" :
-                $("#variableColor").hide();
-                $("#careerSize").hide();
-                $("#etcSize").hide();
-                $("#etcOption").hide();
-                break
-            case "색상" :
-                $("#variableColor").show();
-                $("#careerSize").hide();
-                $("#etcSize").hide();
-                $("#etcOption").hide();
-                break
-            case "사이즈" :
-                $("#etcSize").show();
-                $("#variableColor").hide();
-                $("#careerSize").hide();
-                $("#etcOption").hide();
-                break
-            case "인치" :
-                $("#careerSize").show();
-                $("#etcSize").hide();
-                $("#etcOption").hide();
-                $("#variableColor").hide();
-                break
-            case "기타" :
-                $("#etcOption").show();
-                $("#variableColor").hide();
-                $("#careerSize").hide();
-                $("#etcSize").hide();
-                break
-            default :
-                break
-        }
-    })
+    document.getElementById('plusOptName').addEventListener('click', function() {
+        let optionContainer = document.getElementById('optionContainer');
+
+        // 새로운 옵션명 입력 필드를 생성
+        let input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = '옵션명';
+        input.id = 'optName' + optionCount; // ID 값에 숫자 추가
+
+        // '-' 버튼 생성
+        let removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.innerText = '-';
+
+        // '-' 버튼 클릭 시 옵션 제거
+        removeButton.addEventListener('click', function() {
+            optionContainer.removeChild(input); // 옵션명 입력 필드 삭제
+            optionContainer.removeChild(removeButton); // '-' 버튼 삭제
+        });
+
+        // 생성된 요소를 옵션 컨테이너에 추가
+        optionContainer.appendChild(input);
+        optionContainer.appendChild(removeButton);
+        optionContainer.style.flex="none";
+
+        optionCount++; // 옵션 숫자 증가
+    });
 
 });
+
+
+
+/* 옵션관리 추가하기 삭제하기 */
+document.addEventListener("DOMContentLoaded", function (){
+    let nextValue = 4;
+
+    document.getElementById("addOption").addEventListener("click", function (){
+        const optionTextValue = document.getElementById("optionText").value;
+        const selectElement = document.getElementById("product_option");
+        const newOption = document.createElement("option");
+
+        newOption.textContent = optionTextValue;
+        newOption.value = nextValue.toString();
+
+        selectElement.appendChild(newOption);
+
+        document.getElementById("optionText").value="";
+
+        nextValue++;
+    });
+
+});
+
+
 
 /* label별 index 화면 표시 */
 document.addEventListener("DOMContentLoaded", function () {
@@ -347,11 +361,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const fileButton2 = document.createElement("label");
 
-
         fileButton2.setAttribute("for", counterId2);
         fileButton2.classList.add("file_button");
         fileButton2.textContent = "찾아보기";
-
 
         const labelName = document.createElement("label");
 
@@ -360,13 +372,10 @@ document.addEventListener("DOMContentLoaded", function () {
         labelName.textContent = "각도별 이미지";
         labelName.style.marginLeft = "16px";
 
-
-
         imgInput.appendChild(labelName);
         imgInput.appendChild(imgArea2);
         imgInput.appendChild(productImg);
         imgInput.appendChild(fileButton2);
-
 
         const divAddImg = document.getElementById("div_add_img");
 

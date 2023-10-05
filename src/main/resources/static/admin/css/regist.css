@@ -358,3 +358,31 @@ select {
     line-height: 143%; /* 20.02px */
     letter-spacing: 0.17px;
 }
+
+.option_button {
+    height: 30px;
+    margin-top: 24px;
+    margin-left: 16px;
+    border-radius: var(--borderRadius, 4px);
+    border: 1px solid rgba(0, 0, 0, 0.28);
+    background: #EDEDED;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    color: var(--components-backdrop-fill, rgba(0, 0, 0, 0.50));
+
+
+    /* button/small */
+    font-family: Roboto;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 169.231% */
+    letter-spacing: 0.46px;
+    text-transform: uppercase;
+}
+
+#optWrapper {
+    display: flex;
+}
+

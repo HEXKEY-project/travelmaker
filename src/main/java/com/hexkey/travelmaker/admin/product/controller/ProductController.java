@@ -1,21 +1,22 @@
 package com.hexkey.travelmaker.admin.product.controller;
 
 import com.hexkey.travelmaker.admin.product.dto.FileDTO;
+import com.hexkey.travelmaker.admin.product.dto.ProductCategoryDTO;
 import com.hexkey.travelmaker.admin.product.dto.ProductDTO;
+import com.hexkey.travelmaker.admin.product.dto.ProductOptionDTO;
 import com.hexkey.travelmaker.admin.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
@@ -27,6 +28,7 @@ public class ProductController {
     private String IMAGE_DIR;
 
     private final ProductService productService;
+    //private final
 
     public ProductController(ProductService productService) { this.productService = productService; }
 
@@ -38,10 +40,15 @@ public class ProductController {
     @PostMapping("/regist")
     public String registProduct(ProductDTO product, String serialNo1, String serialNo2, String serialNo3,
                                 @RequestParam(value = "product_content", required = false) List<MultipartFile> productContent,
-                                @RequestParam(value = "product_img", required = false) List<MultipartFile> productImage) {
+                                @RequestParam(value = "product_img", required = false) List<MultipartFile> productImage
+                                ) {
 
+        /* 시리얼 넘버 가공해서 넣기 */
         String serialNo = serialNo1 + "-" + serialNo2 + "-" + serialNo3;
         product.setSerialNo(serialNo);
+
+        /* 옵션 넣기 */
+
 
         log.info("product regist : {}", product);
         log.info("product Content: {}", productContent);
@@ -129,7 +136,9 @@ public class ProductController {
         product.setFileList(fileList);
         productService.registProduct(product);
 
-        return "redirect:/index";
+
+
+        return "redirect:/";
     }
 
 
