@@ -9,15 +9,14 @@ import java.sql.Date;
 @Getter @Setter @ToString
 public class OrderDTO {
 
-    long orderCode; // PK
-    String orderDate; // not null
-    String orderStatus; // not null
-    long memberCode; // not null
-    String cancelDate;
-    String confirmDate;
-    long totalPrice; // not null
-    long productPrice; // not null
-    long shipPrice; // not null
-    long mileageDiscountPrice; // not null
-
+    private long orderCode; // PK
+    private String orderDate; // not null
+    private String orderStatus; // not null
+    private long memberCode; // not null
+    private String cancelDate;
+    private String confirmDate;
+    private long totalPrice; // not null
+    private long productPrice; // not null
+    private long shipPrice; // not null
+    private long mileageDiscountPrice; // not null
 }

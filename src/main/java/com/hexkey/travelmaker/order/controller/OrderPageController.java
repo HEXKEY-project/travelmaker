@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.Date;
 
@@ -77,5 +78,12 @@ public class OrderPageController {
     @GetMapping("/order/pay")
     public void pay () {}
 
+    @PostMapping("/order/test")
+    @ResponseBody
+    public String test(@RequestParam String t1,
+                       @RequestParam String t2) {
+        // t1 값으로 원하는 로직 수행
+        return "결과: " + t1 + t2;
+    }
 
 }
