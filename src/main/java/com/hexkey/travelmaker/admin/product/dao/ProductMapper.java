@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ProductMapper {
     void insertProduct(ProductDTO product);
 
-    //void insertFile(FileDTO file);
+    void insertFile(FileDTO file);
 }

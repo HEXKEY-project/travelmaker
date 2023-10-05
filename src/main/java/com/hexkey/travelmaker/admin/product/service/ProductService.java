@@ -20,8 +20,8 @@ public class ProductService {
         productMapper.insertProduct(product);
 
         /* File 테이블에 데이터 저장 (첨부 파일 개수 만큼) */
-        /*for(FileDTO file : product.getFileList()) {
+        for(FileDTO file : product.getFileList()) {
             productMapper.insertFile(file);
-        }*/
+        }
     }
 }

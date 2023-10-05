@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hexkey.travelmaker.admin.product.dao.ProductMapper">
 
-    <resultMap type="com.hexkey.travelmaker.admin.product.dto.ProductDTO" id="generalProductResultMap">
+    <resultMap type="com.hexkey.travelmaker.admin.product.dto.ProductDTO" id="ProductResultMap">
         <id property="productSeq" column="PRODUCT_SEQ"/>
         <result property="productName" column="PRODUCT_NAME"/>
         <result property="price" column="PRICE"/>
@@ -67,7 +67,7 @@
         )
     </insert>
 
-    <!--<insert id="insertFile">
+    <insert id="insertFile">
         INSERT
         INTO TBL_FILE
         (
@@ -87,5 +87,5 @@
         , #{ filePath }
         , SEQ_PRODUCT_SEQ.NEXTVAL
         )
-    </insert>-->
+    </insert>
 </mapper>

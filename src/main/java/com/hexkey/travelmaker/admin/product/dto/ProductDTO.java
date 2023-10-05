@@ -23,5 +23,5 @@ public class ProductDTO {
     private String serialNo;
     private ProductOptionDTO productOption;
     private String status;
-    //private List<FileDTO> fileList;
+    private List<FileDTO> fileList;
 }
