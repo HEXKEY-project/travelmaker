@@ -4,6 +4,10 @@ body {
     align-items: center;
 }
 
+ul {
+    list-style: none;
+}
+
 /* placeholder 글자 색 설정 */
 input::-webkit-input-placeholder {
     color: #AAA;
@@ -78,7 +82,7 @@ input::-webkit-input-placeholder {
 }
 
 /* 회원가입 설정 */
-.btn-join {
+#joinBtn {
     height: 40px;
     width: 650px;
     border: 0;
@@ -99,4 +103,18 @@ input::-webkit-input-placeholder {
     margin-left: 10px;
 }
 
-.check-agree::after{content: "";display: block;clear: both;}
+/* 회원가입 버튼 가운데 정렬 */
+button#joinBtn {
+    display: block;
+    margin: 0 auto;
+}
+.tooltip {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+}
+
+/*.check-agree::after{content: "";display: block;clear: both;}*/
