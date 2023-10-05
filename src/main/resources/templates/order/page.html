@@ -50,10 +50,10 @@
                         <tr>
                             <th id="addr_th">주소</th>
                             <td>
-                                <input type="text" id="sample4_postcode" placeholder="우편번호" disabled>
+                                <input type="text" id="sample4_postcode" placeholder="우편번호" readonly>
                                 <input id="button-address" type="button" onclick="sample4_execDaumPostcode()"
                                        value="주소검색"><br>
-                                <input type="text" id="sample4_roadAddress" placeholder="도로명주소" disabled><br>
+                                <input type="text" id="sample4_roadAddress" placeholder="도로명주소" readonly><br>
                                 <!--<input type="text" id="sample4_jibunAddress" placeholder="지번주소">-->
                                 <span id="guide" style="color:#999;display:none"></span>
                                 <input type="text" id="sample4_detailAddress" placeholder="상세주소">
@@ -137,9 +137,21 @@
                 <h2 id="product_h2">주문상품 <span id="product_h2_span"> </span></h2>
             </div>
             <div id="product_body">
-                <div class="contents" id="contents_product">
-                    <img src="https://i.namu.wiki/i/4nXN8kJ3k8HTrDl3IUnx7HEauMY4_crkNiwh_f4-wPj2zny5yMDQp2qaOWSopSj40SfMy2HaDyY_h_WkERYRUQ.webp"
-                         width="100px">
+                <div style="display: flex">
+                    <div class="contents" id="contents_product">
+                        <img src="https://i.namu.wiki/i/4nXN8kJ3k8HTrDl3IUnx7HEauMY4_crkNiwh_f4-wPj2zny5yMDQp2qaOWSopSj40SfMy2HaDyY_h_WkERYRUQ.webp"
+                             width="100px">
+                    </div>
+                    <div>
+                        <h2>
+                            <div th:text="${'상품이름 : ' + option0 }"></div>
+                        </h2>
+                        <div th:text="${'옵션 : ' + option1 }"></div>
+                        <div th:text="${'수량 : ' + option2 }"></div>
+                        <div th:text="${'DTO : ' + orderPageProductDTO }"></div>
+<!--                       ========================== 테스트======================-->
+                        <div th:text="${'insert 테스트 결과값 : ' + result }"></div>
+                    </div>
                 </div>
 
                 <div class="tail" id="shipFee_product">
@@ -181,7 +193,7 @@
         <hr>
         <div class="area">
             <div class="title" id="title_pay">
-                <h2 id="pay_h2">결제정보 <span id="pay_h2_span"> </span> </h2>
+                <h2 id="pay_h2">결제정보 <span id="pay_h2_span"> </span></h2>
             </div>
 
             <div id="pay_body">
@@ -203,7 +215,6 @@
                     <h3>최종 결제 금액</h3>
                 </div>
             </div>
-
 
 
         </div>
