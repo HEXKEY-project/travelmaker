@@ -34,6 +34,6 @@ public class NoticesController {
         model.addAttribute("paging", noticesListAndPaging.get("paging"));
         model.addAttribute("noticesList",noticesListAndPaging.get("noticesList"));
 
-        return "community/notices/noticesList";
+        return "user/zeesang/community/notices/noticesList";
     }
 }

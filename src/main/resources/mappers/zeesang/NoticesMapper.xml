@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hexkey.travelmaker.community.notices.dao.NoticesMapper">
+<mapper namespace="com.hexkey.travelmaker.community.zeesang.notices.dao.NoticesMapper">
 
-    <resultMap id="noticesList" type="com.hexkey.travelmaker.community.notices.dto.NoticesDTO">
+    <resultMap id="noticesList" type="com.hexkey.travelmaker.community.zeesang.notices.dto.NoticesDTO">
         <id property="no" column="NOTICE_CODE"/>
         <result property="title" column="NOTICE_TITLE"/>
         <result property="registeredDate" column="REGISTERED_DATE"/>
