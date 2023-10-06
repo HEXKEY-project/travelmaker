@@ -1,0 +1,64 @@
+/* 웹폰트 연결 */
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#pop_style01 {
+    width: 1000px;
+    height: 998px;
+    text-align: center;
+}
+
+
+#pop_page_top {
+    padding: 30px;
+    text-align: left;
+}
+
+.memberDetail {
+    border-top: 1px solid black;
+}
+
+.inputSearch {
+    width: auto;
+    height: 70px;
+    display: flex;
+    border-bottom: 1px solid black;
+    gap: 20px;
+}
+
+.box1{
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 70px;
+}
+
+.box2 {
+    display: flex;
+    align-items: center;
+}
+
+.btnSubmit {
+    width: 94px;
+    height: 24px;
+    background-color: white;
+    color: black;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 1px solid black;
+    /*border: none;*/
+}
+
+.box3 {
+    display: flex;
+    align-items: center;
+}
+.userUpdater{
+    margin-top: 50px;
+}

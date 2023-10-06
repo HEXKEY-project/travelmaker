@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.header{
+
+    width: 1920px;
+    height: 64px;
+    background: black;
+
+}
+.logo{
+    padding: 20px;
+}
+/* 사이드메뉴바*/
+li{list-style:none}
+/* dep1 a태그 */
+a{
+    text-decoration:none;
+}
+/* dep1  img태그  */
+.menu_title{
+    margin: 12px;
+    float: left;
+}
+
+/* 사이드메뉴바 전체 */
+.menu_wrap {
+    width: 364px;
+    height: 1890px;
+    background: #F8F9FA;
+}
+
+/* 사이드메뉴바 1차 메뉴들 */
+.menu_wrap > .dep1 {
+    position: absolute;
+    width: 15%;
+    padding-top: 104px;
+    margin-left: 80px;
+    line-height: 50px;
+    text-align: left;
+}
+/* 사이드메뉴바 1차메뉴글씨 */
+ .dep1 > li > h3 {
+     color: #545D67;
+     font-size: 18px;
+}
+
+/* 사이드메뉴바  2차메뉴글씨 */
+.dep2 > li > a{
+    color: black;
+    font-size: 16px;
+}
+/* 사이드메뉴바  2차메뉴 공간 */
+.dep2 {
+    padding-left: 45px;
+    height: 0;
+    overflow: hidden;
+}
+/* 사이드메뉴바 제목 마우스 댔을때 반응 */
+.menu_wrap ul > li:hover > h3 {
+    display: block;
+    background-color: #E9ECEF;
+    color: black;
+}
+/* 사이드메뉴바 제목 마우스 댔을때 반응 */
+.dep1 > li:hover .dep2 {
+
+     height: 150px;
+     transition-duration: 1s;
+
+}
+/* 사이드메뉴바 2차메뉴 마우스 댔을때 반응*/
+ .dep2 > li:hover {
+    background-color: #E9ECEF;
+}
+/* 사이드메뉴바 2차메뉴 마우스 댔을때 반응*/
+.dep2 > li:hover > a {
+    color: #0075BD;
+
+}
+
+
+
