@@ -1,8 +1,8 @@
-package com.hexkey.travelmaker.order.yongmin.controller;
+package com.hexkey.travelmaker.order.orderpage.controller;
 
-import com.hexkey.travelmaker.order.yongmin.dto.OrderDTO;
-import com.hexkey.travelmaker.order.yongmin.dto.ProductDTO;
-import com.hexkey.travelmaker.order.yongmin.service.OrderPageService;
+import com.hexkey.travelmaker.order.orderpage.dto.OrderDTO;
+import com.hexkey.travelmaker.order.orderpage.dto.ProductDTO;
+import com.hexkey.travelmaker.order.orderpage.service.OrderPageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -67,11 +67,8 @@ public class OrderPageController {
 
         model.addAttribute("result", result);
 
-        return "order/page";
+        return "user/order/page";
     }
-
-    @GetMapping("/map/map")
-    public void map () {}
 
     @GetMapping("/order/pay")
     public void pay () {}
@@ -86,5 +83,15 @@ public class OrderPageController {
 
     @GetMapping("/basket/basket")
     public void basket () {}
+
+    @GetMapping("/map/map")
+    public String map () {
+        return "user/map/map";
+    }
+
+    @GetMapping("/admin/order")
+    public String adminOrder () {
+        return "admin/order/adminOrder";
+    }
 
 }

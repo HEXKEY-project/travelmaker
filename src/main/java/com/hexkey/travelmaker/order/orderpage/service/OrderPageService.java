@@ -1,8 +1,8 @@
-package com.hexkey.travelmaker.order.yongmin.service;
+package com.hexkey.travelmaker.order.orderpage.service;
 
-import com.hexkey.travelmaker.order.yongmin.dto.ProductDTO;
-import com.hexkey.travelmaker.order.yongmin.dao.OrderPageMapper;
-import com.hexkey.travelmaker.order.yongmin.dto.OrderDTO;
+import com.hexkey.travelmaker.order.orderpage.dto.ProductDTO;
+import com.hexkey.travelmaker.order.orderpage.dao.OrderPageMapper;
+import com.hexkey.travelmaker.order.orderpage.dto.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
