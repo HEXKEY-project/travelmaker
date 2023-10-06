@@ -1,4 +1,4 @@
-package com.hexkey.travelmaker.user.dto;
+package com.hexkey.travelmaker;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,15 +9,19 @@ import java.util.List;
 @Getter @Setter @ToString
 public class MemberDTO {
 
-    private int code;
-    private String name;
+    private int MemberCode;
+    private String MemberName;
     private int phone;
     private String email;
-    private String id;
-    private String pwd;
+    private String memberId;
+    private String memberPwd;
     private int tel;
 
     // 한 멤버는 여러 권한을 가질 수 있다.
-    private List<MemberRoleDTO> memberRoleList;
+    private List<com.hexkey.travelmaker.MemberRoleDTO> memberRoleList;
+
+    public String getPassword() {
+        return memberPwd;
+    }
 
 }
