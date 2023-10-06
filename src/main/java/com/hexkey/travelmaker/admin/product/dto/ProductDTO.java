@@ -21,7 +21,7 @@ public class ProductDTO {
     private Long categoryCode;
     private ProductCategoryDTO productCategory;
     private String serialNo;
-    private ProductOptionDTO productOption;
+    private List<ProductOptionDTO> productOption;
     private String status;
     private List<FileDTO> fileList;
 }

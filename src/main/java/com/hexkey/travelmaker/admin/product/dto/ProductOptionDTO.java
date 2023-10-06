@@ -13,7 +13,6 @@ public class ProductOptionDTO {
 
     private String optionName;
     private Long optionCode;
-    private List<ProductOptionDTO> productOptionList;
     private Long productSeq;
     private Long refOptionCode;
 }
