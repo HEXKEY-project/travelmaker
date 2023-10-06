@@ -135,39 +135,6 @@ window.onload = function () {
 
 /* 상품 옵션 +버튼 클릭시 옵션명 input 만들기 */
 
-document.addEventListener("DOMContentLoaded", function (){
-    // + 버튼 클릭 시 옵션명 입력 필드와 + 버튼을 추가
-    let optionCount = 2; // 옵션의 숫자를 초기화
-
-    document.getElementById('plusOptName').addEventListener('click', function() {
-        let optionContainer = document.getElementById('optionContainer');
-
-        // 새로운 옵션명 입력 필드를 생성
-        let input = document.createElement('input');
-        input.type = 'text';
-        input.placeholder = '옵션명';
-        input.id = 'optName' + optionCount; // ID 값에 숫자 추가
-
-        // '-' 버튼 생성
-        let removeButton = document.createElement('button');
-        removeButton.type = 'button';
-        removeButton.innerText = '-';
-
-        // '-' 버튼 클릭 시 옵션 제거
-        removeButton.addEventListener('click', function() {
-            optionContainer.removeChild(input); // 옵션명 입력 필드 삭제
-            optionContainer.removeChild(removeButton); // '-' 버튼 삭제
-        });
-
-        // 생성된 요소를 옵션 컨테이너에 추가
-        optionContainer.appendChild(input);
-        optionContainer.appendChild(removeButton);
-        optionContainer.style.flex="none";
-
-        optionCount++; // 옵션 숫자 증가
-    });
-
-});
 
 
 
