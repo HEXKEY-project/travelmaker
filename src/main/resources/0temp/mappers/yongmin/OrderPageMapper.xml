@@ -18,8 +18,8 @@
 
     <select id="selectAllProduct" resultMap="orderPageProductMap">
         SELECT
-                *
-            FROM TBL_PRODUCT
+        *
+        FROM TBL_PRODUCT
 
     </select>
 
