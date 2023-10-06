@@ -1,0 +1,120 @@
+body{
+    margin:auto;
+    text-align:center;
+}
+
+.noticesListLineFirst{
+    margin-top: 40px;
+    margin-bottom: 0;
+    width: 852px;
+    height: auto;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    /*text-align: left;*/
+}
+
+.noticesListLine{
+    margin-top: auto;
+    width: 852px;
+    height: 94px;
+    border-top: 1px solid #B3B3B3;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.search{
+    margin-top: 160px;
+    text-align:center;
+}
+
+input {
+    width: 268px;
+    border: 1px solid black;
+    border-radius: 0;
+    height: 40px;
+    padding: 0px;
+    font-size: 16px;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    text-indent: 8px;
+}
+
+input:focus {
+    border-color: black;
+    outline: none;
+    border-radius: 0;
+}
+
+.searchButton {
+    width: 62px;
+    height: 40px;
+    padding: 8px;
+    border: 0;
+    border-radius: 2px;
+    font-size: 16px;
+    margin: auto;
+    background-color: #0075BD;
+    color: white;
+    display:inline-block;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+#searchCondition{
+    width: 72px;
+    border: 1px solid black;
+    border-radius: 0;
+    height: 40px;
+    padding: 0px;
+    font-size: 16px;
+    margin: 0 auto;
+    display:inline-block;
+    vertical-align: middle;
+    text-indent: 4px;
+}
+
+#searchCondition:focus{
+    border-color: black;
+    outline: none;
+    border-radius: 0;
+}
+
+input, select, button
+{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.noticesListTable{
+    vertical-align: middle;
+}
+
+.noticesNumber {
+    font-size: 24px;
+}
+
+input::-ms-clear,
+input::-ms-reveal{
+    display:none;width:0;height:0;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration{
+    display:none;
+}
+
+.pagingButton{
+    border: 0;
+    background-color: white;
+}
+
