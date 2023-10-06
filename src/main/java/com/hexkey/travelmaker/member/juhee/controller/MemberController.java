@@ -20,11 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/member")
 public class MemberController {
 
-    private final MemberService memberService;
+    private final MemberService  memberService;
     private final PasswordEncoder passwordEncoder;
     private final MessageSourceAccessor messageSourceAccessor;
 
-    public MemberController(MemberService memberService, PasswordEncoder passwordEncoder, MessageSourceAccessor messageSourceAccessor) {
+    public MemberController(MemberService  memberService, PasswordEncoder passwordEncoder, MessageSourceAccessor messageSourceAccessor) {
         this.memberService = memberService;
         this.passwordEncoder = passwordEncoder;
         this.messageSourceAccessor = messageSourceAccessor;
@@ -38,7 +38,7 @@ public class MemberController {
 
     // 아이디 중복 체크
     @PostMapping("/idDupCheck")
-    public ResponseEntity<String> checkDuplication(@RequestBody MemberDTO member) {
+    public ResponseEntity<String>  checkDuplication(@RequestBody MemberDTO member) {
 
         log.info("Request Check ID : {}", member.getMemberId());
         String result = "사용 가능한 아이디입니다.";
@@ -53,8 +53,8 @@ public class MemberController {
 
     // 회원가입
     @PostMapping("/regist")
-    public String registMember(AddressDTO address, MemberDTO member, String zipCode, String address1, String address2,
-                               RedirectAttributes rttr) throws MemberRegistException {
+    public String registMember (AddressDTO address, MemberDTO member, String zipCode, String address1, String address2,
+                               RedirectAttributes rttr) throws MemberRegistException  {
 
         address.setPostalCode(Integer.parseInt(zipCode));
         address.setDefaultAdr(address1);
@@ -71,6 +71,5 @@ public class MemberController {
         return "redirect:/";
 
     }
-
 
 }
