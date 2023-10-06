@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexkey.travelmaker.community.notices.dao.NoticesMapper">
+
+    <resultMap id="noticesList" type="com.hexkey.travelmaker.community.notices.dto.NoticesDTO">
+        <id property="no" column="NOTICE_CODE"/>
+        <result property="title" column="NOTICE_TITLE"/>
+        <result property="registeredDate" column="REGISTERED_DATE"/>
+    </resultMap>
+
+    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT
+        COUNT(*)
+        FROM TBL_NOTICE
+        <where>
+            <if test="searchCondition == 'all'">
+                NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
+                AND NOTICE_BODY LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'title'">
+                NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'body'">
+                NOTICE_BODY LIKE '%' || #{ searchValue } || '%'
+            </if>
+            AND STATUS_YN = 'Y'
+        </where>
+    </select>
+
+    <select id="selectNotices" resultMap="noticesList">
+        SELECT
+            A.NOTICE_CODE
+        , A.NOTICE_TITLE
+        , A.REGISTERED_DATE
+          FROM (SELECT
+                    ROWNUM RNUM,
+                    B.NOTICE_CODE
+                     , B.NOTICE_TITLE
+                     , B.REGISTERED_DATE
+                FROM (SELECT
+                          C.NOTICE_CODE
+                           , C.NOTICE_TITLE
+                           , C.REGISTERED_DATE
+                      FROM TBL_NOTICE C
+        <where>
+            <if test="searchCondition == 'all'">
+                NOTICE_TITLE LIKE '%' || #{searchValue} || '%'
+                OR NOTICE_BODY LIKE '%' || #{searchValue} || '%'
+            </if>
+            <if test="searchCondition == 'title'">
+                NOTICE_TITLE LIKE '%' || #{searchValue} || '%'
+            </if>
+            <if test="searchCondition == 'body'">
+                NOTICE_BODY LIKE '%' || #{searchValue} || '%'
+            </if>
+            AND STATUS_YN = 'Y'
+            ORDER BY NOTICE_CODE desc
+        </where>
+                          ) B
+        <![CDATA[
+                  WHERE ROWNUM <= #{ endRow }
+                  ]]>
+                ) A WHERE A.RNUM >= #{ startRow }
+        ORDER BY 1 DESC
+    </select>
+
+
+</mapper>
+
+
