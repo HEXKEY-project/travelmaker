@@ -12,7 +12,7 @@
         <result property="modifyDate" column="MODIFIED_DATE"/>
         <result property="categoryCode" column="CATEGORY_CODE"/>
         <result property="serialNo" column="SERIAL_NO"/>
-        <result property="status" column="ORDERABLE_STATUS"/>
+        <result property="status" column="ORDERABLE_STATUS"/
         
         <association property="productCategory" resultMap="ProductCategoryResultMap"/>
         <collection property="productOption" resultMap="ProductOptionResultMap"/>
