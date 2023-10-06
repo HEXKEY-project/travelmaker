@@ -1,4 +1,4 @@
-package com.hexkey.travelmaker.product.hyungmin.dto;
+package com.hexkey.travelmaker.product.regist.dto;
 
 import lombok.Getter;
 import lombok.Setter;
