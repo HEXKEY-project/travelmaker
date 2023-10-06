@@ -1,8 +1,8 @@
 package com.hexkey.travelmaker.member.juhee.controller;
 
 import com.hexkey.travelmaker.common.MemberRegistException;
+import com.hexkey.travelmaker.member.juhee.service.MemberMainService;
 import com.hexkey.travelmaker.member.juhee.dto.AddressDTO;
-import com.hexkey.travelmaker.member.juhee.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import com.hexkey.travelmaker.member.juhee.dto.MemberDTO;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -20,12 +20,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/member")
 public class MemberController {
 
-    private final MemberService  memberService;
+    private final MemberMainService memberMainService;
     private final PasswordEncoder passwordEncoder;
     private final MessageSourceAccessor messageSourceAccessor;
 
-    public MemberController(MemberService  memberService, PasswordEncoder passwordEncoder, MessageSourceAccessor messageSourceAccessor) {
-        this.memberService = memberService;
+    public MemberController(MemberMainService memberMainService, PasswordEncoder passwordEncoder, MessageSourceAccessor messageSourceAccessor) {
+        this.memberMainService = memberMainService;
         this.passwordEncoder = passwordEncoder;
         this.messageSourceAccessor = messageSourceAccessor;
     }
@@ -43,7 +43,7 @@ public class MemberController {
         log.info("Request Check ID : {}", member.getMemberId());
         String result = "사용 가능한 아이디입니다.";
 
-        if (memberService.selectMemberById(member.getMemberId())) {
+        if (memberMainService.selectMemberById(member.getMemberId())) {
             result = "이미 사용 중인 아이디입니다.";
         }
 
@@ -64,7 +64,7 @@ public class MemberController {
 
         log.info("Request regist member : {}", member);
 
-        memberService.registMemebr(member);
+        memberMainService.registMemebr(member);
 
         rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.regist"));
 

@@ -4,7 +4,7 @@ import com.hexkey.travelmaker.member.juhee.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface MemberMapper {
+public interface MemberMainMapper {
     int insertMember(MemberDTO  member);
 
     int insertMemberRole();
