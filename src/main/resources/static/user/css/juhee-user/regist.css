@@ -14,19 +14,18 @@ input::-webkit-input-placeholder {
 }
 
 /* 아이디, 비밀번호, 비밀번호 확인, 이름, 이메일, 주소 입력 칸 너비, 높이 설정 */
-.user-id, .user-pwd1, .user-pwd2, .user-name, .address1,
-.address2, .email {
+.user-id, .user-pwd1, .user-pwd2, .user-name, .address1, .address2, .email {
     width: 550px;
     height: 25px;
     outline: none;
 }
 
 /* 여백 설정 */
-.user-id, .user-pwd1, .user-pwd2, .user-name, .joinAddress,
-.join-tel, .join-phone, .sms-yn, .join-email, .email-yn {
+.user-id, .user-pwd1, .user-pwd2, .user-name, .joinAddress, .join-tel, .join-phone, .sms-yn, .join-email, .email-yn {
     margin-top: 20px;
 }
-.address1, .address2 {
+.address1, .address2
+{
     margin-top: 10px;
 }
 .check-agree {
@@ -34,7 +33,8 @@ input::-webkit-input-placeholder {
 }
 
 /* 우편번호, 연락처 입력 칸 설정 */
-#zipCode, .tel1, .tel2, .tel3, .phone1, .phone2, .phone3 {
+#zipCode, .tel1, .tel2, .tel3, .phone1, .phone2, .phone3
+{
     height: 25px;
     width: 170.5px;
     outline: none;
@@ -50,10 +50,12 @@ input::-webkit-input-placeholder {
 .user-pwd2 {
     margin-left: 14.5px;
 }
-.user-name, #zipCode {
+.user-name, #zipCode
+{
     margin-left: 74px;
 }
-.address1, .address2 {
+.address1, .address2
+{
     margin-left: 116px;
 }
 .tel1 {
@@ -92,6 +94,13 @@ input::-webkit-input-placeholder {
     margin-bottom: 15px;
 }
 
+/* 연락처 스핀 버튼 설정 */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
 /* radio 색상 설정 */
 [type="radio"] {
     accent-color: black;
@@ -102,14 +111,6 @@ input::-webkit-input-placeholder {
     height: 31px;
     margin-left: 10px;
 }
-
-/* 연락처 스핀 버튼 설정 */
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-
 /* 회원가입 버튼 가운데 정렬 */
 button#joinBtn {
     display: block;

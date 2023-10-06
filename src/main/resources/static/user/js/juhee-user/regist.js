@@ -64,14 +64,14 @@ function toggleCheckbox(e) {
     toggleSubmitButton();
 }
 
-function checkAllStatus() {
-    const {police, private, promotion} agreements;
-    if (police && private && promotion) {
-        checkAll.checked = true;
-    } else {
-        checkAll.checked = false;
-    }
-}
+// function checkAllStatus() {
+//     const {police, private, promotion} agreements;
+//     if (police && private && promotion) {
+//         checkAll.checked = true;
+//     } else {
+//         checkAll.checked = false;
+//     }
+// }
 
 
 
