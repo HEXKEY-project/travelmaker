@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexkey.travelmaker.order.yongmin.dao.OrderPageMapper">
+
+    <resultMap id="orderPageProductMap" type="com.hexkey.travelmaker.order.yongmin.dto.ProductDTO">
+        <id property="productSeq" column="PRODUCT_SEQ"/>
+        <result property="productName" column="PRODUCT_NAME"/>
+        <result property="price" column="PRICE"/>
+        <result property="registeredDate" column="REGISTERED_DATE"/>
+        <result property="modifiedDate" column="MODIFIED_DATE"/>
+        <result property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="serialNo" column="SERIAL_NO"/>
+        <result property="orderableStatus" column="ORDERABLE_STATUS"/>
+    </resultMap>
+
+
+    <select id="selectAllProduct" resultMap="orderPageProductMap">
+        SELECT
+        *
+        FROM TBL_PRODUCT
+
+    </select>
+
+    <insert id="insertOrder">
+        INSERT INTO TBL_ORDER
+        (
+        ORDER_CODE
+        ,ORDER_DATE
+        ,ORDER_STATUS
+        ,MEMBER_CODE
+        ,CANCEL_DATE
+        ,CONFIRM_DATE
+        ,TOTAL_PRICE
+        ,PRODUCT_PRICE
+        ,SHIP_PRICE
+        ,MILEAGE_DISCOUNT_PRICE
+        )
+        VALUES
+        (
+        SEQ_ORDER_NO.NEXTVAL
+        ,#{ orderDate }
+        ,#{ orderStatus }
+        ,#{ memberCode }
+        ,#{ cancelDate }
+        ,#{ confirmDate }
+        ,#{ totalPrice }
+        ,#{ productPrice }
+        ,#{ shipPrice }
+        ,#{ mileageDiscountPrice }
+        )
+    </insert>
+
+
+</mapper>
