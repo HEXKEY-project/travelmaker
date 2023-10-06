@@ -21,10 +21,12 @@ public class ProductService {
 
         /* Product 테이블에 데이터 저장 */
         productMapper.insertProduct(product);
+
+        /* ProductOption 테이블에 데이터 저장 */
         List<ProductOptionDTO> productOption = product.getProductOption();
         for(int i = 0; i < productOption.size(); i++) {
             if(i == 0) {
-                //productMapper.insertProductSuperOption(productOption.get(i));
+                productMapper.insertProductSuperOption(productOption.get(i));
             } else {
                 //productMapper.insertProductSubOption(productOption.get(i));
             }
