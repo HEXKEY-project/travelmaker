@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<form action="/order/page" method="post">
+
+    <input type="text" value="멋진 가방" name="option0" readonly>
+
+    <select name="option1">
+        <option value="옵션 선택">옵션 선택</option>
+        <option value="Yellow">Yellow</option>
+        <option value="Blue">Blue</option>
+    </select>
+
+    <input name="option2" type="number" value="1">
+
+    <input type="submit" value="주문하기">
+</form>
+
+<br>
+
+
+
+
+
+<form id="myForm">
+    <input name="t1" type="text" value="여기 쓰시오.">
+    <input name="t2" type="number" value="5">
+    <input name="test" type="submit" value="api방식 테스트">
+</form>
+
+<div id="result"></div>
+
+<script>
+    const a = document.getElementById('myForm')
+
+
+    a.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        console.log(formData);
+
+        fetch('/order/test', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('result').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+
+
+</body>
+</html>

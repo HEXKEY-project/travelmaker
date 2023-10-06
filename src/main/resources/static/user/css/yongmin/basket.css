@@ -1,6 +1,45 @@
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+hr {
+    background:black;
+    height:1px;
+    border:0;
+}
+
 body {
     font-family: 'Noto Sans KR', sans-serif;
+}
+
+#b-b-options {
+    display: flex;
+    justify-content: center;
+
+}
+
+#b-b-options input {
+    width: 120px;
+    height: 50px;
+    cursor: pointer;
+    border: 1px solid #b7b7b7;
+    border-radius: 3px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    border: 1px solid #0075BD;
+}
+
+#button1 {
+    background-color: #0075BD;
+    color: white;
+}
+#button2 {
+    background-color: white;
+    color: #0075BD;
+}
+
+#b-tail .row1-columns, #b-tail .columns {
+    flex-grow: 1;
+    background-image: none;
+    text-align: center;
+    border-top: 1px solid #b7b7b7;
+    border-bottom: 1px solid #b7b7b7;
 }
 
 #head {
@@ -8,10 +47,10 @@ body {
 }
 
 #b-body {
-    border-top: 1px solid #6e6e6e;
-    border-bottom: 1px solid #6e6e6e;
     max-width: 1300px;
     margin: auto;
+    border-top: 1px solid #484848;;
+    border-bottom: 1px solid #484848;;
 }
 
 img {
@@ -19,7 +58,7 @@ img {
     height: auto;
 }
 
-#b-b-row1, .row {
+#b-b-row1, #b-t-row1, .row {
     display: flex;
     min-width: 1000px;
     max-width: 1300px;
@@ -30,8 +69,7 @@ img {
 .row1-columns, .columns {
     flex-basis: 0;
     flex-grow: 1;
-    border-bottom: 1px solid #737373;
-    border-top: 1px solid black;
+    border-top: 1px solid #b7b7b7;
     margin: 0 auto;
 }
 
@@ -47,8 +85,4 @@ img {
 .columns:nth-child(2) {
     background-image: url("https://image.yes24.com/goods/86622405/XL");
     background-size: cover;
-}
-
-.columns:nth-child(3) {
-    text-align: left;
 }
