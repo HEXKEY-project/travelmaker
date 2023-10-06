@@ -1,0 +1,54 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#head {
+    text-align: center;
+}
+
+#b-body {
+    border-top: 1px solid #6e6e6e;
+    border-bottom: 1px solid #6e6e6e;
+    max-width: 1300px;
+    margin: auto;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+#b-b-row1, .row {
+    display: flex;
+    min-width: 1000px;
+    max-width: 1300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.row1-columns, .columns {
+    flex-basis: 0;
+    flex-grow: 1;
+    border-bottom: 1px solid #737373;
+    border-top: 1px solid black;
+    margin: 0 auto;
+}
+
+.columns {
+    height: 100px;
+    line-height: 100px;
+}
+
+.row1-columns:nth-child(3), .columns:nth-child(3) {
+    flex-grow: 5;
+}
+
+.columns:nth-child(2) {
+    background-image: url("https://image.yes24.com/goods/86622405/XL");
+    background-size: cover;
+}
+
+.columns:nth-child(3) {
+    text-align: left;
+}

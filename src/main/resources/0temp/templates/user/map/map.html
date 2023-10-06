@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Kakao 지도 시작하기</title>
+
+    <link rel="stylesheet" href="/user/css/yongmin/map.css">
+    <script rel="script" type="text/javascript" src="/user/js/yongmin/map.js"></script>
+
+</head>
+
+
+<body style="margin-left: 30%;margin-right: 30%; align-content: center">
+<div id="main">
+    <div id="map-header">
+        <h1>트레블 메이커 위치 안내</h1>
+    </div>
+    <br>
+
+    <div id="map-choice">
+        <input id="map1" type="button" value="지도 보기" style="background-color: #0075BD; color: white">
+        <input id="map2" type="button" value="로드뷰 보기">
+    </div>
+
+    <br>
+
+    <div id="map-body">
+        <div id="map" style="width:1000px;height:600px"></div>
+        <br>
+        <div id="roadview" style="width:1000px;height:600px"></div>
+        <br>
+        <div id="about">
+        </div>
+        <div id="aboutbody">
+            <p> <span class="p-span">주소 : </span><span>서울 종로구 인사동길 12 대일빌딩 7층, 15층</span> </p>
+            <p> <span class="p-span">문의전화 : </span><span>010-3923-9424</span> </p>
+            <p> <span class="p-span">매장운영시간 : </span><span>06:30 - 21:30</span> </p>
+        </div>
+    </div>
+</div>
+
+</body>
+
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4af31d662b35cfd5a156349a72c3cd4b"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(37.5719, 126.9874), // 지도의 중심좌표
+            level: 1 // 지도의 확대 레벨
+        };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 마커가 표시될 위치입니다
+    var markerPosition = new kakao.maps.LatLng(37.5719, 126.9874);
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+</script>
+
+<script>
+    var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+    var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+    var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+    var position = new kakao.maps.LatLng(37.5719, 126.9874);
+
+    // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+    roadviewClient.getNearestPanoId(position, 50, function (panoId) {
+        roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+    });
+</script>
+
+
+
+</html>

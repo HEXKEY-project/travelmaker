@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>주문 페이지</title>
+
+    <link rel="stylesheet" href="/user/css/yongmin/orderpage.css">
+    <!--    <link rel="stylesheet" href="/order/orderpage.css">-->
+    <script rel="script" type="text/javascript" src="/user/js/yongmin/orderpage.js"></script>
+
+</head>
+
+
+<body>
+
+<div class="main" id="main">
+
+    <div id="title">
+        <h2><span id="title_h2_span"> </span> 트래블 메이커</h2>
+    </div>
+    <div id="sub_title">
+        <h2>주문/결제</h2>
+    </div>
+    <div id="main_body">
+        <div class="area" id="area_ship">
+            <div class="title" id="title_ship">
+                <h2 id="ship_h2">배송지 <span id="ship_h2_span"> </span></h2>
+
+            </div>
+
+            <div id="ship_body">
+
+                <div class="select" id="select_ship">
+                    <input type="radio" id="address_select_default" name="ship_select" value="default">
+                    <label>기본 배송지</label>
+                    <input type="radio" id="addr_select_new" name="ship_select" value="new">
+                    <label>새로운 배송지</label>
+                </div>
+
+                <div class="contents" id="contents_ship">
+                    <table id="ship_table">
+                        <colgroup>
+                            <col id="ship_col1">
+                            <col id="ship_col2">
+                        </colgroup>
+                        <tr>
+                            <th>받는사람</th>
+                            <td><input id="input_ship1" type="text"></td>
+                        </tr>
+                        <tr>
+                            <th id="addr_th">주소</th>
+                            <td>
+                                <input type="text" id="sample4_postcode" placeholder="우편번호" readonly>
+                                <input id="button-address" type="button" onclick="sample4_execDaumPostcode()"
+                                       value="주소검색"><br>
+                                <input type="text" id="sample4_roadAddress" placeholder="도로명주소" readonly><br>
+                                <!--<input type="text" id="sample4_jibunAddress" placeholder="지번주소">-->
+                                <span id="guide" style="color:#999;display:none"></span>
+                                <input type="text" id="sample4_detailAddress" placeholder="상세주소">
+                                <!--<input type="text" id="sample4_extraAddress" placeholder="참고항목">-->
+                            </td>
+                        </tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr>
+                            <th>일반전화</th>
+                            <td>
+                                <select class="input_phone" type="text">
+                                    <option value="02">02</option>
+                                    <option value="031">031</option>
+                                    <option value="032">032</option>
+                                    <option value="033">033</option>
+                                    <option value="041">041</option>
+                                    <option value="042">042</option>
+                                    <option value="043">043</option>
+                                    <option value="044">044</option>
+                                    <option value="051">051</option>
+                                    <option value="052">052</option>
+                                    <option value="053">053</option>
+                                    <option value="053">053</option>
+                                    <option value="054">054</option>
+                                    <option value="055">055</option>
+                                    <option value="02">02</option>
+                                    <option value="070">053</option>
+                                </select>
+                                -
+                                <input class="input_phone" type="text">
+                                -
+                                <input class="input_phone" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>휴대전화</th>
+                            <td>
+                                <select class="input_phone" type="text">
+                                    <option value="010">010</option>
+                                    <option value="011">011</option>
+                                    <option value="017">017</option>
+                                    <option value="018">018</option>
+                                    <option value="019">019</option>
+                                </select>
+                                -
+                                <input class="input_phone" type="text">
+                                -
+                                <input class="input_phone" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>이메일</th>
+                            <td>
+                                <input class="input_email" type="text">
+                                @
+                                <input class="input_email" type="text">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="special">
+                    <select>
+                        <option>배송 전에 미리 연락 바랍니다.</option>
+                        <option>부재 시 경비실에 맡겨주세요.</option>
+                        <option>빠른 배송 부탁드립니다.</option>
+                        <option>탑골공원 조심하세요.</option>
+                        <option>직접 입력</option>
+                    </select>
+                    <br>
+                    <input type="checkbox"> 기본 배송지로 저장
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="area" id="area_product">
+            <div class="title" id="title_product">
+                <h2 id="product_h2">주문상품 <span id="product_h2_span"> </span></h2>
+            </div>
+            <div id="product_body">
+                <div style="display: flex">
+                    <div class="contents" id="contents_product">
+                        <img src="https://i.namu.wiki/i/4nXN8kJ3k8HTrDl3IUnx7HEauMY4_crkNiwh_f4-wPj2zny5yMDQp2qaOWSopSj40SfMy2HaDyY_h_WkERYRUQ.webp"
+                             width="100px">
+                    </div>
+                    <div>
+                        <h2>
+                            <div th:text="${'상품이름 : ' + option0 }"></div>
+                        </h2>
+                        <div th:text="${'옵션 : ' + option1 }"></div>
+                        <div th:text="${'수량 : ' + option2 }"></div>
+                        <div th:text="${'DTO : ' + orderPageProductDTO }"></div>
+                        <!--                       ========================== 테스트======================-->
+                        <div th:text="${'insert 테스트 결과값 : ' + result }"></div>
+                    </div>
+                </div>
+
+                <div class="tail" id="shipFee_product">
+                    <h3>배송비</h3>
+                </div>
+            </div>
+
+        </div>
+
+
+        <hr>
+
+        <div class="area">
+            <div class="title" id="title_discount">
+                <h2 id="discount_h2">적립금 할인 <span id="discount_h2_span"> </span></h2>
+            </div>
+
+            <div id="discount_body">
+                <div class="contents" id="contents_discount">
+                    적립금
+                    <input type="text">
+                    <input id="point_use_button" type="button" value="전액 사용">
+                </div>
+                <div>
+                    보유잔액 :
+                </div>
+                <div>
+                    1회 구매시 적립금 최대 사용금액은 1,000원입니다.
+                </div>
+
+                <div class="tail">
+                    <h3>적용금액</h3>
+                </div>
+            </div>
+
+        </div>
+
+
+        <hr>
+        <div class="area">
+            <div class="title" id="title_pay">
+                <h2 id="pay_h2">결제정보 <span id="pay_h2_span"> </span></h2>
+            </div>
+
+            <div id="pay_body">
+                <table>
+                    <tr>
+                        <th>주문상품</th>
+                        <td>288,000</td>
+                    </tr>
+                    <tr>
+                        <th>배송비</th>
+                        <td>+3,000</td>
+                    </tr>
+                    <tr>
+                        <th>적립금 할인</th>
+                        <td>-0</td>
+                    </tr>
+                </table>
+                <div class="tail">
+                    <h3>최종 결제 금액</h3>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <hr>
+        <div class="area">
+            <div class="title" id="title_pay_kind">
+                <h2 id="pay_kind_h2">결제수단 <span id="pay_kind_h2_span"> </span></h2>
+            </div>
+
+            <div id="pay_kind_body">
+                <h3>결제수단 선택</h3>
+                <div>신용카드</div>
+                <div>계좌이체</div>
+                <div>페이코</div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="area">
+            <div class="title" id="title_point">
+                <h2 id="point_h2">적립 혜택<span id="point_h2_span"> </span></h2>
+            </div>
+
+            <div id="point_body">
+                <span>상품 적립금</span>
+                <span>245원</span>
+            </div>
+        </div>
+
+        <hr>
+    </div>
+    <div>
+        <button id="button_final" onclick="requestPay()">
+            <h2 id="h2_final"><span>20,000</span> 결제하기</h2>
+        </button>
+    </div>
+    <div>
+        <p id="p_final">
+            - 무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을 동시에 구매할 경우 전체 주문 상품 금액에 대해 무이자할부가 적용되지 않습니다.
+            <br> - 무이자할부를 원하시는 경우 장바구니에서 무이자할부 상품만 선택하여 주문하여 주시기 바랍니다.
+            <br> - 최소 결제 가능 금액은 결제금액에서 배송비를 제외한 금액입니다.
+        </p>
+    </div>
+
+
+</div>
+
+
+</body>
+
+<!--====================== 주소지 API ======================-->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if (data.buildingName !== '' && data.apartment === 'Y') {
+                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if (extraRoadAddr !== '') {
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample4_postcode').value = data.zonecode;
+                document.getElementById("sample4_roadAddress").value = roadAddr;
+                // document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+
+                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                // if (roadAddr !== '') {
+                //     document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                // } else {
+                //     document.getElementById("sample4_extraAddress").value = '';
+                // }
+
+                var guideTextBox = document.getElementById("guide");
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if (data.autoRoadAddress) {
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                    guideTextBox.style.display = 'block';
+
+                } else if (data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                    guideTextBox.style.display = 'block';
+                } else {
+                    guideTextBox.innerHTML = '';
+                    guideTextBox.style.display = 'none';
+                }
+            }
+        }).open();
+    }
+</script>
+
+<!--====================== 결제 API ======================-->
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script>
+    var IMP = window.IMP;
+    IMP.init("imp67011510");
+
+    var today = new Date();
+    var hours = today.getHours(); // 시
+    var minutes = today.getMinutes();  // 분
+    var seconds = today.getSeconds();  // 초
+    var milliseconds = today.getMilliseconds();
+    var makeMerchantUid = hours + minutes + seconds + milliseconds;
+
+    function requestPay() {
+        IMP.request_pay({
+            pg: 'kcp',
+            pay_method: 'card',
+            merchant_uid: "IMP" + makeMerchantUid,
+            name: '당근 10kg',
+            amount: 104,
+            buyer_email: 'Iamport@chai.finance',
+            buyer_name: '아임포트 기술지원팀',
+            buyer_tel: '010-1234-5678',
+            buyer_addr: '서울특별시 강남구 삼성동',
+            buyer_postcode: '123-456'
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                console.log(rsp);
+            } else {
+                console.log(rsp);
+            }
+        });
+    }
+</script>
+
+</html>
