@@ -71,11 +71,23 @@
                 <tr>
                     <th class="th_content" scope="row">상품 옵션</th>
                     <td colspan="3">
-                       <select>
-                           <option>옵션종류</option>
+                        <div id="optWrapper">
+                       <select id="optKind">
+                           <option >옵션종류</option>
                            <option name="productOption.optionName">색상</option>
+                           <option name="productOption.optionName">사이즈</option>
+                           <option name="productOption.optionName">인치</option>
                        </select>
-                        <input type="text" placeholder="옵션명">
+                            <input type="text" id="optName" name="productOption.optionName" placeholder="옵션명">
+                            <button type="button" id="optNameAdd">+</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th_content" scope="row">옵션 추가</th>
+                    <td colspan="3">
+                        <input type="text" id="optKindAdd" placeholder="옵션종류">
+                        <button type="button" id="optAdd">추가하기</button>
                     </td>
                 </tr>
                 <tr>

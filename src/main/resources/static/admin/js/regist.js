@@ -133,8 +133,57 @@ window.onload = function () {
 
 }
 
-/* 상품 옵션 +버튼 클릭시 옵션명 input 만들기 */
+/* 옵션추가하기 버튼 누를 시 input에 적은 옵션이 select option에 추가 됨 */
+document.addEventListener("DOMContentLoaded", function (){
+    let optKindAddInput = document.getElementById("optKindAdd");
+    let optAddButton = document.getElementById("optAdd");
+    let optKindSelect = document.getElementById("optKind");
 
+    optAddButton.addEventListener("click", function (){
+
+        let newOptionText = optKindAddInput.value;
+        let newOption = document.createElement("option");
+        newOption.textContent = newOptionText;
+        newOption.setAttribute("name", "productOption.optionName");
+
+        optKindSelect.appendChild(newOption);
+
+        optKindAddInput.value = "";
+    });
+
+});
+
+/* + button 클릭시 해당 옵션에 속한 옵션명들을 적을 수 있는 input이 생성 */
+document.addEventListener("DOMContentLoaded", function (){
+    let optNameAdd = document.getElementById("optNameAdd");
+
+    optNameAdd.addEventListener("click", function (){
+        let newOptName = document.createElement("div");
+        let newInput = document.createElement("input");
+        let deleteButton = document.createElement("button");
+
+        newInput.setAttribute("type", "text");
+        newInput.setAttribute("name", "productOption.optionName");
+        newInput.setAttribute("placeholder", "옵션명");
+
+        deleteButton.setAttribute("type", "button");
+        deleteButton.className = "deleteButton";
+        deleteButton.textContent = "-";
+
+        deleteButton.addEventListener("click", function (){
+            newOptName.remove();
+        });
+
+        newOptName.appendChild(newInput);
+        newOptName.appendChild(deleteButton);
+        newOptName.style.marginLeft = "114px";
+
+        let optWrapper = document.getElementById("optWrapper");
+        optWrapper.insertAdjacentElement("afterend", newOptName);
+
+
+    });
+});
 
 
 
@@ -142,7 +191,7 @@ window.onload = function () {
 document.addEventListener("DOMContentLoaded", function (){
     let nextValue = 4;
 
-    document.getElementById("addOption").addEventListener("click", function (){
+    document.getElementById("optAdd").addEventListener("click", function (){
         const optionTextValue = document.getElementById("optionText").value;
         const selectElement = document.getElementById("product_option");
         const newOption = document.createElement("option");
