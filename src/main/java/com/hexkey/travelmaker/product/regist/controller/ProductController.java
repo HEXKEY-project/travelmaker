@@ -1,8 +1,8 @@
-package com.hexkey.travelmaker.product.hyungmin.controller;
+package com.hexkey.travelmaker.product.regist.controller;
 
-import com.hexkey.travelmaker.product.hyungmin.dto.FileDTO;
-import com.hexkey.travelmaker.product.hyungmin.dto.ProductDTO;
-import com.hexkey.travelmaker.product.hyungmin.service.ProductService;
+import com.hexkey.travelmaker.product.regist.dto.FileDTO;
+import com.hexkey.travelmaker.product.regist.dto.ProductDTO;
+import com.hexkey.travelmaker.product.regist.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

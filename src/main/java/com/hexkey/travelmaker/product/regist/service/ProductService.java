@@ -1,9 +1,9 @@
-package com.hexkey.travelmaker.product.hyungmin.service;
+package com.hexkey.travelmaker.product.regist.service;
 
-import com.hexkey.travelmaker.product.hyungmin.dao.ProductMapper;
-import com.hexkey.travelmaker.product.hyungmin.dto.FileDTO;
-import com.hexkey.travelmaker.product.hyungmin.dto.ProductDTO;
-import com.hexkey.travelmaker.product.hyungmin.dto.ProductOptionDTO;
+import com.hexkey.travelmaker.product.regist.dao.ProductMapper;
+import com.hexkey.travelmaker.product.regist.dto.FileDTO;
+import com.hexkey.travelmaker.product.regist.dto.ProductDTO;
+import com.hexkey.travelmaker.product.regist.dto.ProductOptionDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
