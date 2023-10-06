@@ -1,9 +1,7 @@
-package com.hexkey.travelmaker.member.mingyo.dao;
+package com.hexkey.travelmaker.member.admin.dao;
 
 
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.Map;
 
 @Mapper
 public interface MemberMapper {

@@ -1,6 +1,6 @@
-package com.hexkey.travelmaker.member.mingyo.service;
+package com.hexkey.travelmaker.member.admin.service;
 
-import com.hexkey.travelmaker.member.mingyo.dao.MemberMapper;
+import com.hexkey.travelmaker.member.admin.dao.MemberMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

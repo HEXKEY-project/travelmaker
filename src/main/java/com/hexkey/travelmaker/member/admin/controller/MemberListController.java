@@ -1,7 +1,7 @@
-package com.hexkey.travelmaker.member.mingyo.controller;
+package com.hexkey.travelmaker.member.admin.controller;
 
 
-import com.hexkey.travelmaker.member.mingyo.service.MemberService;
+import com.hexkey.travelmaker.member.admin.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
