@@ -5,21 +5,47 @@
 <mapper namespace="com.hexkey.travelmaker.order.orderpage.dao.OrderPageMapper">
 
     <resultMap id="orderPageProductMap" type="com.hexkey.travelmaker.order.orderpage.dto.ProductDTO">
-        <id property="productSeq" column="PRODUCT_SEQ"/>
-        <result property="productName" column="PRODUCT_NAME"/>
-        <result property="price" column="PRICE"/>
-        <result property="registeredDate" column="REGISTERED_DATE"/>
-        <result property="modifiedDate" column="MODIFIED_DATE"/>
-        <result property="categoryCode" column="CATEGORY_CODE"/>
-        <result property="serialNo" column="SERIAL_NO"/>
-        <result property="orderableStatus" column="ORDERABLE_STATUS"/>
+        <id property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
     </resultMap>
+
+    <resultMap id="memberResultMap" type="com.hexkey.travelmaker.order.orderpage.dto.MemberDTO2">
+        <id property="memberCode" column="MEMBER_CODE"/>
+        <result property="memberName" column="MEMBER_NAME"/>
+        <result property="phone" column="PHONE"/>
+    </resultMap>
+
+    <resultMap id="selectAdminOrder" type="com.hexkey.travelmaker.order.orderpage.dto.OrderDTO">
+        <id property="orderCode" column="ORDER_CODE"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="orderStatus" column="ORDER_STATUS"/>
+        <result property="memberCode" column="MEMBER_CODE"/>
+        <result property="cancelDate" column="CANCEL_DATE"/>
+        <result property="confirmDate" column="CONFIRM_DATE"/>
+        <result property="totalPrice" column="TOTAL_PRICE"/>
+        <result property="productPrice" column="PRODUCT_PRICE"/>
+        <result property="shipPrice" column="SHIP_PRICE"/>
+        <result property="mileageDiscountPrice" column="MILEAGE_DISCOUNT_PRICE"/>
+
+        <association property="memberDTO" resultMap="memberResultMap"/>
+    </resultMap>
+
+    <select id="selectAdminOrder" resultMap="selectAdminOrder">
+        SELECT
+                *
+        FROM TBL_ORDER
+        JOIN TBL_MEMBER ON (TBL_ORDER.MEMBER_CODE = TBL_MEMBER.MEMBER_CODE)
+    </select>
+
+
+
 
 
     <select id="selectAllProduct" resultMap="orderPageProductMap">
         SELECT
-        *
-        FROM TBL_PRODUCT
+                 *
+        FROM TBL_PRODUCT_CATEGORY
 
     </select>
 
@@ -51,6 +77,7 @@
         ,#{ mileageDiscountPrice }
         )
     </insert>
+
 
 
 </mapper>

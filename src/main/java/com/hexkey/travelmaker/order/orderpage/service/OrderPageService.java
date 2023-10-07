@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 @Service
 public class OrderPageService {
-
 
     private final OrderPageMapper orderPageMapper;
     @Autowired
@@ -19,10 +22,21 @@ public class OrderPageService {
     }
 
 
-    public ProductDTO selectAllProduct() {
+    public Map<String, Object> selectAdminOrder() {
 
-        ProductDTO orderPageProductDTO = orderPageMapper.selectAllProduct();
-        return orderPageProductDTO;
+        List<OrderDTO> orderDTO = orderPageMapper.selectAdminOrder();
+        Map<String, Object> selectAdminOrderMap = new HashMap<>();
+        selectAdminOrderMap.put("orderDTO", orderDTO);
+        return selectAdminOrderMap;
+    }
+
+
+    public Map<String, Object> selectAllProduct() {
+
+        List<ProductDTO> productDTO = orderPageMapper.selectAllProduct();
+        Map<String, Object> productMAP = new HashMap<>();
+        productMAP.put("productDTO", productDTO);
+        return productMAP;
     }
 
 

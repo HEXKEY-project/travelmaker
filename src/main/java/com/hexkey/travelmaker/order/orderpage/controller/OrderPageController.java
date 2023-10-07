@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Map;
+
 
 @Slf4j
 @Controller
@@ -41,12 +43,12 @@ public class OrderPageController {
         log.info("{}", option1);
         log.info("{}", option2);
 
-        ProductDTO orderPageProductDTO = orderPageService.selectAllProduct();
+        Map<String, Object> orderPageProductDTO = orderPageService.selectAllProduct();
 
         model.addAttribute("option0", option0);
         model.addAttribute("option1", option1);
         model.addAttribute("option2", option2);
-        model.addAttribute("orderPageProductDTO", orderPageProductDTO);
+        model.addAttribute("productDTO", orderPageProductDTO.get("productDTO"));
 
         ////////////////// inset 연습 코드 ///////////////
         OrderDTO orderDTO = new OrderDTO();
@@ -55,11 +57,11 @@ public class OrderPageController {
 
         orderDTO.setOrderDate("2022-02-02");
         orderDTO.setOrderStatus("32000");
-        orderDTO.setMemberCode(32000);
+        orderDTO.setMemberCode(32004);
         orderDTO.setCancelDate("2022-02-02");
         orderDTO.setConfirmDate("2022-02-02");
-        orderDTO.setTotalPrice(32000);
-        orderDTO.setProductPrice(32000);
+        orderDTO.setTotalPrice(5500);
+        orderDTO.setProductPrice(52200);
         orderDTO.setShipPrice(32000);
         orderDTO.setMileageDiscountPrice(32000);
 
@@ -90,8 +92,14 @@ public class OrderPageController {
     }
 
     @GetMapping("/admin/order")
-    public String adminOrder () {
+    public String adminOrder (Model model) {
+
+        Map<String, Object> selectAdminOrderMap = orderPageService.selectAdminOrder();
+
+        model.addAttribute("orderDTOs", selectAdminOrderMap.get("orderDTO"));
+
         return "admin/order/adminOrder";
     }
+
 
 }

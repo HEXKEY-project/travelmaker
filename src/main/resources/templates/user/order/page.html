@@ -148,7 +148,9 @@
                         </h2>
                         <div th:text="${'옵션 : ' + option1 }"></div>
                         <div th:text="${'수량 : ' + option2 }"></div>
-                        <div th:text="${'DTO : ' + orderPageProductDTO }"></div>
+                        <div th:each="product : ${ productDTO }">
+                            <p th:text="${product.categoryCode + product.categoryName}"></p>
+                        </div>
                         <!--                       ========================== 테스트======================-->
                         <div th:text="${'insert 테스트 결과값 : ' + result }"></div>
                     </div>

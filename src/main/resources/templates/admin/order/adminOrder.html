@@ -13,6 +13,8 @@
     </div>
     <div id="title-sub">
         <h3>주문 관리</h3>
+
+
     </div>
     <div id="search">
         <div class="search-row">
@@ -62,15 +64,15 @@
             <div class="th">휴대전화</div>
             <div class="th">주문상태</div>
         </div>
-        <div class="tr">
+        <div class="tr" th:each="orderDTO : ${ orderDTOs }">
             <div class="td"><input type="checkbox"></div>
-            <div class="td">01</div>
-            <div class="td">2222-10-25</div>
-            <div class="td">B0021515</div>
-            <div class="td">정민교</div>
-            <div class="td">32,000</div>
-            <div class="td">01066639627</div>
-            <div class="td">배송 대기 중</div>
+            <div class="td" th:text="${ orderDTO.orderCode }"></div>
+            <div class="td" th:text="${ orderDTO.orderDate }"></div>
+            <div class="td" th:text="${ orderDTO.orderCode }"></div>
+            <div class="td" th:text="${ orderDTO.memberDTO.memberName }"></div>
+            <div class="td" th:text="${ orderDTO.totalPrice }"></div>
+            <div class="td" th:text="${ orderDTO.memberDTO.phone }"></div>
+            <div class="td" th:text="${ orderDTO.orderStatus }"></div>
         </div>
 
     </div>
