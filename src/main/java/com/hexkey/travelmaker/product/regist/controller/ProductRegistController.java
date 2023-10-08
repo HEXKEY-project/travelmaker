@@ -2,7 +2,8 @@ package com.hexkey.travelmaker.product.regist.controller;
 
 import com.hexkey.travelmaker.product.regist.dto.FileDTO;
 import com.hexkey.travelmaker.product.regist.dto.ProductDTO;
-import com.hexkey.travelmaker.product.regist.service.ProductService;
+import com.hexkey.travelmaker.product.regist.dto.ProductOptionDTO;
+import com.hexkey.travelmaker.product.regist.service.ProductRegistService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,15 +22,14 @@ import java.util.UUID;
 @Slf4j
 @Controller
 @RequestMapping("/admin/product")
-public class ProductController {
+public class ProductRegistController {
 
     @Value("${image.image-dir}")
     private String IMAGE_DIR;
 
-    private final ProductService productService;
-    //private final
+    private final ProductRegistService productRegistService;
 
-    public ProductController(ProductService productService) { this.productService = productService; }
+    public ProductRegistController(ProductRegistService productRegistService) { this.productRegistService = productRegistService; }
 
     @GetMapping("/regist")
     public String getRegistPage() {
@@ -38,6 +38,7 @@ public class ProductController {
 
     @PostMapping("/regist")
     public String registProduct(ProductDTO product, String serialNo1, String serialNo2, String serialNo3,
+                                @RequestParam(value = "productOption.optionName", required = false) List<String> productOption,
                                 @RequestParam(value = "product_content", required = false) List<MultipartFile> productContent,
                                 @RequestParam(value = "product_img", required = false) List<MultipartFile> productImage
                                 ) {
@@ -46,7 +47,24 @@ public class ProductController {
         String serialNo = serialNo1 + "-" + serialNo2 + "-" + serialNo3;
         product.setSerialNo(serialNo);
 
+
         /* 옵션 넣기 */
+        List<ProductOptionDTO> productOptionList = new ArrayList<>();
+
+        for(String productOptions : productOption) {
+            ProductOptionDTO productOptionName = new ProductOptionDTO();
+            productOptionName.setOptionName(productOptions);
+            productOptionList.add(productOptionName);
+        }
+
+        /* List<ProductOptionDTO> productOptions = new ArrayList<>();
+        if (productOptionNames != null) {
+            for (String optionName : productOptionNames) {
+                ProductOptionDTO option = new ProductOptionDTO();
+                option.setOptionName(optionName);
+                productOptions.add(option);
+            }
+        }*/
 
 
         log.info("product regist : {}", product);
@@ -93,6 +111,7 @@ public class ProductController {
                     fileInfo.setFilePath("/static/admin/images/productcontent/");
                     fileInfo.setFileType("productContent");
 
+                    fileList.add(fileInfo);
                 }
             }
 
@@ -124,6 +143,7 @@ public class ProductController {
                     fileInfo.setFilePath("/static/admin/images/productimage/");
                     fileInfo.setFileType("productImage");
 
+                    fileList.add(fileInfo);
                 }
             }
 
@@ -133,11 +153,11 @@ public class ProductController {
 
         log.info("productImage : {}", fileList);
         product.setFileList(fileList);
-        productService.registProduct(product);
+        productRegistService.registProduct(product);
 
 
 
-        return "redirect:/";
+        return "redirect:/admin/product/regist";
     }
 
 

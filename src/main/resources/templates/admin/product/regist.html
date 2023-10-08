@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>regist</title>
-    <link rel="stylesheet" type="text/css" href="/admin/css/hyungmin/regist.css">
+    <link rel="stylesheet" type="text/css" href="/admin/css/product/regist.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="/admin/js/hyungmin/regist.js" type="text/javascript"></script>
+    <script src="/admin/js/product/regist.js" type="text/javascript"></script>
 
 </head>
 <body>
-
 <div th:include="common/admin/header.html"></div>
+<div id="wrapper">
+<div th:include="common/admin/nav.html"></div>
 
 <div class="regist-header">
+
+</div>
+<div class="regist_form" id="regist_wrapper">
     <p class="regist_title">상품 등록 및 수정</p>
     <p class="regist_content">기본 정보</p>
-</div>
-<div class="regist_form" id="wrapper">
     <form name="regist" id="regist" action="/admin/product/regist" enctype="multipart/form-data" method="post">
         <div class="regist_tbl">
             <table class="tal_regist">
@@ -71,24 +73,37 @@
                 <tr>
                     <th class="th_content" scope="row">상품 옵션</th>
                     <td colspan="3">
-                       <select>
-                           <option>옵션종류</option>
-                           <option name="productOption.optionName">색상</option>
-                       </select>
-                        <input type="text" placeholder="옵션명">
+                        <div id="optWrapper">
+                            <select id="optKind" name="productOption.optionName">
+                                <option >옵션종류</option>
+                                <option>색상</option>
+                                <option>사이즈</option>
+                                <option>인치</option>
+                            </select>
+                            <input type="text" id="optName" name="productOption.optionName" placeholder="옵션명">
+                            <button type="button" id="optNameAdd">+</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th_content" scope="row">옵션 추가</th>
+                    <td colspan="3">
+                        <input type="text" id="optKindAdd" placeholder="옵션종류">
+                        <button type="button" id="optAdd">추가하기</button>
                     </td>
                 </tr>
                 <tr>
                     <th class="th_content" scope="row">상품 상태</th>
                     <td colspan="3">
                         <select name="status">
-                            <option value>판매중</option>
-                            <option value="stopcell">판매중지</option>
+                            <option>상품 상태</option>
+                            <option name="status">판매중</option>
+                            <option name="status">판매중지</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">상세설명</th>
+                    <th class="th_content" scope="row">상세설명</th>
                     <td id="form_product_description">
                         상품 설명이미지
                     </td>
@@ -129,7 +144,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">상품이미지</th>
+                    <th class="th_content" scope="row">상품이미지</th>
                     <td colspan="3">
                         <div class="img-input">
                             <input class="img-area2" value="예) 대표 이미지.jpg" placeholder="예)대표 이미지.jpg">
@@ -171,6 +186,7 @@
         </div>
         <button type="submit" id="productRegist">상품등록</button>
     </form>
+</div>
 </div>
 </body>
 </html>
