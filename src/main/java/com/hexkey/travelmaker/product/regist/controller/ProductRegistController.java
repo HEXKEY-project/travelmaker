@@ -6,12 +6,14 @@ import com.hexkey.travelmaker.product.regist.dto.ProductOptionDTO;
 import com.hexkey.travelmaker.product.regist.service.ProductRegistService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +31,12 @@ public class ProductRegistController {
 
     private final ProductRegistService productRegistService;
 
-    public ProductRegistController(ProductRegistService productRegistService) { this.productRegistService = productRegistService; }
+    private final MessageSourceAccessor messageSourceAccessor;
+
+    public ProductRegistController(ProductRegistService productRegistService, MessageSourceAccessor messageSourceAccessor) {
+        this.productRegistService = productRegistService;
+        this.messageSourceAccessor = messageSourceAccessor;
+    }
 
     @GetMapping("/regist")
     public String getRegistPage() {
@@ -38,9 +45,10 @@ public class ProductRegistController {
 
     @PostMapping("/regist")
     public String registProduct(ProductDTO product, String serialNo1, String serialNo2, String serialNo3,
-                                @RequestParam(value = "productOption.optionName", required = false) List<String> productOption,
+                                /*@RequestParam(value = "productOption.optionName", required = false) List<String> productOption,*/
                                 @RequestParam(value = "product_content", required = false) List<MultipartFile> productContent,
-                                @RequestParam(value = "product_img", required = false) List<MultipartFile> productImage
+                                @RequestParam(value = "product_img", required = false) List<MultipartFile> productImage,
+                                RedirectAttributes rttr
                                 ) {
 
         /* 시리얼 넘버 가공해서 넣기 */
@@ -49,13 +57,13 @@ public class ProductRegistController {
 
 
         /* 옵션 넣기 */
-        List<ProductOptionDTO> productOptionList = new ArrayList<>();
+        /*List<ProductOptionDTO> productOptionList = new ArrayList<>();
 
         for(String productOptions : productOption) {
             ProductOptionDTO productOptionName = new ProductOptionDTO();
             productOptionName.setOptionName(productOptions);
             productOptionList.add(productOptionName);
-        }
+        }*/
 
         /* List<ProductOptionDTO> productOptions = new ArrayList<>();
         if (productOptionNames != null) {
@@ -155,6 +163,7 @@ public class ProductRegistController {
         product.setFileList(fileList);
         productRegistService.registProduct(product);
 
+        rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("product.regist"));
 
 
         return "redirect:/admin/product/regist";
