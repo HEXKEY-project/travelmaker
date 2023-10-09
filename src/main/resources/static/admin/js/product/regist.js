@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function (){
         let newOptionText = optKindAddInput.value;
         let newOption = document.createElement("option");
         newOption.textContent = newOptionText;
-        newOption.setAttribute("name", "productOption.optionName");
+        newOption.setAttribute("name", "productOption[0].optionName");
 
         optKindSelect.appendChild(newOption);
 
@@ -157,6 +157,9 @@ document.addEventListener("DOMContentLoaded", function (){
 /* + button 클릭시 해당 옵션에 속한 옵션명들을 적을 수 있는 input이 생성 */
 document.addEventListener("DOMContentLoaded", function (){
     let optNameAdd = document.getElementById("optNameAdd");
+    let optWrapper = document.getElementById("optWrapper");
+    let optionIndex = 2;
+    let lastInsertedDiv = optWrapper;
 
     optNameAdd.addEventListener("click", function (){
         let newOptName = document.createElement("div");
@@ -164,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function (){
         let deleteButton = document.createElement("button");
 
         newInput.setAttribute("type", "text");
-        newInput.setAttribute("name", "productOption.optionName");
+        newInput.setAttribute("name", "productOption[" + optionIndex + "].optionName");
         newInput.setAttribute("placeholder", "옵션명");
 
         deleteButton.setAttribute("type", "button");
@@ -179,10 +182,10 @@ document.addEventListener("DOMContentLoaded", function (){
         newOptName.appendChild(deleteButton);
         newOptName.style.marginLeft = "106px";
 
-        let optWrapper = document.getElementById("optWrapper");
-        optWrapper.insertAdjacentElement("afterend", newOptName);
+        lastInsertedDiv.insertAdjacentElement("afterend", newOptName);
+        lastInsertedDiv = newOptName;
 
-
+        optionIndex++;
     });
 });
 

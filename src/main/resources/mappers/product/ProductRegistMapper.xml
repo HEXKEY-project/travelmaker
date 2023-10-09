@@ -105,7 +105,7 @@
     </insert>
 
     <insert id="insertProductSubOpt">
-        <selectKey keyProperty="optionCode" order="BEFORE" resultType="_int">
+        <selectKey keyProperty="productOption.refOptionCode" order="BEFORE" resultType="_int">
             SELECT
                    SEQ_OPTION_CODE.CURRVAL
               FROM DUAL
@@ -123,7 +123,7 @@
           #{ productOption.optionName }
         , SEQ_OPTION_CODE.NEXTVAL
         , SEQ_PRODUCT_SEQ.CURRVAL
-        , SEQ_OPTION_CODE.CURRVAL
+        , #{ productOption.refOptionCode }
         )
     </insert>
 </mapper>

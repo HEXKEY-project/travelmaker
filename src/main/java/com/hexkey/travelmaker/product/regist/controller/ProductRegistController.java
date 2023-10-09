@@ -45,7 +45,6 @@ public class ProductRegistController {
 
     @PostMapping("/regist")
     public String registProduct(ProductDTO product, String serialNo1, String serialNo2, String serialNo3,
-                                /*@RequestParam(value = "productOption.optionName", required = false) List<String> productOption,*/
                                 @RequestParam(value = "product_content", required = false) List<MultipartFile> productContent,
                                 @RequestParam(value = "product_img", required = false) List<MultipartFile> productImage,
                                 RedirectAttributes rttr
@@ -54,26 +53,6 @@ public class ProductRegistController {
         /* 시리얼 넘버 가공해서 넣기 */
         String serialNo = serialNo1 + "-" + serialNo2 + "-" + serialNo3;
         product.setSerialNo(serialNo);
-
-
-        /* 옵션 넣기 */
-        /*List<ProductOptionDTO> productOptionList = new ArrayList<>();
-
-        for(String productOptions : productOption) {
-            ProductOptionDTO productOptionName = new ProductOptionDTO();
-            productOptionName.setOptionName(productOptions);
-            productOptionList.add(productOptionName);
-        }*/
-
-        /* List<ProductOptionDTO> productOptions = new ArrayList<>();
-        if (productOptionNames != null) {
-            for (String optionName : productOptionNames) {
-                ProductOptionDTO option = new ProductOptionDTO();
-                option.setOptionName(optionName);
-                productOptions.add(option);
-            }
-        }*/
-
 
         log.info("product regist : {}", product);
         log.info("product Content: {}", productContent);
