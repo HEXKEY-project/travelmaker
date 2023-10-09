@@ -98,14 +98,14 @@
         )
         VALUES
         (
-          #{ productOption.optionName }
+          #{ optionName }
         , SEQ_OPTION_CODE.NEXTVAL
         , SEQ_PRODUCT_SEQ.CURRVAL
         )
     </insert>
 
     <insert id="insertProductSubOpt">
-        <selectKey keyProperty="productOption.refOptionCode" order="BEFORE" resultType="_int">
+        <selectKey keyProperty="refOptionCode" order="BEFORE" resultType="_int">
             SELECT
                    SEQ_OPTION_CODE.CURRVAL
               FROM DUAL
@@ -120,10 +120,10 @@
         )
         VALUES
         (
-          #{ productOption.optionName }
+          #{ optionName }
         , SEQ_OPTION_CODE.NEXTVAL
         , SEQ_PRODUCT_SEQ.CURRVAL
-        , #{ productOption.refOptionCode }
+        , #{ refOptionCode }
         )
     </insert>
 </mapper>
