@@ -1,0 +1,20 @@
+.swiper-main {
+    width: 100%;
+    max-width: 1920px;
+    height: 690px;
+}
+
+.swiper-container {
+    margin-top: 64px;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+}
+
+.swiper-slide image {
+    height: 690px;
+
+
+}

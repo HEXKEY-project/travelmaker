@@ -13,7 +13,7 @@
 
     <div class="upper-buttons-justify">
         <div class="main-logo">
-            <a href=#>
+            <a href="/">
                 <img src="/user/images/migi/main_logo.png">
             </a>
         </div>
@@ -106,12 +106,11 @@
         </a>
 
         <div class="search-inner">
-            <form id="searchForm" action="/search-form.html" method="get" target="_self">
+            <form id="searchForm" action="/user/search" method="get" target="_self">
                 <fieldset title="검색어를 입력해주세요.">
-                    <input id="keyword" name="keyword" class="inputTypeText" placeholder="검색어를 입력하세요."
-                           value="검색어를 입력하세요." type="text">
-                    <input type="image" src="/user/images/migi/top_search.png" class="btn-src" alt="검색이미지"
-                           onclick="submitSearch(this);">
+                    <input type="text" id="keyword" name="keyword" class="inputTypeText" placeholder="검색어를 입력하세요."
+                           value="검색어를 입력하세요." />
+                    <input type="image" src="/user/images/migi/top_search.png" class="btn-src" alt="검색이미지"/>
                 </fieldset>
             </form>
 
@@ -186,7 +185,7 @@
 
         function submitSearch(formElement) {
             // 폼 엘리먼트에서 'keyword' 입력 필드의 값을 가져옵니다.
-            var keywordValue = formElement.querySelector('input[name="keyword"]').value;
+            const keywordValue = formElement.querySelector('input[name="keyword"]').value;
 
             // 검색어가 비어 있는지 확인
             if (keywordValue.trim() === '') {
@@ -195,9 +194,9 @@
             }
 
             // 검색어를 쿼리 문자열로 조합하여 URL로 이동
-            var searchUrl = '/search?keyword=' + encodeURIComponent(keywordValue);
-            window.location.href = searchUrl;
-
+            const searchUrl = '/search?keyword=' + encodeURIComponent(keywordValue);
+            httpRequest.open('GET', searchUrl)
+            httpRequest.send();
         }
 
     </script>
