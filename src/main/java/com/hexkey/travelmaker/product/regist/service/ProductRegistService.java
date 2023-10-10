@@ -25,8 +25,11 @@ public class ProductRegistService {
         List<ProductOptionDTO> productOption = product.getProductOption();
         for(int i = 0; i < productOption.size(); i++) {
             if(i == 0) {
+                /* 첫번째 옵션값에는 refOptionCode는 null값 */
                 productRegistMapper.insertProductSuperOpt(productOption.get(i));
             } else {
+                /* 두번째 옵션값에 처음 옵션코드를 refOptionCode로 고정시키 위해 */
+                productOption.get(i).setRefOptionCode(productOption.get(0).getRefOptionCode());
                 productRegistMapper.insertProductSubOpt(productOption.get(i));
             }
         }
