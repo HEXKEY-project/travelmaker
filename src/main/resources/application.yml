@@ -9,19 +9,15 @@ spring:
     password: TRAVELMAKER
 
 # file upload config
-servlet:
-  multipart:
-    max-file-size: 100MB
-    max-request-size: 100MB
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      location: C:/Lecture/SubProjectMerge/
 
 # Mybatis config
 mybatis:
   mapper-locations: mappers/**/*.xml
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
-      location: C:/Lecture/SubProject/TravelMaker/
 
 # image upload dir
 image:
