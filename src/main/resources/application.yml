@@ -7,6 +7,12 @@ spring:
     url: jdbc:oracle:thin:@localhost:1521:xe
     username: C##TRAVELMAKER
     password: TRAVELMAKER
+  thymeleaf:
+    prefix: classpath:/templates/  # 템플릿 파일의 위치를 지정합니다.
+    suffix: .html  # 템플릿 파일의 확장자를 지정합니다.
+    mode: HTML5  # 타임리프의 모드 설정 (HTML5, XHTML, XML 등)
+    encoding: UTF-8  # 템플릿 파일 인코딩 설정
+    cache: false  # 템플릿 캐싱 여부 (개발 환경에서는 주로 비활성화)
 
 # file upload config
 servlet:
