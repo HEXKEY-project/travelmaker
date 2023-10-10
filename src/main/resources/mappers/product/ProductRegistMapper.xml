@@ -89,6 +89,11 @@
     </insert>
 
     <insert id="insertProductSuperOpt">
+        <selectKey keyProperty="refOptionCode" order="AFTER" resultType="_long">
+            SELECT
+            SEQ_OPTION_CODE.CURRVAL
+            FROM DUAL
+        </selectKey>
         INSERT
         INTO TBL_PRODUCT_OPTION
         (
@@ -105,11 +110,6 @@
     </insert>
 
     <insert id="insertProductSubOpt">
-        <selectKey keyProperty="refOptionCode" order="BEFORE" resultType="_long">
-            SELECT
-                   SEQ_OPTION_CODE.CURRVAL
-              FROM DUAL
-        </selectKey>
         INSERT
         INTO TBL_PRODUCT_OPTION
         (
