@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link href="/user/css/migi/search.css" rel="stylesheet" type="text/css">
     <title>search</title>
 </head>
 <body>
+<div th:replace="/common/user/header.html"></div>
+
     <div id="container">
         <div id="contents">
 
@@ -13,7 +15,7 @@
                 <h1>상품검색</h1>
             </div>
 
-            <form id="search-form" action="search-form.html" method="get" target="_self">
+            <form id="search-form" action="searchForm.html" method="get" target="_self">
                 <div class="search-box">
                     <fieldset>
                     <legend>상품검색</legend>
@@ -37,7 +39,7 @@
                             <option value="prd_model">모델명</option>
                             <option value="prd_brand">브랜드명</option>
                         </select>
-                        <input id="keyword" class="inputTypeText" th:value="${keyword}" placeholder size="15" type="text">
+                        <input type="text" id="keyword" name="keyword" class="inputTypeText" placeholder size="15">
                     </div>
 
                     <div class="search-hotkeyword">
@@ -103,16 +105,21 @@
     </div>
 
 <script>
+
     window.addEventListener('DOMContentLoaded', function () {
         // 현재 URL에서 'keyword' 파라미터 값을 가져옵니다.
-        var urlParams = new URLSearchParams(window.location.search);
-        var keywordValue = urlParams.get('keyword');
+        const urlParams = new URLSearchParams(window.location.search);
+        const keywordValue = urlParams.get('keyword');
 
         // 'keyword' 파라미터가 존재하고 값이 비어 있지 않다면 값을 'keyword' 입력 필드에 설정합니다.
         if (keywordValue !== null && keywordValue.trim() !== '') {
-            document.getElementById('keyword').value = keywordValue;
+            document.getElementById("keyword").value = keywordValue;
         }
     });
+
 </script>
+
+<div th:replace="/common/user/footer.html"></div>
+
 </body>
 </html>
