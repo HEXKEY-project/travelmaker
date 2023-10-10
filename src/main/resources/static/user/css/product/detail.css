@@ -1,0 +1,32 @@
+#titleImgArea {
+    margin-top: 219px;
+    margin-left: 242px;
+    width: 706px;
+    height: 695px;
+    flex-shrink: 0;
+}
+
+#product_contents {
+    display: flex;
+}
+
+#product_title {
+    margin-top: 219px;
+    color: var(--components-chip-default-close-fill, #000);
+    font-family: Noto Sans;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 60px; /* 150% */
+    text-transform: uppercase;
+}
+
+#product_price {
+    display: block;
+}
+
+
+:root {
+    --components-chip-default-close-fill: #000;
+}
+

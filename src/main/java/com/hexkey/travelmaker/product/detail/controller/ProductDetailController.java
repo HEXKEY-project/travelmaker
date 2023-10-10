@@ -12,6 +12,6 @@ public class ProductDetailController {
     public String selectProductDetail(){
 
 
-        return "redirect:/";
+        return "/user/product/detail";
     }
 }
