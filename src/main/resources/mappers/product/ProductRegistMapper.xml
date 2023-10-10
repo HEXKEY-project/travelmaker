@@ -105,7 +105,7 @@
     </insert>
 
     <insert id="insertProductSubOpt">
-        <selectKey keyProperty="refOptionCode" order="BEFORE" resultType="_int">
+        <selectKey keyProperty="refOptionCode" order="BEFORE" resultType="_long">
             SELECT
                    SEQ_OPTION_CODE.CURRVAL
               FROM DUAL
