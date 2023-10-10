@@ -7,6 +7,10 @@
     text-align: center;
 }
 
+#container {
+    margin-top: 164px;
+}
+
 /* form */
 div#search-form {
     margin: auto;

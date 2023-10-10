@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link href="/user/css/search.css" rel="stylesheet" type="text/css">
+    <link href="/user/css/migi/search.css" rel="stylesheet" type="text/css">
     <title>search</title>
 </head>
 <body>
+<div th:replace="/common/user/header.html"></div>
+
     <div id="container">
         <div id="contents">
 
@@ -13,7 +15,7 @@
                 <h1>상품검색</h1>
             </div>
 
-            <form id="search-form" action="search.html" method="get" target="_self">
+            <form id="search-form" action="searchForm.html" method="get" target="_self">
                 <div class="search-box">
                     <fieldset>
                     <legend>상품검색</legend>
@@ -37,22 +39,22 @@
                             <option value="prd_model">모델명</option>
                             <option value="prd_brand">브랜드명</option>
                         </select>
-                        <input id="keyword" class="inputTypeText" placeholder size="15" type="text">
+                        <input type="text" id="keyword" name="keyword" class="inputTypeText" placeholder size="15">
                     </div>
 
                     <div class="search-hotkeyword">
                         <strong>인기검색어</strong>
                         <p>
-                            <a href="search.html?keyword=캐리어">캐리어  </a>
-                            <a href="search.html?keyword=캐리어커버">캐리어커버  </a>
-                            <a href="search.html?keyword=캐리어벨트">캐리어벨트  </a>
-                            <a href="search.html?keyword=와이어">와이어  </a>
-                            <a href="search.html?keyword=배낭">배낭  </a>
-                            <a href="search.html?keyword=도난방지">도난방지  </a>
-                            <a href="search.html?keyword=복대">복대  </a>
-                            <a href="search.html?keyword=네임택">네임택  </a>
-                            <a href="search.html?keyword=여권케이스">여권케이스  </a>
-                            <a href="search.html?keyword=목베개">목베개</a>
+                            <a href="search-form.html?keyword=캐리어">캐리어  </a>
+                            <a href="search-form.html?keyword=캐리어커버">캐리어커버  </a>
+                            <a href="search-form.html?keyword=캐리어벨트">캐리어벨트  </a>
+                            <a href="search-form.html?keyword=와이어">와이어  </a>
+                            <a href="search-form.html?keyword=배낭">배낭  </a>
+                            <a href="search-form.html?keyword=도난방지">도난방지  </a>
+                            <a href="search-form.html?keyword=복대">복대  </a>
+                            <a href="search-form.html?keyword=네임택">네임택  </a>
+                            <a href="search-form.html?keyword=여권케이스">여권케이스  </a>
+                            <a href="search-form.html?keyword=목베개">목베개</a>
                         </p>
                     </div>
 
@@ -101,5 +103,23 @@
             </form>
         </div>
     </div>
+
+<script>
+
+    window.addEventListener('DOMContentLoaded', function () {
+        // 현재 URL에서 'keyword' 파라미터 값을 가져옵니다.
+        const urlParams = new URLSearchParams(window.location.search);
+        const keywordValue = urlParams.get('keyword');
+
+        // 'keyword' 파라미터가 존재하고 값이 비어 있지 않다면 값을 'keyword' 입력 필드에 설정합니다.
+        if (keywordValue !== null && keywordValue.trim() !== '') {
+            document.getElementById("keyword").value = keywordValue;
+        }
+    });
+
+</script>
+
+<div th:replace="/common/user/footer.html"></div>
+
 </body>
 </html>
