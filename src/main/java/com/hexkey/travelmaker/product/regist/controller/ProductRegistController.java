@@ -95,8 +95,9 @@ public class ProductRegistController {
                     FileDTO fileInfo = new FileDTO();
                     fileInfo.setOriginalName(originalFileName);
                     fileInfo.setSavedName(savedFileName);
-                    fileInfo.setFilePath("/static/admin/images/productcontent/");
+                    fileInfo.setSavePath("/static/admin/images/productcontent/");
                     fileInfo.setFileType("productContent");
+                    fileInfo.setFilePath("/static/admin/images/productcontent_" + savedFileName);
 
                     fileList.add(fileInfo);
                 }
@@ -127,8 +128,9 @@ public class ProductRegistController {
                     FileDTO fileInfo = new FileDTO();
                     fileInfo.setOriginalName(originalFileName);
                     fileInfo.setSavedName(savedFileName);
-                    fileInfo.setFilePath("/static/admin/images/productimage/");
+                    fileInfo.setSavePath("/static/admin/images/productimage/");
                     fileInfo.setFileType("productImage");
+                    fileInfo.setFilePath("/static/admin/images/productimage_" + savedFileName);
 
                     fileList.add(fileInfo);
                 }
