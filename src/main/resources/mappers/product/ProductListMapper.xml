@@ -53,7 +53,7 @@
 
     <select id="selectProductList" resultMap="generalProductResultMap">
         SELECT
-               A.PRODUCT_SEQ
+            A.PRODUCT_SEQ
              , A.PRODUCT_NAME
              , A.PRICE
              , A.REGISTERED_DATE
@@ -64,7 +64,13 @@
              , B.FILE_TYPE
              , B.FILE_PATH
              , B.SAVED_FILE_NAME
-          FROM TBL_PRODUCT A
-          JOIN TBL_FILE B ON (A.PRODUCT_SEQ = B.PRODUCT_SEQ)
+             , C.REF_CATEGORY_CODE
+        FROM TBL_PRODUCT A
+                 JOIN TBL_FILE B ON (A.PRODUCT_SEQ = B.PRODUCT_SEQ)
+                 JOIN TBL_PRODUCT_CATEGORY C ON (A.CATEGORY_CODE = C.CATEGORY_CODE)
+        WHERE C.REF_CATEGORY_CODE IN (SELECT
+                                          CATEGORY_CODE
+                                      FROM TBL_PRODUCT_CATEGORY
+                                      WHERE REF_CATEGORY_CODE = #{ categoryCode })
     </select>
 </mapper>

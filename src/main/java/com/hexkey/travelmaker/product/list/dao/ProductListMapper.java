@@ -11,5 +11,5 @@ public interface ProductListMapper {
 
     int selectProductTotalCount();
 
-    List<ProductDTO> selectProductList(SelectCriteria selectCriteria);
+    List<ProductDTO> selectProductList(int categoryCode, SelectCriteria selectCriteria);
 }

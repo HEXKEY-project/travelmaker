@@ -1,4 +1,8 @@
 
+body {
+    height: 10000px;
+}
+
 /* title */
 .title-area {
     min-height: 30px;

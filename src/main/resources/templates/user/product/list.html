@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/user/css/migi/list.css" type="text/css">
     <meta charset="UTF-8">
     <title>list</title>
 </head>
@@ -8,10 +9,10 @@
 <div th:replace="common/user/header.html"></div>
 
 <div class="wrapper" style="margin-top: 164px">
-    <h1>제품 목록</h1>
+    <h1 align="center">제품 목록</h1>
     <div id="thumbnailArea">
         <th:block th:each="productList : ${productList}">
-            <div th:onclick="|location.href='/product/detail?no=${productList.productSeq}'|">
+            <div align="center" class="item" th:onclick="|location.href='/product/detail?no=${productList.productSeq}'|">
                 <div>
                     <th:block th:each="file : ${productList.fileList}">
                         <img th:if="${ file.fileType == 'productImage' }"
@@ -20,16 +21,16 @@
                              height="350px">
                     </th:block>
                 </div>
-            </div>
             <div class="product-description">
                 <div class="product-name">
                     <a th:onclick="|location.href='/product/detail?no=${productList.productSeq}'|">
-                        <span th:text="${productList.productName}" style="font-size: 16px;color: #111111;"></span>
+                        <div th:text="${productList.productName}"></div>
                     </a>
                 </div>
             </div>
-        </th:block>
-    </div>
+        </div>
+    </th:block>
+</div>
 
 </div>
 
