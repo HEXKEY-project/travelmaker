@@ -22,7 +22,7 @@ public class ProductListService {
     }
 
 
-    public Map<String, Object> selectCateList(int page) {
+    public Map<String, Object> selectCateList(int categoryCode, int page) {
 
         int totalCount = productListMapper.selectProductTotalCount();
         log.info("product total count : {}", totalCount);
@@ -32,7 +32,7 @@ public class ProductListService {
         SelectCriteria selectCriteria = Pagenation.getSelectCriteria(page, totalCount, limit, buttonAmount);
         log.info("product list selectCriteria : {}", selectCriteria);
 
-        List<ProductDTO> productList = productListMapper.selectProductList(selectCriteria);
+        List<ProductDTO> productList = productListMapper.selectProductList(categoryCode, selectCriteria);
         log.info("productList : {}", productList);
 
         Map<String, Object> productListAndPaging = new HashMap<>();
