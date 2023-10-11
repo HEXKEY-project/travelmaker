@@ -10,11 +10,11 @@
     <div th:replace="common/user/header.html"></div>
     <div id="product_contents">
         <div id="titleImgArea">
-          <!--<th:block th:each="index : ${ #numbers.sequence(1, product.fileList.size())}" th:if="${ product.fileList.size() > 0 }">
-            <img id="productImg" th:src="${ product.fileList[index].savePath }">
-            <img src="/static/user/images/productdetail/_ButtonBase_left.png" alt="이전이미지">
-            <img src="/static/user/images/productdetail/_ButtonBase_right.png" alt="다음이미지">
-          </th:block>-->
+          <th:block th:each="index : ${ #numbers.sequence(1, file.size())}" th:if="${ file.size() > 0 }">
+            <img id="productImg" th:src="${ file[4].filePath }">
+           <!-- <img src="/static/user/images/productdetail/_ButtonBase_left.png" alt="이전이미지">
+            <img src="/static/user/images/productdetail/_ButtonBase_right.png" alt="다음이미지">-->
+          </th:block>
         </div>
         <div>
             <!--<div id="product_title" th:text="${product.productName}"></div>
