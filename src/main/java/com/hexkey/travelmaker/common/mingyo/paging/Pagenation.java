@@ -1,7 +1,5 @@
 package com.hexkey.travelmaker.common.mingyo.paging;
 
-import com.hexkey.travelmaker.common.zeesang.paging.SelectCriteria;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +29,7 @@ public class Pagenation {
         int endRow = startRow + limit - 1;
 
         return new SelectCriteria(page, totalCount, limit, buttonAmount, maxPage, startPage, endPage,
-                startRow, endRow, searchMap.get("searchCondition"), searchMap.get("searchValue"));
+                startRow, endRow, searchMap.get("memberGradeList"), searchMap.get("searchValueId"),searchMap.get("searchDate"));
     }
 
     public static SelectCriteria getSelectCriteria(int page, int totalCount, int limit, int buttonAmount) {

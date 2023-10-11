@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexkey.travelmaker.member.admin.dao.MemberMapper">
+
+
+    <resultMap type="com.hexkey.travelmaker.member.admin.dto.MemberDTO" id="memberResultMap">
+        <id property="memberCode" column="MEMBER_CODE"/>
+        <result property="memberName" column="MEMBER_NAME"/>
+        <result property="phone" column="PHONE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="memberId" column="MEMBER_ID"/>
+        <result property="memberPwd" column="MEMBER_PWD"/>
+        <result property="smsYn" column="SMS_YN"/>
+        <result property="emailYn" column="EMAIL_YN"/>
+        <result property="mileage" column="MILEAGE"/>
+        <result property="policyYn" column="POLICY_YN"/>
+        <result property="privateYn" column="PRIVATE_YN"/>
+        <result property="promotionYn" column="PROMOTION_YN"/>
+        <result property="loginType" column="LOGIN_TYPE"/>
+        <result property="tell" column="TEL"/>
+        <result property="joinDay" column="JOIN_DAY"/>
+        <collection property="gradeCode" resultMap="MemberGradeResultMap"/>
+    </resultMap>
+    <resultMap type="com.hexkey.travelmaker.member.admin.dto.MemberGradeDTO" id="MemberGradeResultMap">
+        <id property="gradeCode" column="GRADE_CODE"/>
+        <result property="gradeName" column="GRADE_NAME"/>
+        <result property="mileageRate" column="MILEAGE_RATE"/>
+    </resultMap>
+
+    <select id="findAllMemberList" resultMap="memberResultMap">
+
+        SELECT
+        A.MEMBER_CODE,
+        A.JOIN_DAY,
+        A.MEMBER_NAME,
+        A.MEMBER_ID,
+        A.PHONE,
+        B.GRADE_NAME
+        FROM (
+        SELECT
+        ROWNUM RNUM,
+        B.MEMBER_CODE,
+        B.JOIN_DAY,
+        B.MEMBER_NAME,
+        B.MEMBER_ID,
+        B.PHONE,
+        B.GRADE_CODE
+        FROM(
+        SELECT
+        C.MEMBER_CODE,
+        C.JOIN_DAY,
+        C.MEMBER_NAME,
+        C.MEMBER_ID,
+        C.PHONE,
+        C.GRADE_CODE
+        FROM TBL_MEMBER C
+        <trim prefix="WHERE" prefixOverrides="AND">
+        <if test="searchValueId  != null and !searchValueId.equals('') ">
+            C.MEMBER_ID = #{ searchValueId }
+        </if>
+        <if test="memberGradeList != null and !memberGradeList.equals('') ">
+            <if test="memberGradeList == 'gold'">
+                AND    C.GRADE_CODE = 4
+            </if>
+            <if test="memberGradeList == 'silver'">
+                AND   C.GRADE_CODE = 3
+            </if>
+            <if test="memberGradeList == 'bronze'">
+                AND    C.GRADE_CODE = 2
+            </if>
+            <if test="memberGradeList == 'normal'">
+                AND    C.GRADE_CODE = 1
+            </if>
+        </if>
+            <if test=" searchDate   != null and ! searchDate .equals('') ">
+                AND   TO_CHAR(C.JOIN_DAY, 'YYYY-MM-DD') = #{ searchDate }
+            </if>
+        </trim>
+        )B
+        <![CDATA[
+                WHERE ROWNUM<= #{ endRow }
+            ]]>
+        ORDER BY B.MEMBER_CODE DESC
+        ) A
+        JOIN TBL_GRADE B ON (A.GRADE_CODE = B.GRADE_CODE)
+        WHERE A.RNUM >= #{ startRow }
+    </select>
+
+    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT
+        COUNT(*)
+        FROM TBL_MEMBER A
+        JOIN TBL_GRADE B ON (A.GRADE_CODE = B.GRADE_CODE)
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="searchValueId  != null and !searchValueId.equals('') ">
+                A.MEMBER_ID = #{ searchValueId }
+            </if>
+            <if test="memberGradeList != null and !memberGradeList.equals('') ">
+            <if test="memberGradeList == 'gold'">
+                AND    B.GRADE_CODE = 4
+                </if>
+                <if test="memberGradeList == 'silver'">
+                AND    B.GRADE_CODE = 3
+                </if>
+                <if test="memberGradeList == 'bronze'">
+                AND    B.GRADE_CODE = 2
+                </if>
+                <if test="memberGradeList == 'normal'">
+                AND    B.GRADE_CODE = 1
+                </if>
+            </if>
+            <if test=" searchDate   != null and ! searchDate .equals('') ">
+                AND TO_CHAR(A.JOIN_DAY, 'YYYY-MM-DD') = #{ searchDate }
+            </if>
+        </trim>
+    </select>
+
+
+</mapper>
