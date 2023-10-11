@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/user/css/migi/list.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/product/list/list.css" type="text/css">
     <meta charset="UTF-8">
     <title>list</title>
 </head>
@@ -14,12 +14,18 @@
         <th:block th:each="productList : ${productList}">
             <div align="center" class="item" th:onclick="|location.href='/product/detail?productSeq=${productList.productSeq}'|">
                 <div>
-                    <th:block th:each="file : ${productList.fileList}">
+                    <th:block th:if="${not #lists.isEmpty(productList.fileList)}">
+                            <img th:if="${productList.fileList[0].fileType == 'productImage'}"
+                                 th:src="${productList.fileList[0].filePath + productList.fileList[0].savedName}"
+                                 width="350px"
+                                 height="350px"/>
+                    </th:block>
+                 <!--   <th:block th:each="file : ${productList.fileList}">
                         <img th:if="${ file.fileType == 'productImage' }"
                              th:src="${ file.filePath } + ${ file.savedName }"
                              width="350px"
                              height="350px">
-                    </th:block>
+                    </th:block> -->
                 </div>
             <div class="product-description">
                 <div class="product-name">
