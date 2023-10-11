@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
-@RequestMapping("/user/product")
+@RequestMapping("/product")
 public class ProductDetailController {
 
     private final ProductDetailService productDetailService;
@@ -19,14 +19,14 @@ public class ProductDetailController {
     public ProductDetailController(ProductDetailService productDetailService) { this.productDetailService = productDetailService; }
 
     @GetMapping("/detail")
-    public String selectProductDetail(@RequestParam("productSeq") Long productSeq, Model model){
+    public String selectProductDetail(Long productSeq, Model model){
 
 
-        //ProductDTO productDetail = productDetailService.selectProductDetail(productSeq);
+        ProductDTO productDetail = productDetailService.selectProductDetail(productSeq);
 
-        //log.info("productDetail : {}", productDetail);
+        log.info("productDetail : {}", productDetail);
 
-        //model.addAttribute("product", productDetail);
+        model.addAttribute("product", productDetail);
 
         return "/user/product/detail";
     }
