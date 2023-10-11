@@ -97,7 +97,7 @@ public class ProductRegistController {
                     fileInfo.setSavedName(savedFileName);
                     fileInfo.setSavePath("/admin/images/productcontent/");
                     fileInfo.setFileType("productContent");
-                    fileInfo.setFilePath("/admin/images/productcontent_" + savedFileName);
+                    fileInfo.setFilePath("/admin/images/productcontent/" + savedFileName);
 
                     fileList.add(fileInfo);
                 }
@@ -130,7 +130,7 @@ public class ProductRegistController {
                     fileInfo.setSavedName(savedFileName);
                     fileInfo.setSavePath("/admin/images/productimage/");
                     fileInfo.setFileType("productImage");
-                    fileInfo.setFilePath("/admin/images/productimage_" + savedFileName);
+                    fileInfo.setFilePath("/admin/images/productimage/" + savedFileName);
 
                     fileList.add(fileInfo);
                 }
