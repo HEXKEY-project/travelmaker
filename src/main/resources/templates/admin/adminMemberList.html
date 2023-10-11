@@ -144,9 +144,8 @@
                 <hr>
                 <!-- 페이징 바 -->
                 <div id="paging" align="center" style="margin-top: 20px; height: 50px">
-
-                    <!--                    <th:block-->
-                    <!--                            th:if="${ paging.memberGradeList != null and paging.searchValueId != null and pagin.searchDate != null }">-->
+                    <th:block
+                            th:if="${ paging.memberGradeList != null and paging.searchValueId != null and paging.searchDate != null }">
                     <!--  맨 앞으로 이동-->
                     <button
                             th:onclick="'location.href=\'/admin/adminMemberList?page=1&memberGradeList='+ @{${paging.memberGradeList}} + '&searchValueId=' + @{${paging.searchValueId}} +'&searchDate=' + @{${paging.searchDate}} +'\''">&lt;&lt;</button>
@@ -174,7 +173,7 @@
                     <button
                             th:onclick="'location.href=\'/admin/adminMemberList?page=' + @{${paging.maxPage}} + '&memberGradeList=' + @{${paging.memberGradeList}} + '&searchValueId=' + @{${paging.searchValueId}} +'&searchDate=' + @{${paging.searchDate}} +'\''">>></button>
 
-                    <!--                 </th:block>-->
+                    </th:block>
                 </div>
             </div>
 
