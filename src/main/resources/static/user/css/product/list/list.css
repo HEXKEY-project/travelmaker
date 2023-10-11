@@ -25,6 +25,9 @@ body {
     position: relative;
     margin: 16px auto;
     width: 350px;
+    white-space: normal;
+    line-height: 24px;
+    word-break: keep-all;
 }
 
 .product-name {
