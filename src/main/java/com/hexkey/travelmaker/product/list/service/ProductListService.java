@@ -3,6 +3,7 @@ package com.hexkey.travelmaker.product.list.service;
 import com.hexkey.travelmaker.common.migi.paging.Pagenation;
 import com.hexkey.travelmaker.common.migi.paging.SelectCriteria;
 import com.hexkey.travelmaker.product.list.dao.ProductListMapper;
+import com.hexkey.travelmaker.product.regist.dto.ProductCategoryDTO;
 import com.hexkey.travelmaker.product.regist.dto.ProductDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,12 @@ public class ProductListService {
         productListAndPaging.put("productList", productList);
 
         return productListAndPaging;
+    }
+
+    public ProductCategoryDTO selectSuperCategoryName(int categoryCode) {
+
+        ProductCategoryDTO superCategoryName =  productListMapper.selectSuperCategoryName(categoryCode);
+
+        return superCategoryName;
     }
 }

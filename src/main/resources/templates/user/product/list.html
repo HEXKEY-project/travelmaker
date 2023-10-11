@@ -9,7 +9,7 @@
 <div th:replace="common/user/header.html"></div>
 
 <div class="wrapper" style="margin-top: 164px">
-    <h1 align="center" th:text="${productList[0].productCategory.categoryName}"></h1>
+    <h1 align="center" th:text="${superCategoryName.getCategoryName()}"></h1>
     <div id="thumbnailArea">
         <th:block th:each="productList : ${productList}">
             <div align="center" class="item" th:onclick="|location.href='/product/detail?productSeq=${productList.productSeq}'|">
@@ -25,6 +25,7 @@
                 <div class="product-name">
                     <a th:onclick="|location.href='/product/detail?no=${productList.productSeq}'|">
                         <div th:text="${productList.productName}"></div>
+                        <div id="product-price" th:text="'₩' + ${#numbers.formatInteger(productList.price, 0, 'POINT')}"></div>
                     </a>
                 </div>
             </div>
