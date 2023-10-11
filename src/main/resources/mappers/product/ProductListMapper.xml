@@ -37,11 +37,11 @@
         <result property="fileType" column="FILE_TYPE"/>
         <result property="originalName" column="ORIGIN_FILE_NAME"/>
         <result property="savedName" column="SAVED_FILE_NAME"/>
-        <result property="filePath" column="FILE_PATH"/>
+        <result property="savePath" column="SAVE_PATH"/>
         <result property="noticeCode" column="NOTICE_CODE"/>
         <result property="productSeq" column="PRODUCT_SEQ"/>
         <result property="reviewCode" column="REVIEW_CODE"/>
-        <result property="qnaCode" column="QNA_CODE"/>
+        <result property="filePath" column="FILE_PATH"/>
     </resultMap>
 
 
@@ -65,6 +65,7 @@
              , B.FILE_PATH
              , B.SAVED_FILE_NAME
              , C.REF_CATEGORY_CODE
+             , C.CATEGORY_NAME
         FROM TBL_PRODUCT A
                  JOIN TBL_FILE B ON (A.PRODUCT_SEQ = B.PRODUCT_SEQ)
                  JOIN TBL_PRODUCT_CATEGORY C ON (A.CATEGORY_CODE = C.CATEGORY_CODE)
