@@ -13,6 +13,6 @@ public interface OrderPageMapper {
 
     int insertOrder(OrderDTO orderDTO);
 
-    List<OrderDTO> selectAdminOrder();
+    List<OrderDTO> selectAdminOrder(String searchCondition, String searchValue, String orderDate1, String orderDate2);
 
 }

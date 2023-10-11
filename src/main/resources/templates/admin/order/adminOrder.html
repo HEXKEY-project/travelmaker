@@ -17,36 +17,35 @@
 
     </div>
     <div id="search">
-        <div class="search-row">
-            <div class="columns">분류 선택</div>
-            <div class="columns">
-                <select>
-                    <option>주문자 명</option>
-                </select>
+        <form action="/admin/order" method="post">
+            <div class="search-row">
+                <div class="columns">분류 선택</div>
+                <div class="columns">
+                    <select name="searchCondition">
+                        <option>주문자 명</option>
+                    </select>
+                </div>
+                <div class="columns">
+                    <input name="searchValue" type="text">
+                </div>
             </div>
-            <div class="columns">
-                <input type="text">
+            <div class="search-row">
+                <div class="columns">주문일자</div>
+                <div class="columns">
+                    <input name="orderDate1" type="date">
+                </div>
+                <p> -</p>
+                <div class="columns">
+                    <input name="orderDate2" type="date">
+                </div>
             </div>
-        </div>
-        <div class="search-row">
-            <div class="columns">등록일</div>
-            <div class="columns">
-                <input type="date">
+            <br>
+            <div id="search-div">
+                <input id="search-button" type="submit" value="주문 조회">
             </div>
-            <p> -</p>
-            <div class="columns">
-                <input type="date">
-            </div>
-        </div>
-        <br>
-        <div id="search-div">
-            <input id="search-button" type="button" value="주문 조회">
-        </div>
+        </form>
     </div>
 </div>
-
-
-
 
 
 <div id="body">

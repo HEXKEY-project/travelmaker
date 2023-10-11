@@ -22,9 +22,9 @@ public class OrderPageService {
     }
 
 
-    public Map<String, Object> selectAdminOrder() {
+    public Map<String, Object> selectAdminOrder(String searchCondition, String searchValue, String orderDate1, String orderDate2) {
 
-        List<OrderDTO> orderDTO = orderPageMapper.selectAdminOrder();
+        List<OrderDTO> orderDTO = orderPageMapper.selectAdminOrder(searchCondition, searchValue, orderDate1, orderDate2);
         Map<String, Object> selectAdminOrderMap = new HashMap<>();
         selectAdminOrderMap.put("orderDTO", orderDTO);
         return selectAdminOrderMap;

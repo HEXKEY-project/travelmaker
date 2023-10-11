@@ -33,9 +33,22 @@
 
     <select id="selectAdminOrder" resultMap="selectAdminOrder">
         SELECT
-                *
-        FROM TBL_ORDER
-        JOIN TBL_MEMBER ON (TBL_ORDER.MEMBER_CODE = TBL_MEMBER.MEMBER_CODE)
+                O.*,
+                M.*
+        FROM TBL_ORDER O
+        JOIN TBL_MEMBER M ON (O.MEMBER_CODE = M.MEMBER_CODE)
+
+        <where>
+            <if test="searchCondition == '주문자 명'">
+                UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{ searchValue }) || '%'
+            </if>
+            <if test="orderDate1 != '' and orderDate2 != ''">
+                <![CDATA[
+                AND ORDER_DATE >= TO_DATE('${orderDate1}', 'YYYY-MM-DD') AND ORDER_DATE <= TO_DATE('${orderDate2}', 'YYYY-MM-DD')
+                ]]>
+            </if>
+        </where>
+
     </select>
 
 

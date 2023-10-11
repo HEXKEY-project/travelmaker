@@ -4,7 +4,9 @@ import com.hexkey.travelmaker.order.orderpage.dto.OrderDTO;
 import com.hexkey.travelmaker.order.orderpage.dto.ProductDTO;
 import com.hexkey.travelmaker.order.orderpage.service.OrderPageService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.valves.rewrite.InternalRewriteMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.Map;
 
 
@@ -94,7 +97,24 @@ public class OrderPageController {
     @GetMapping("/admin/order")
     public String adminOrder (Model model) {
 
-        Map<String, Object> selectAdminOrderMap = orderPageService.selectAdminOrder();
+        Map<String, Object> selectAdminOrderMap = orderPageService.selectAdminOrder("0", "0","","");
+
+        model.addAttribute("orderDTOs", selectAdminOrderMap.get("orderDTO"));
+
+        return "admin/order/adminOrder";
+    }
+
+    @PostMapping("/admin/order")
+    public String adminOrder (@RequestParam(required = false) String searchCondition,
+                              @RequestParam(required = false) String searchValue,
+                              @RequestParam(required = false) String orderDate1,
+                              @RequestParam(required = false) String orderDate2,
+                              Model model) {
+
+        log.info("{}", orderDate1);
+        log.info("{}", orderDate2);
+
+        Map<String, Object> selectAdminOrderMap = orderPageService.selectAdminOrder(searchCondition, searchValue, orderDate1, orderDate2);
 
         model.addAttribute("orderDTOs", selectAdminOrderMap.get("orderDTO"));
 
