@@ -65,6 +65,7 @@
              , B.FILE_PATH
              , B.SAVED_FILE_NAME
              , C.REF_CATEGORY_CODE
+             , C.CATEGORY_NAME
         FROM TBL_PRODUCT A
                  JOIN TBL_FILE B ON (A.PRODUCT_SEQ = B.PRODUCT_SEQ)
                  JOIN TBL_PRODUCT_CATEGORY C ON (A.CATEGORY_CODE = C.CATEGORY_CODE)
