@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
@@ -18,13 +19,14 @@ public class ProductDetailController {
     public ProductDetailController(ProductDetailService productDetailService) { this.productDetailService = productDetailService; }
 
     @GetMapping("/detail")
-    public String selectProductDetail(Long productSeq, Model model){
+    public String selectProductDetail(@RequestParam("productSeq") Long productSeq, Model model){
 
-        log.info("productSeq : {}", productSeq);
 
-        ProductDTO productDetail = productDetailService.selectProductDetail(productSeq);
+        //ProductDTO productDetail = productDetailService.selectProductDetail(productSeq);
 
-        model.addAttribute("product", productDetail);
+        //log.info("productDetail : {}", productDetail);
+
+        //model.addAttribute("product", productDetail);
 
         return "/user/product/detail";
     }

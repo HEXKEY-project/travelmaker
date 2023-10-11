@@ -12,7 +12,7 @@
     <h1 align="center">제품 목록</h1>
     <div id="thumbnailArea">
         <th:block th:each="productList : ${productList}">
-            <div align="center" class="item" th:onclick="|location.href='/product/detail?no=${productList.productSeq}'|">
+            <div align="center" class="item" th:onclick="|location.href='/product/detail?productSeq=${productList.productSeq}'|">
                 <div>
                     <th:block th:each="file : ${productList.fileList}">
                         <img th:if="${ file.fileType == 'productImage' }"
