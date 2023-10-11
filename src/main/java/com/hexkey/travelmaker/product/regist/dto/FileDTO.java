@@ -12,11 +12,12 @@ public class FileDTO {
     private String fileType;
     private String originalName;
     private String savedName;
-    private String filePath;
+    private String savePath;
     private Long noticeCode;
     private Long productSeq;
     private Long reviewCode;
     private Long qnaCode;
+    private String filePath;
 
 
 }
