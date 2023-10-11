@@ -51,6 +51,13 @@
           FROM TBL_PRODUCT
     </select>
 
+    <select id="selectSuperCategoryName" resultMap="ProductCategoryResultMap">
+        SELECT
+            CATEGORY_NAME
+        FROM TBL_PRODUCT_CATEGORY
+        WHERE CATEGORY_CODE = #{ categoryCode }
+    </select>
+
     <select id="selectProductList" resultMap="generalProductResultMap">
         SELECT
             A.PRODUCT_SEQ
@@ -74,4 +81,6 @@
                                       FROM TBL_PRODUCT_CATEGORY
                                       WHERE REF_CATEGORY_CODE = #{ categoryCode })
     </select>
+
+
 </mapper>
