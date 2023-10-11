@@ -22,11 +22,12 @@ public class ProductListController {
     }
 
     @GetMapping("/list")
-    public String selectCateList(@RequestParam(defaultValue = "1") int page, Model model) {
+    public String selectCateList(@RequestParam("categoryCode") int categoryCode, @RequestParam(defaultValue = "1") int page, Model model) {
 
-        Map<String, Object> productListAndPaging = productListService.selectCateList(page);
+        Map<String, Object> productListAndPaging = productListService.selectCateList(categoryCode, page);
 
         model.addAttribute("paging", productListAndPaging.get("paging"));
+        model.addAttribute("categoryCode", categoryCode);
         model.addAttribute("productList", productListAndPaging.get("productList"));
 
         return "/user/product/list";
