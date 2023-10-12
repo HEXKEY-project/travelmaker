@@ -1,4 +1,4 @@
-package com.hexkey.travelmaker.member.juhee.dto;
+package com.hexkey.travelmaker.member.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,5 +9,6 @@ public class AuthorityDTO {
 
     private int code;
     private String name;
+    private String desc;
 
 }
