@@ -45,6 +45,7 @@
                PRODUCT_SEQ
              , PRODUCT_NAME
              , PRICE
+             , ORDERABLE_STATUS
           FROM TBL_PRODUCT
          WHERE PRODUCT_SEQ = #{ productSeq }
            AND ORDERABLE_STATUS = '판매중'

@@ -2,28 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${product.productName}"></title>
     <link rel="stylesheet" type="text/css" href="/user/css/product/detail.css">
+
 </head>
 <body>
 <div id="wrapper">
     <div th:replace="common/user/header.html"></div>
     <div id="product_contents">
         <div id="titleImgArea">
-          <th:block th:each="index : ${ #numbers.sequence(1, file.size())}" th:if="${ file.size() > 0 }">
-            <img id="productImg" th:src="${ file[4].filePath }">
-           <!-- <img src="/static/user/images/productdetail/_ButtonBase_left.png" alt="이전이미지">
-            <img src="/static/user/images/productdetail/_ButtonBase_right.png" alt="다음이미지">-->
-          </th:block>
+             <th:block
+                     th:each="index : ${ #numbers.sequence(1, product.fileList.size() - 1)}"
+                     th:if="${ product.getFileList().get(index).getFileType() == 'productImage'}"
+             >
+            <div>
+            <img  th:src="${ product.getFileList().get(index).getFilePath() }">
+            </div>
+            <div>
+                <!--<img th:src="${ product.getFileList().get(index).getFilePath()}">-->
+            </div>
+            </th:block>
+
+            <img id="leftButtonImg" src="/user/images/productdetail/_ButtonBase_left.png" alt="이전이미지">
+            <img id="rightButtonImg" src="/user/images/productdetail/_ButtonBase_right.png" alt="다음이미지">
+
         </div>
-        <div>
-            <!--<div id="product_title" th:text="${product.productName}"></div>
-            <div id="product_price" th:text="'₩' + ${product.price}"></div>-->
-            <div id="option">옵션
-                <select id="productOpt">
-                    <option>- [필수]옵션 선택 -</option>
-                    <option>-----------------</option>
-                </select>
+        <div id="product_info">
+            <div id="product_title" th:text="${product.productName}"></div>
+            <div id="product_price" th:text="'₩ ' + ${product.price}"></div>
+            <div id="optContent">
+                <div id="option">
+                    <span th:text="${product.getProductOption().get(0).getOptionName()}"></span>
+                    <select id="productOpt">
+                        <option th:text="'-[필수] ' + ${product.getProductOption().get(0).getOptionName() + ' 선택-'} ">
+                        </option>
+                        <option>-----------------</option>
+                        <th:block th:each="optName : ${ #numbers.sequence(1, product.productOption.size() - 1)}">
+                            <option th:text="${product.getProductOption().get(optName).getOptionName()}"></option>
+                        </th:block>
+                    </select>
+                    <img id="iconArrow" src="/user/images/productdetail/iconArrow.png">
+                </div>
             </div>
             <div id="optAddLine">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -32,7 +51,6 @@
                 </svg>
                 <div id="optAddLineContent">위 옵션선택 박스를 선택하시면 아래에 상품이 추가됩니다.</div>
             </div>
-
             <svg xmlns="http://www.w3.org/2000/svg" width="560" height="2" viewBox="0 0 560 2" fill="none">
                 <path d="M0 1H560" stroke="#BDBDBD"/>
             </svg>

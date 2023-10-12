@@ -25,17 +25,9 @@ public class ProductDetailController {
     @GetMapping("/detail")
     public String selectProductDetail(Long productSeq, Model model){
 
-        ProductDTO productDetail = productDetailService.selectProductDetail(productSeq);
-        List<ProductOptionDTO> optionList = productDetailService.selectProductOption(productSeq);
-        List<FileDTO> fileList = productDetailService.selectProductFile(productSeq);
+        ProductDTO product = productDetailService.selectProductDetail(productSeq);
 
-        log.info("productDetail : {}", productDetail);
-        log.info("optionList : {}", optionList);
-        log.info("fileList : {}", fileList);
-
-        model.addAttribute("product", productDetail);
-        model.addAttribute("option", optionList);
-        model.addAttribute("file", fileList);
+        model.addAttribute("product", product);
 
         return "/user/product/detail";
     }
