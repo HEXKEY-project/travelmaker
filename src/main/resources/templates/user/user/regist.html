@@ -2,54 +2,57 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <script type="text/javascript" src="/com/hexkey/travelmaker/member/js/regist.js"></script>
-    <link rel="stylesheet" type="text/css" href="/com/hexkey/travelmaker/member/css/regist.css">
-    <!--    이메일 자동완성을 위해 추가-->
+    <script type="text/javascript" src="/user/js/user/regist.js"></script>
+    <link rel="stylesheet" type="text/css" href="/user/css/user/regist.css">
+    <!-- 이메일 자동완성을 위해 추가-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- 주소 API -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
-<!--<body>-->
+<body>
+
 <div>
     <h2 align="center">REGISTER</h2>
-    <form id="join" method="post">
+    <form action="/user/regist" method="post">
         <ul>
-            <li class="join-id">
-                <label for="user-id">아이디 *</label>
-                <input class="user-id" id="user-id" type="text" required>
+            <li class="regist-id">
+                <label for="id">아이디 *</label>
+                <input class="id" id="id" type="text" maxlength="16" required>
+                <input type="button" value="중복확인" id="idCheck">
             </li>
-            <li class="join-pwd">
-                <label for="user-pwd1">비밀번호 *</label>
-                <input class="user-pwd1" id="user-pwd1" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{10,16}$"
-                       placeholder="(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자 ~ 16자)" required><br>
-                <div class="password-info" style="display: none;">
+            <li class="pwd">
+                <label for="pwd1">비밀번호 *</label>
+                <input id="pwd1" type="password"
+                       placeholder="(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자 ~ 16자)" maxlength="16" required><br>
+                <div id="pwdError"></div>
+                <div id="pwdMessage" style="display: none;">
                     <p>
-                        * 비밀번호 입력 조건<br>
+                        <strong>* 비밀번호 입력 조건</strong><br>
                         - 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자 ~ 16자<br>
-                        - 입력 가능 특수문자: ~ ! @ # $ % ^ ( ) * _ - = { } [ ] | ; : < > , . ? /<br>
+                        - 입력 가능 특수문자: ~ ` ! @ # $ % ^ ( ) * _ - = { } [ ] | ; : < > , . ? /<br>
                         - 공백 입력 불가능<br>
                         - 연속된 문자, 숫자 사용 불가능<br>
                         - 동일한 문자, 숫자를 반복해서 사용 불가능<br>
-                        - 아이디 포함 불가능
                     </p>
                 </div>
-                <label for="user-pwd2">비밀번호 확인 *</label>
-                <input class="user-pwd2" id="user-pwd2" type="password" required>
+                <label for="pwd2">비밀번호 확인 *</label>
+                <input id="pwd2" type="password" required>
+                <div id="pwdError2"></div>
             </li>
-            <li class="join-name">
-                <label for="user-name">이름 *</label>
-                <input class="user-name" id="user-name" type="text" required>
+            <li class="regist-name">
+                <label for="name">이름 *</label>
+                <input class="name" id="name" type="text" required>
             </li>
             <li class="joinAddress">
                 <label for="zipCode">주소 *</label>
                 <input id="zipCode" type="text" readonly>
                 <button id="searchZipCode" type="button">주소 검색</button><br>
-                <input class="address1" id="address1" type="text" readonly><br>
-                <input class="address2" id="address2" type="text">
+                <input class="address" id="address1" type="text" readonly><br>
+                <input class="address" id="address2" type="text">
             </li>
-            <li class="join-tel">
+            <li class="tel">
                 <label>일반전화</label>
                 <select class="tel1" id="tel1">
                     <option value="02" selected>02</option>
@@ -87,7 +90,7 @@
                 <input class="tel2" id="tel2" type="number" maxlength="4" oninput="maxLengthCheck(this)">  -
                 <input class="tel3" id="tel3" type="number" maxlength="4" oninput="maxLengthCheck(this)">
             </li>
-            <li class="join-phone">
+            <li class="phone">
                 <label>휴대전화 *</label>
                 <select class="phone1" id="phone1">
                     <option value="010">010</option>
@@ -107,7 +110,7 @@
                     <input type="radio" name="sms" value="no"><label>수신안함</label>
                 </div>
             </li>
-            <li class="join-email">
+            <li class="regist-email">
                 <lavel>이메일 *</lavel>
                 <input class="email" id="email" onkeyup="autoEmail('email', this.value)" autocomplete="off" required>
             </li>
@@ -120,11 +123,11 @@
             </li>
         </ul>
 
-        <form action="/static" method="POST" id="form-wrap">
+        <form action="/" method="POST" id="checkbox-all">
             <ul class="check-agree">
                 <li>
-                    <input type="checkbox" id="checkAll" onclick="checkAll();">
-                    <label>이용약관 및 개인정보수집 및 이용, 쇼핑정보 수신(선택)에 모두 동의합니다.</label><br><br>
+                    <input type="checkbox" id="checkAll">
+                    <label for="checkAll">이용약관 및 개인정보수집 및 이용, 쇼핑정보 수신(선택)에 모두 동의합니다.</label><br><br>
                 </li>
                 <li>
                     <label>[필수] 이용약관 동의</label>
@@ -160,9 +163,9 @@
                 </li>
                 <li>
                     <label>이용약관에 동의하십니까? </label>
-                    <input type="checkbox" name="cbox" id="policy1"><label>동의함</label><br><br>
+                    <input type="checkbox" id="policy1" class="requiredCheck" required><label for="policy1">동의함</label><br><br>
                 </li>
-                <li>
+                <li class="required-check">
                     <label>[필수] 개인정보 수집 및 이용 동의</label><br>
                     <div class="private">
                         <p>1. 개인정보 수집목적 및 이용목적</p>
@@ -193,9 +196,9 @@
                 </li>
                 <li>
                     <label>개인정보 수집 및 이용에 동의하십니까? </label>
-                    <input type="checkbox" name="cbox" id="private1"><label>동의함</label><br><br>
+                    <input type="checkbox" id="private1" class="requiredCheck" required><label for="private1">동의함</label><br><br>
                 </li>
-                <li>
+                <li class="required-check">
                     <label>[선택] 쇼핑정보 수신 동의</label>
                     <div class="promotion">
                         <p>할인쿠폰 및 혜택, 이벤트, 신상품 소식 등 쇼핑몰에서 제공하는 유익한 쇼핑정보를 SMS나 이메일로 받아보실 수 있습니다.</p>
@@ -205,11 +208,11 @@
                 </li>
                 <li>
                     <label>SMS 수신을 동의하십니까? </label>
-                    <input type="checkbox" name="cbox" id="promotion1"><label>동의함</label><br>
+                    <input type="checkbox" id="promotion1" class="optionalCheck"><label for="promotion1">동의함</label><br>
                 </li>
                 <li>
                     <label>이메일 수신을 동의하십니까? </label>
-                    <input type="checkbox" name="cbox" id="promotion2"><label>동의함</label><br><br><br>
+                    <input type="checkbox" id="promotion2" class="optionalCheck"><label for="promotion2">동의함</label><br><br><br>
                 </li>
             </ul>
         </form>
@@ -219,10 +222,8 @@
     </form>
 </div>
 
-<!-- 주소 API -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-
+    <!-- 주소 API -->
     const $searchZipCode = document.getElementById("searchZipCode");
 
     $searchZipCode.onclick = function () {

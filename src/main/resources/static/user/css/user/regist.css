@@ -1,7 +1,13 @@
 body {
+    margin-top: 164px;
     display: flex;
     justify-content: center;
     align-items: center;
+    /*width: 1920px;*/
+}
+
+input{
+    border: 1px solid black;
 }
 
 ul {
@@ -13,19 +19,18 @@ input::-webkit-input-placeholder {
     color: #AAA;
 }
 
-/* 아이디, 비밀번호, 비밀번호 확인, 이름, 이메일, 주소 입력 칸 너비, 높이 설정 */
-.user-id, .user-pwd1, .user-pwd2, .user-name, .address1, .address2, .email {
+/* 입력 칸 너비, 높이 설정(아이디, 비밀번호, 비밀번호 확인, 이름, 이메일, 주소) */
+#id, #pwd1, #pwd2, .name, .address, .email {
     width: 550px;
     height: 25px;
     outline: none;
 }
 
 /* 여백 설정 */
-.user-id, .user-pwd1, .user-pwd2, .user-name, .joinAddress, .join-tel, .join-phone, .sms-yn, .join-email, .email-yn {
+#id, #pwd1, #pwd2, .name, .joinAddress, .tel, .phone, .sms-yn, .regist-email, .email-yn {
     margin-top: 20px;
 }
-.address1, .address2
-{
+.address {
     margin-top: 10px;
 }
 .check-agree {
@@ -33,29 +38,26 @@ input::-webkit-input-placeholder {
 }
 
 /* 우편번호, 연락처 입력 칸 설정 */
-#zipCode, .tel1, .tel2, .tel3, .phone1, .phone2, .phone3
-{
+#zipCode, .tel1, .tel2, .tel3, .phone1, .phone2, .phone3 {
     height: 25px;
     width: 170.5px;
     outline: none;
 }
 
 /* 입력 칸 맞춤 설정 */
-.user-id, .email {
+#id, .email {
     margin-left: 60.2px;
 }
-.user-pwd1 {
+#pwd1 {
     margin-left: 46.3px;
 }
-.user-pwd2 {
+#pwd2 {
     margin-left: 14.5px;
 }
-.user-name, #zipCode
-{
+.name, #zipCode {
     margin-left: 74px;
 }
-.address1, .address2
-{
+.address {
     margin-left: 116px;
 }
 .tel1 {
@@ -94,11 +96,47 @@ input::-webkit-input-placeholder {
     margin-bottom: 15px;
 }
 
-/* 연락처 스핀 버튼 설정 */
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+/*transform : 선택 요소의 위치 조정*/
+/* 비밀번호 안내 문구 설정 */
+#pwdMessage {
+    transform: translate(10px, -205px);
+    position: absolute;
+    background: white;
+    z-index: 1;
+    margin-left: 120px;
+    margin-top: 10px;
+    width: 400px;
+    border: 1px solid black;
+}
+#pwdMessage:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: black transparent;
+    border-bottom: 0;
+    margin-left: -5px;
+    margin-bottom: -5px;
+}
+#pwdMessage p {
+    display: inline-block;
+    color: #767676;
+    font-size: 12px;
+    line-height: 1.6em;
+    padding-left: 10px;
+}
+#pwdMessage strong {
+    color: #da5b5b;
+}
+
+/* 비밀번호 에러 문구 */
+#pwdError, #pwdError2 {
+    font-size: 12px;
+    color: red;
+    margin-top: 10px;
+    margin-left: 120px;
 }
 
 /* radio 색상 설정 */
@@ -107,10 +145,17 @@ input::-webkit-inner-spin-button {
 }
 
 /* 주소 검색 버튼 설정 */
-.adr {
+#searchZipCode, #idCheck {
     height: 31px;
     margin-left: 10px;
 }
+
+/* 연락처 스핀 버튼 설정 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
 /* 회원가입 버튼 가운데 정렬 */
 button#joinBtn {
     display: block;
@@ -124,5 +169,6 @@ button#joinBtn {
     padding: 10px;
     z-index: 1;
 }
+
 
 /*.check-agree::after{content: "";display: block;clear: both;}*/
