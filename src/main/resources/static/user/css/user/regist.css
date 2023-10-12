@@ -20,7 +20,12 @@ input::-webkit-input-placeholder {
 }
 
 /* 입력 칸 너비, 높이 설정(아이디, 비밀번호, 비밀번호 확인, 이름, 이메일, 주소) */
-#id, #pwd1, #pwd2, .name, .address, .email {
+#id {
+    width: 475px;
+    height: 25px;
+    outline: none;
+}
+#pwd1, #pwd2, .name, .address, .email {
     width: 550px;
     height: 25px;
     outline: none;
