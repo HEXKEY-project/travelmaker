@@ -58,7 +58,6 @@ a{
     text-align: center;
     margin-right: 400px;
 }
-
 /* 드롭다운 메뉴*/
 
 .sub_a {
@@ -80,7 +79,6 @@ a{
 
 .add-sub li {
     list-style: none;
-    margin: 0;
     padding: 0;
 }
 
@@ -88,7 +86,8 @@ a{
     display: block;
     padding: 5px 10px;
     text-decoration: none;
-    color: #333;
+    font-size: 14px;
+    color: #565656;
 }
 
 .add-sub li a:hover {
@@ -112,7 +111,6 @@ a{
 
 .add-sub-bags li {
     list-style: none;
-    margin: 0;
     padding: 0;
 }
 
@@ -120,44 +118,46 @@ a{
     display: block;
     padding: 5px 10px;
     text-decoration: none;
-    color: #333;
+    font-size: 14px;
+    color: #565656;
 }
 
 .add-sub-bags li a:hover {
     background-color: #f0f0f0;
 }
 
-/*!* ---- 여행용품 ---- *!*/
+/* ---- 여행용품 ---- */
 
-/*.add-sub-items {*/
-/*    display: none;*/
-/*}*/
+.add-sub-items {
+    display: none;
+}
 
-/*.add-sub-items {*/
-/*    transform: translate(-20px, 44px);*/
-/*    position: absolute;*/
-/*    background-color: white;*/
-/*    border: 1px solid #ccc;*/
-/*    padding: 10px;*/
-/*    z-index: 1;*/
-/*}*/
+.add-sub-items {
+    transform: translate(-40px, 44px);
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+    margin-bottom: 4px;
+}
 
-/*.add-sub-items li {*/
-/*    list-style: none;*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*}*/
+.add-sub-items li {
+    list-style: none;
+    padding: 0;
+}
 
-/*.add-sub-items li a {*/
-/*    display: block;*/
-/*    padding: 5px 10px;*/
-/*    text-decoration: none;*/
-/*    color: #333;*/
-/*}*/
+.add-sub-items li a {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #565656;
+}
 
-/*.add-sub-items li a:hover {*/
-/*    background-color: #f0f0f0;*/
-/*}*/
+.add-sub-items li a:hover {
+    background-color: #f0f0f0;
+}
 
 
 /* ---- 커뮤니티 ---- */

@@ -5,17 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-//    @GetMapping("/")
-//    public String getMain(){
-//
-//        return "/main";
-//    }
-//
-//    @GetMapping("/")
-//    public String gotoSearch() {
-//
-//        return null;
-//    }
+    @GetMapping("/main")
+    public String getMain(){
 
+        return "/index";
+    }
 
 }
