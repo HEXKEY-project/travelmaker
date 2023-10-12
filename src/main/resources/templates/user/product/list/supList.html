@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/user/css/product/list.css" type="text/css">
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+<div th:replace="common/user/header.html"></div>
+
+<div class="wrapper" style="margin-top: 164px">
+    <h1 align="center" th:text="${superCategoryName.getCategoryName()}"></h1>
+    <div id="thumbnailArea">
+        <th:block th:each="productList : ${productList}">
+            <div align="center" class="item" th:onclick="|location.href='/product/detail?productSeq=${productList.productSeq}'|">
+                <div>
+                    <th:block th:if="${not #lists.isEmpty(productList.fileList)}">
+                            <img th:if="${productList.fileList[0].fileType == 'productImage'}"
+                                 th:src="${productList.fileList[0].filePath}"
+                                 width="350px"
+                                 height="350px"/>
+                    </th:block>
+                </div>
+            <div class="product-description">
+                <div class="product-name">
+                    <a th:onclick="|location.href='/product/detail?productSeq=${productList.productSeq}'|">
+                        <div th:text="${productList.productName}"></div>
+                        <div id="product-price" th:text="'₩' + ${#numbers.formatInteger(productList.price, 0, 'POINT')}"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</div>
+</div>
+
+
+<div th:replace="common/user/footer.html"></div>
+</body>
+</html>
