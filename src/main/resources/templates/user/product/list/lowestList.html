@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/user/css/product/list/list.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/product/list.css" type="text/css">
     <meta charset="UTF-8">
     <title>list</title>
 </head>
@@ -9,7 +9,7 @@
 <div th:replace="common/user/header.html"></div>
 
 <div class="wrapper" style="margin-top: 164px">
-    <h1 align="center" th:text="${superCategoryName.getCategoryName()}"></h1>
+    <h1 align="center" th:text="${lowestCategoryName.getCategoryName()}"></h1>
     <div id="thumbnailArea">
         <th:block th:each="productList : ${productList}">
             <div align="center" class="item" th:onclick="|location.href='/product/detail?productSeq=${productList.productSeq}'|">
@@ -23,7 +23,7 @@
                 </div>
             <div class="product-description">
                 <div class="product-name">
-                    <a th:onclick="|location.href='/product/detail?no=${productList.productSeq}'|">
+                    <a th:onclick="|location.href='/product/detail?productSeq=${productList.productSeq}'|">
                         <div th:text="${productList.productName}"></div>
                         <div id="product-price" th:text="'₩' + ${#numbers.formatInteger(productList.price, 0, 'POINT')}"></div>
                     </a>
