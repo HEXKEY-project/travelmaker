@@ -48,13 +48,6 @@ function autoEmail(a, b) {
     });
 }
 
-// 연락처 숫자 값 + 글자 수 제한
-function maxLengthCheck(object) {
-    if (object.value.length > object.maxLength) {
-        object.value = object.value.slice(0, object.maxLength);
-    }
-}
-
 // HTML 로드된 후에 스크립트 실행
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -184,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const nameField = document.getElementById("name");
         const address1Fild = document.getElementById("address1")
         const address2Fild = document.getElementById("address2")
-        const phoneFields = document.getElementsByClassName("phone2");
+        const phoneFields = document.getElementsById("phone");
         const emailField = document.getElementById("email");
         const agreePolicy = document.getElementById("policy1");
         const agreePrivate = document.getElementById("private1");

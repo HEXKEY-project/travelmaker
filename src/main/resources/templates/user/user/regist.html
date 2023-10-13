@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- 주소 API -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </head>
 <body>
 
@@ -19,13 +20,13 @@
         <ul>
             <li class="regist-id">
                 <label for="id">아이디 *</label>
-                <input class="id" id="id" type="text" maxlength="16" required>
+                <input class="id" id="memberId" name="memberId" type="text" maxlength="16" required>
                 <input type="button" value="중복확인" id="idCheck">
                 <div id="idError"></div>
             </li>
             <li class="pwd">
                 <label for="pwd1">비밀번호 *</label>
-                <input class="password" id="pwd1" type="password"
+                <input class="password" id="pwd1" name="memberPwd" type="password"
                        placeholder="(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자 ~ 16자)" maxlength="16" required><br>
                 <div id="pwdError"></div>
                 <div id="pwdMessage" style="display: none;">
@@ -39,87 +40,44 @@
                     </p>
                 </div>
                 <label for="pwd2">비밀번호 확인 *</label>
-                <input class="password" id="pwd2" type="password" required>
+                <input class="password" id="pwd2" name="pwd2" type="password" maxlength="16" required>
                 <div id="pwdError2"></div>
             </li>
             <li class="regist-name">
                 <label for="name">이름 *</label>
-                <input class="name" id="name" type="text" required>
+                <input class="name" id="memberName" name="memberName" type="text" required>
             </li>
             <li class="joinAddress">
                 <label for="zipCode">주소 *</label>
-                <input id="zipCode" type="text" readonly>
+                <input id="zipCode" name="zipCode" type="text" readonly>
                 <button id="searchZipCode" type="button">주소 검색</button><br>
-                <input class="address" id="address1" type="text" readonly required><br>
-                <input class="address" id="address2" type="text" required>
+                <input class="address" id="address1" name="address1" type="text" readonly required><br>
+                <input class="address" id="address2" name="address2" type="text" required>
             </li>
             <li class="tel">
-                <label>일반전화</label>
-                <select class="tel1" id="tel1">
-                    <option value="02" selected>02</option>
-                    <option value="031">031</option>
-                    <option value="032">032</option>
-                    <option value="033">033</option>
-                    <option value="041">041</option>
-                    <option value="042">042</option>
-                    <option value="043">043</option>
-                    <option value="044">044</option>
-                    <option value="051">051</option>
-                    <option value="052">052</option>
-                    <option value="053">053</option>
-                    <option value="054">054</option>
-                    <option value="055">055</option>
-                    <option value="061">061</option>
-                    <option value="062">062</option>
-                    <option value="063">063</option>
-                    <option value="064">064</option>
-                    <option value="0502">0502</option>
-                    <option value="0503">0503</option>
-                    <option value="0504">0504</option>
-                    <option value="0505">0505</option>
-                    <option value="0506">0506</option>
-                    <option value="0507">0507</option>
-                    <option value="0508">0508</option>
-                    <option value="070">070</option>
-                    <option value="010">010</option>
-                    <option value="011">011</option>
-                    <option value="016">016</option>
-                    <option value="017">017</option>
-                    <option value="018">018</option>
-                    <option value="019">019</option>
-                </select> -
-                <input class="tel2" type="number" maxlength="4" oninput="maxLengthCheck(this)">  -
-                <input class="tel2" type="number" maxlength="4" oninput="maxLengthCheck(this)">
+                <label for="tel">일반전화</label>
+                <input class="tel" id="tel" name="tel" type="number">
             </li>
             <li class="phone">
-                <label>휴대전화 *</label>
-                <select class="phone1" id="phone1">
-                    <option value="010">010</option>
-                    <option value="011">011</option>
-                    <option value="016">016</option>
-                    <option value="017">017</option>
-                    <option value="018">018</option>
-                    <option value="019">019</option>
-                </select> -
-                <input class="phone2" type="number" maxlength="4" oninput="maxLengthCheck(this)" required> -
-                <input class="phone2" type="number" maxlength="4" oninput="maxLengthCheck(this)" required>
+                <label for="phone">휴대전화 *</label>
+                <input class="phone" id="phone" name="phone" type="number" maxlength="11"  required>
             </li>
             <li class="sms-yn">
                 <label>SMS<br>수신여부 *</label>
                 <div class="s-yn">
-                    <input type="radio" name="sms" value="yes" checked><label>수신함</label>
-                    <input type="radio" name="sms" value="no"><label>수신안함</label>
+                    <input type="radio" name="smsYn" value="Y" checked><label>수신함</label>
+                    <input type="radio" name="smsYn" value="N"><label>수신안함</label>
                 </div>
             </li>
             <li class="regist-email">
                 <lavel>이메일 *</lavel>
-                <input class="email" id="email" onkeyup="autoEmail('email', this.value)" autocomplete="off" required>
+                <input class="email" id="email" name="email" onkeyup="autoEmail('email', this.value)" autocomplete="off" required>
             </li>
             <li class="email-yn">
                 <label>이메일<br>수신여부 *</label>
                 <div class="e-yn">
-                    <input type="radio" name="email" value="yes" checked><label>수신함</label>
-                    <input type="radio" name="email" value="no"><label>수신안함</label>
+                    <input type="radio" name="emailYn" value="Y" checked><label>수신함</label>
+                    <input type="radio" name="emailYn" value="N"><label>수신안함</label>
                 </div>
             </li>
         </ul>
@@ -163,7 +121,7 @@
             </li>
             <li>
                 <label>이용약관에 동의하십니까? </label>
-                <input type="checkbox" id="policy1" class="requiredCheck" required><label for="policy1">동의함</label><br><br>
+                <input type="checkbox" id="policy1" name="policyYn" class="requiredCheck" required><label for="policy1">동의함</label><br><br>
             </li>
             <li class="required-check">
                 <label>[필수] 개인정보 수집 및 이용 동의</label><br>
@@ -196,7 +154,7 @@
             </li>
             <li>
                 <label>개인정보 수집 및 이용에 동의하십니까? </label>
-                <input type="checkbox" id="private1" class="requiredCheck" required><label for="private1">동의함</label><br><br>
+                <input type="checkbox" id="private1" name="privateYn" class="requiredCheck" required><label for="private1">동의함</label><br><br>
             </li>
             <li class="required-check">
                 <label>[선택] 쇼핑정보 수신 동의</label>
@@ -208,11 +166,13 @@
             </li>
             <li>
                 <label>SMS 수신을 동의하십니까? </label>
-                <input type="checkbox" id="promotion1" class="optionalCheck"><label for="promotion1">동의함</label><br>
+                <input type="checkbox" id="promotion1" name="promotionYn" value="Y" class="optionalCheck"><label for="promotion1">동의함</label><br>
+                <input type="hidden" id="promo1" name="promotionYn" value="N">
             </li>
             <li>
                 <label>이메일 수신을 동의하십니까? </label>
-                <input type="checkbox" id="promotion2" class="optionalCheck"><label for="promotion2">동의함</label><br><br><br>
+                <input type="checkbox" id="promotion2" name="promotionYn" value="Y" class="optionalCheck"><label for="promotion2">동의함</label><br><br><br>
+                <input type="hidden" id="promo2" name="promotionYn" value="N">
             </li>
         </ul>
 
@@ -224,7 +184,6 @@
 
 <script>
 
-    <!-- 주소 API -->
     const $searchZipCode = document.getElementById("searchZipCode");
 
     $searchZipCode.onclick = function () {

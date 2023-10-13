@@ -1,5 +1,6 @@
 package com.hexkey.travelmaker.user.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,25 +15,26 @@ public class MemberMDTO implements UserDetails {
 
     private int memberCode;         // 회원 코드
     private String memberName;      // 회원 이름
-    private int phone;              // 휴대폰 번호
+    private String phone;              // 휴대폰 번호
     private String email;           // 이메일
     private String memberId;        // 회원 아이디
     private String memberPwd;       // 비밀번호
-    private int smsYn;              // sms 수신 여부
-    private int emailYn;            // email 수신 여부
+    private String smsYn;           // sms 수신 여부
+    private String emailYn;         // email 수신 여부
     private int mileage;            // 적립금
-    private int policyYn;           // 이용약관 동의 여부
-    private int privateYn;          // 개인정보 동의 여부
-    private int promotionYn;        // 쇼핑정보 동의 여부
+    private String policyYn;        // 이용약관 동의 여부
+    private String privateYn;       // 개인정보 동의 여부
+    private String promotionYn;     // 쇼핑정보 동의 여부
     private int gradeCode;          // 회원 등급
     private String loginType;       // 로그인 경로
-    private int tel;                // 일반전화
+    private String tel;                // 일반전화
     private Date joinDay;           // 가입일
     private String memberStatus;    // 회원 상태
     private List<MemberRoleDTO> memberRoleList;
     // 한 멤버는 여러 권한을 가질 수 있다.
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> roles = new HashSet<>();
         for(MemberRoleDTO role : memberRoleList) {
@@ -70,6 +72,5 @@ public class MemberMDTO implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 
 }

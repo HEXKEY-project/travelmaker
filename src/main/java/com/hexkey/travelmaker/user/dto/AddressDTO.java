@@ -13,6 +13,6 @@ public class AddressDTO {
     private int memberCode;
     private String defaultAdr;
     private String optionalAdr;
-    private int defaultYn;
+    private String defaultYn;
 
 }
