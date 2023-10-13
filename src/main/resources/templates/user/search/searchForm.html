@@ -61,40 +61,54 @@
                          ~
                         <input id="productPrice2" name="productPrice2" size="16" type="text">
                     </div>
-
-<!--                    <div class="item">-->
-<!--                        <strong>검색정렬기준</strong>-->
-<!--                        <select id="orderBy" name="orderBy">-->
-<!--                            <option value selected="selected">::: 기준선택 :::</option>-->
-<!--                            <option value="recent">신상품 순</option>-->
-<!--                            <option value="name">상품명순</option>-->
-<!--                            <option value="priceasc">낮은가격 순</option>-->
-<!--                            <option value="price">높은가격 순</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
                     <p class="button">
                         <button type="submit" class="btnSubmitFix">검색</button>
                     </p>
                     </fieldset>
+
+
                 </div>
                 <div class="searchResult">
                     <p class="record">
-                        <strong th:text="${searchResultMap.get('totalCount')}"></strong>
+                        <strong>[[${totalCount}]]</strong>
                         개의 상품을 찾았습니다.
                     </p>
-                    <ul class="search-orderby listType">
-                        <li rel style class="btn_order"></li>
-                    </ul>
                 </div>
-                <div class="noData">
-                    <strong class="warning">검색결과가 없습니다.</strong>
-                    <strong>정확한 검색어 인지 확인하시고 다시 검색해 주세요.</strong>
-                    <ul>
-                        <li>검색어의 입력이 정확한지 확인해 보세요.</li>
-                        <li>두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요.</li>
-                        <li>검색 옵션을 다시 확인해 보세요.</li>
-                    </ul>
+
+                <div id="thumbnailArea">
+                    <th:block th:each="searchResultList : ${searchResultList}">
+                        <div align="center" class="item" th:onclick="|location.href='/product/detail?productSeq=${searchResultList.productSeq}'|">
+                            <div>
+                                <th:block th:if="${not #lists.isEmpty(searchResultList.fileList)}">
+                                    <img th:if="${searchResultList.fileList[0].fileType == 'productImage'}"
+                                         th:src="${searchResultList.fileList[0].filePath}"
+                                         width="296px"
+                                         height="296px"/>
+                                </th:block>
+                            </div>
+                            <div class="product-description">
+                                <div class="product-name">
+                                    <a th:onclick="|location.href='/product/detail?productSeq=${searchResultList.productSeq}'|">
+                                        <div th:text="${searchResultList.productName}"></div>
+                                        <div id="product-price" th:text="'₩' + ${#numbers.formatInteger(searchResultList.price, 0, 'POINT')}"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
                 </div>
+
+
+<!--                <div id="noData">-->
+<!--                    <ul>-->
+<!--                        <li class="warning">검색결과가 없습니다.</li>-->
+<!--                        <li class="warning">정확한 검색어 인지 확인하시고 다시 검색해 주세요.</li>-->
+<!--                        <li>검색어의 입력이 정확한지 확인해 보세요.</li>-->
+<!--                        <li>두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요.</li>-->
+<!--                        <li>검색 옵션을 다시 확인해 보세요.</li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+
             </form>
         </div>
     </div>
@@ -106,11 +120,42 @@
     window.addEventListener('DOMContentLoaded', function () {
         // 현재 URL에서 'searchValue' 파라미터 값을 가져옵니다.
         const urlParams = new URLSearchParams(window.location.search);
+        const categoryCode = urlParams.get('categoryCode');
+        const searchCondition = urlParams.get('searchCondition');
         const searchValue = urlParams.get('searchValue');
+        const productPrice1 = urlParams.get('productPrice1');
+        const productPrice2 = urlParams.get('productPrice2');
 
-        // 'searchValue' 파라미터가 존재하고 값이 비어 있지 않다면 값을 'searchValue' 입력 필드에 설정합니다.
+        // 파라미터가 존재하고 값이 비어 있지 않다면 값을 입력 필드에 설정합니다.
+        if (categoryCode !== null && categoryCode.trim() !== '') {
+
+            document.getElementById("categoryCode").value = categoryCode;
+
+        }
+
+        if (searchCondition !== null && searchCondition.trim() !== '') {
+
+            document.getElementById("searchCondition").value = searchCondition;
+
+        }
+
         if (searchValue !== null && searchValue.trim() !== '') {
+
+            console.log(searchValue)
             document.getElementById("searchValue").value = searchValue;
+
+        }
+
+        if (productPrice1 !== null && productPrice1.trim() !== '') {
+
+            document.getElementById("productPrice1").value = productPrice1;
+
+        }
+
+        if (productPrice2 !== null && productPrice2.trim() !== '') {
+
+            document.getElementById("productPrice2").value = productPrice2;
+
         }
     });
 

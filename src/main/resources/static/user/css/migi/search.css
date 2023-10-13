@@ -165,23 +165,61 @@ fieldset {
     margin: 30px auto;
 }
 
-.noData {
+#noData {
     padding: 48px 0;
     text-align: center;
     line-height: 1.8em;
 }
 
-.noData > strong{
-    display: block;
+#noData > .warning{
+    font-weight: bold;
 }
 
-.noData ul {
+#noData ul {
     text-align: center;
     display: inline-block;
     margin: 10px 0 0;
 }
 
-.noData li {
+#noData li {
     display: block;
     text-align: center;
+}
+
+#thumbnailArea {
+    max-width: 1540px;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item {
+    margin: 20px;
+    cursor: pointer;
+}
+
+.product-description {
+    font-size: 12px;
+    position: relative;
+    margin: 16px auto;
+    width: 350px;
+    white-space: normal;
+    word-break: keep-all;
+}
+
+.product-name {
+    text-align: left;
+    padding: 4px 0;
+    font-weight: 500;
+    color: #767676;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    font-size: 14px;
+}
+
+.product-name #product-price {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
 }
