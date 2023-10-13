@@ -1,4 +1,4 @@
-package com.hexkey.travelmaker.config;
+package com.hexkey.travelmaker.config.community;
 
 import com.hexkey.travelmaker.community.notices.controller.AdminNoticesController;
 import org.springframework.context.annotation.Bean;
