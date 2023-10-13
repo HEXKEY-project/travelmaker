@@ -79,7 +79,7 @@
         )
         VALUES
             (
-              SEQ_MEMBER_CODE.NEXTVAL
+                SEQ_MEMBER_CODE.NEXTVAL
             , #{ memberName }
             , #{ phone }
             , #{ email }
@@ -89,6 +89,7 @@
             , #{ emailYn }
             , #{ mileage }
             , #{ policyYn }
+            , #{ privateYn }
             , #{ promotionYn }
             , #{ gradeCode }
             , #{ loginType }
@@ -113,12 +114,11 @@
         VALUES
             (
               SEQ_ADDRESS_CODE.NEXTVAL
-            , #{ addressCode }
             , #{ addressName }
             , #{ postalCode }
             , #{ memberCode }
             , #{ defaultAdr }
-            , #{ optionAdr }
+            , #{ optionalAdr }
             , #{ defaultYn }
             )
     </insert>
@@ -132,8 +132,8 @@
         )
         VALUES
             (
-              SEQ_MEMBER_CODE.CURRVAL
-            , 1
+              1
+            , SEQ_MEMBER_CODE.CURRVAL
             )
     </insert>
 
