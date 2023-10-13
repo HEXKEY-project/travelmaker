@@ -1,5 +1,6 @@
 package com.hexkey.travelmaker.order.orderpage.dao;
 
+import com.hexkey.travelmaker.order.orderpage.dto.OrderFormDTO;
 import com.hexkey.travelmaker.order.orderpage.dto.ProductDTO;
 import com.hexkey.travelmaker.order.orderpage.dto.OrderDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,4 +16,5 @@ public interface OrderPageMapper {
 
     List<OrderDTO> selectAdminOrder(String searchCondition, String searchValue, String orderDate1, String orderDate2);
 
+    int insertFormOrder(OrderFormDTO orderFormDTO);
 }

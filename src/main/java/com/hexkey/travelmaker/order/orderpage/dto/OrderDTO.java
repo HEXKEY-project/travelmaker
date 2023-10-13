@@ -21,4 +21,6 @@ public class OrderDTO {
     private long mileageDiscountPrice; // not null
 
     private MemberDTO2 memberDTO;
+    private PaymentDTO paymentDTO;
+    private OrderDetailDTO orderDetailDTO;
 }

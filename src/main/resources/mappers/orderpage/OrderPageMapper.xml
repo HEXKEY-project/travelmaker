@@ -92,5 +92,32 @@
     </insert>
 
 
+<!--  OrderFormData 입력  -->
+    <insert id="insertFormOrder">
+        INSERT INTO TBL_ORDER
+        (
+        ORDER_CODE
+        ,ORDER_DATE
+        ,ORDER_STATUS
+        ,MEMBER_CODE
+        ,TOTAL_PRICE
+        ,PRODUCT_PRICE
+        ,SHIP_PRICE
+        ,MILEAGE_DISCOUNT_PRICE
+        )
+        VALUES
+        (
+        SEQ_ORDER_NO.NEXTVAL
+        ,TO_DATE('${orderDate}', 'YYYY-MM-DD')
+        ,'결제완료'
+        ,1
+        ,TO_NUMBER('${totalPrice}','999999')
+        ,TO_NUMBER('${productPrice}','999999')
+        ,TO_NUMBER('${shipPrice}','999999')
+        ,TO_NUMBER('${discount}','999999')
+        )
+    </insert>
+
+
 
 </mapper>

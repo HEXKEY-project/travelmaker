@@ -1,5 +1,6 @@
 package com.hexkey.travelmaker.order.orderpage.service;
 
+import com.hexkey.travelmaker.order.orderpage.dto.OrderFormDTO;
 import com.hexkey.travelmaker.order.orderpage.dto.ProductDTO;
 import com.hexkey.travelmaker.order.orderpage.dao.OrderPageMapper;
 import com.hexkey.travelmaker.order.orderpage.dto.OrderDTO;
@@ -49,6 +50,21 @@ public class OrderPageService {
             resultMessage = "데이터 입력 완료!";
         } else {
             resultMessage = "데이터 입력 실패!";
+        }
+
+        return resultMessage;
+    }
+
+
+    public String insertFormOrder(OrderFormDTO orderFormDTO) {
+        int result = orderPageMapper.insertFormOrder(orderFormDTO);
+
+        String resultMessage = "";
+
+        if(result > 0) {
+            resultMessage = "주문 완료!";
+        } else {
+            resultMessage = "주문 실패!";
         }
 
         return resultMessage;
