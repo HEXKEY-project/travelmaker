@@ -174,15 +174,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // 회원가입 버튼 클릭 시 필수 항목 관련 알림창
-
-
-
     joinBtn.addEventListener("click", function () {
 
         const joinBtn = document.getElementById("joinBtn");
         const idField = document.getElementById("id");
-        const pwdField = document.getElementsByClassName("password");
+        const pwd1Field = document.getElementById("pwd1");
+        const pwd2Field = document.getElementById("pwd2");
+        const pwdConfirmField = document.getElementsByClassName("password")
         const nameField = document.getElementById("name");
+        const address1Fild = document.getElementById("address1")
+        const address2Fild = document.getElementById("address2")
         const phoneFields = document.getElementsByClassName("phone2");
         const emailField = document.getElementById("email");
         const agreePolicy = document.getElementById("policy1");
@@ -193,7 +194,12 @@ document.addEventListener('DOMContentLoaded', function () {
             return false;
         }
 
-        if (pwdField.value.trim() === "") {
+        if (pwd1Field.value.trim() === "") {
+            alert("비밀번호 항목은 필수 입력값입니다.");
+            return false;
+        }
+
+        if (pwd2Field.value.trim() === "") {
             alert("비밀번호 항목은 필수 입력값입니다.");
             return false;
         }
@@ -203,13 +209,8 @@ document.addEventListener('DOMContentLoaded', function () {
             return false;
         }
 
-        if (idField.value.trim() === "") {
-            alert("아이디 항목은 필수 입력값입니다.");
-            return false;
-        }
-
-        if (emailField.value.trim() === "") {
-            alert("이메일을 입력하세요.");
+        if (address2Fild.value.trim() === "") {
+            alert("주소를 입력해주세요");
             return false;
         }
 
@@ -225,6 +226,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        if (emailField.value.trim() === "") {
+            alert("이메일을 입력하세요.");
+            return false;
+        }
+
         if (!agreePolicy.checked) {
             alert("이용약관에 동의하세요");
             return false;
@@ -235,6 +241,19 @@ document.addEventListener('DOMContentLoaded', function () {
             return false;
         }
 
+        if (address1Fild.value.trim() === "") {
+            alert("주소를 입력해주세요");
+            event.preventDefault();
+            return false;
+        }
+
+        if (pwd1Field.value.trim() !== pwd2Field.value.trim()) {
+            alert("비밀번호가 일치하지 않습니다.");
+            event.preventDefault();
+            return false;
+
+
+        }
     });
 
 });
