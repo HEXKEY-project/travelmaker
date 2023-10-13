@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="/user/css/zeesang/styles.css" rel="stylesheet" type="text/css"/>
+<link href="/user/css/zeesang/noticesDetail.css" rel="stylesheet" type="text/css"/>
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 확인 폼</title>
+</head>
+<body>
+
+<div th:replace="common/user/header.html"></div>
+
+
+<H1 align="center" style="margin-top: 56px;">공지사항</H1>
+<div align="center">
+    <div class="noticesListLineFirst">
+        <table class="noticesListLine" style="margin: auto">
+            <tr>
+                <td class="noticesCategory" style="color: crimson" th:text="${ noticesD.category.name }" th:if="${noticesD.category.code}==1"></td>
+                <td class="noticesCategory" th:text="${ noticesD.category.name }" th:if="${noticesD.category.code}==2"></td>
+                <td class="noticesCategory" style="color:#0075BD" th:text="${ noticesD.category.name }" th:if="${noticesD.category.code}==3"></td>
+                <td class="noticesTitle"><p th:text="${ noticesD.title }"></p></td>
+                <td class="noticesDate"th:text="${#dates.format(noticesD.registeredDate, 'yyyy.MM.dd')}">
+            </tr>
+        </table>
+    </div>
+</div>
+<div>
+    <textarea name="body" cols="60" rows="15"
+              style="resize: none; margin-top: 94px" readonly th:text="${ noticesD.body }">
+                                </textarea></td>
+</div>
+
+<div align="center">
+    <div class="noticesListLineSecond">
+        <table class="noticesListLine" style="margin: auto">
+            <tr>
+                <td class="noticesCategory" style="color: crimson" th:text="${ noticesD.category.name }" th:if="${noticesD.category.code}==1"></td>
+                <td class="noticesCategory" th:text="${ noticesD.category.name }" th:if="${noticesD.category.code}==2"></td>
+                <td class="noticesCategory" style="color:#0075BD" th:text="${ noticesD.category.name }" th:if="${noticesD.category.code}==3"></td>
+                <td class="noticesTitle"><p th:text="${ noticesD.title }"></p></td>
+                <td class="noticesDate"th:text="${#dates.format(noticesD.registeredDate, 'yyyy.MM.dd')}">
+            </tr>
+        </table>
+        <div class="noticesListLineThird">
+        </div>
+    </div>
+</div>
+<div th:replace="/common/user/footer.html"></div>
+</body>
+</html>
