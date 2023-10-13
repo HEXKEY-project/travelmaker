@@ -69,6 +69,35 @@
           AND PRICE BETWEEN #{ productPrice1 } AND #{ productPrice2 }
     </select>
 
+    <select id="selectBySearchCriteria" resultMap="generalProductResultMap">
+        SELECT
+               A.PRODUCT_SEQ
+             , A.PRODUCT_NAME
+             , A.PRICE
+             , A.CATEGORY_CODE
+             , A.ORDERABLE_STATUS
+             , B.FILE_TYPE
+             , B.FILE_PATH
+             , B.SAVED_FILE_NAME
+             , C.CATEGORY_CODE
+             , C.REF_CATEGORY_CODE
+             , C.CATEGORY_NAME
+        FROM TBL_PRODUCT A
+                 JOIN TBL_FILE B ON (A.PRODUCT_SEQ = B.PRODUCT_SEQ)
+                 JOIN TBL_PRODUCT_CATEGORY C ON (A.CATEGORY_CODE = C.CATEGORY_CODE)
+        WHERE REF_CATEGORY_CODE IN (SELECT
+                                           CATEGORY_CODE
+                                      FROM TBL_PRODUCT_CATEGORY
+                                     WHERE REF_CATEGORY_CODE = #{ categoryCode })
+    <if test="searchCondition == 'productName'">
+          AND PRODUCT_NAME LIKE '%' || #{searchValue} || '%'
+    </if>
+    <if test="searchCondition == 'productSeq'">
+          AND PRODUCT_SEQ = #{searchValue}
+    </if>
+          AND PRICE BETWEEN #{ productPrice1 } AND #{ productPrice2 }
+    </select>
+
 
 
 </mapper>

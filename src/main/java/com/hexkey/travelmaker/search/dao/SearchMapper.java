@@ -10,6 +10,6 @@ import java.util.Map;
 public interface SearchMapper {
     int selectTotalCount(Map<String, Object> searchMap);
 
-//    List<ProductDTO> selectBySearchCriteria(Map<String, Object> searchMap);
+    List<ProductDTO> selectBySearchCriteria(Map<String, Object> searchMap);
 
 }

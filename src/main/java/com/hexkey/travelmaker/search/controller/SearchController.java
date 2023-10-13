@@ -50,9 +50,9 @@ public class SearchController {
 
         Map<String, Object> searchResultMap = searchService.selectBySearchCriteria(searchMap);
         model.addAttribute("totalCount", searchResultMap.get("totalCount"));
-        model.addAttribute("searchResultMap", searchResultMap.get("productList"));
+        model.addAttribute("searchResultList", searchResultMap.get("searchResultList"));
 
-        return "/user/search/searchForm";
+        return "user/search/searchForm";
     }
 
 }
