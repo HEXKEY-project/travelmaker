@@ -1,3 +1,10 @@
+@charset "UTF-8";
+
+body {
+    margin-top: 164px;
+}
+
+
 .qnaListLineTop{
     margin-top: 40px;
     margin-bottom: 0;

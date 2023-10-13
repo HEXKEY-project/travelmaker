@@ -204,14 +204,6 @@ a{
     object-fit: cover;
 }
 
-.button-style {
-    transform: scale(1)
-    rotate(0deg);
-    opacity: 1;
-}
-
-/* ----- 검색창 ----- */
-
 .slide-search {
     display: block;
     width: 100%;

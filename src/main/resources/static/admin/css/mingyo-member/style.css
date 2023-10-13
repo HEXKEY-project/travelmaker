@@ -7,10 +7,12 @@
     width: 1920px;
     height: 64px;
     background: black;
+    display: flex;
+    align-items: center;
 
 }
 .logo{
-    padding: 20px;
+    margin-left: 23px;
 }
 /* 사이드메뉴바*/
 li{list-style:none}
@@ -70,6 +72,7 @@ a{
      transition-duration: 1s;
 
 }
+
 /* 사이드메뉴바 2차메뉴 마우스 댔을때 반응*/
  .dep2 > li:hover {
     background-color: #E9ECEF;

@@ -1,5 +1,6 @@
 package com.hexkey.travelmaker.config;
 
+import com.hexkey.travelmaker.community.notices.controller.AdminNoticesController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,6 +23,9 @@ public class SecurityConfig {
         return http
                 .csrf()
                 .disable()
+                .headers()
+                .frameOptions().sameOrigin()
+                .and()
                 .authorizeHttpRequests()
                 .anyRequest().permitAll()
                 .and()
