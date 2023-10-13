@@ -52,6 +52,7 @@
                    , A.PRODUCT_SEQ
                    , A.PRICE
                    , B.CATEGORY_CODE
+                   , B.REF_CATEGORY_CODE
                 FROM TBL_PRODUCT A
                 JOIN TBL_PRODUCT_CATEGORY B ON(A.CATEGORY_CODE = B.CATEGORY_CODE)
              )
@@ -59,7 +60,12 @@
                                         CATEGORY_CODE
                                     FROM TBL_PRODUCT_CATEGORY
                                     WHERE REF_CATEGORY_CODE = #{ categoryCode })
-          AND #{ searchCondition } LIKE '%'${ searchValue }'%'
+        <if test="searchCondition == 'productName'">
+            AND PRODUCT_NAME LIKE '%' || #{searchValue} || '%'
+        </if>
+        <if test="searchCondition == 'productSeq'">
+            AND PRODUCT_SEQ = #{searchValue}
+        </if>
           AND PRICE BETWEEN #{ productPrice1 } AND #{ productPrice2 }
     </select>
 

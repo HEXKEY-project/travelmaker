@@ -27,28 +27,29 @@ public class SearchController {
 
         model.addAttribute("searchValue", searchValue);
 
-        return "user/search/searchForm";
+        return "/user/search/searchForm";
     }
 
-    @GetMapping("user/searchForm")
-    public String selectBySearchCriteria(@RequestParam("categoryCode") String categoryCode,@RequestParam("searchCondition") String searchCondition, @RequestParam("searchValue") String searchValue, @RequestParam(required = false) String productPrice1,
-                                         @RequestParam(required = false) String productPrice2, @RequestParam(required = false) String orderBy, Model model) {
+    @GetMapping("/user/searchForm")
+    public String selectBySearchCriteria(@RequestParam("categoryCode") int categoryCode, @RequestParam("searchCondition") String searchCondition, @RequestParam("searchValue") String searchValue, @RequestParam(required = false) int productPrice1,
+                                         @RequestParam(required = false) int productPrice2, Model model) {
 
+        log.info("categoryCode : {}", categoryCode);
         log.info("searchCondition : {}", searchCondition);
         log.info("searchValue : {}", searchValue);
         log.info("productPrice1 : {}", productPrice1);
         log.info("productPrice2 : {}", productPrice2);
-        log.info("orderBy : {}", orderBy);
 
-        Map<String, String> searchMap = new HashMap<>();
+        Map<String, Object> searchMap = new HashMap<>();
+
         searchMap.put("categoryCode", categoryCode);
         searchMap.put("searchCondition", searchCondition);
         searchMap.put("searchValue", searchValue);
         searchMap.put("productPrice1", productPrice1);
         searchMap.put("productPrice2", productPrice2);
-        searchMap.put("orderBy", orderBy);
 
         Map<String, Object> searchResultMap = searchService.selectBySearchCriteria(searchMap);
+        model.addAttribute("totalCount", searchResultMap.get("totalCount"));
         model.addAttribute("searchResultMap", searchResultMap.get("productList"));
 
         return "/user/search/searchForm";

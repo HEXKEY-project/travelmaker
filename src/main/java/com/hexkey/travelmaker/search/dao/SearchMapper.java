@@ -8,8 +8,8 @@ import java.util.Map;
 
 @Mapper
 public interface SearchMapper {
-    int selectTotalCount(Map<String, String> searchMap);
+    int selectTotalCount(Map<String, Object> searchMap);
 
-    List<ProductDTO> selectBySearchCriteria(Map<String, String> searchMap);
+//    List<ProductDTO> selectBySearchCriteria(Map<String, Object> searchMap);
 
 }

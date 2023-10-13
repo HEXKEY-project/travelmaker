@@ -22,7 +22,7 @@
 
                     <div class="item">
                         <strong>상품분류</strong>
-                        <select id="categoryNo" name="categoryCode">
+                        <select id="categoryCode" name="categoryCode">
                             <option selected="selected">상품분류 선택</option>
                             <option value="1">캐리어</option>
                             <option value="2">가방</option>
@@ -33,8 +33,8 @@
                     <div class="item overview">
                         <strong>검색조건</strong>
                         <select id="searchCondition" name="searchCondition">
-                            <option value="PRODUCT_NAME">상품명</option>
-                            <option value="PRODUCT_SEQ">상품코드</option>
+                            <option value="productName">상품명</option>
+                            <option value="productSeq">상품코드</option>
                         </select>
                         <input type="text" id="searchValue" th:value="${searchValue}" name="searchValue" class="inputTypeText" placeholder size="15">
                     </div>
@@ -62,18 +62,16 @@
                         <input id="productPrice2" name="productPrice2" size="16" type="text">
                     </div>
 
-                    <div class="item">
-                        <strong>검색정렬기준</strong>
-                        <select id="orderBy" name="orderBy">
-                            <option value selected="selected">::: 기준선택 :::</option>
-                            <option value="recent">신상품 순</option>
-                            <option value="name">상품명순</option>
-                            <option value="priceasc">낮은가격 순</option>
-                            <option value="price">높은가격 순</option>
-                            <option value="manu_name">제조사 순</option>
-                            <option value="review">사용후기 순</option>
-                        </select>
-                    </div>
+<!--                    <div class="item">-->
+<!--                        <strong>검색정렬기준</strong>-->
+<!--                        <select id="orderBy" name="orderBy">-->
+<!--                            <option value selected="selected">::: 기준선택 :::</option>-->
+<!--                            <option value="recent">신상품 순</option>-->
+<!--                            <option value="name">상품명순</option>-->
+<!--                            <option value="priceasc">낮은가격 순</option>-->
+<!--                            <option value="price">높은가격 순</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
                     <p class="button">
                         <button type="submit" class="btnSubmitFix">검색</button>
                     </p>
@@ -81,7 +79,7 @@
                 </div>
                 <div class="searchResult">
                     <p class="record">
-                        <strong>0</strong>
+                        <strong th:text="${searchResultMap.get('totalCount')}"></strong>
                         개의 상품을 찾았습니다.
                     </p>
                     <ul class="search-orderby listType">
