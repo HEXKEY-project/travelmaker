@@ -174,10 +174,3 @@ button#joinBtn {
     padding: 10px;
     z-index: 1;
 }
-/* required 알림창 미설정*/
-input:required::-webkit-validation-bubble {
-    display: none;
-}
-input:required::-webkit-validation-bubble-message {
-    display: none;
-}
