@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title th:text="${product.productName}"></title>
     <link rel="stylesheet" type="text/css" href="/user/css/product/detail.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/user/js/product/detail.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -11,21 +14,11 @@
     <div th:replace="common/user/header.html"></div>
     <div id="product_contents">
         <div id="titleImgArea">
-             <th:block
-                     th:each="index : ${ #numbers.sequence(1, product.fileList.size() - 1)}"
-                     th:if="${ product.getFileList().get(index).getFileType() == 'productImage'}"
-             >
-            <div>
-            <img  th:src="${ product.getFileList().get(index).getFilePath() }">
-            </div>
-            <div>
-                <!--<img th:src="${ product.getFileList().get(index).getFilePath()}">-->
-            </div>
-            </th:block>
-
-            <img id="leftButtonImg" src="/user/images/productdetail/_ButtonBase_left.png" alt="이전이미지">
-            <img id="rightButtonImg" src="/user/images/productdetail/_ButtonBase_right.png" alt="다음이미지">
-
+            <div id="thumbnailArea"></div>
+            <img id="leftButtonImg" src="/user/images/productdetail/_ButtonBase_left.png" alt="이전이미지"
+                 onclick="showPreviousImage()">
+            <img id="rightButtonImg" src="/user/images/productdetail/_ButtonBase_right.png" alt="다음이미지"
+                 onclick="showNextImage()">
         </div>
         <div id="product_info">
             <div id="product_title" th:text="${product.productName}"></div>
@@ -34,11 +27,17 @@
                 <div id="option">
                     <span th:text="${product.getProductOption().get(0).getOptionName()}"></span>
                     <select id="productOpt">
-                        <option th:text="'-[필수] ' + ${product.getProductOption().get(0).getOptionName() + ' 선택-'} ">
+                        <option selected
+                                th:text="'-[필수] ' + ${product.getProductOption().get(0).getOptionName() + ' 선택-'} ">
                         </option>
-                        <option>-----------------</option>
+                        <option disabled>-----------------</option>
+                        <option disabled id="optKind"
+                                th:text="${product.getProductOption().get(0).getOptionName()}"></option>
                         <th:block th:each="optName : ${ #numbers.sequence(1, product.productOption.size() - 1)}">
-                            <option th:text="${product.getProductOption().get(optName).getOptionName()}"></option>
+                            <option th:text="'&nbsp;&nbsp;' + ${product.getProductOption().get(optName).getOptionName()}"
+                                    th:name="${product.getProductOption().get(optName).getOptionName()}"
+                                    th:value="${product.getProductOption().get(optName).getOptionName()}">
+                            </option>
                         </th:block>
                     </select>
                     <img id="iconArrow" src="/user/images/productdetail/iconArrow.png">
@@ -54,9 +53,68 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="560" height="2" viewBox="0 0 560 2" fill="none">
                 <path d="M0 1H560" stroke="#BDBDBD"/>
             </svg>
+            <div id="addOpt"><!--<span th:text="${ product.productName }"></span>
+                <input type="number" id="productCount" min="1" step="1">-->
+            </div>
+            <div id="payInfo">
+                <div>아래 <span>구매하기</span> 버튼을 통해 결제페이지에서</div>
+                <div>상품별 적립금을 적용할 수 있습니다</div>
+            </div>
+            <div id="BtnArea">
+                <button type="submit" id="basketBtn">장바구니</button>
+                <button type="button" id="BuyBtn">구매하기</button>
+            </div>
+
         </div>
+
+    </div>
+    <div id="smallImgArea">
+        <th:block th:if="${ product.fileList.size() > 1}"
+                  th:each="index : ${ #numbers.sequence(0, product.fileList.size() - 1)}"
+        >
+            <img class="thumbnailImg" th:if="${ product.getFileList().get(index).getFileType() == 'productImage'}"
+                 th:src="${ product.fileList[index].filePath }">
+        </th:block>
+    </div>
+    <div id="productContentWrapper">
+        <div id="productDetail">DETAIL</div>
+        <div id="productReview">REVIEW</div>
+        <div id="productQnA">Q&A</div>
+    </div>
+    <div id="productContentImg">
+        <th:block th:if="${ product.fileList.size() > 1}"
+                  th:each="index : ${ #numbers.sequence(0, product.fileList.size() - 1)}"
+        >
+            <div class="contentImg"><img th:if="${ product.getFileList().get(index).getFileType() == 'productContent'}"
+                 th:src="${ product.fileList[index].filePath }"></div>
+        </th:block>
     </div>
     <div th:replace="common/user/footer.html"></div>
 </div>
+
+<script>
+    // 현재 보이는 이미지의 인덱스를 추적하는 변수
+    let currentImageIndex = 0;
+
+    // 이미지 요소들을 가져옵니다.
+    const thumbnailImages = document.querySelectorAll('.thumbnailImg');
+    const thumbnailArea = document.getElementById('thumbnailArea');
+
+    function showPreviousImage() {
+        if (currentImageIndex > 0) {
+            currentImageIndex--; // 이전 이미지 인덱스로 이동
+            thumbnailArea.innerHTML = `<img src="${thumbnailImages[currentImageIndex].src}" alt="상세 이미지" style="width: 706px; height: 695px; flex-shrink: 0;">`;
+        }
+    }
+
+    function showNextImage() {
+        if (currentImageIndex < thumbnailImages.length - 1) {
+            currentImageIndex++; // 다음 이미지 인덱스로 이동
+            thumbnailArea.innerHTML = `<img src="${thumbnailImages[currentImageIndex].src}" alt="상세 이미지" style="width: 706px; height: 695px; flex-shrink: 0;">`;
+        }
+    }
+
+</script>
+
 </body>
 </html>
