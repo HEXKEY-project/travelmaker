@@ -30,165 +30,211 @@ window.onload = function() {
         }
 
     }
+}
 
-    // HTML 로드된 후에 스크립트 실행
-    document.addEventListener('DOMContentLoaded', function () {
+// 이메일 자동 완성
+function autoEmail(a, b) {
+    const mailId = b.split('@');                                                                   // 메일계정의 ID만 받아와서 처리하기 위함
+    const mailList = ['naver.com', 'gmail.com', 'daum.net', 'hanmail.net', 'nate.com'];    // 메일목록
+    const availableCity = new Array;                                                        // 자동완성 키워드 리스트
+    for (let i = 0; i < mailList.length; i++) {
+        availableCity.push(mailId[0] + '@' + mailList[i]);                                         // 입력되는 텍스트와 메일목록을 조합
+    }
+    $("#" + a).autocomplete({
+        source: availableCity,                                                                     // jQuery 자동완성에 목록을 넣어줌
+        focus: function (event, ui) {
+            return false;
+        }
+    });
+}
 
-        // 비밀번호 정규식에 맞춰 작성
-        document.getElementById('pwd1').addEventListener('blur', function () {
-            const password = this.value;
-            const regex = /^(?!.*(.)\1\1)(?!((?:[A-Za-z]+)|(?:[~`!@#$^()*_\-={}[]|;:<>,.?\/]+)|(?:[0-9]+))$)[A-Za-z\d~`!@#$^()*_\-={}[]|;:<>,.?\/]{10,}$/;
-            const isValid = regex.test(password);
-            const messageElement = document.getElementById('pwdError');
+// 연락처 숫자 값 + 글자 수 제한
+function maxLengthCheck(object) {
+    if (object.value.length > object.maxLength) {
+        object.value = object.value.slice(0, object.maxLength);
+    }
+}
 
-            if (password.length >= 10 && isValid) {
-                messageElement.textContent = "";
-            } else if (password.length > 0) {
-                messageElement.textContent = "비밀번호가 형식에 맞지 않습니다.";
+// HTML 로드된 후에 스크립트 실행
+document.addEventListener('DOMContentLoaded', function () {
+
+    // 아이디 형식에 맞춰 작성
+    $("#id").blur(function () {
+        let idCheck = /^[a-z0-9]{4,16}$/;
+
+        if (!idCheck.test($("#id").val())) {
+            $("#idError").css("color", "red");
+            $("#idError").text("아이디는 영문 소문자 또는 숫자 4~16자로 입력해 주세요.");
+            id = false;
+        } else {
+            $("#idError").text("");
+            id = true;
+        }
+    });
+
+    // 비밀번호 형식에 맞춰 작성
+    document.getElementById('pwd1').addEventListener('blur', function () {
+        const password = this.value;
+        const regex = /^(?!.*(.)\1\1)(?!((?:[A-Za-z]+)|(?:[~`!@#$^()*_\-={}[]|;:<>,.?\/]+)|(?:[0-9]+))$)[A-Za-z\d~`!@#$^()*_\-={}[]|;:<>,.?\/]{10,}$/;
+        const isValid = regex.test(password);
+        const messageElement = document.getElementById('pwdError');
+
+        if (password.length >= 10 && isValid) {
+            messageElement.textContent = "";
+        } else if (password.length > 0) {
+            messageElement.textContent = "비밀번호가 형식에 맞지 않습니다.";
+        }
+    });
+
+    // 비밀번호 클릭 시 비밀번호 형식 안내 문구창
+    const pwd1Element = document.getElementById("pwd1");
+    const pwdMessageElement = document.getElementById("pwdMessage");
+
+    pwd1Element.addEventListener("click", function (event) {
+        // event.stopPropagation();
+        pwdMessageElement.style.display = "block";
+    });
+
+    document.addEventListener("click", function (event) {
+        if (event.target !== pwd1Element && event.target !== pwdMessageElement) {
+            pwdMessageElement.style.display = "none";
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Tab") {
+            pwdMessageElement.style.display = "none";
+        }
+    });
+
+    // 비밀번호 일치 확인
+    document.getElementById('pwd1').addEventListener('input', checkPasswords);
+    document.getElementById('pwd2').addEventListener('input', checkPasswords);
+
+    function checkPasswords() {
+        let password1 = document.getElementById('pwd1').value;
+        let password2 = document.getElementById('pwd2').value;
+        let messageElement = document.getElementById('pwdError2')
+
+        if (password1 === password2) {
+            messageElement.textContent = "";
+        } else {
+            messageElement.textContent = "비밀번호가 일치하지 않습니다."
+        }
+
+    }
+
+    // 체크 박스 상태 변화
+    let checkAllCheckbox = document.getElementById('checkAll');
+    let requiredCheck = document.getElementsByClassName('requiredCheck');
+    let optionalCheck = document.getElementsByClassName('optionalCheck');
+
+    function updateCheckAllCheckbox() {
+        let allChecked = true;
+
+        for (let i = 0; i < requiredCheck.length; i++) {
+            if (!requiredCheck[i].checked) {
+                allChecked = false;
+                break;
             }
+        }
+
+        for (let i = 0; i < optionalCheck.length; i++) {
+            if (!optionalCheck[i].checked) {
+                allChecked = false;
+                break;
+            }
+        }
+
+        checkAllCheckbox.checked = allChecked;
+    }
+
+    checkAllCheckbox.addEventListener('change', function () {
+        for (let i = 0; i < requiredCheck.length; i++) {
+            requiredCheck[i].checked = this.checked;
+        }
+
+        for (let i = 0; i < optionalCheck.length; i++) {
+            optionalCheck[i].checked = this.checked;
+        }
+
+        updateCheckAllCheckbox();
+    });
+
+    for (let i = 0; i < requiredCheck.length; i++) {
+        requiredCheck[i].addEventListener('change', function () {
+            updateCheckAllCheckbox();
         });
+    }
 
-        // 비밀번호 클릭 시 비밀번호 형식 안내 문구창
-        const pwd1Element = document.getElementById("pwd1");
-        const pwdMessageElement = document.getElementById("pwdMessage");
-
-        pwd1Element.addEventListener("click", function (event) {
-            // event.stopPropagation();
-            pwdMessageElement.style.display = "block";
+    for (let i = 0; i < optionalCheck.length; i++) {
+        optionalCheck[i].addEventListener('change', function () {
+            updateCheckAllCheckbox();
         });
+    }
 
-        document.addEventListener("click", function (event) {
-            if (event.target !== pwd1Element && event.target !== pwdMessageElement) {
-                pwdMessageElement.style.display = "none";
-            }
-        });
+    // 회원가입 버튼 클릭 시 필수 항목 관련 알림창
 
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "Tab") {
-                pwdMessageElement.style.display = "none";
-            }
-        });
 
-        // 비밀번호 일치 확인
-        document.getElementById('pwd1').addEventListener('input', checkPasswords);
-        document.getElementById('pwd2').addEventListener('input', checkPasswords);
 
-        function checkPasswords() {
-            const password1 = document.getElementById('pwd1').value;
-            const password2 = document.getElementById('pwd2').value;
-            const messageElement = document.getElementById('pwdError2')
+    joinBtn.addEventListener("click", function () {
 
-            if (password1 === password2) {
-                messageElement.textContent = "";
-            } else {
-                messageElement.textContent = "비밀번호가 일치하지 않습니다."
-            }
+        const joinBtn = document.getElementById("joinBtn");
+        const idField = document.getElementById("id");
+        const pwdField = document.getElementsByClassName("password");
+        const nameField = document.getElementById("name");
+        const phoneFields = document.getElementsByClassName("phone2");
+        const emailField = document.getElementById("email");
+        const agreePolicy = document.getElementById("policy1");
+        const agreePrivate = document.getElementById("private1");
 
+        if (idField.value.trim() === "") {
+            alert("아이디 항목은 필수 입력값입니다.");
+            return false;
         }
 
+        if (pwdField.value.trim() === "") {
+            alert("비밀번호 항목은 필수 입력값입니다.");
+            return false;
+        }
 
-        // 연락처 숫자 값 + 글자 수 제한
-        function maxLengthCheck(object) {
-            if (object.value.length > object.maxLength) {
-                object.value = object.value.slice(0, object.maxLength);
+        if (nameField.value.trim() === "") {
+            alert("이름 항목은 필수 입력값입니다.");
+            return false;
+        }
+
+        if (idField.value.trim() === "") {
+            alert("아이디 항목은 필수 입력값입니다.");
+            return false;
+        }
+
+        if (emailField.value.trim() === "") {
+            alert("이메일을 입력하세요.");
+            return false;
+        }
+
+        for (let i = 0; i < phoneFields.length; i++) {
+            const phoneField = phoneFields[i];
+            if (phoneField.value.trim() === "") {
+                alert("휴대전화를 입력하세요.");
+                return false;
+            }
+            if (phoneField.value.trim().length < 4) {
+                alert("올바른 휴대전화 번호를 입력하세요.");
+                return false;
             }
         }
 
-
-        // 이메일 자동 완성
-        function autoEmail(a, b) {
-            const mailId = b.split('@');                                                                   // 메일계정의 ID만 받아와서 처리하기 위함
-            const mailList = ['naver.com', 'gmail.com', 'daum.net', 'hanmail.net', 'nate.com'];    // 메일목록
-            const availableCity = new Array;                                                        // 자동완성 키워드 리스트
-            for (var i = 0; i < mailList.length; i++) {
-                availableCity.push(mailId[0] + '@' + mailList[i]);                                         // 입력되는 텍스트와 메일목록을 조합
-            }
-            $("#" + a).autocomplete({
-                source: availableCity,                                                                     // jQuery 자동완성에 목록을 넣어줌
-                focus: function (event, ui) {
-                    return false;
-                }
-            });
+        if (!agreePolicy.checked) {
+            alert("이용약관에 동의하세요");
+            return false;
         }
 
-
-        // 변수 선언 : DOM 요소 참조하기 위해(HTML에 정의된 요소를 자바스크립트로 조작하기 위해)
-        var checkAllCheckbox = document.getElementById('checkAll');
-        var requiredCheck = document.getElementsByClassName('requiredCheck');
-        var optionalCheck = document.getElementsByClassName('optionalCheck');
-        var submitBtn = document.getElementById('joinBtn');
-
-        // 필수 체크 박스 모두 체크 시 회원가입 버튼 활성화
-        function submitButtonActivate() {
-
-            var allRequiredChecked = true;
-
-            for (var i = 0; i < requiredCheck.length; i++) {
-
-                if (!requiredCheck[i].checked) {
-                    allRequiredChecked = false;
-                    break;
-                }
-
-            }
-
-            submitBtn.disabled = !allRequiredChecked;
-
-        }
-
-        // 필수 체크 박스와 선택 체크 박스가 모두 체크되어 있으면 checkAllCheckbox 또한 체크하고 아닌 경우 해제
-        function updateCheckAllCheckbox() {
-
-            var allChecked = true;
-
-            for (var i = 0; i < requiredCheck.length; i++) {
-                if (!requiredCheck[i].checked) {
-                    allChecked = false;
-                    break;
-                }
-            }
-
-            for (var i = 0; i < optionalCheck.length; i++) {
-                if (!optionalCheck[i].checked) {
-                    allChecked = false;
-                    break;
-                }
-            }
-
-            checkAllCheckbox.checked = allChecked;
-        }
-
-        // 필수 체크 박스와 선택 체크 박스를 일괄 체크하고 회원가입 버튼 활성화
-        checkAllCheckbox.addEventListener('change', function () {
-
-            for (var i = 0; i < requiredCheck.length; i++) {
-                requiredCheck[i].checked = this.checked;
-            }
-
-            for (var i = 0; i < optionalCheck.length; i++) {
-                optionalCheck[i].checked = this.checked;
-            }
-
-            submitButtonActivate();
-
-        })
-
-        // 체크 박스의 상태에 따라 updateCheckALlCheckbox() 함수가 호출되어 checkAllCheckbox의 상태를 업데이트 후 submitButtonActivate() 함수 호출해 회원가입 버튼 활성화 여부 결정
-        for (var i = 0; i < requiredCheck.length; i++) {
-            requiredCheck[i].addEventListener('change', function () {
-                updateCheckAllCheckbox();
-                submitButtonActivate();
-            })
-        }
-
-        for (var i = 0; i < optionalCheck.length; i++) {
-            optionalCheck[i].addEventListener('change', function () {
-                updateCheckAllCheckbox();
-                submitButtonActivate();
-            });
+        if (!agreePrivate.checked) {
+            alert("개인정보 수집 및 이용 방침에 동의하세요.");
+            return false;
         }
 
     });
 
-}
-
+});
