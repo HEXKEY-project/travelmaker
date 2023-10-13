@@ -86,7 +86,7 @@ fieldset {
     padding: 5px 10px 0 0;
 }
 
-.search-box #category_no {
+.search-box #categoryCode {
     width: 400px;
     height: 24px;
 }
@@ -96,13 +96,14 @@ fieldset {
     border: 1px solid #d5d5d5;
 }
 
-.search-box #search_type {
+.search-box #searchCondition {
     margin: 1px 1px 1px 0;
     width: 120px;
     height: 24px;
 }
 
-.search-box #keyword {
+.search-box #searchValue {
+    font-size: 0.9em;
     width: 278px;
     height: 24px;
     margin: 1px;
@@ -128,17 +129,17 @@ fieldset {
     color: #757575;
 }
 
-.search-box #product_price1 {
+.search-box #productPrice1 {
     width: 191px;
     margin: 0px 5px 0 0;
 }
 
-.search-box #product_price2 {
+.search-box #productPrice2 {
     width: 191px;
     margin: 0 0 0 5px;
 }
 
-.search-box #order_by {
+.search-box #orderBy {
     width: 400px;
     height: 24px;
 }
