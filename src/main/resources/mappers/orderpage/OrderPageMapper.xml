@@ -31,6 +31,12 @@
         <association property="memberDTO" resultMap="memberResultMap"/>
     </resultMap>
 
+
+
+
+
+
+
     <select id="selectAdminOrder" resultMap="selectAdminOrder">
         SELECT
                 O.*,
@@ -93,7 +99,7 @@
 
 
 <!--  OrderFormData 입력  -->
-    <insert id="insertFormOrder">
+    <insert id="insertFormOrder"  parameterType="com.hexkey.travelmaker.order.orderpage.dto.OrderFormDTO" useGeneratedKeys="true" keyProperty="orderCode" keyColumn="ORDER_CODE">
         INSERT INTO TBL_ORDER
         (
         ORDER_CODE
@@ -117,6 +123,15 @@
         ,TO_NUMBER('${discount}','999999')
         )
     </insert>
+
+
+    <select id="selectCurrentOrder" resultMap="selectAdminOrder">
+        SELECT
+                *
+            FROM TBL_ORDER
+            WHERE ORDER_CODE = #{currentCode}
+
+    </select>
 
 
 

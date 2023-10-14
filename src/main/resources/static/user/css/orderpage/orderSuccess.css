@@ -1,0 +1,66 @@
+hr {
+    width: 500px;
+    color: black;
+    background-color: black;
+    border: 1px solid black;
+}
+
+.text {
+    top: 1px;
+    position: absolute;
+}
+
+.header {
+    position: relative;
+    width: 30%;
+    text-align: center;
+}
+
+.body {
+    width: 70%;
+}
+
+#center {
+    margin-top: 30px;
+    display: flex;
+
+    vertical-align: top;
+
+}
+
+#main {
+    width: 500px;
+    height: 650px;
+    margin: auto;
+    box-shadow: 5px 5px 10px 0px #6e6e6e;
+    display: flex;
+    flex-direction: column;
+}
+
+.order:nth-child(1) {
+    height: 10%;
+}
+.order:nth-child(2) {
+    height: 10%;
+}
+.order:nth-child(3) {
+    height: 20%;
+}
+.order:nth-child(4) {
+    height: 20%;
+}
+.order:nth-child(5) {
+    height: 10%;
+    background-color: black;
+}
+.order:nth-child(6) {
+    height: 10%;
+    background-color: black;
+}
+
+
+
+
+.order {
+    display: flex;
+}

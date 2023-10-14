@@ -6,6 +6,7 @@ import com.hexkey.travelmaker.order.orderpage.dto.OrderFormDTO;
 import com.hexkey.travelmaker.order.orderpage.service.OrderPageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +28,10 @@ public class OrderPageController {
 
 
 
-
     //----------------------------- 고객 파트 ------------------------------------//
     @PostMapping("/order/orderForm")
     @ResponseBody
-    public String orderForm(@ModelAttribute OrderFormDTO orderFormDTO) {
+    public Long orderForm(@ModelAttribute OrderFormDTO orderFormDTO) {
         log.info("orderFormDTO : {}", orderFormDTO);
 
         LocalDate currentDate = LocalDate.now();
@@ -49,11 +49,11 @@ public class OrderPageController {
         orderFormDTO.setOrderDate(today);
 
 
-        String result = orderPageService.insertFormOrder(orderFormDTO);
-        log.info("{}", result);
+        Long currentCode = orderPageService.insertFormOrder(orderFormDTO);
+        log.info("currentCode : {}", currentCode);
 
 
-        return "{ \"status\": \"" + result + "\" }";
+        return currentCode;
     }
 
     @PostMapping("/order/orderSuccess")
@@ -69,7 +69,15 @@ public class OrderPageController {
     }
 
     @GetMapping("/order/orderSuccess")
-    public String successPage() {
+    public String successPage(@RequestParam String res,
+                              Model model) {
+
+        Long currentCode = Long.parseLong(res);
+
+        OrderDTO selectCurrentOrder = orderPageService.selectCurrentOrder(currentCode);
+
+        model.addAttribute("selectCurrentOrder", selectCurrentOrder);
+
         return "user/order/orderSuccess";
     }
 

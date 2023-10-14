@@ -261,7 +261,7 @@
             <hr>
         </div>
         <div>
-            <button type="submit" id="button_final" onclick="requestPay()">
+            <button id="button_final" type="submit" onclick="requestPay()">
                 <h2 id="h2_final"><span>20,000</span> 결제하기</h2>
             </button>
         </div>
@@ -275,28 +275,6 @@
     </div>
 </form>
 </body>
-
-<script>
-    const form = document.getElementById('orderFormDTO');
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-
-        console.log([...formData]);
-
-        fetch('/order/orderForm', {
-            method: 'POST',
-            body: formData
-        })
-            .then(res => res.json())
-            .then(res => {
-                console.log(res)
-            });
-    });
-</script>
-
 <!--====================== 결제 API ======================-->
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -305,6 +283,17 @@
 <!--axios CDN-->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    var form = document.getElementById('orderFormDTO');
+    var formData;
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        formData = new FormData(form);
+
+        console.log([...formData]);
+    });
+
     var IMP = window.IMP;
     IMP.init("imp67011510");
 
@@ -314,23 +303,6 @@
     var seconds = today.getSeconds();  // 초
     var milliseconds = today.getMilliseconds();
     var makeMerchantUid = hours + minutes + seconds + milliseconds;
-
-    // var input_ship1 = tempData;
-    // //////////////////////////////
-    //     let tempData = ''; // 임시로 데이터를 저장할 변수
-    //     let tempData2 = ''; // 임시로 데이터를 저장할 변수
-    //
-    //     // form이 제출되었을 때 이벤트 핸들러
-    //     document.getElementById('myForm').addEventListener('submit', function(event) {
-    //         event.preventDefault(); // 기본 제출 동작을 막음
-    //         const inputData = document.getElementById('inputField').value;
-    //         const input_ship1 = document.getElementById('input_ship1').value;
-    //         tempData = inputData;
-    //         tempData2 = input_ship1;
-    //         console.log(tempData)
-    //         console.log(tempData2)
-    //     });
-    // //////////////////////////////////////
 
     function requestPay() {
         console.log("페이 함수 실행");
@@ -347,9 +319,22 @@
             buyer_postcode: '123-456',
             m_redirect_url: '/basket/basket'
         }, function (rsp) { // callback
-            console.log("페이 true 진입 성공");
-            if (rsp.success) {
-                // axios로 HTTP 요청
+
+            if (true) {
+                console.log("페이 true 진입 성공");
+
+                ////
+                fetch('/order/orderForm', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(res => {
+                        console.log("currentCode 반환값" + res)
+                        location.href = `/order/orderSuccess?res=${res}`;
+                    });
+                ////
+
                 axios({
                     url: "/order/orderSuccess",
                     method: "post",
@@ -362,13 +347,64 @@
                     console.log(data);
                     console.log("아임포트 결제 성공");
 
-                    location.href = "/order/orderSuccess"
+                    // location.href = "/order/orderSuccess"
                 })
             } else {
                 alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
             }
         });
     }
+</script>
+
+
+<script>
+    // var IMP = window.IMP;
+    // IMP.init("imp67011510");
+    //
+    // var today = new Date();
+    // var hours = today.getHours(); // 시
+    // var minutes = today.getMinutes();  // 분
+    // var seconds = today.getSeconds();  // 초
+    // var milliseconds = today.getMilliseconds();
+    // var makeMerchantUid = hours + minutes + seconds + milliseconds;
+    //
+    // function requestPay() {
+    //     console.log("페이 함수 실행");
+    //     IMP.request_pay({
+    //         pg: 'kcp',
+    //         pay_method: 'card',
+    //         merchant_uid: "IMP" + makeMerchantUid,
+    //         name: '당근 10kg',
+    //         amount: 12,
+    //         buyer_email: 'Iamport@chai.finance',
+    //         buyer_name: '아임포트 기술지원팀',
+    //         buyer_tel: '010-1234-5678',
+    //         buyer_addr: '서울특별시 강남구 삼성동',
+    //         buyer_postcode: '123-456',
+    //         m_redirect_url: '/basket/basket'
+    //     }, function (rsp) { // callback
+    //
+    //         if (rsp.success) {
+    //             console.log("페이 true 진입 성공");
+    //             axios({
+    //                 url: "/order/orderSuccess",
+    //                 method: "post",
+    //                 headers: { "Content-Type": "application/json" },
+    //                 data: {
+    //                     imp_uid: rsp.imp_uid,
+    //                     merchant_uid: rsp.merchant_uid
+    //                 }
+    //             }).then((data) => {
+    //                 console.log(data);
+    //                 console.log("아임포트 결제 성공");
+    //
+    //                 location.href = "/order/orderSuccess"
+    //             })
+    //         } else {
+    //             alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+    //         }
+    //     });
+    // }
 </script>
 
 <script>

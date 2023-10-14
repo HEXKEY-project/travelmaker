@@ -56,19 +56,23 @@ public class OrderPageService {
     }
 
 
-    public String insertFormOrder(OrderFormDTO orderFormDTO) {
-        int result = orderPageMapper.insertFormOrder(orderFormDTO);
+    public Long insertFormOrder(OrderFormDTO orderFormDTO) {
 
-        String resultMessage = "";
+        Long result = orderPageMapper.insertFormOrder(orderFormDTO);
 
-        if(result > 0) {
-            resultMessage = "주문 완료!";
-        } else {
-            resultMessage = "주문 실패!";
-        }
+        Long currentCode = orderFormDTO.getOrderCode();
+        System.out.println("currentCode : " + currentCode);
 
-        return resultMessage;
+        return currentCode;
+
     }
+
+    public OrderDTO selectCurrentOrder(Long currentCode) {
+        OrderDTO selectCurrentOrder = orderPageMapper.selectCurrentOrder(currentCode);
+        System.out.println("selectCurrentOrder : " + selectCurrentOrder);
+        return selectCurrentOrder;
+    }
+
 
 
 }

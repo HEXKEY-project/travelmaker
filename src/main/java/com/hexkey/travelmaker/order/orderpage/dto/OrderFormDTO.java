@@ -7,6 +7,8 @@ import lombok.ToString;
 @Getter @Setter @ToString
 public class OrderFormDTO {
 
+    private Long orderCode;
+
     private String selectDefault;
 
     private String name;

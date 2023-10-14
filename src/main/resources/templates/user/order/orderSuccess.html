@@ -3,15 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>안뇽</title>
+
+    <link rel="stylesheet" href="/user/css/orderpage/orderSuccess.css">
+
 </head>
 <body>
-안뇽 바디 <br>
-안뇽 바디<br>
-안뇽 바디
 
-<div th:text="${ test }">테스트실패</div>
 
-안뇽 바디
+
+<div id="center">
+    <div id="main">
+        <div class="order">
+            <div class="header">주문번호</div>
+            <div class="body" th:text="${selectCurrentOrder.orderCode}"></div>
+        </div>
+
+        <hr>
+
+        <div class="order">
+            <div class="header">주문일시</div>
+            <div class="body" th:text="${selectCurrentOrder.orderDate}"></div>
+        </div>
+
+        <hr>
+
+        <div class="order">
+            <div class="header">결제금액</div>
+            <div class="body">
+                <div th:text="${'상품가격 : ' + selectCurrentOrder.productPrice}"></div>
+                <div th:text="${'배송비 : ' + selectCurrentOrder.shipPrice}"></div>
+                <div th:text="${'할인금액 : -' + selectCurrentOrder.mileageDiscountPrice}"></div>
+                <div th:text="${'총 결제 금액 : ' + selectCurrentOrder.totalPrice}"></div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="order">
+            <div class="header">배송지</div>
+            <div class="body">
+                <div>이름</div>
+                <div>전화번호</div>
+                <div>주소</div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="order">
+            <div class="header">배송메모</div>
+            <div class="body"></div>
+        </div>
+
+        <hr>
+
+        <div class="order">홈으로</div>
+    </div>
+</div>
+
 
 
 </body>

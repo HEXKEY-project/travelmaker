@@ -16,5 +16,7 @@ public interface OrderPageMapper {
 
     List<OrderDTO> selectAdminOrder(String searchCondition, String searchValue, String orderDate1, String orderDate2);
 
-    int insertFormOrder(OrderFormDTO orderFormDTO);
+    Long insertFormOrder(OrderFormDTO orderFormDTO);
+
+    OrderDTO selectCurrentOrder(Long currentCode);
 }
