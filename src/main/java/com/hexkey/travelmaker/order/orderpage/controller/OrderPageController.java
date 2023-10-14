@@ -81,12 +81,12 @@ public class OrderPageController {
         ShipDTO selectCurrentShip = (ShipDTO) selectSuccessMap.get("selectCurrentShip");
 
         log.info("Order 어디까지완료 ? {}", selectCurrentOrder);
-//        String temp = selectCurrentOrder.getOrderDate();
-//        log.info("temp {}", temp);
-//        String temp2 = temp.substring(0, 10);
-//
-//        selectCurrentOrder.setOrderDate(temp2);
-//
+        String temp = selectCurrentOrder.getOrderDate();
+        log.info("temp {}", temp);
+        String temp2 = temp.substring(0, 10);
+
+        selectCurrentOrder.setOrderDate(temp2);
+
         log.info("Ship 어디까지완료 ? {}", selectCurrentShip);
 
         model.addAttribute("selectCurrentOrder", selectCurrentOrder);
