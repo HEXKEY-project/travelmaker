@@ -21,17 +21,17 @@
                                  height="350px"/>
                     </th:block>
                 </div>
-            <div class="product-description">
-                <div class="product-name">
-                    <a th:onclick="|location.href='/product/detail?productSeq=${productList.productSeq}'|">
-                        <div th:text="${productList.productName}"></div>
-                        <div id="product-price" th:text="'₩' + ${#numbers.formatInteger(productList.price, 0, 'POINT')}"></div>
-                    </a>
+                <div class="product-description">
+                    <div class="product-name">
+                        <a th:onclick="|location.href='/product/detail?productSeq=${productList.productSeq}'|">
+                            <div th:text="${productList.productName}"></div>
+                            <div id="product-price" th:text="'₩' + ${#numbers.formatInteger(productList.price, 0, 'POINT')}"></div>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </th:block>
-</div>
+        </th:block>
+    </div>
 
 </div>
 

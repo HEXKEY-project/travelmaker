@@ -106,9 +106,9 @@
                 <ul class="add-sub-com">
                     <li class="sub_a"><a href="#">게시판</a></li>
                     <li><a href="#">ABOUT US</a></li>
-                    <li><a href="#">NOTICE</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Q&A</a></li>
+                    <li><a href="/community/notices/list">NOTICE</a></li>
+                    <li><a href="/community/faq/list">FAQ</a></li>
+                    <li><a href="/community/qna/list">Q&A</a></li>
                 </ul>
             </li>
 
@@ -127,7 +127,7 @@
                 </a>
                 <ul class="add-sub-my">
                     <li><a href="#">로그인</a></li>
-                    <li><a href="#">회원가입</a></li>
+                    <li><a href="/user/user/regist">회원가입</a></li>
                     <li><a href="#">주문조회</a></li>
                 </ul>
             </div>
@@ -152,10 +152,10 @@
         <div class="search-inner">
             <form id="searchForm" action="/user/search" method="get" target="_self">
                 <fieldset title="검색어를 입력해주세요.">
-                    <input id="keyword" name="keyword" class="inputTypeText" placeholder="검색어를 입력하세요."
+                    <input id="searchValue" name="searchValue" class="inputTypeText" placeholder="검색어를 입력하세요."
                            value="검색어를 입력하세요." type="text">
                     <input type="image" src="/user/images/migi/top_search.png" class="btn-src" alt="검색이미지"
-                           onclick="submitSearch(this); return false">
+                           onclick.href="/user/search">
                 </fieldset>
             </form>
 
@@ -226,6 +226,11 @@
             }
             animate();
         }
+
+        function submitSearch() {
+
+        }
+
     </script>
 
 

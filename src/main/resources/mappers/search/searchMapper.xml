@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexkey.travelmaker.search.dao.SearchMapper">
+
+    <resultMap id="generalProductResultMap" type="com.hexkey.travelmaker.product.regist.dto.ProductDTO">
+        <id property="productSeq" column="PRODUCT_SEQ"/>
+        <result property="productName" column="PRODUCT_NAME"/>
+        <result property="price" column="PRICE"/>
+        <result property="registDate" column="REGISTERED_DATE"/>
+        <result property="modifyDate" column="MODIFIED_DATE"/>
+        <result property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="serialNo" column="SERIAL_NO"/>
+        <result property="status" column="ORDERABLE_STATUS"/>
+
+        <association property="productCategory" resultMap="ProductCategoryResultMap"/>
+        <collection property="productOption" resultMap="ProductOptionResultMap"/>
+        <collection property="fileList" resultMap="FileResultMap"/>
+    </resultMap>
+
+    <resultMap type="com.hexkey.travelmaker.product.regist.dto.ProductCategoryDTO" id="ProductCategoryResultMap">
+        <id property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
+    </resultMap>
+
+    <resultMap type="com.hexkey.travelmaker.product.regist.dto.ProductOptionDTO" id="ProductOptionResultMap">
+        <id property="optionCode" column="OPTION_CODE"/>
+        <result property="optionName" column="OPTION_NAME"/>
+        <result property="productSeq" column="PRODUCT_SEQ"/>
+        <result property="refOptionCode" column="REF_OPTION_CODE"/>
+    </resultMap>
+
+    <resultMap type="com.hexkey.travelmaker.product.regist.dto.FileDTO" id="FileResultMap">
+        <id property="fileCode" column="FILE_CODE"/>
+        <result property="fileType" column="FILE_TYPE"/>
+        <result property="originalName" column="ORIGIN_FILE_NAME"/>
+        <result property="savedName" column="SAVED_FILE_NAME"/>
+        <result property="savePath" column="SAVE_PATH"/>
+        <result property="noticeCode" column="NOTICE_CODE"/>
+        <result property="productSeq" column="PRODUCT_SEQ"/>
+        <result property="reviewCode" column="REVIEW_CODE"/>
+        <result property="filePath" column="FILE_PATH"/>
+    </resultMap>
+
+    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT
+            COUNT(*)
+        FROM (SELECT
+                     A.PRODUCT_NAME
+                   , A.PRODUCT_SEQ
+                   , A.PRICE
+                   , B.CATEGORY_CODE
+                   , B.REF_CATEGORY_CODE
+                FROM TBL_PRODUCT A
+                JOIN TBL_PRODUCT_CATEGORY B ON(A.CATEGORY_CODE = B.CATEGORY_CODE)
+             )
+        WHERE REF_CATEGORY_CODE IN (SELECT
+                                        CATEGORY_CODE
+                                    FROM TBL_PRODUCT_CATEGORY
+                                    WHERE REF_CATEGORY_CODE = #{ categoryCode })
+        <if test="searchCondition == 'productName'">
+            AND PRODUCT_NAME LIKE '%' || #{searchValue} || '%'
+        </if>
+        <if test="searchCondition == 'productSeq'">
+            AND PRODUCT_SEQ = #{searchValue}
+        </if>
+          AND PRICE BETWEEN #{ productPrice1 } AND #{ productPrice2 }
+    </select>
+
+    <select id="selectBySearchCriteria" resultMap="generalProductResultMap">
+        SELECT
+               A.PRODUCT_SEQ
+             , A.PRODUCT_NAME
+             , A.PRICE
+             , A.CATEGORY_CODE
+             , A.ORDERABLE_STATUS
+             , B.FILE_TYPE
+             , B.FILE_PATH
+             , B.SAVED_FILE_NAME
+             , C.CATEGORY_CODE
+             , C.REF_CATEGORY_CODE
+             , C.CATEGORY_NAME
+        FROM TBL_PRODUCT A
+                 JOIN TBL_FILE B ON (A.PRODUCT_SEQ = B.PRODUCT_SEQ)
+                 JOIN TBL_PRODUCT_CATEGORY C ON (A.CATEGORY_CODE = C.CATEGORY_CODE)
+        WHERE REF_CATEGORY_CODE IN (SELECT
+                                           CATEGORY_CODE
+                                      FROM TBL_PRODUCT_CATEGORY
+                                     WHERE REF_CATEGORY_CODE = #{ categoryCode })
+    <if test="searchCondition == 'productName'">
+          AND PRODUCT_NAME LIKE '%' || #{searchValue} || '%'
+    </if>
+    <if test="searchCondition == 'productSeq'">
+          AND PRODUCT_SEQ = #{searchValue}
+    </if>
+          AND PRICE BETWEEN #{ productPrice1 } AND #{ productPrice2 }
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexkey.travelmaker.user.dao.MemberMMapper">
+
+    <select id="selectMemberById" resultType="string">
+        SELECT MEMBER_ID
+        FROM TBL_MEMBER
+        WHERE MEMBER_STATUS = 'Y'
+        AND MEMBER_ID = #{ memberId }
+    </select>
+
+    <resultMap id="memberResultMap" type="com.hexkey.travelmaker.user.dto.MemberMDTO">
+        <id property="memberCode" column="MEMBER_CODE"/>
+        <result property="memberName" column="MEMBER_NAME"/>
+        <result property="phone" column="PHONE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="memberId" column="MEMBER_ID"/>
+        <result property="memberPwd" column="MEMBER_PWD"/>
+        <result property="smsYn" column="SMS_YN"/>
+        <result property="emailYn" column="EMAIL_YN"/>
+        <result property="mileage" column="MILEAGE"/>
+        <result property="policyYn" column="POLICY_YN"/>
+        <result property="privateYn" column="PRIVATE_YN"/>
+        <result property="promotionYn" column="PROMOTION_YN"/>
+        <result property="gradeCode" column="GRADE_CODE"/>
+        <result property="loginType" column="LOGIN_TYPE"/>
+        <result property="tel" column="TEL"/>
+        <result property="joinDay" column="JOIN_DAY"/>
+        <result property="memberStatus" column="MEMBER_STATUS"/>
+        <collection property="memberRoleList" resultMap="memberRoleResultMap"/>
+        <collection property="addressList" resultMap="addressListMap"/>
+    </resultMap>
+
+    <resultMap id="memberRoleResultMap" type="com.hexkey.travelmaker.user.dto.MemberRoleDTO">
+        <id property="memberCode" column="REF_MEMBER_CODE"/>
+        <id property="authorityCode" column="REF_AUTHORITY_CODE"/>
+        <association property="authority" resultMap="authorityResultMap"/>
+    </resultMap>
+
+    <resultMap id="authorityResultMap" type="com.hexkey.travelmaker.user.dto.AuthorityDTO">
+        <id property="code" column="REF_AUTHORITY_CODE2"/>
+        <result property="name" column="AUTHORITY_NAME"/>
+        <result property="desc" column="AUTHORITY_DESC"/>
+    </resultMap>
+
+    <resultMap id="addressListMap" type="com.hexkey.travelmaker.user.dto.AddressDTO">
+        <id property="memberCode" column="REF_MEMBER_CODE"/>
+        <result property="addressCode" column="ADDRESS_CODE"/>
+        <result property="addressName" column="ADDRESS_NAME"/>
+        <result property="postalCode" column="POSTAL_CODE"/>
+        <result property="defaultAdr" column="DEFAULT_ADR"/>
+        <result property="optionalAdr" column="OPTIONAL_ADR"/>
+        <result property="defaultYn" column="DEFAULT_YN"/>
+    </resultMap>
+
+    <!-- 회원가입 -->
+    <insert id="insertMember">
+        INSERT INTO TBL_MEMBER
+        (
+          MEMBER_CODE
+        , MEMBER_NAME
+        , PHONE
+        , EMAIL
+        , MEMBER_ID
+        , MEMBER_PWD
+        , SMS_YN
+        , EMAIL_YN
+        , MILEAGE
+        , POLICY_YN
+        , PRIVATE_YN
+        , PROMOTION_YN
+        , GRADE_CODE
+        , LOGIN_TYPE
+        , TEL
+        , JOIN_DAY
+        , MEMBER_STATUS
+        )
+        VALUES
+            (
+              SEQ_MEMBER_CODE.NEXTVAL
+            , #{ memberName }
+            , #{ phone }
+            , #{ email }
+            , #{ memberId }
+            , #{ memberPwd }
+            , #{ smsYn }
+            , #{ emailYn }
+            , #{ mileage }
+            , #{ policyYn }
+            , #{ privateYn }
+            , #{ promotionYn }
+            , #{ gradeCode }
+            , #{ loginType }
+            , #{ tel }
+            , #{ joinDay }
+            , #{ memberStatus }
+            )
+    </insert>
+
+    <!-- 회원가입 내 주소등록 -->
+    <insert id="insertMemberAdr">
+        INSERT INTO TBL_ADDRESS
+        (
+          ADDRESS_CODE
+        , ADDRESS_NAME
+        , POSTAL_CODE
+        , MEMBER_CODE
+        , DEFAULT_ADR
+        , OPTIONAL_ADR
+        , DEFAULT_YN
+        )
+        VALUES
+            (
+              SEQ_ADDRESS_CODE.NEXTVAL
+            , #{ addressName }
+            , #{ postalCode }
+            , #{ memberCode }
+            , #{ defaultAdr }
+            , #{ optionalAdr }
+            , #{ defaultYn }
+            )
+    </insert>
+
+    <!-- 회원가입 시 권한 -->
+    <insert id="insertMemberRole">
+        INSERT INTO TBL_MEMBER_AUTHORITY
+        (
+          AUTHORITY_CODE
+        , MEMBER_CODE
+        )
+        VALUES
+            (
+              1
+            , SEQ_MEMBER_CODE.CURRVAL
+            )
+    </insert>
+
+    <select id="findByMemberId" resultMap="memberResultMap">
+        SELECT
+               A.MEMBER_CODE
+             , A.MEMBER_NAME
+             , A.PHONE
+             , A.EMAIL
+             , A.MEMBER_ID
+             , A.MEMBER_PWD
+             , A.SMS_YN
+             , A.EMAIL_YN
+             , A.MILEAGE
+             , A.POLICY_YN
+             , A.PRIVATE_YN
+             , A.PROMOTION_YN
+             , A.GRADE_CODE
+             , A.LOGIN_TYPE
+             , A.TEL
+             , A.JOIN_DAY
+             , A.MEMBER_STATUS
+             , B.ADDRESS_CODE
+             , B.ADDRESS_NAME
+             , B.POSTAL_CODE
+             , B.MEMBER_CODE
+             , B.DEFAULT_ADR
+             , B.OPTIONAL_ADR
+             , B.DEFAULT_YN
+             , C.AUTHORITY_CODE REF_AUTHORITY_CODE
+             , C.MEMBER_CODE REF_MEMBER_CODE
+             , D.AUTHORITY_CODE REF_AUTHORITY_CODE2
+             , D.AUTHORITY_NAME
+             , D.AUTHORITY_DESC
+        FROM TBL_MEMBER A
+                 LEFT JOIN TBL_ADDRESS B ON (A.MEMBER_CODE = B.MEMBER_CODE)
+                 LEFT JOIN TBL_MEMBER_AUTHORITY C ON (A.MEMBER_CODE = C.MEMBER_CODE)
+                 LEFT JOIN TBL_AUTHORITY D ON (C.AUTHORITY_CODE = D.AUTHORITY_CODE)
+        WHERE MEMBER_STATUS = 'Y'
+          AND MEMBER_ID = #{ memberId }
+    </select>
+
+</mapper>

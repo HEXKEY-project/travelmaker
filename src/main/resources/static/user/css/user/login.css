@@ -4,6 +4,11 @@ a {
     color:black;
 }
 
+li {
+    list-style-type: none;
+    display: block;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -18,11 +23,22 @@ body {
     box-sizing: border-box;
     outline: none;
     font-size: 12px;
-    height: 30px;
+    height: 50px;
     left: 33.5%;
-    margin: -25px 0 0 -100px;
+    margin: 0 0 0 -100px;
     position: relative;
     width: 298px;
+}
+.loginId {
+    margin-bottom: 15px;
+}
+
+#errorMessage {
+    color: red;
+    font-size: 14px;
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
 }
 
 /* placeholder 글자 색 설정 */
@@ -31,7 +47,7 @@ input::-webkit-input-placeholder {
 }
 
 /* 로그인 설정 */
-.btn-login {
+.loginBtn {
     height: 40px;
     width: 300px;
     border: 0;
@@ -42,12 +58,12 @@ input::-webkit-input-placeholder {
 }
 
 /* 회원가입 설정 */
-.btn-join {
+.joinBtn {
     height: 40px;
     width: 300px;
     border: 0;
-    color: #000000;
-    border: 1px solid black;
+    color: black;
+    border: 1px solid #000;
     background: white;
 }
 
@@ -58,7 +74,7 @@ input[type="checkbox"] {
 }
 
 /* 체크 박스 설정 */
-.save-id {
+.saveId {
     margin: 16px 0;
 }
 
@@ -69,12 +85,12 @@ div>label {
 }
 
 /* 아이디 찾기, 비밀번호 찾기 글자 설정 */
-.loss-id {
+.findId {
     font-size: 12px;
     padding-left: 90px;
 }
 
-.loss-pwd {
+.findPwd {
     font-size: 12px;
 }
 

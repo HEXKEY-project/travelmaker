@@ -2,12 +2,23 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hexkey.travelmaker.community.zeesang.notices.dao.NoticesMapper">
+<mapper namespace="com.hexkey.travelmaker.community.notices.dao.NoticesMapper">
 
-    <resultMap id="noticesList" type="com.hexkey.travelmaker.community.zeesang.notices.dto.NoticesDTO">
-        <id property="no" column="NOTICE_CODE"/>
+    <resultMap id="noticesList" type="com.hexkey.travelmaker.community.notices.dto.NoticesDTO">
+        <id property="code" column="NOTICE_CODE"/>
+        <result property="categoryCode" column="NOTICE_CATEGORY_CODE"/>
         <result property="title" column="NOTICE_TITLE"/>
+        <result property="body" column="NOTICE_BODY"/>
         <result property="registeredDate" column="REGISTERED_DATE"/>
+        <result property="modifiedDate" column="MODIFIED_DATE"/>
+        <result property="deletedDate" column="DELETED_DATE"/>
+        <result property="statusYN" column="STATUS_YN"/>
+        <association property="category" resultMap="categoryResultMap"/>
+    </resultMap>
+
+    <resultMap id="categoryResultMap" type="com.hexkey.travelmaker.community.notices.dto.CategoryDTO">
+        <id property="code" column="NOTICE_CATEGORY_CODE"/>
+        <result property="name" column="NOTICE_CATEGORY_NAME"/>
     </resultMap>
 
     <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
@@ -31,41 +42,62 @@
 
     <select id="selectNotices" resultMap="noticesList">
         SELECT
-            A.NOTICE_CODE
+        A.NOTICE_CODE
         , A.NOTICE_TITLE
+        , A.NOTICE_CATEGORY_CODE
         , A.REGISTERED_DATE
-          FROM (SELECT
-                    ROWNUM RNUM,
-                    B.NOTICE_CODE
-                     , B.NOTICE_TITLE
-                     , B.REGISTERED_DATE
-                FROM (SELECT
-                          C.NOTICE_CODE
-                           , C.NOTICE_TITLE
-                           , C.REGISTERED_DATE
-                      FROM TBL_NOTICE C
+        , A.MODIFIED_DATE
+        , D.NOTICE_CATEGORY_NAME
+        FROM (SELECT
+        ROWNUM RNUM
+        , B.NOTICE_CODE
+        , B.NOTICE_TITLE
+        , B.NOTICE_CATEGORY_CODE
+        , B.REGISTERED_DATE
+        , B.MODIFIED_DATE
+        FROM (SELECT
+        C.NOTICE_CODE
+        , C.NOTICE_TITLE
+        , C.NOTICE_CATEGORY_CODE
+        , C.REGISTERED_DATE
+        , C.MODIFIED_DATE
+        FROM TBL_NOTICE C
         <where>
             <if test="searchCondition == 'all'">
-                NOTICE_TITLE LIKE '%' || #{searchValue} || '%'
-                OR NOTICE_BODY LIKE '%' || #{searchValue} || '%'
+                C.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
+                OR C.NOTICE_BODY LIKE '%' || #{ searchValue } || '%'
             </if>
             <if test="searchCondition == 'title'">
-                NOTICE_TITLE LIKE '%' || #{searchValue} || '%'
+                C.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
             </if>
             <if test="searchCondition == 'body'">
-                NOTICE_BODY LIKE '%' || #{searchValue} || '%'
+                C.NOTICE_BODY LIKE '%' || #{ searchValue } || '%'
             </if>
-            AND STATUS_YN = 'Y'
-            ORDER BY NOTICE_CODE desc
+            AND C.STATUS_YN = 'Y'
         </where>
-                          ) B
+        ORDER BY 1 DESC
+        ) B
         <![CDATA[
                   WHERE ROWNUM <= #{ endRow }
                   ]]>
-                ) A WHERE A.RNUM >= #{ startRow }
+        ) A
+        JOIN TBL_NOTICE_CATEGORY D ON (A.NOTICE_CATEGORY_CODE = D.NOTICE_CATEGORY_CODE)
+        WHERE A.RNUM >= #{ startRow }
         ORDER BY 1 DESC
     </select>
 
+    <select id="selectNoticesDetail" resultMap="noticesList">
+        SELECT
+            A.NOTICE_TITLE
+             , A.NOTICE_BODY
+             , A.REGISTERED_DATE
+             , A.MODIFIED_DATE
+             , A.NOTICE_CATEGORY_CODE
+             , B.NOTICE_CATEGORY_NAME
+        FROM TBL_NOTICE A JOIN TBL_NOTICE_CATEGORY B ON (A.NOTICE_CATEGORY_CODE = B.NOTICE_CATEGORY_CODE)
+        WHERE STATUS_YN = 'Y'
+          AND NOTICE_CODE = #{ code }
+    </select>
 
 </mapper>
 

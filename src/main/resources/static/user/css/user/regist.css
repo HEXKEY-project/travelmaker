@@ -50,6 +50,7 @@ input::-webkit-input-placeholder {
 }
 
 /* 입력 칸 맞춤 설정 */
+
 #memberId, .email, .tel {
     margin-left: 60.2px;
 }

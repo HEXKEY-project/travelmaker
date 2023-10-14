@@ -1,6 +1,7 @@
-body{
-    margin:auto;
-    text-align:center;
+@charset "UTF-8";
+
+body {
+    margin-top: 164px;
 }
 
 .noticesListLineFirst{
@@ -27,27 +28,24 @@ body{
     justify-content: center;
 }
 
+.noticesListLine:first-child{
+    border:none;
+    margin-top: auto;
+    width: 852px;
+    height: 94px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
 
-.search{
+
+.searchCategory{
     margin-top: 160px;
     text-align:center;
 }
 
-input {
-    width: 268px;
-    border: 1px solid black;
-    border-radius: 0;
-    height: 40px;
-    padding: 0px;
-    font-size: 16px;
-    margin: 0 auto;
-    display: inline-block;
-    vertical-align: middle;
-    text-align: left;
-    text-indent: 8px;
-}
-
-input:focus {
+#searchValue input:focus {
     border-color: black;
     outline: none;
     border-radius: 0;
@@ -86,20 +84,36 @@ input:focus {
     outline: none;
     border-radius: 0;
 }
+#searchValue{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+#searchValue{
+    width: 268px;
+    border: 1px solid black;
+    border-radius: 0;
+    height: 40px;
+    padding: 0px;
+    font-size: 16px;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    text-indent: 8px;
+}
 
-input, select, button
-{
+.searchButton button{
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
 
-.noticesListTable{
-    vertical-align: middle;
-}
-
-.noticesNumber {
-    font-size: 24px;
+#searchCondition {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    appearance: menulist-button;
 }
 
 input::-ms-clear,
@@ -115,6 +129,30 @@ input::-webkit-search-results-decoration{
 
 .pagingButton{
     border: 0;
+    padding: 0px 8px 0px 8px;
+    font-size: 16px;
     background-color: white;
 }
+.noticesDate{
+    padding-right: 24px;
+    width: 120px;
+}
 
+.noticesCategory{
+    padding-left: 24px;
+    width: 120px;
+    font-weight: bolder;
+}
+
+.noticesTitle{
+    padding:0px 60px 0px 60px;
+    width: 400px;
+}
+
+.noticesTitle p{
+    width: 480px;
+    overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+word-break:break-all
+}
