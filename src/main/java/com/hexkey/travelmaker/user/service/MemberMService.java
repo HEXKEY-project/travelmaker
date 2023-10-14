@@ -39,7 +39,7 @@ public class MemberMService {
         member.setJoinDay(new Date());
         member.setMemberStatus("Y");
         address.setDefaultYn("Y");
-        address.setAddressName("집");
+        address.setAddressName("");
 
         log.info("memberDTO : {} ", member);
 

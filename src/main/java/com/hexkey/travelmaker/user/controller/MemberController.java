@@ -10,12 +10,9 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,14 +21,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Slf4j
 @Controller
 @RequestMapping("/user")
-public class MemberMController {
+public class MemberController {
 
     private final MemberMService memberMService;
     private final MessageSourceAccessor messageSourceAccessor;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationService authenticationService;
 
-    public MemberMController(MemberMService memberMService, MessageSourceAccessor messageSourceAccessor, PasswordEncoder passwordEncoder, AuthenticationService authenticationService) {
+    public MemberController(MemberMService memberMService, MessageSourceAccessor messageSourceAccessor, PasswordEncoder passwordEncoder, AuthenticationService authenticationService) {
         this.memberMService = memberMService;
         this.messageSourceAccessor = messageSourceAccessor;
         this.passwordEncoder = passwordEncoder;
@@ -40,6 +37,14 @@ public class MemberMController {
 
     @GetMapping("/user/login")
     public void loginPage() {}
+
+    @PostMapping("/user/loginfail")
+    public String loginFailed(RedirectAttributes rttr) {
+
+        rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("error.login"));
+        return "redirect:/user/user/login";
+
+    }
 
     @GetMapping("/user/regist")
     public void registPage() {}
@@ -83,14 +88,14 @@ public class MemberMController {
 
     };
 
-     protected Authentication createNewAuthcentication(String memberId) {
-
-        UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);
-        UsernamePasswordAuthenticationToken newAuth
-        = new UsernamePasswordAuthenticationToken(newPrincipal, newPrincipal.getPassword(), newPrincipal.getAuthorities());
-
-        return newAuth;
-
-    }
+//     protected Authentication createNewAuthcentication(String memberId) {
+//
+//        UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);
+//        UsernamePasswordAuthenticationToken newAuth
+//        = new UsernamePasswordAuthenticationToken(newPrincipal, newPrincipal.getPassword(), newPrincipal.getAuthorities());
+//
+//        return newAuth;
+//
+//    }
 
 }

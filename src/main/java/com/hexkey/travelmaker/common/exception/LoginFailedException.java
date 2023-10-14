@@ -1,4 +1,4 @@
-package com.hexkey.travelmaker.common.exception.member;
+package com.hexkey.travelmaker.common.exception;
 
 public class LoginFailedException extends Exception {
     public LoginFailedException(String msg){

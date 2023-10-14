@@ -15,7 +15,7 @@ public class MemberMDTO implements UserDetails {
 
     private int memberCode;         // 회원 코드
     private String memberName;      // 회원 이름
-    private String phone;              // 휴대폰 번호
+    private String phone;           // 휴대폰 번호
     private String email;           // 이메일
     private String memberId;        // 회원 아이디
     private String memberPwd;       // 비밀번호
@@ -27,11 +27,12 @@ public class MemberMDTO implements UserDetails {
     private String promotionYn;     // 쇼핑정보 동의 여부
     private int gradeCode;          // 회원 등급
     private String loginType;       // 로그인 경로
-    private String tel;                // 일반전화
+    private String tel;             // 일반전화
     private Date joinDay;           // 가입일
     private String memberStatus;    // 회원 상태
     private List<MemberRoleDTO> memberRoleList;
     // 한 멤버는 여러 권한을 가질 수 있다.
+    private List<AddressDTO> addressList;
 
     @Override
     @JsonIgnore
@@ -42,6 +43,7 @@ public class MemberMDTO implements UserDetails {
         }
         return roles;
     }
+
 
     @Override
     public String getPassword() {
@@ -72,5 +74,7 @@ public class MemberMDTO implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 
 }
