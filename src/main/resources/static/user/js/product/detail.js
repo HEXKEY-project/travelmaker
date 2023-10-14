@@ -37,19 +37,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function (){
-    function updateSelectedOption() {
-        const selectElement = document.getElementById("productOpt");
-        const selectedOption = selectElement.options[selectElement.selectedIndex].text;
-        const addOptDiv = document.getElementById("addOpt");
-
-        // 선택한 옵션 텍스트로 새로운 span 요소를 생성합니다.
-        const newSpan = document.createElement("span");
-        newSpan.innerText = selectedOption;
-
-        // addOptDiv의 기존 내용을 지우고 새로운 span 요소를 추가합니다.
-        addOptDiv.innerHTML = '';
-        addOptDiv.appendChild(newSpan);
-    }
-});
-
+/* 옵션에서 옵션종류 선택시 상품명과 옵션 선택 이름과 수량 만들기 */

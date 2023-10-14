@@ -175,6 +175,49 @@
     font-weight: bold;
 }
 
+.selectedProductName {
+    margin-top: 20px;
+    position: relative;
+
+    color: var(--components-chip-default-close-fill, #000);
+   /* font-family: Noto Sans;*/
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.selectedProductOption {
+    color: #323232;
+    font-family: Noto Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.selectedProductName input {
+    position: absolute;
+    right: 0;
+    width: 50px;
+    border: 1px solid #BDBDBD;
+}
+.selectedProductName button {
+    position: absolute;
+    left: 25%;
+    top: 26px;
+    height: 15px;
+    width: 15px;
+    background: #6e6e6e;
+    color: #BDBDBD;
+    text-align: center;
+    line-height: 0;
+}
+
 #payInfo {
     width: 560px;
     padding: var(--1, 8px) 16px;
@@ -227,6 +270,22 @@
 
 }
 
+#basketBtn:hover {
+    width: 268px;
+    height: 48px;
+    border-radius: var(--1, 8px);
+    background: #0D7CC0;
+
+    color: #FFF;
+    text-align: center;
+    font-family: Noto Sans;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
 #BuyBtn {
     margin-left: 20px;
     width: 268px;
@@ -235,6 +294,20 @@
     background: #0D7CC0;
 
     color: #FFF;
+    text-align: center;
+    font-family: Noto Sans;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+#BuyBtn:hover {
+    border: 1px solid #0D7CC0 ;
+    background:  #FFF;
+
+    color: #0D7CC0;
     text-align: center;
     font-family: Noto Sans;
     font-size: 20px;
