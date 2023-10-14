@@ -5,8 +5,7 @@
 <mapper namespace="com.hexkey.travelmaker.user.dao.MemberMMapper">
 
     <select id="selectMemberById" resultType="string">
-        SELECT
-               MEMBER_ID
+        SELECT MEMBER_ID
         FROM TBL_MEMBER
         WHERE MEMBER_STATUS = 'Y'
         AND MEMBER_ID = #{ memberId }
@@ -31,6 +30,7 @@
         <result property="joinDay" column="JOIN_DAY"/>
         <result property="memberStatus" column="MEMBER_STATUS"/>
         <collection property="memberRoleList" resultMap="memberRoleResultMap"/>
+        <collection property="addressList" resultMap="addressListMap"/>
     </resultMap>
 
     <resultMap id="memberRoleResultMap" type="com.hexkey.travelmaker.user.dto.MemberRoleDTO">
@@ -45,7 +45,7 @@
         <result property="desc" column="AUTHORITY_DESC"/>
     </resultMap>
 
-    <resultMap id="addressResultMap" type="com.hexkey.travelmaker.user.dto.AddressDTO">
+    <resultMap id="addressListMap" type="com.hexkey.travelmaker.user.dto.AddressDTO">
         <id property="memberCode" column="REF_MEMBER_CODE"/>
         <result property="addressCode" column="ADDRESS_CODE"/>
         <result property="addressName" column="ADDRESS_NAME"/>
@@ -79,7 +79,7 @@
         )
         VALUES
             (
-                SEQ_MEMBER_CODE.NEXTVAL
+              SEQ_MEMBER_CODE.NEXTVAL
             , #{ memberName }
             , #{ phone }
             , #{ email }
@@ -136,5 +136,44 @@
             , SEQ_MEMBER_CODE.CURRVAL
             )
     </insert>
+
+    <select id="findByMemberId" resultMap="memberResultMap">
+        SELECT
+               A.MEMBER_CODE
+             , A.MEMBER_NAME
+             , A.PHONE
+             , A.EMAIL
+             , A.MEMBER_ID
+             , A.MEMBER_PWD
+             , A.SMS_YN
+             , A.EMAIL_YN
+             , A.MILEAGE
+             , A.POLICY_YN
+             , A.PRIVATE_YN
+             , A.PROMOTION_YN
+             , A.GRADE_CODE
+             , A.LOGIN_TYPE
+             , A.TEL
+             , A.JOIN_DAY
+             , A.MEMBER_STATUS
+             , B.ADDRESS_CODE
+             , B.ADDRESS_NAME
+             , B.POSTAL_CODE
+             , B.MEMBER_CODE
+             , B.DEFAULT_ADR
+             , B.OPTIONAL_ADR
+             , B.DEFAULT_YN
+             , C.AUTHORITY_CODE REF_AUTHORITY_CODE
+             , C.MEMBER_CODE REF_MEMBER_CODE
+             , D.AUTHORITY_CODE REF_AUTHORITY_CODE2
+             , D.AUTHORITY_NAME
+             , D.AUTHORITY_DESC
+        FROM TBL_MEMBER A
+                 LEFT JOIN TBL_ADDRESS B ON (A.MEMBER_CODE = B.MEMBER_CODE)
+                 LEFT JOIN TBL_MEMBER_AUTHORITY C ON (A.MEMBER_CODE = C.MEMBER_CODE)
+                 LEFT JOIN TBL_AUTHORITY D ON (C.AUTHORITY_CODE = D.AUTHORITY_CODE)
+        WHERE MEMBER_STATUS = 'Y'
+          AND MEMBER_ID = #{ memberId }
+    </select>
 
 </mapper>

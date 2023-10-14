@@ -1,34 +1,56 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <script type="text/javascript" src="/js/regist.js"></script>
-    <link rel="stylesheet" href="../../static/user/css/login.css">
+    <script type="text/javascript" src="/user/js/user/login.js"></script>
+    <link rel="stylesheet" type="text/css" href="/user/css/user/login.css">
+
+    <script>
+        const message = '[[${message}]]';
+        message && alert(message);
+    </script>
 </head>
 <body>
-<div class="login-container">
-    <form id="login" method="post">
-        <p>ID</p>
-        <input class="id" name="id" type="text" placeholder="아이디">
-        <p>PASSWORD</p>
-        <input class="pwd" type="text" name="password" placeholder="비밀번호">
-    </form>
-    <div>
-        <input type="checkbox" class="save-id"><label>아이디 저장</label>
-        <a href="/templates/user/id/findId" class="loss-id">아이디 찾기</a>
-        /
-        <a href="/templates/user/id/findPwd" class="loss-pwd">비밀번호 찾기</a>
-    </div>
-    <div>
-        <button type="button" class="btn-login">로그인</button>
-    </div>
-    <div>
-        <button type="button" class="btn-join">회원가입</button>
-    </div>
 
-    <img class="login-naver" src="/user/images/네이버.png">
-    <img class="login-kakao" src="/user/images/카톡.png">
-    <img class="login-google" src="/user/images/구글.png"/>
-    <img class="login-apple" src="/user/images/애플.png">
+<div class="loginContainer">
+    <form id="loginForm" action="/user/user/login" method="post">
+        <div class="loginId">
+            <label class="inputId">ID</label>
+                <div class="idForm">
+                    <input class="id" name="memberId" type="text" placeholder="아이디" onfocus="this.placeholder=''"
+                           onblur="this.placeholder='아이디'" required>
+                </div>
+        </div>
+
+        <div class="loginPwd">
+            <label class="inputPwd">PWD</label>
+                <div class="pwdForm">
+                    <input class="pwd" type="password" name="memberPwd" placeholder="비밀번호" onfocus="this.placeholder=''"
+                           onblur="this.placeholder='비밀번호'" onkeyup="checkCapsLock(event)" required>
+                    <span id="capsMessage"></span>
+                </div>
+        </div>
+
+        <div>
+            <input type="checkbox" class="saveId"><label>아이디 저장</label>
+            <a href="/templates/user/id/findId" class="findId">아이디 찾기</a>
+            /
+            <a href="/templates/user/id/findPwd" class="findPwd">비밀번호 찾기</a>
+        </div>
+
+        <div>
+            <input class="loginBtn" type="submit" value="로그인">
+        </div>
+
+        <div>
+            <button type="button" class="joinBtn" id="joinBtn">회원가입</button>
+        </div>
+
+    <img class="login-naver" src="/user/images/login/네이버.png">
+    <img class="login-kakao" src="/user/images/login/카톡.png">
+    <img class="login-google" src="/user/images/login/구글.png"/>
+    <img class="login-apple" src="/user/images/login/애플.png">
+    </form>
 </div>
 </body>
 </html>
