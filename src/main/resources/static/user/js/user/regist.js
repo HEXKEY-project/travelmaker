@@ -14,7 +14,12 @@ window.onload = function() {
 
         $duplication.onclick = function () {
 
-            let memberId = document.getElementById("id").value.trim();
+            let memberId = $memberId.value.trim();
+
+            if (memberId === "") {
+                alert("아이디를 입력하세요.");
+                return;
+            }
 
             fetch("/user/idCheck", {
                 method: "POST",
@@ -37,7 +42,7 @@ function autoEmail(a, b) {
     const mailId = b.split('@');                                                                   // 메일계정의 ID만 받아와서 처리하기 위함
     const mailList = ['naver.com', 'gmail.com', 'daum.net', 'hanmail.net', 'nate.com'];    // 메일목록
     const availableCity = new Array;                                                        // 자동완성 키워드 리스트
-    for (let i = 0; i < mailList.length; i++) {
+    for (var i = 0; i < mailList.length; i++) {
         availableCity.push(mailId[0] + '@' + mailList[i]);                                         // 입력되는 텍스트와 메일목록을 조합
     }
     $("#" + a).autocomplete({
@@ -46,13 +51,6 @@ function autoEmail(a, b) {
             return false;
         }
     });
-}
-
-// 연락처 숫자 값 + 글자 수 제한
-function maxLengthCheck(object) {
-    if (object.value.length > object.maxLength) {
-        object.value = object.value.slice(0, object.maxLength);
-    }
 }
 
 // HTML 로드된 후에 스크립트 실행
@@ -184,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const nameField = document.getElementById("name");
         const address1Fild = document.getElementById("address1")
         const address2Fild = document.getElementById("address2")
-        const phoneFields = document.getElementsByClassName("phone2");
+        const phoneFields = document.getElementsById("phone");
         const emailField = document.getElementById("email");
         const agreePolicy = document.getElementById("policy1");
         const agreePrivate = document.getElementById("private1");
@@ -257,3 +255,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
+
