@@ -14,7 +14,12 @@ window.onload = function() {
 
         $duplication.onclick = function () {
 
-            let memberId = document.getElementById("id").value.trim();
+            let memberId = $memberId.value.trim();
+
+            if (memberId === "") {
+                alert("아이디를 입력하세요.");
+                return;
+            }
 
             fetch("/user/idCheck", {
                 method: "POST",
@@ -37,7 +42,7 @@ function autoEmail(a, b) {
     const mailId = b.split('@');                                                                   // 메일계정의 ID만 받아와서 처리하기 위함
     const mailList = ['naver.com', 'gmail.com', 'daum.net', 'hanmail.net', 'nate.com'];    // 메일목록
     const availableCity = new Array;                                                        // 자동완성 키워드 리스트
-    for (let i = 0; i < mailList.length; i++) {
+    for (var i = 0; i < mailList.length; i++) {
         availableCity.push(mailId[0] + '@' + mailList[i]);                                         // 입력되는 텍스트와 메일목록을 조합
     }
     $("#" + a).autocomplete({
@@ -250,3 +255,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
+
