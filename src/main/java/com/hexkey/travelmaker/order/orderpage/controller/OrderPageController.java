@@ -3,6 +3,7 @@ package com.hexkey.travelmaker.order.orderpage.controller;
 import com.hexkey.travelmaker.order.orderpage.dto.HandleSuccessDTO;
 import com.hexkey.travelmaker.order.orderpage.dto.OrderDTO;
 import com.hexkey.travelmaker.order.orderpage.dto.OrderFormDTO;
+import com.hexkey.travelmaker.order.orderpage.dto.ShipDTO;
 import com.hexkey.travelmaker.order.orderpage.service.OrderPageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,9 +75,22 @@ public class OrderPageController {
 
         Long currentCode = Long.parseLong(res);
 
-        OrderDTO selectCurrentOrder = orderPageService.selectCurrentOrder(currentCode);
+        Map<String,Object> selectSuccessMap = orderPageService.selectCurrentOrder(currentCode);
+
+        OrderDTO selectCurrentOrder = (OrderDTO) selectSuccessMap.get("selectCurrentOrder");
+        ShipDTO selectCurrentShip = (ShipDTO) selectSuccessMap.get("selectCurrentShip");
+
+        log.info("Order 어디까지완료 ? {}", selectCurrentOrder);
+//        String temp = selectCurrentOrder.getOrderDate();
+//        log.info("temp {}", temp);
+//        String temp2 = temp.substring(0, 10);
+//
+//        selectCurrentOrder.setOrderDate(temp2);
+//
+        log.info("Ship 어디까지완료 ? {}", selectCurrentShip);
 
         model.addAttribute("selectCurrentOrder", selectCurrentOrder);
+        model.addAttribute("selectCurrentShip", selectCurrentShip);
 
         return "user/order/orderSuccess";
     }

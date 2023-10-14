@@ -31,6 +31,23 @@
         <association property="memberDTO" resultMap="memberResultMap"/>
     </resultMap>
 
+    <resultMap id="selectShip" type="com.hexkey.travelmaker.order.orderpage.dto.ShipDTO">
+
+        <id property="shipCode" column="SHIP_CODE"/>
+        <result property="shipCompany" column="SHIP_COMPANY"/>
+        <result property="invoiceNo" column="INVOICE_NO"/>
+        <result property="shippedDate" column="SHIPPED_DATE"/>
+        <result property="shipStatus" column="SHIP_STATUS"/>
+        <result property="recipent" column="RECIPENT"/>
+        <result property="postalCode" column="POSTAL_CODE"/>
+        <result property="orderCode" column="ORDER_CODE"/>
+        <result property="defaultAdr" column="DEFAULT_ADR"/>
+        <result property="optionalAdr" column="OPTIONAL_ADR"/>
+        <result property="phone" column="PHONE"/>
+        <result property="memo" column="MEMO"/>
+
+    </resultMap>
+
 
 
 
@@ -124,12 +141,53 @@
         )
     </insert>
 
+    <insert id="insertFormShip">
+        INSERT INTO TBL_SHIPMENT
+        (
+        SHIP_CODE
+        ,SHIP_COMPANY
+        ,INVOICE_NO
+        ,SHIPPED_DATE
+        ,SHIP_STATUS
+        ,RECIPENT
+        ,POSTAL_CODE
+        ,ORDER_CODE
+        ,DEFAULT_ADR
+        ,OPTIONAL_ADR
+        ,PHONE
+        ,MEMO
+        )
+        VALUES
+        (
+        #{ orderCode }
+        ,'한진택배'
+        ,null
+        ,null
+        ,'배송준비중'
+        ,#{ name }
+        ,TO_NUMBER('${ addressNumber }','99999')
+        ,#{ orderCode }
+        ,#{ addressNew }
+        ,#{ addressDetail }
+        ,TO_NUMBER('${ phone2 }' || '${ phone3 }','9999999999999')
+        ,#{ memo }
+        )
+    </insert>
+
 
     <select id="selectCurrentOrder" resultMap="selectAdminOrder">
         SELECT
                 *
             FROM TBL_ORDER
             WHERE ORDER_CODE = #{currentCode}
+
+    </select>
+
+    <select id="selectCurrentShip" resultMap="selectShip">
+        SELECT
+        *
+        FROM TBL_SHIPMENT
+        WHERE SHIP_CODE = #{currentCode}
 
     </select>
 
