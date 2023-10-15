@@ -7,8 +7,13 @@ import lombok.ToString;
 @Getter @Setter @ToString
 public class ProductDTO {
 
-    long categoryCode;
-    String categoryName;
-    long refCategoryCode;
+    int productSeq;
+    String productName;
+    int price;
+    String registeredDate;
+    String modifiedDate;
+    int categoryCode;
+    int serialNo;
+    String orderableStatus;
 
 }

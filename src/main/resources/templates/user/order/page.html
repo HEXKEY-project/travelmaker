@@ -42,18 +42,18 @@
                                 <col id="ship_col2">
                             </colgroup>
                             <tr>
-                                <th>받는사람</th>
+                                <th>수령인<span class="star">*</span></th>
                                 <td><input id="input_ship1" type="text" name="name"></td>
                             </tr>
                             <tr>
-                                <th id="addr_th">주소</th>
+                                <th id="addr_th">주소<span class="star">*</span></th>
                                 <td>
                                     <input type="text" id="sample4_postcode" placeholder="우편번호" name="addressNumber"
-                                           readonly>
+                                           readonly required>
                                     <input id="button-address" type="button" onclick="sample4_execDaumPostcode()"
                                            value="주소검색"><br>
                                     <input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addressNew"
-                                           readonly><br>
+                                           readonly required><br>
                                     <!--<input type="text" id="sample4_jibunAddress" placeholder="지번주소">-->
                                     <span id="guide" style="color:#999;display:none"></span>
                                     <input type="text" id="sample4_detailAddress" placeholder="상세주소"
@@ -91,9 +91,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>휴대전화</th>
+                                <th>휴대전화<span class="star">*</span></th>
                                 <td>
-                                    <select class="input_phone" type="number" name="phone1">
+                                    <select class="input_phone" type="number" name="phone1" required>
                                         <option value="010">010</option>
                                         <option value="011">011</option>
                                         <option value="017">017</option>
@@ -101,9 +101,9 @@
                                         <option value="019">019</option>
                                     </select>
                                     -
-                                    <input class="input_phone" type="number" name="phone2">
+                                    <input class="input_phone" type="number" name="phone2" required>
                                     -
-                                    <input class="input_phone" type="number" name="phone3">
+                                    <input class="input_phone" type="number" name="phone3" required>
                                 </td>
                             </tr>
                             <tr>
@@ -143,27 +143,22 @@
                             <img src="https://i.namu.wiki/i/4nXN8kJ3k8HTrDl3IUnx7HEauMY4_crkNiwh_f4-wPj2zny5yMDQp2qaOWSopSj40SfMy2HaDyY_h_WkERYRUQ.webp"
                                  width="100px">
                         </div>
-                        <div>
+                        <div id="temp">
                             <h2>
-                                <div th:text="${'상품이름 : ' + option0 }"></div>
-                                <input name="productName" type="hidden" th:value="${ option0 }">
+                                <div th:text="${' [ ' + productName + ' ] ' }"></div>
+                                <input name="productName" type="hidden" th:value="${ productName }">
                             </h2>
 
-                            <div th:text="${'수량 : ' + option2 }"></div>
-                            <input name="productCount" type="hidden" th:value="${ option2 }">
-
-<!--                            <div th:each="product : ${ productDTO }">-->
-<!--                                <p th:text="${product.categoryCode + product.categoryName}"></p>-->
-<!--                                <input name="test2" th:value="${product.categoryCode + product.categoryName}">-->
-<!--                            </div>-->
-
-                            <!--                       ========================== 테스트======================-->
-                            <div th:text="${'insert 테스트 결과값 : ' + result }"></div>
+                            <div th:text="${'옵션 : ( ' + optionName + ' ) ' }"></div>
+                            <input name="optionName" type="hidden" th:value="${ optionName }">
+                            <div th:text="${'수량 : ' + count + ' 개 ' }"></div>
+                            <input name="count" type="hidden" th:value="${ count }">
                         </div>
                     </div>
 
                     <div class="tail" id="shipFee_product">
-                        <h3>배송비</h3>
+                        <h3 th:text="${'상품금액 : ' + productPrice  + '원'}"></h3>
+                        <h3 th:text="${'배송비 : ' + shipPrice  + '원'}"></h3>
                     </div>
                 </div>
 
@@ -172,7 +167,7 @@
 
             <hr>
 
-            <div class="area">
+            <div class=" area">
                 <div class="title" id="title_discount">
                     <h2 id="discount_h2">적립금 할인 <span id="discount_h2_span"> </span></h2>
                 </div>
@@ -180,7 +175,7 @@
                 <div id="discount_body">
                     <div class="contents" id="contents_discount">
                         적립금사용
-                        <input type="text">
+                        <input id="discountInput" type="number">
                         <input id="point_use_button" type="button" name="full" value="전액 사용">
                     </div>
                     <div>
@@ -191,7 +186,7 @@
                     </div>
 
                     <div class="tail">
-                        <h3>적용금액</h3>
+                        <h3>할인금액</h3>
                     </div>
                 </div>
 
@@ -207,15 +202,15 @@
                 <div id="pay_body">
                     <table>
                         <tr>
-                            <th>주문상품</th>
-                            <td>288,000</td>
-                            <input name="productPrice" type="hidden" value="288000">
+                            <th>상품가격</th>
+                            <td th:text="${ productPrice }"></td>
+                            <input name="productPrice" type="hidden" th:value="${ productPrice }">
 
                         </tr>
                         <tr>
                             <th>배송비</th>
-                            <td>+3,000</td>
-                            <input name="shipPrice" type="hidden" value="3000">
+                            <td th:text="${ shipPrice }"></td>
+                            <input name="shipPrice" type="hidden" th:value="${ shipPrice }">
                         </tr>
                         <tr>
                             <th>적립금 할인</th>
@@ -224,47 +219,34 @@
                         </tr>
                     </table>
                     <div class="tail">
-                        <h3>최종 결제 금액</h3>
+                        <h3 th:text="${'최종 결제 금액 : ' + totalPrice + '원'}"></h3>
+                        <input name="totalPrice" type="hidden" th:value="${ totalPrice }">
+
                     </div>
                 </div>
-
-
             </div>
 
 
-            <hr>
-            <div class="area">
-                <div class="title" id="title_pay_kind">
-                    <h2 id="pay_kind_h2">결제수단 <span id="pay_kind_h2_span"> </span></h2>
-                </div>
-
-                <div id="pay_kind_body">
-                    <h3>결제수단 선택</h3>
-                    <div>신용카드</div>
-                    <div>계좌이체</div>
-                    <div>페이코</div>
-                </div>
-            </div>
-
-            <hr>
-            <div class="area">
-                <div class="title" id="title_point">
-                    <h2 id="point_h2">적립 혜택<span id="point_h2_span"> </span></h2>
-                </div>
-
-                <div id="point_body">
-                    <span>상품 적립금</span>
-                    <span>245원</span>
-                </div>
-            </div>
-
-            <hr>
         </div>
+
+        <hr>
+        <div class="area">
+            <div class="title" id="title_point">
+                <h2 id="point_h2">적립 혜택<span id="point_h2_span"> </span></h2>
+            </div>
+
+            <div id="point_body">
+                <span>상품 적립금</span>
+                <span>245원</span>
+            </div>
+        </div>
+
         <div>
             <button id="button_final" type="submit" onclick="requestPay()">
                 <h2 id="h2_final"><span>20,000</span> 결제하기</h2>
             </button>
         </div>
+
         <div>
             <p id="p_final">
                 - 무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을 동시에 구매할 경우 전체 주문 상품 금액에 대해 무이자할부가 적용되지 않습니다.
@@ -272,7 +254,9 @@
                 <br> - 최소 결제 가능 금액은 결제금액에서 배송비를 제외한 금액입니다.
             </p>
         </div>
+
     </div>
+
 </form>
 </body>
 <!--====================== 결제 API ======================-->
@@ -305,109 +289,109 @@
     var makeMerchantUid = hours + minutes + seconds + milliseconds;
 
     function requestPay() {
-        console.log("페이 함수 실행");
-        IMP.request_pay({
-            pg: 'kcp',
-            pay_method: 'card',
-            merchant_uid: "IMP" + makeMerchantUid,
-            name: '당근 10kg',
-            amount: 12,
-            buyer_email: 'Iamport@chai.finance',
-            buyer_name: '아임포트 기술지원팀',
-            buyer_tel: '010-1234-5678',
-            buyer_addr: '서울특별시 강남구 삼성동',
-            buyer_postcode: '123-456',
-            m_redirect_url: '/basket/basket'
-        }, function (rsp) { // callback
+        var requiredFields = document.querySelectorAll('input[required]');
+        var isFormValid = true;
 
-            if (true) {
-                console.log("페이 true 진입 성공");
-
-                ////
-                fetch('/order/orderForm', {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(res => res.json())
-                    .then(res => {
-                        console.log("currentCode 반환값" + res)
-                        location.href = `/order/orderSuccess?res=${res}`;
-                    });
-                ////
-
-                axios({
-                    url: "/order/orderSuccess",
-                    method: "post",
-                    headers: { "Content-Type": "application/json" },
-                    data: {
-                        imp_uid: rsp.imp_uid,
-                        merchant_uid: rsp.merchant_uid
-                    }
-                }).then((data) => {
-                    console.log(data);
-                    console.log("아임포트 결제 성공");
-
-                    // location.href = "/order/orderSuccess"
-                })
-            } else {
-                alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+        for (var i = 0; i < requiredFields.length; i++) {
+            if (requiredFields[i].value.trim() === '') {
+                alert('필수 정보를 입력하세요.');
+                isFormValid = false;
+                break;
             }
-        });
+        }
+
+        // 필수 필드가 모두 채워져 있으면 요청을 실행합니다.
+        if (isFormValid) {
+            // 실제로 요청을 보내거나 원하는 작업을 수행합니다.
+            // 여기에 작업을 추가하세요.
+
+            console.log("페이 함수 실행");
+            IMP.request_pay({
+                pg: 'kcp',
+                pay_method: 'card',
+                merchant_uid: "IMP" + makeMerchantUid,
+                name: '당근 10kg',
+                amount: 12,
+                buyer_email: 'Iamport@chai.finance',
+                buyer_name: '아임포트 기술지원팀',
+                buyer_tel: '010-1234-5678',
+                buyer_addr: '서울특별시 강남구 삼성동',
+                buyer_postcode: '123-456',
+                m_redirect_url: '/basket/basket'
+            }, function (rsp) { // callback
+
+                if (true) {
+                    console.log("페이 true 진입 성공");
+
+                    ////
+                    fetch('/order/orderForm', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(res => res.json())
+                        .then(res => {
+                            console.log("currentCode 반환값" + res)
+                            location.href = `/order/orderSuccess?res=${res}`;
+                        });
+                    ////
+
+                    axios({
+                        url: "/order/orderSuccess",
+                        method: "post",
+                        headers: {"Content-Type": "application/json"},
+                        data: {
+                            imp_uid: rsp.imp_uid,
+                            merchant_uid: rsp.merchant_uid
+                        }
+                    }).then((data) => {
+                        console.log(data);
+                        console.log("아임포트 결제 성공");
+
+                        // location.href = "/order/orderSuccess"
+                    })
+                } else {
+                    alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+                }
+            });
+        }
     }
 </script>
 
-
 <script>
-    // var IMP = window.IMP;
-    // IMP.init("imp67011510");
+    // // JavaScript를 사용하여 '적립금 할인' 텍스트를 동적으로 변경
+    // const $text = document.getElementById("contents_discount");
+    // const discountInput = document.getElementById("discountInput");
     //
-    // var today = new Date();
-    // var hours = today.getHours(); // 시
-    // var minutes = today.getMinutes();  // 분
-    // var seconds = today.getSeconds();  // 초
-    // var milliseconds = today.getMilliseconds();
-    // var makeMerchantUid = hours + minutes + seconds + milliseconds;
+    // discountInput.addEventListener("input", function() {
+    //     const inputValue = discountInput.value; // 입력된 값 가져오기
     //
-    // function requestPay() {
-    //     console.log("페이 함수 실행");
-    //     IMP.request_pay({
-    //         pg: 'kcp',
-    //         pay_method: 'card',
-    //         merchant_uid: "IMP" + makeMerchantUid,
-    //         name: '당근 10kg',
-    //         amount: 12,
-    //         buyer_email: 'Iamport@chai.finance',
-    //         buyer_name: '아임포트 기술지원팀',
-    //         buyer_tel: '010-1234-5678',
-    //         buyer_addr: '서울특별시 강남구 삼성동',
-    //         buyer_postcode: '123-456',
-    //         m_redirect_url: '/basket/basket'
-    //     }, function (rsp) { // callback
+    //     if (!isNaN(parsedValue)) { // 숫자로 변환 가능한 경우
+    //         const newText = `할인금액: ${inputValue}`;
+    //         discountValueSpan.textContent = newText;
+    //     } else {
+    //         discountValueSpan.textContent = "할인금액: 0"; // 숫자로 변환할 수 없는 경우
+    //     }
+    // });
     //
-    //         if (rsp.success) {
-    //             console.log("페이 true 진입 성공");
-    //             axios({
-    //                 url: "/order/orderSuccess",
-    //                 method: "post",
-    //                 headers: { "Content-Type": "application/json" },
-    //                 data: {
-    //                     imp_uid: rsp.imp_uid,
-    //                     merchant_uid: rsp.merchant_uid
-    //                 }
-    //             }).then((data) => {
-    //                 console.log(data);
-    //                 console.log("아임포트 결제 성공");
+    // <div className="contents" id="contents_discount">
+    //     적립금사용
+    //     <input id="discountInput" type="text">
     //
-    //                 location.href = "/order/orderSuccess"
-    //             })
-    //         } else {
-    //             alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
-    //         }
-    //     });
+    //
+    //
+    // function updateDiscountText(newText) {
+    //     document.getElementById('discount_h2').textContent = newText;
     // }
-</script>
+    //
+    // // 예시: 2초마다 '적립금 할인' 텍스트를 변경
+    // setInterval(function() {
+    //     if (/* 어떤 조건을 만족하면 */) {
+    //         updateDiscountText('새로운 텍스트');
+    //     } else {
+    //         updateDiscountText('기본 텍스트');
+    //     }
+    // }, 2000); // 2초마다 실행
 
-<script>
 
 </script>
 

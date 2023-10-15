@@ -20,7 +20,7 @@ p {
 }
 
 hr {
-    width: 500px;
+    width: 450px;
     border: 1px solid #e7e7e7;
 }
 
@@ -52,7 +52,7 @@ hr {
 }
 
 #main {
-    width: 500px;
+    width: 450px;
     height: 500px;
     margin: auto;
     box-shadow: 3px 3px 5px 3px #d5d5d5;

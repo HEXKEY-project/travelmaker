@@ -134,10 +134,10 @@
         ,TO_DATE('${orderDate}', 'YYYY-MM-DD')
         ,'결제완료'
         ,1
-        ,TO_NUMBER('${totalPrice}','999999')
-        ,TO_NUMBER('${productPrice}','999999')
-        ,TO_NUMBER('${shipPrice}','999999')
-        ,TO_NUMBER('${discount}','999999')
+        ,TO_NUMBER('${totalPrice}','99999999')
+        ,TO_NUMBER('${productPrice}','99999999')
+        ,TO_NUMBER('${shipPrice}','99999999')
+        ,TO_NUMBER('${discount}','99999999')
         )
     </insert>
 
