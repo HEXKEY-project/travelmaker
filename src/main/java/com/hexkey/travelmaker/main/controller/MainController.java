@@ -7,16 +7,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/main")
+    @GetMapping(value = {"/main", "/"})
     public String getMain() {
 
         return "/index";
+
     }
 
     @PostMapping("/")
     public String redirectMain() {
 
-        return  "redircet:/";
+        return  "redirect:/";
 
     }
 

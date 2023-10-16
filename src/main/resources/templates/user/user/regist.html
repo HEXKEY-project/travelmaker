@@ -11,10 +11,17 @@
     <!-- 주소 API -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+    <script>
+        const message = '[[${message}]]';
+        message && alert(message);
+    </script>
+
 </head>
 <body>
 
-<div>
+<div th:replace="common/user/header.html"></div>
+
+<div class="registContainer">
     <h2 align="center">REGISTER</h2>
     <form action="/user/regist" method="post">
         <ul>
@@ -71,7 +78,7 @@
                 </div>
             </li>
             <li class="regist-email">
-                <lavel>이메일 *</lavel>
+                <label>이메일 *</label>
                 <input class="email" id="email" name="email" onkeyup="autoEmail('email', this.value)" autocomplete="off" required>
             </li>
             <li class="email-yn">

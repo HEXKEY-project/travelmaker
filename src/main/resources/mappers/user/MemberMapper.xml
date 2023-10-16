@@ -176,4 +176,19 @@
           AND MEMBER_ID = #{ memberId }
     </select>
 
+    <select id="findId" parameterType="String" resultType="String">
+        SELECT MEMBER_ID
+          FROM TBL_MEMBER
+         WHERE MEMBER_NAME = #{ memberName }
+           AND (PHONE = #{ phone }
+            OR EMAIL = #{ email })
+    </select>
+
+    <select id="findPwd">
+        SELECT MEMBER_ID
+          FROM TBL_MEMBER
+         WHERE MEMBER_STAT = 'Y'
+           AND MEMBER_ID = #{ memberId }
+    </select>
+
 </mapper>
