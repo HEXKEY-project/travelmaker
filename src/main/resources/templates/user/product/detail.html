@@ -2,28 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${product.productName}"></title>
     <link rel="stylesheet" type="text/css" href="/user/css/product/detail.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/user/js/product/detail.js" type="text/javascript"></script>
+
 </head>
 <body>
 <div id="wrapper">
     <div th:replace="common/user/header.html"></div>
     <div id="product_contents">
         <div id="titleImgArea">
-          <!--<th:block th:each="index : ${ #numbers.sequence(1, product.fileList.size())}" th:if="${ product.fileList.size() > 0 }">
-            <img id="productImg" th:src="${ product.fileList[index].savePath }">
-            <img src="/static/user/images/productdetail/_ButtonBase_left.png" alt="이전이미지">
-            <img src="/static/user/images/productdetail/_ButtonBase_right.png" alt="다음이미지">
-          </th:block>-->
+            <div id="thumbnailArea"></div>
+            <img id="leftButtonImg" src="/user/images/productdetail/_ButtonBase_left.png" alt="이전이미지"
+                 onclick="showPreviousImage()">
+            <img id="rightButtonImg" src="/user/images/productdetail/_ButtonBase_right.png" alt="다음이미지"
+                 onclick="showNextImage()">
         </div>
-        <div>
-            <!--<div id="product_title" th:text="${product.productName}"></div>
-            <div id="product_price" th:text="'₩' + ${product.price}"></div>-->
-            <div id="option">옵션
-                <select id="productOpt">
-                    <option>- [필수]옵션 선택 -</option>
-                    <option>-----------------</option>
-                </select>
+        <div id="product_info">
+            <div id="product_title" th:text="${product.productName}"></div>
+            <div id="product_price" th:text="'₩ ' + ${#numbers.formatInteger(product.price, 3, 'COMMA')}"></div>
+            <div id="optContent">
+                <div id="option">
+                    <span th:text="${product.productOption[0].optionName}"></span>
+                    <select id="productOpt" onchange="updateAddOpt()">
+                        <option selected
+                                th:text="'-[필수] ' + ${product.productOption[0].optionName + ' 선택-'} ">
+                        </option>
+                        <option disabled>-----------------</option>
+                        <option disabled id="optKind"
+                                th:text="${product.productOption[0].optionName}"></option>
+                        <th:block th:each="optName : ${ #numbers.sequence(1, product.productOption.size() - 1)}">
+                            <option th:text="'&nbsp;&nbsp;' + ${product.productOption[optName].optionName}"
+                                    th:name="${product.productOption[optName].optionName}"
+                                    th:value="${product.productOption[optName].optionName}">
+                            </option>
+                        </th:block>
+                    </select>
+                    <img id="iconArrow" src="/user/images/productdetail/iconArrow.png">
+                </div>
             </div>
             <div id="optAddLine">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -32,13 +50,162 @@
                 </svg>
                 <div id="optAddLineContent">위 옵션선택 박스를 선택하시면 아래에 상품이 추가됩니다.</div>
             </div>
-
             <svg xmlns="http://www.w3.org/2000/svg" width="560" height="2" viewBox="0 0 560 2" fill="none">
                 <path d="M0 1H560" stroke="#BDBDBD"/>
             </svg>
+            <div id="addOpt"></div>
+            <div id="payInfo">
+                <div>아래 <span>구매하기</span> 버튼을 통해 결제페이지에서</div>
+                <div>상품별 적립금을 적용할 수 있습니다</div>
+            </div>
+            <div id="sumPrice">TOTAL ₩</div>
+            <div id="BtnArea">
+                <button type="submit" id="basketBtn">장바구니</button>
+                <button type="button" id="BuyBtn">구매하기</button>
+            </div>
+
         </div>
+
+    </div>
+    <div id="smallImgArea">
+        <th:block th:if="${ product.fileList.size() > 1}"
+                  th:each="index : ${ #numbers.sequence(0, product.fileList.size() - 1)}"
+        >
+            <img class="thumbnailImg" th:if="${ product.fileList[index].fileType == 'productImage'}"
+                 th:src="${ product.fileList[index].filePath }">
+        </th:block>
+    </div>
+    <div id="productContentWrapper">
+        <div id="productDetail">DETAIL</div>
+        <div id="productReview">REVIEW</div>
+        <div id="productQnA">Q&A</div>
+    </div>
+    <div id="productContentImg">
+        <th:block th:if="${ product.fileList.size() > 1}"
+                  th:each="index : ${ #numbers.sequence(0, product.fileList.size() - 1)}"
+        >
+            <div class="contentImg"><img th:if="${ product.fileList[index].fileType == 'productContent'}"
+                                         th:src="${ product.fileList[index].filePath }"></div>
+        </th:block>
     </div>
     <div th:replace="common/user/footer.html"></div>
 </div>
+
+<script>
+    // 현재 보이는 이미지의 인덱스를 추적하는 변수
+    let currentImageIndex = 0;
+
+    // 이미지 요소들을 가져옵니다.
+    const thumbnailImages = document.querySelectorAll('.thumbnailImg');
+    const thumbnailArea = document.getElementById('thumbnailArea');
+
+    function showPreviousImage() {
+        if (currentImageIndex > 0) {
+            currentImageIndex--; // 이전 이미지 인덱스로 이동
+            thumbnailArea.innerHTML = `<img src="${thumbnailImages[currentImageIndex].src}" alt="상세 이미지" style="width: 706px; height: 695px; flex-shrink: 0;">`;
+        }
+    }
+
+    function showNextImage() {
+        if (currentImageIndex < thumbnailImages.length - 1) {
+            currentImageIndex++; // 다음 이미지 인덱스로 이동
+            thumbnailArea.innerHTML = `<img src="${thumbnailImages[currentImageIndex].src}" alt="상세 이미지" style="width: 706px; height: 695px; flex-shrink: 0;">`;
+        }
+    }
+
+</script>
+<!-- 옵션 선택시 생성 -->
+<script>
+    // 중복으로 생성되는거 방지하기 위해 set으로 설정
+    const addedOptions = new Set();
+
+
+    function updateAddOpt() {
+        const selectElement = document.getElementById('productOpt');
+        const selectedOption = selectElement.options[selectElement.selectedIndex].value;
+
+        // 선택한 옵션이 3번째 이상의 옵션인지 확인
+        if (selectElement.selectedIndex >= 2) {
+
+            if(!addedOptions.has(selectedOption)) {
+                addedOptions.add(selectedOption);
+
+
+
+            // 상품 이름 가져오기
+            const productTitle = document.getElementById('product_title').textContent;
+
+            // 상품 이름 생성되게 하기
+            const newProductElement = document.createElement('div');
+            newProductElement.setAttribute("class", "selectedProductName");
+            newProductElement.textContent = productTitle;
+
+            newProductElement.style.display = "flex";
+
+            // 선택한 옵션 표시할 새 엘리먼트를 생성
+            const newOptionElement = document.createElement('div');
+            newOptionElement.setAttribute("class", "selectedProductOption");
+            newOptionElement.textContent = '-' + selectedOption;
+
+            // 수량 선택할 input 생성
+            const newProductCount = document.createElement('input');
+            newProductCount.setAttribute("type", "number");
+            newProductCount.setAttribute("name", "basketCount");
+            newProductCount.setAttribute("min", "1");
+            newProductCount.setAttribute("step", "1");
+            newProductCount.setAttribute("value", "1");
+
+            // 삭제 버튼 생성
+            const newDeleteBtn = document.createElement('button');
+            newDeleteBtn.textContent="x";
+
+            // 삭제 버튼 클릭시 생성된거 제거
+            newDeleteBtn.addEventListener("click", function (){
+                newProductElement.remove();
+                newOptionElement.remove();
+
+            });
+
+            newProductElement.appendChild(newDeleteBtn);
+            newProductElement.appendChild(newProductCount);
+
+            // 새 엘리먼트를 'addOpt' div에 추가
+            const addOptDiv = document.getElementById('addOpt');
+            addOptDiv.appendChild(newProductElement);
+            addOptDiv.appendChild(newOptionElement);
+
+            /*const sumPrice = document.getElementById('sumPrice');
+            const productPrice = document.getElementById('product_price').textContent;
+            sumPrice.textContent = productPrice;*/
+                updateTotalPrice();
+            }
+        }
+
+
+    }
+
+    // 가격 업데이트 함수
+    function updateTotalPrice() {
+        const sumPrice = document.getElementById('sumPrice');
+        const productPriceElement = document.getElementById('product_price');
+        const productPrice = parseFloat(productPriceElement.textContent.replace(/[^0-9.-]+/g, ''));
+        let total = productPrice;
+
+        // 모든 수량 입력란을 가져와서 가격을 합산
+        const productCounts = document.querySelectorAll('input[name="basketCount"]');
+        productCounts.forEach(function (countInput) {
+            const count = parseInt(countInput.value, 10);
+            total += productPrice * count;
+        });
+
+        // 합산된 가격을 포맷하여 표시
+        sumPrice.textContent = 'TOTAL ₩ ' + formatPrice(total);
+    }
+
+    // formatPrice 함수 정의
+    function formatPrice(price) {
+        return price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    }
+</script>
 </body>
 </html>
