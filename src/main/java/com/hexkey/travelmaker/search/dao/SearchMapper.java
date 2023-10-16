@@ -1,6 +1,6 @@
 package com.hexkey.travelmaker.search.dao;
 
-import com.hexkey.travelmaker.order.yongmin.dto.ProductDTO;
+import com.hexkey.travelmaker.product.regist.dto.ProductDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
