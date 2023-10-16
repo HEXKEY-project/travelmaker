@@ -16,7 +16,7 @@ public class MainController {
 //    @PostMapping("/")
 //    public String redirectMain() {
 //
-//        return  "redircet:/";
+//        return  "redirect:/";
 //
 //    }
 
