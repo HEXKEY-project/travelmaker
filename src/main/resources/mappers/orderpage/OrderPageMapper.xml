@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexkey.travelmaker.order.orderpage.dao.OrderPageMapper">
+
+    <resultMap id="orderPageProductMap" type="com.hexkey.travelmaker.order.orderpage.dto.ProductDTO">
+        <id property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
+    </resultMap>
+
+    <resultMap id="memberResultMap" type="com.hexkey.travelmaker.order.orderpage.dto.MemberDTO2">
+        <id property="memberCode" column="MEMBER_CODE"/>
+        <result property="memberName" column="MEMBER_NAME"/>
+        <result property="phone" column="PHONE"/>
+    </resultMap>
+
+    <resultMap id="selectAdminOrder" type="com.hexkey.travelmaker.order.orderpage.dto.OrderDTO">
+        <id property="orderCode" column="ORDER_CODE"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="orderStatus" column="ORDER_STATUS"/>
+        <result property="memberCode" column="MEMBER_CODE"/>
+        <result property="cancelDate" column="CANCEL_DATE"/>
+        <result property="confirmDate" column="CONFIRM_DATE"/>
+        <result property="totalPrice" column="TOTAL_PRICE"/>
+        <result property="productPrice" column="PRODUCT_PRICE"/>
+        <result property="shipPrice" column="SHIP_PRICE"/>
+        <result property="mileageDiscountPrice" column="MILEAGE_DISCOUNT_PRICE"/>
+
+        <association property="memberDTO" resultMap="memberResultMap"/>
+    </resultMap>
+
+
+
+
+
+
+
+    <select id="selectAdminOrder" resultMap="selectAdminOrder">
+        SELECT
+                O.*,
+                M.*
+        FROM TBL_ORDER O
+        JOIN TBL_MEMBER M ON (O.MEMBER_CODE = M.MEMBER_CODE)
+
+        <where>
+            <if test="searchCondition == '주문자 명'">
+                UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{ searchValue }) || '%'
+            </if>
+            <if test="orderDate1 != '' and orderDate2 != ''">
+                <![CDATA[
+                AND ORDER_DATE >= TO_DATE('${orderDate1}', 'YYYY-MM-DD') AND ORDER_DATE <= TO_DATE('${orderDate2}', 'YYYY-MM-DD')
+                ]]>
+            </if>
+        </where>
+
+    </select>
+
+
+
+
+
+    <select id="selectAllProduct" resultMap="orderPageProductMap">
+        SELECT
+                 *
+        FROM TBL_PRODUCT_CATEGORY
+
+    </select>
+
+    <insert id="insertOrder">
+        INSERT INTO TBL_ORDER
+        (
+        ORDER_CODE
+        ,ORDER_DATE
+        ,ORDER_STATUS
+        ,MEMBER_CODE
+        ,CANCEL_DATE
+        ,CONFIRM_DATE
+        ,TOTAL_PRICE
+        ,PRODUCT_PRICE
+        ,SHIP_PRICE
+        ,MILEAGE_DISCOUNT_PRICE
+        )
+        VALUES
+        (
+        SEQ_ORDER_NO.NEXTVAL
+        ,#{ orderDate }
+        ,#{ orderStatus }
+        ,#{ memberCode }
+        ,#{ cancelDate }
+        ,#{ confirmDate }
+        ,#{ totalPrice }
+        ,#{ productPrice }
+        ,#{ shipPrice }
+        ,#{ mileageDiscountPrice }
+        )
+    </insert>
+
+
+<!--  OrderFormData 입력  -->
+    <insert id="insertFormOrder"  parameterType="com.hexkey.travelmaker.order.orderpage.dto.OrderFormDTO" useGeneratedKeys="true" keyProperty="orderCode" keyColumn="ORDER_CODE">
+        INSERT INTO TBL_ORDER
+        (
+        ORDER_CODE
+        ,ORDER_DATE
+        ,ORDER_STATUS
+        ,MEMBER_CODE
+        ,TOTAL_PRICE
+        ,PRODUCT_PRICE
+        ,SHIP_PRICE
+        ,MILEAGE_DISCOUNT_PRICE
+        )
+        VALUES
+        (
+        SEQ_ORDER_NO.NEXTVAL
+        ,TO_DATE('${orderDate}', 'YYYY-MM-DD')
+        ,'결제완료'
+        ,1
+        ,TO_NUMBER('${totalPrice}','999999')
+        ,TO_NUMBER('${productPrice}','999999')
+        ,TO_NUMBER('${shipPrice}','999999')
+        ,TO_NUMBER('${discount}','999999')
+        )
+    </insert>
+
+
+    <select id="selectCurrentOrder" resultMap="selectAdminOrder">
+        SELECT
+                *
+            FROM TBL_ORDER
+            WHERE ORDER_CODE = #{currentCode}
+
+    </select>
+
+
+
+</mapper>
