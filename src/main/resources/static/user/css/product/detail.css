@@ -218,6 +218,16 @@
     line-height: 0;
 }
 
+#sumPrice {
+    color: var(--components-chip-default-close-fill, #000);
+    font-family: Noto Sans;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 48px; /* 150% */
+    text-transform: uppercase;
+}
+
 #payInfo {
     width: 560px;
     padding: var(--1, 8px) 16px;

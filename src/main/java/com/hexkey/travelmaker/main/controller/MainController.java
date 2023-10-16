@@ -13,11 +13,11 @@ public class MainController {
         return "/index";
     }
 
-    @PostMapping("/")
-    public String redirectMain() {
-
-        return  "redircet:/";
-
-    }
+//    @PostMapping("/")
+//    public String redirectMain() {
+//
+//        return  "redircet:/";
+//
+//    }
 
 }

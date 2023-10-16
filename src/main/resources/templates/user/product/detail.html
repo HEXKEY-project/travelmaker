@@ -35,7 +35,7 @@
                                 th:text="${product.productOption[0].optionName}"></option>
                         <th:block th:each="optName : ${ #numbers.sequence(1, product.productOption.size() - 1)}">
                             <option th:text="'&nbsp;&nbsp;' + ${product.productOption[optName].optionName}"
-                                    th:name="${product.productOption[optName].optionName}"
+                                    th:name="${product.productOption[optName].optionCode}"
                                     th:value="${product.productOption[optName].optionName}">
                             </option>
                         </th:block>
@@ -60,8 +60,8 @@
             </div>
             <div id="sumPrice">TOTAL ₩</div>
             <div id="BtnArea">
-                <button type="submit" id="basketBtn">장바구니</button>
-                <button type="button" id="BuyBtn">구매하기</button>
+                <button type="submit" id="basketBtn" onclick="sendBasket()" >장바구니</button>
+                <button type="button" id="BuyBtn" onclick="sendBuy()">구매하기</button>
             </div>
 
         </div>
@@ -116,96 +116,180 @@
 </script>
 <!-- 옵션 선택시 생성 -->
 <script>
-    // 중복으로 생성되는거 방지하기 위해 set으로 설정
-    const addedOptions = new Set();
 
+    /* 옵션이 중복되게 안나오기 위해 set 이용 */
+  const addedOptions = new Set();
+  /* 가격 0으로 초기화 */
+  let totalSum = 0;
 
-    function updateAddOpt() {
-        const selectElement = document.getElementById('productOpt');
-        const selectedOption = selectElement.options[selectElement.selectedIndex].value;
+  function updateAddOpt() {
+      const selectElement = document.getElementById('productOpt');
 
-        // 선택한 옵션이 3번째 이상의 옵션인지 확인
-        if (selectElement.selectedIndex >= 2) {
+      const selectedOption = selectElement.options[selectElement.selectedIndex].value;
+      const selectedOptionCode = selectElement.options[selectElement.selectedIndex].getAttribute('name');
 
-            if(!addedOptions.has(selectedOption)) {
-                addedOptions.add(selectedOption);
+      /* 옵션 선택 할때 3번째부터 옵션 선택시 생성하기 위해 인덱스 2보다 클때로 조건 설정 */
+      if (selectElement.selectedIndex > 2) {
+          /* 상품가격을 ₩와 콤마가 들어갔기에 기존 숫자표시로만 온전히 가져오기 위해
+          * */
+          const productPrice = document.getElementById('product_price').textContent.replace(/[^0-9.-]+/g, "");
+          const productTitle = document.getElementById('product_title').textContent;
 
+          if (!addedOptions.has(selectedOption)) {
+              addedOptions.add(selectedOption);
 
+              const newProductElement = document.createElement('div');
+              newProductElement.setAttribute("class", "selectedProductName");
+              newProductElement.textContent = productTitle;
+              newProductElement.style.display = "flex";
 
-            // 상품 이름 가져오기
-            const productTitle = document.getElementById('product_title').textContent;
+              const newOptionElement = document.createElement('div');
+              newOptionElement.setAttribute("class", "selectedProductOption");
+              newOptionElement.setAttribute("name", selectedOptionCode);
+              newOptionElement.textContent = '-' + selectedOption;
 
-            // 상품 이름 생성되게 하기
-            const newProductElement = document.createElement('div');
-            newProductElement.setAttribute("class", "selectedProductName");
-            newProductElement.textContent = productTitle;
+              const newProductCount = document.createElement('input');
+              newProductCount.setAttribute("type", "number");
+              newProductCount.setAttribute("name", "basketCount");
+              newProductCount.setAttribute("min", "1");
+              newProductCount.setAttribute("step", "1");
+              newProductCount.setAttribute("value", "1");
 
-            newProductElement.style.display = "flex";
+              const newDeleteBtn = document.createElement('button');
+              newDeleteBtn.textContent = "x";
 
-            // 선택한 옵션 표시할 새 엘리먼트를 생성
-            const newOptionElement = document.createElement('div');
-            newOptionElement.setAttribute("class", "selectedProductOption");
-            newOptionElement.textContent = '-' + selectedOption;
+              const updateProductPrice = () => {
+                  const count = parseInt(newProductCount.value);
+                  const subtotal = productPrice * count;
+                  totalSum += subtotal - parseFloat(newProductCount.dataset.subtotal || 0);
+                  newProductCount.dataset.subtotal = subtotal;
+                  updateTotalPrice();
+              };
 
-            // 수량 선택할 input 생성
-            const newProductCount = document.createElement('input');
-            newProductCount.setAttribute("type", "number");
-            newProductCount.setAttribute("name", "basketCount");
-            newProductCount.setAttribute("min", "1");
-            newProductCount.setAttribute("step", "1");
-            newProductCount.setAttribute("value", "1");
+              newDeleteBtn.addEventListener("click", function () {
+                  newProductElement.remove();
+                  newOptionElement.remove();
+                  totalSum -= parseFloat(newProductCount.dataset.subtotal || 0);
+                  addedOptions.delete(selectedOption);
+                  updateTotalPrice();
+              });
 
-            // 삭제 버튼 생성
-            const newDeleteBtn = document.createElement('button');
-            newDeleteBtn.textContent="x";
+              newProductCount.addEventListener("change", updateProductPrice);
 
-            // 삭제 버튼 클릭시 생성된거 제거
-            newDeleteBtn.addEventListener("click", function (){
-                newProductElement.remove();
-                newOptionElement.remove();
+              newProductElement.appendChild(newDeleteBtn);
+              newProductElement.appendChild(newProductCount);
 
-            });
+              const addOptDiv = document.getElementById('addOpt');
+              addOptDiv.appendChild(newProductElement);
+              addOptDiv.appendChild(newOptionElement);
 
-            newProductElement.appendChild(newDeleteBtn);
-            newProductElement.appendChild(newProductCount);
+              updateProductPrice();
+          }
+      }
+  }
 
-            // 새 엘리먼트를 'addOpt' div에 추가
-            const addOptDiv = document.getElementById('addOpt');
-            addOptDiv.appendChild(newProductElement);
-            addOptDiv.appendChild(newOptionElement);
+  function updateTotalPrice() {
+      const sumPrice = document.getElementById('sumPrice');
+      sumPrice.textContent = 'TOTAL ₩ ' + formatPrice(totalSum);
+  }
 
-            /*const sumPrice = document.getElementById('sumPrice');
-            const productPrice = document.getElementById('product_price').textContent;
-            sumPrice.textContent = productPrice;*/
-                updateTotalPrice();
-            }
+  function formatPrice(price) {
+      return price.toFixed(0).replace(/\d(?=(\d{3})+($))/g, '$&,');
+  }
+</script>
+
+<!-- 장바구니 Json으로 데이터 전송 -->
+<script>
+    function sendBasket(){
+        // 선택한 옵션들 배열에 담기
+        const selectedProducts = [];
+        // 옵션 선택시 생성되는 div 개수와 div안에 input값 수량을 알아오기 위해 불러온다.
+        const productElements = document.querySelectorAll('.selectedProductName');
+        const optionElements = document.querySelectorAll('.selectedProductOption');
+
+        /* 생성되는 각각의 옵션별로의 옵션코드와 상품수량을 알아오기위해 productElements.length를 이용했다. */
+        for (let i = 0; i < productElements.length; i++) {
+            /* option의 name 속성값에 optionCode를 넣어놔서 각각 옵션의 name 속성을 불러온다. */
+            const optionCode = optionElements[i].getAttribute('name');
+            console.log(optionCode);
+            const count = productElements[i].querySelector('input[name="basketCount"]').value;
+
+            selectedProducts.push(
+                optionCode,
+                count
+            );
         }
 
+        // JSON 형식으로 데이터를 문자열로 변환
+        const jsonData = JSON.stringify(selectedProducts);
+        console.log(selectedProducts);
+
+        // 서버로 데이터를 전송
+        fetch('/order1/page1', {
+            method: 'POST',
+            body: jsonData,
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        })
+            .then(response => response.text())
+            .then(data => {
+                // 서버 응답에 대한 처리를 수행합니다.
+                console.log(data); // 서버 응답 데이터가 잘 들어왔는지 콘솔로 확인 또는 다른 처리 수행
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
 
     }
 
-    // 가격 업데이트 함수
-    function updateTotalPrice() {
-        const sumPrice = document.getElementById('sumPrice');
-        const productPriceElement = document.getElementById('product_price');
-        const productPrice = parseFloat(productPriceElement.textContent.replace(/[^0-9.-]+/g, ''));
-        let total = productPrice;
 
-        // 모든 수량 입력란을 가져와서 가격을 합산
-        const productCounts = document.querySelectorAll('input[name="basketCount"]');
-        productCounts.forEach(function (countInput) {
-            const count = parseInt(countInput.value, 10);
-            total += productPrice * count;
-        });
-
-        // 합산된 가격을 포맷하여 표시
-        sumPrice.textContent = 'TOTAL ₩ ' + formatPrice(total);
-    }
-
-    // formatPrice 함수 정의
-    function formatPrice(price) {
-        return price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-    }
 </script>
+<!-- 구매하기 Json으로 데이터 전송 -->
+<script>
+    function sendBuy() {
+        // 선택한 옵션들 배열에 담기
+        const selectedProducts = [];
+        // 옵션 선택시 생성되는 div 개수와 div안에 input값 수량을 알아오기 위해 불러온다.
+        const productElements = document.querySelectorAll('.selectedProductName');
+        const optionElements = document.querySelectorAll('.selectedProductOption');
+
+        /* 생성되는 각각의 옵션별로의 옵션코드와 상품수량을 알아오기위해 productElements.length를 이용했다. */
+        for (let i = 0; i < productElements.length; i++) {
+            /* option의 name 속성값에 optionCode를 넣어놔서 각각 옵션의 name 속성을 불러온다. */
+            const optionCode = optionElements[i].getAttribute('name');
+            console.log(optionCode);
+            const count = productElements[i].querySelector('input[name="basketCount"]').value;
+
+            selectedProducts.push(
+                optionCode,
+                count
+            );
+        }
+
+        // JSON 형식으로 데이터를 문자열로 변환
+        const jsonData = JSON.stringify(selectedProducts);
+        console.log(selectedProducts);
+
+        // 서버로 데이터를 전송
+        fetch('/order1/page1', {
+            method: 'POST',
+            body: jsonData,
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        })
+            .then(response => response.text())
+            .then(data => {
+                // 서버 응답에 대한 처리를 수행합니다.
+                console.log(data); // 서버 응답 데이터가 잘 들어왔는지 콘솔로 확인 또는 다른 처리 수행
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+</script>
+
 </body>
 </html>
