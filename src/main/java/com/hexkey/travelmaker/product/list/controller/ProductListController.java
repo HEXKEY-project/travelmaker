@@ -23,9 +23,9 @@ public class ProductListController {
     }
 
     @GetMapping("/supList")
-    public String selectSuperCateList(@RequestParam("categoryCode") int categoryCode, @RequestParam(defaultValue = "1") int page, Model model) {
+    public String selectSuperCateList(@RequestParam("categoryCode") int categoryCode, Model model) {
 
-        Map<String, Object> supCateProductListAndPaging = productListService.selectSuperCateList(categoryCode, page);
+        Map<String, Object> supCateProductListAndPaging = productListService.selectSuperCateList(categoryCode);
 
         ProductCategoryDTO categoryName = productListService.selectCategoryName(categoryCode);
 

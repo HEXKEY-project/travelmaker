@@ -1,4 +1,4 @@
-package com.hexkey.travelmaker.order.yongmin.dto;
+package com.hexkey.travelmaker.order.orderpage.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,13 +7,13 @@ import lombok.ToString;
 @Getter @Setter @ToString
 public class ProductDTO {
 
-    long productSeq;
+    int productSeq;
     String productName;
-    long price;
+    int price;
     String registeredDate;
     String modifiedDate;
-    long categoryCode;
-    String serialNo;
+    int categoryCode;
+    int serialNo;
     String orderableStatus;
 
 }

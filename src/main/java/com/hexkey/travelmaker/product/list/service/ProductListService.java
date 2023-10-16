@@ -1,7 +1,5 @@
 package com.hexkey.travelmaker.product.list.service;
 
-import com.hexkey.travelmaker.common.migi.paging.Pagenation;
-import com.hexkey.travelmaker.common.migi.paging.SelectCriteria;
 import com.hexkey.travelmaker.product.list.dao.ProductListMapper;
 import com.hexkey.travelmaker.product.regist.dto.ProductCategoryDTO;
 import com.hexkey.travelmaker.product.regist.dto.ProductDTO;
@@ -23,21 +21,15 @@ public class ProductListService {
     }
 
 
-    public Map<String, Object> selectSuperCateList(int categoryCode, int page) {
+    public Map<String, Object> selectSuperCateList(int categoryCode) {
 
         int totalCount = productListMapper.selectProductTotalCount(categoryCode);
         log.info("product total count : {}", totalCount);
 
-        int limit = 9;
-        int buttonAmount = 5;
-        SelectCriteria selectCriteria = Pagenation.getSelectCriteria(page, totalCount, limit, buttonAmount);
-        log.info("product list selectCriteria : {}", selectCriteria);
-
-        List<ProductDTO> productList = productListMapper.selectSuperCateList(categoryCode, selectCriteria);
+        List<ProductDTO> productList = productListMapper.selectSuperCateList(categoryCode);
         log.info("productList : {}", productList);
 
         Map<String, Object> productListAndPaging = new HashMap<>();
-        productListAndPaging.put("paging", selectCriteria);
         productListAndPaging.put("productList", productList);
 
         return productListAndPaging;
@@ -56,16 +48,10 @@ public class ProductListService {
         int totalCount = productListMapper.selectProductTotalCount(categoryCode);
         log.info("product total count : {}", totalCount);
 
-        int limit = 9;
-        int buttonAmount = 5;
-        SelectCriteria selectCriteria = Pagenation.getSelectCriteria(page, totalCount, limit, buttonAmount);
-        log.info("product list selectCriteria : {}", selectCriteria);
-
-        List<ProductDTO> productList = productListMapper.selectSubCateList(categoryCode, selectCriteria);
+        List<ProductDTO> productList = productListMapper.selectSubCateList(categoryCode);
         log.info("productList : {}", productList);
 
         Map<String, Object> productListAndPaging = new HashMap<>();
-        productListAndPaging.put("paging", selectCriteria);
         productListAndPaging.put("productList", productList);
 
         return productListAndPaging;
@@ -77,16 +63,10 @@ public class ProductListService {
         int totalCount = productListMapper.selectProductTotalCount(categoryCode);
         log.info("product total count : {}", totalCount);
 
-        int limit = 9;
-        int buttonAmount = 5;
-        SelectCriteria selectCriteria = Pagenation.getSelectCriteria(page, totalCount, limit, buttonAmount);
-        log.info("product list selectCriteria : {}", selectCriteria);
-
-        List<ProductDTO> productList = productListMapper.selectLowestCateList(categoryCode, selectCriteria);
+        List<ProductDTO> productList = productListMapper.selectLowestCateList(categoryCode);
         log.info("productList : {}", productList);
 
         Map<String, Object> productListAndPaging = new HashMap<>();
-        productListAndPaging.put("paging", selectCriteria);
         productListAndPaging.put("productList", productList);
 
         return productListAndPaging;

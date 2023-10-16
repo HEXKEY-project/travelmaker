@@ -1,10 +1,10 @@
-package com.hexkey.travelmaker.order.yongmin.dto;
+package com.hexkey.travelmaker.order.orderpage.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Date;
+
 
 @Getter @Setter @ToString
 public class OrderDTO {
@@ -19,4 +19,8 @@ public class OrderDTO {
     private long productPrice; // not null
     private long shipPrice; // not null
     private long mileageDiscountPrice; // not null
+
+    private MemberDTO2 memberDTO;
+    private PaymentDTO paymentDTO;
+    private OrderDetailDTO orderDetailDTO;
 }

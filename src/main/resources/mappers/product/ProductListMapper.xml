@@ -104,6 +104,7 @@
                                           CATEGORY_CODE
                                       FROM TBL_PRODUCT_CATEGORY
                                       WHERE REF_CATEGORY_CODE = #{ categoryCode })
+          AND B.FILE_TYPE = 'productImage'
     </select>
 
     <select id="selectSubCateList" resultMap="generalProductResultMap">
@@ -129,6 +130,7 @@
                                       CATEGORY_CODE
                                   FROM TBL_PRODUCT_CATEGORY
                                   WHERE REF_CATEGORY_CODE = #{ categoryCode })
+          AND B.FILE_TYPE = 'productImage'
     </select>
 
     <select id="selectLowestCateList" resultMap="generalProductResultMap">
@@ -154,6 +156,7 @@
                                       CATEGORY_CODE
                                   FROM TBL_PRODUCT_CATEGORY
                                   WHERE CATEGORY_CODE = #{ categoryCode })
+          AND B.FILE_TYPE = 'productImage'
     </select>
 
 </mapper>
