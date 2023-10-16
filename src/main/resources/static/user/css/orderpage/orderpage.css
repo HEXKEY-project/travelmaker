@@ -1,5 +1,13 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+#temp {
+      margin-left: 20px;
+}
+
+.star {
+      color: #3971FF;
+}
+
 #point_use_button:hover {
       cursor: pointer;
 }
@@ -23,8 +31,7 @@
 }
 
 .tail {
-      background-color: #f2f2f2;
-      padding: 0px;
+      color: #5084ff;;
 }
 
 .title {
@@ -119,7 +126,7 @@ hr {
 }
 
 .main {
-      width: 900px;
+      width: 800px;
       margin: 0 auto;
       border-left: 1px solid #d7d5d5;
       border-right: 1px solid #d7d5d5;
@@ -127,7 +134,7 @@ hr {
 
 h2 {
       font-size: 20px;
-      font-weight: 500;
+      font-weight: bold;
 }
 
 #title h2{
@@ -144,6 +151,7 @@ h2 {
       margin: 0;
       padding: 15px;
       color: white;
+      font-weight: 100;
 }
 
 .area {
@@ -160,15 +168,15 @@ h2 {
 }
 
 #input_ship1, #sample4_roadAddress, #sample4_detailAddress {
-      width: 652px;
+      width: 600px;
 }
 
 .input_phone {
-      width: 194px;
+      width: 180px;
 }
 
 .input_email {
-      width: 304px;
+      width: 280px;
 }
 
 

@@ -4,6 +4,7 @@ import com.hexkey.travelmaker.order.orderpage.dto.OrderFormDTO;
 import com.hexkey.travelmaker.order.orderpage.dto.ProductDTO;
 import com.hexkey.travelmaker.order.orderpage.dao.OrderPageMapper;
 import com.hexkey.travelmaker.order.orderpage.dto.OrderDTO;
+import com.hexkey.travelmaker.order.orderpage.dto.ShipDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class OrderPageService {
 
     private final OrderPageMapper orderPageMapper;
+
     @Autowired
     public OrderPageService(OrderPageMapper orderPageMapper) {
         this.orderPageMapper = orderPageMapper;
@@ -46,7 +48,7 @@ public class OrderPageService {
         int result = orderPageMapper.insertOrder(orderDTO);
         String resultMessage = "";
 
-        if(result > 0) {
+        if (result > 0) {
             resultMessage = "데이터 입력 완료!";
         } else {
             resultMessage = "데이터 입력 실패!";
@@ -58,7 +60,15 @@ public class OrderPageService {
 
     public Long insertFormOrder(OrderFormDTO orderFormDTO) {
 
+        System.out.println(orderFormDTO);
+
         Long result = orderPageMapper.insertFormOrder(orderFormDTO);
+
+        System.out.println(orderFormDTO);
+
+        System.out.println(orderFormDTO);
+        Long resultShip = orderPageMapper.insertFormShip(orderFormDTO);
+        System.out.println(orderFormDTO);
 
         Long currentCode = orderFormDTO.getOrderCode();
         System.out.println("currentCode : " + currentCode);
@@ -67,12 +77,20 @@ public class OrderPageService {
 
     }
 
-    public OrderDTO selectCurrentOrder(Long currentCode) {
+    public Map<String,Object> selectCurrentOrder(Long currentCode) {
         OrderDTO selectCurrentOrder = orderPageMapper.selectCurrentOrder(currentCode);
-        System.out.println("selectCurrentOrder : " + selectCurrentOrder);
-        return selectCurrentOrder;
-    }
+        System.out.println("서비스단 오더 출력 : " + selectCurrentOrder);
 
+        ShipDTO selectCurrentShip = orderPageMapper.selectCurrentShip(currentCode);
+        System.out.println("서비스단 배송 출력 : " + selectCurrentShip);
+
+        Map<String,Object> selectSuccessMap = new HashMap<>();
+
+        selectSuccessMap.put("selectCurrentOrder", selectCurrentOrder);
+        selectSuccessMap.put("selectCurrentShip", selectCurrentShip);
+
+        return selectSuccessMap;
+    }
 
 
 }
