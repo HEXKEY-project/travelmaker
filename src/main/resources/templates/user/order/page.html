@@ -139,26 +139,29 @@
                 </div>
                 <div id="product_body">
                     <div style="display: flex">
-                        <div class="contents" id="contents_product">
-                            <img src="https://i.namu.wiki/i/4nXN8kJ3k8HTrDl3IUnx7HEauMY4_crkNiwh_f4-wPj2zny5yMDQp2qaOWSopSj40SfMy2HaDyY_h_WkERYRUQ.webp"
-                                 width="100px">
-                        </div>
-                        <div id="temp">
-                            <h2>
-                                <div th:text="${' [ ' + productName + ' ] ' }"></div>
-                                <input name="productName" type="hidden" th:value="${ productName }">
-                            </h2>
+                        <div class="contents" id="contents_product" th:each="productData : ${productDatas}">
+                            <div id="div1">
+                                <div th:text="${'상품이름 : ' +  productData.get('productName') }"></div>
+                                <input name="productName" type="hidden" th:value="${ productData.get('productName')}">
+                                <br>
+                            </div>
 
-                            <div th:text="${'옵션 : ( ' + optionName + ' ) ' }"></div>
-                            <input name="optionName" type="hidden" th:value="${ optionName }">
-                            <div th:text="${'수량 : ' + count + ' 개 ' }"></div>
-                            <input name="count" type="hidden" th:value="${ count }">
+                            <div id="div2">
+                                <div th:text="${'옵션 : ' + productData.get('optionName')}"></div>
+                                <input name="optionName" type="hidden" th:value="${ productData.get('optionName') }">
+                                <br>
+                            </div>
+                            <div id="div3">
+                                <div th:text="${'개수 : ' + productData.get('count')}"></div>
+                                <input name="count" type="hidden" th:value="${ productData.get('count') }">
+                                <br>
+                            </div>
                         </div>
                     </div>
 
                     <div class="tail" id="shipFee_product">
-                        <h3 th:text="${'상품금액 : ' + productPrice  + '원'}"></h3>
-                        <h3 th:text="${'배송비 : ' + shipPrice  + '원'}"></h3>
+                        <h3 th:text="${'상품금액 : ' + productPrices  + '원'}"></h3>
+                        <h3 th:text="${'배송비 : ' + shipPrices  + '원'}"></h3>
                     </div>
                 </div>
 
@@ -203,14 +206,14 @@
                     <table>
                         <tr>
                             <th>상품가격</th>
-                            <td th:text="${ productPrice }"></td>
-                            <input name="productPrice" type="hidden" th:value="${ productPrice }">
+                            <td th:text="${ productPrices }"></td>
+                            <input name="productPrice" type="hidden" th:value="${ productPrices }">
 
                         </tr>
                         <tr>
                             <th>배송비</th>
-                            <td th:text="${ shipPrice }"></td>
-                            <input name="shipPrice" type="hidden" th:value="${ shipPrice }">
+                            <td th:text="${ shipPrices }"></td>
+                            <input name="shipPrice" type="hidden" th:value="${ shipPrices }">
                         </tr>
                         <tr>
                             <th>적립금 할인</th>
@@ -219,8 +222,8 @@
                         </tr>
                     </table>
                     <div class="tail">
-                        <h3 th:text="${'최종 결제 금액 : ' + totalPrice + '원'}"></h3>
-                        <input name="totalPrice" type="hidden" th:value="${ totalPrice }">
+                        <h3 th:text="${'최종 결제 금액 : ' + totalPrices + '원'}"></h3>
+                        <input name="totalPrice" type="hidden" th:value="${ totalPrices }">
 
                     </div>
                 </div>

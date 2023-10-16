@@ -1,6 +1,6 @@
 package com.hexkey.travelmaker.search.service;
 
-import com.hexkey.travelmaker.order.yongmin.dto.ProductDTO;
+import com.hexkey.travelmaker.product.regist.dto.ProductDTO;
 import com.hexkey.travelmaker.search.dao.SearchMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

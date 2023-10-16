@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<!--========== '주문하기/장바구니 담기' 클릭 시 받아야 하는 정보  -->
+<form action="/order/page" method="post">
+    첫번째 옵션코드<input name="codeAndCountList[0].optionCode" type="number">
+    수량<input name="codeAndCountList[0].count" type="number">
+
+    두번째 옵션코드<input name="codeAndCountList[1].optionCode" type="number">
+    수량<input name="codeAndCountList[1].count" type="number">
+
+
+    <input type="submit" value="주문하기">
+</form>
+
+<!--(현재 사용자 정보)-->
+
+
+
+<!--========== '장바구니' 클릭 시 받아야 하는 정보 (현재 사용자 정보) -->
+<!--(현재 사용자 정보)-->
+
+
+
+<br>
+
+
+
+
+
+<form id="myForm">
+    <input name="t1" type="text" value="여기 쓰시오.">
+    <input name="t2" type="number" value="5">
+    <input name="test" type="submit" value="api방식 테스트">
+</form>
+
+<div id="result"></div>
+
+<script>
+    const a = document.getElementById('myForm')
+
+
+    a.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        console.log(formData);
+
+        fetch('/order/test', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('result').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+
+<br>
+
+<input onclick="location.href='/map/map'" type="button" value="MAP 페이지 이동">
+<input onclick="location.href='/admin/order'" type="button" value="adminOrder 페이지 이동">
+<input onclick="location.href='/basket/basket'" type="button" value="basket 페이지 이동">
+
+</body>
+</html>

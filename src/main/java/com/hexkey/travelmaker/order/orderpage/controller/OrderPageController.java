@@ -28,6 +28,11 @@ public class OrderPageController {
         this.orderPageService = orderPageService;
     }
 
+    @GetMapping("/")
+    public String orderMain () {
+        return "orderMain";
+    }
+
 
     //----------------------------- 고객 파트 ------------------------------------//
     @PostMapping("/order/orderForm")
