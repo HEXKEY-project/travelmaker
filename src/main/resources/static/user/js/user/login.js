@@ -21,24 +21,42 @@ function checkCapsLock(event)  {
     }
 }
 
+// 아이디 저정
+function rememberId() {
+    console.log("아이디 체크 여부 확인 메시지 ")
 
-// 아이디 찾기 버튼에 대한 클릭 이벤트
-function findUserId() {
+    let isChecked = document.getElementById('saveId').checked;
 
-    var name = document.getElementById("inputName_id").value;
-    var phone = document.getElementById("inputPhone_id").value;
-    var findIdResult = document.getElementById("findIdResult").value;
-
+    if (isChecked) {
+        let username = document.getElementById('memberId').value;
+        document.cookie = "memberName=" + username + "; expires=Thu, 18 Dec 2022 12:00:00 UTC; path=/;";
+    } else {
+        document.cookie = "memberName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
 }
 
-// 휴대폰 or 이메일로 비밀번호 찾기 선택 시 보이는 화면
-function find_Pwd(num) {
-    if (num == '1') {
-        document.getElementById("findPwdByPhone").style.display = "";
-        document.getElementById("findPwdByEmail").style.display = "none";
-    } else {
-        document.getElementById("findPwdByPhone").style.display = "none";
-        document.getElementById("findPwdByEmail").style.display = "";
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    let memberName = getCookie("memberName");
+    if (memberName !== "") {
+        document.getElementById('memberId').value = memberName;
+        document.getElementById('saveId').checked = true;
     }
+});
+
+function getCookie(saveId) {
+    let name = saveId + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 }
