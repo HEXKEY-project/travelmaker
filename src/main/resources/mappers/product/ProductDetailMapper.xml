@@ -48,7 +48,6 @@
              , ORDERABLE_STATUS
           FROM TBL_PRODUCT
          WHERE PRODUCT_SEQ = #{ productSeq }
-           AND ORDERABLE_STATUS = '판매중'
     </select>
 
     <select id="selectProductOption" resultMap="ProductOptionResultMap">
