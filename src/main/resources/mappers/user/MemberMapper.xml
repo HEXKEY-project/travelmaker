@@ -8,7 +8,7 @@
         SELECT MEMBER_ID
         FROM TBL_MEMBER
         WHERE MEMBER_STATUS = 'Y'
-        AND MEMBER_ID = #{ memberId }
+          AND MEMBER_ID = #{ memberId }
     </select>
 
     <resultMap id="memberResultMap" type="com.hexkey.travelmaker.user.dto.MemberMDTO">
@@ -19,11 +19,10 @@
         <result property="memberId" column="MEMBER_ID"/>
         <result property="memberPwd" column="MEMBER_PWD"/>
         <result property="smsYn" column="SMS_YN"/>
-        <result property="emailYn" column="EMAIL_YN"/>
         <result property="mileage" column="MILEAGE"/>
         <result property="policyYn" column="POLICY_YN"/>
         <result property="privateYn" column="PRIVATE_YN"/>
-        <result property="promotionYn" column="PROMOTION_YN"/>
+        <result property="emailYn" column="EMAIL_YN"/>
         <result property="gradeCode" column="GRADE_CODE"/>
         <result property="loginType" column="LOGIN_TYPE"/>
         <result property="tel" column="TEL"/>
@@ -59,18 +58,17 @@
     <insert id="insertMember">
         INSERT INTO TBL_MEMBER
         (
-          MEMBER_CODE
+            MEMBER_CODE
         , MEMBER_NAME
         , PHONE
         , EMAIL
         , MEMBER_ID
         , MEMBER_PWD
-        , SMS_YN
-        , EMAIL_YN
         , MILEAGE
         , POLICY_YN
         , PRIVATE_YN
-        , PROMOTION_YN
+        , SMS_YN
+        , EMAIL_YN
         , GRADE_CODE
         , LOGIN_TYPE
         , TEL
@@ -79,18 +77,17 @@
         )
         VALUES
             (
-              SEQ_MEMBER_CODE.NEXTVAL
+                SEQ_MEMBER_CODE.NEXTVAL
             , #{ memberName }
             , #{ phone }
             , #{ email }
             , #{ memberId }
             , #{ memberPwd }
-            , #{ smsYn }
-            , #{ emailYn }
             , #{ mileage }
             , #{ policyYn }
             , #{ privateYn }
-            , #{ promotionYn }
+            , #{ smsYn }
+            , #{ emailYn }
             , #{ gradeCode }
             , #{ loginType }
             , #{ tel }
@@ -103,7 +100,7 @@
     <insert id="insertMemberAdr">
         INSERT INTO TBL_ADDRESS
         (
-          ADDRESS_CODE
+            ADDRESS_CODE
         , ADDRESS_NAME
         , POSTAL_CODE
         , MEMBER_CODE
@@ -113,7 +110,7 @@
         )
         VALUES
             (
-              SEQ_ADDRESS_CODE.NEXTVAL
+                SEQ_ADDRESS_CODE.NEXTVAL
             , #{ addressName }
             , #{ postalCode }
             , #{ memberCode }
@@ -127,30 +124,29 @@
     <insert id="insertMemberRole">
         INSERT INTO TBL_MEMBER_AUTHORITY
         (
-          AUTHORITY_CODE
+            AUTHORITY_CODE
         , MEMBER_CODE
         )
         VALUES
             (
-              1
+                1
             , SEQ_MEMBER_CODE.CURRVAL
             )
     </insert>
 
     <select id="findByMemberId" resultMap="memberResultMap">
         SELECT
-               A.MEMBER_CODE
+            A.MEMBER_CODE
              , A.MEMBER_NAME
              , A.PHONE
              , A.EMAIL
              , A.MEMBER_ID
              , A.MEMBER_PWD
-             , A.SMS_YN
-             , A.EMAIL_YN
              , A.MILEAGE
              , A.POLICY_YN
              , A.PRIVATE_YN
-             , A.PROMOTION_YN
+             , A.SMS_YN
+             , A.EMAIL_YN
              , A.GRADE_CODE
              , A.LOGIN_TYPE
              , A.TEL
@@ -173,6 +169,21 @@
                  LEFT JOIN TBL_MEMBER_AUTHORITY C ON (A.MEMBER_CODE = C.MEMBER_CODE)
                  LEFT JOIN TBL_AUTHORITY D ON (C.AUTHORITY_CODE = D.AUTHORITY_CODE)
         WHERE MEMBER_STATUS = 'Y'
+          AND MEMBER_ID = #{ memberId }
+    </select>
+
+    <select id="findId" parameterType="String" resultType="String">
+        SELECT MEMBER_ID
+        FROM TBL_MEMBER
+        WHERE MEMBER_NAME = #{ memberName }
+          AND (PHONE = #{ phone }
+            OR EMAIL = #{ email })
+    </select>
+
+    <select id="findPwd">
+        SELECT MEMBER_ID
+        FROM TBL_MEMBER
+        WHERE MEMBER_STAT = 'Y'
           AND MEMBER_ID = #{ memberId }
     </select>
 

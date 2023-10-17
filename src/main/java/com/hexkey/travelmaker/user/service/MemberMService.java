@@ -1,6 +1,7 @@
 package com.hexkey.travelmaker.user.service;
 
 import com.hexkey.travelmaker.common.exception.MemberRegistException;
+import com.hexkey.travelmaker.member.admin.dto.MemberDTO;
 import com.hexkey.travelmaker.user.dao.MemberMMapper;
 import com.hexkey.travelmaker.user.dto.AddressDTO;
 import com.hexkey.travelmaker.user.dto.MemberMDTO;
@@ -50,5 +51,24 @@ public class MemberMService {
         if (!(result1 > 0 && result2 > 0 && result3 > 0)) throw new MemberRegistException("회원가입에 실패했습니다.");
 
     }
+
+    public void pwdUpdate(MemberDTO dto) {
+    }
+
+    public int pwdCheck(MemberDTO dto) {
+        return memberMMapper.pwdCheck(dto);
+    }
+
+//     아이디 찾기
+//    public String findId(String memberName, String phone, String email) {
+//
+//        return memberMMapper.findId(memberName, phone, email);
+//
+//    }
+//
+//    // 비밀번호 찾기
+//    public String int findPwd(MemberDTO dto) {
+//
+//    }
 
 }

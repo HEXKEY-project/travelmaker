@@ -256,3 +256,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    var smsCheckbox = document.getElementById("promotion1");
+    var smsHiddenInput = document.getElementById("promo1");
+    smsCheckbox.addEventListener("change", function() {
+        smsHiddenInput.value = this.checked ? "Y" : "N";
+    });
+
+    var emailCheckbox = document.getElementById("promotion2");
+    var emailHiddenInput = document.getElementById("promo2");
+    emailCheckbox.addEventListener("change", function() {
+        emailHiddenInput.value = this.checked ? "Y" : "N";
+    });
+});

@@ -19,12 +19,11 @@ public class MemberMDTO implements UserDetails {
     private String email;           // 이메일
     private String memberId;        // 회원 아이디
     private String memberPwd;       // 비밀번호
-    private String smsYn;           // sms 수신 여부
-    private String emailYn;         // email 수신 여부
     private int mileage;            // 적립금
     private String policyYn;        // 이용약관 동의 여부
     private String privateYn;       // 개인정보 동의 여부
-    private String promotionYn;     // 쇼핑정보 동의 여부
+    private String smsYn;           // sms 수신 여부
+    private String emailYn;         // email 수신 여부
     private int gradeCode;          // 회원 등급
     private String loginType;       // 로그인 경로
     private String tel;             // 일반전화
@@ -38,7 +37,7 @@ public class MemberMDTO implements UserDetails {
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> roles = new HashSet<>();
-        for(MemberRoleDTO role : memberRoleList) {
+        for (MemberRoleDTO role : memberRoleList) {
             roles.add(new SimpleGrantedAuthority(role.getAuthority().getName()));
         }
         return roles;
