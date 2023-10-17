@@ -227,15 +227,17 @@
         // 서버로 데이터를 전송
         fetch('/order1/page1', {
             method: 'POST',
-            body: jsonData,
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
-            }
+            },
+            body: jsonData
+
         })
             .then(response => response.text())
             .then(data => {
                 // 서버 응답에 대한 처리를 수행합니다.
                 console.log(data); // 서버 응답 데이터가 잘 들어왔는지 콘솔로 확인 또는 다른 처리 수행
+                location.href = `/basket1/basket1?data=${data}`;
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -245,50 +247,57 @@
 
 
 </script>
-<!-- 구매하기 Json으로 데이터 전송 -->
+
+<!-- 구매하기 form태그 생성하여 submit 시키기 -->
 <script>
     function sendBuy() {
-        // 선택한 옵션들 배열에 담기
-        const selectedProducts = [];
-        // 옵션 선택시 생성되는 div 개수와 div안에 input값 수량을 알아오기 위해 불러온다.
+        const form = document.createElement("form");
+        form.action = "/order3/page3"; // 서버 엔드포인트 URL 설정
+        form.method = "POST";
+
+        // 선택한 옵션들의 정보를 수집
+        const selectedOptions = [];
         const productElements = document.querySelectorAll('.selectedProductName');
         const optionElements = document.querySelectorAll('.selectedProductOption');
 
-        /* 생성되는 각각의 옵션별로의 옵션코드와 상품수량을 알아오기위해 productElements.length를 이용했다. */
         for (let i = 0; i < productElements.length; i++) {
-            /* option의 name 속성값에 optionCode를 넣어놔서 각각 옵션의 name 속성을 불러온다. */
             const optionCode = optionElements[i].getAttribute('name');
-            console.log(optionCode);
             const count = productElements[i].querySelector('input[name="basketCount"]').value;
 
-            selectedProducts.push(
-                optionCode,
-                count
-            );
+            // 선택한 옵션을 객체로 저장
+            const selectedOption = {
+                optionCode: optionCode,
+                count: count
+            };
+
+            selectedOptions.push(selectedOption);
         }
 
-        // JSON 형식으로 데이터를 문자열로 변환
-        const jsonData = JSON.stringify(selectedProducts);
-        console.log(selectedProducts);
+        // 수집된 옵션 정보를 JSON 형식으로 변환
+        const jsonData = JSON.stringify(selectedOptions);
 
-        // 서버로 데이터를 전송
-        fetch('/order1/page1', {
-            method: 'POST',
-            body: jsonData,
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8'
-            }
-        })
-            .then(response => response.text())
-            .then(data => {
-                // 서버 응답에 대한 처리를 수행합니다.
-                console.log(data); // 서버 응답 데이터가 잘 들어왔는지 콘솔로 확인 또는 다른 처리 수행
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        // 데이터를 폼으로 전송할 hidden input 엘리먼트를 생성하고 추가
+        const dataInput = document.createElement("input");
+        dataInput.type = "hidden";
+        dataInput.name = "selectedOptionsData"; // 이 이름을 서버에서 사용하여 데이터를 읽음
+        dataInput.value = jsonData;
+
+        // 폼에 input 엘리먼트를 추가
+        form.appendChild(dataInput);
+
+        // 폼을 현재 페이지에 추가 (optional: 보이지 않도록 스타일을 설정할 수 있음)
+        form.style.display = "none";
+
+        // 폼을 현재 문서에 추가
+        document.body.appendChild(form);
+
+        // 폼을 제출 (서버로 데이터를 전송)
+        form.submit();
+
+        // 로깅 또는 콘솔 출력 (선택적)
+        console.log("Buy button clicked");
+        console.log("Selected options data: " + jsonData);
     }
-
 </script>
 
 </body>

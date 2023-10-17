@@ -62,7 +62,6 @@ div {
 .p {
     width: 102px;
     height: 70px;
-    padding: 16px;
     text-align: center;
     line-height: 6;
     gap: var(--1, 8px);
@@ -79,4 +78,137 @@ div {
     font-style: normal;
     font-weight: 400;
     letter-spacing: 0.17px;
+}
+
+:root {
+    --components-input-outlined-enabled-border: rgba(0, 0, 0, 0.23);
+    --text-disabled : rgba(0, 0, 0, 0.38);
+}
+
+.list_tbl select {
+    width: 184px;
+    margin-top: 16px;
+    margin-left: 16px;
+    height: 40px;
+    padding: 10px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+
+    border-radius: var(--borderRadius, 4px);
+    border: 1px solid var(--components-input-outlined-enabled-border, rgba(0, 0, 0, 0.23));
+
+    color: var(--text-disabled, rgba(0, 0, 0, 0.38));
+
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Noto Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 171.429% */
+    letter-spacing: 0.15px;
+}
+
+#searchWord {
+    margin-left: 16px;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Noto Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 171.429% */
+    letter-spacing: 0.15px;
+}
+
+#searchValue {
+    margin-left: 16px;
+    margin-top: 16px;
+    height: 40px;
+    width: 394px;
+
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+
+    border-radius: var(--borderRadius, 4px);
+    border: 1px solid var(--components-input-outlined-enabled-border, rgba(0, 0, 0, 0.23));
+    background: #FAFAFA;
+}
+
+#productPrice {
+    margin-left: 16px;
+    margin-top: 16px;
+}
+#productPrice select {
+    width: 184px;
+    height: 40px;
+    padding: 10px 12px;
+    flex-direction: column;
+    align-items: center;
+
+
+    border-radius: var(--borderRadius, 4px);
+    border: 1px solid var(--components-input-outlined-enabled-border, rgba(0, 0, 0, 0.23));
+
+    color: var(--text-disabled, rgba(0, 0, 0, 0.38));
+
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Noto Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 171.429% */
+    letter-spacing: 0.15px;
+}
+
+#registDateBox {
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+#registDateBox input {
+    border-radius: var(--borderRadius, 4px);
+    border: 1px solid var(--components-input-outlined-enabled-border, rgba(0, 0, 0, 0.23));
+
+    color: var(--text-disabled, rgba(0, 0, 0, 0.38));
+
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Noto Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 171.429% */
+    letter-spacing: 0.15px;
+}
+
+#search {
+    margin-left: 650px;
+    margin-top: 24px;
+
+    display: flex;
+    padding: var(--1, 8px) 16px;
+    align-items: flex-start;
+    gap: var(--borderRadius, 4px);
+
+    color: #FFF;
+    text-align: right;
+    font-feature-settings: 'clig' off, 'liga' off;
+
+    /* Button */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+
+    border-radius: var(--1, 8px);
+    background: #0075BD;
+}
+
+.price {
+    width: 180px;
+    height: 40px;
+
+    border-radius: var(--borderRadius, 4px);
+    border: 1px solid var(--components-input-outlined-enabled-border, rgba(0, 0, 0, 0.23));
 }
