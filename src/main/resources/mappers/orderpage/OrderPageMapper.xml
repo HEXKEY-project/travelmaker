@@ -191,6 +191,42 @@
 
     </select>
 
+    <insert id="insertFormDetail">
+        INSERT INTO TBL_ORDER_DETAIL
+        (
+        ORDER_CODE
+        ,PRODUCT_COUNT
+        ,ALL_PRODUCT_PRICE
+        ,OPTION_CODE
+        )
+        VALUES
+        (
+        #{ orderCode }
+        ,#{ productCount }
+        ,#{ allProductPrice }
+        ,#{ optionCode }
+        )
+    </insert>
+
+    <insert id="insertPayment">
+        INSERT INTO TBL_PAYMENT
+        (
+        PAY_CODE
+        ,PAY_STATUS
+        ,PAY_DATE
+        ,ORDER_CODE
+        ,PAY_API_CODE
+        )
+        VALUES
+        (
+        SEQ_PAY_NO.NEXTVAL
+        ,#{ payStatus }
+        ,TO_DATE('${orderDate}', 'YYYY-MM-DD')
+        ,#{ orderCode }
+        ,#{ payApiCode }
+        )
+    </insert>
+
 
 
 </mapper>

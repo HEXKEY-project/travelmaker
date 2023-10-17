@@ -22,7 +22,7 @@ public class ProductOrderService {
 
     public List<Object> selectProducts(int[] optionCodes) {
 
-        System.out.println("옵션코드s : " +  optionCodes[1] );
+        System.out.println("옵션코드s : " +  optionCodes );
 
         List<ProductOptionDTO> selectProductOptions = new ArrayList<>();
         int[] productSeqs = new int[optionCodes.length];

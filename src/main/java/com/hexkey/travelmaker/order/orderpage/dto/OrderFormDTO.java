@@ -4,8 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter @Setter @ToString
 public class OrderFormDTO {
+    private List<String> optionCodes;
+    private List<String> counts;
+    private List<String> productPrices;
+
+    private String payApiCode;
+    private String payStatus;
 
     private Long orderCode;
 

@@ -1,18 +1,14 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+#picture {
+      width: 100px;
+      height: 100px;
+}
+
 #contents_product {
       display: flex;
 }
 
-#div1,#div3 {
-      width: 150px;
-      line-height: 40px;
-}
-
-#div2 {
-       width: 120px;
-       line-height: 40px;
- }
 
 .star {
       color: #3971FF;

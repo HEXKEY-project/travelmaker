@@ -53,6 +53,7 @@ public class ProductOrderController {
         int productPrices = 0;
         int shipPrices = 0;
         int totalPrices = 0;
+        int optionCode = 0;
 
         for (int i = 0; i < counts.length; i++) {
             Map<String, Object> productData = new HashMap<>();
@@ -60,16 +61,22 @@ public class ProductOrderController {
             productData.put("productName", productsList.get(i).getProductName());
             productData.put("optionName", optionsList.get(i).getOptionName());
             productData.put("count", counts[i]);
+            productData.put("optionCode", optionsList.get(i).getOptionCode());
+            productData.put("productPrice",  productsList.get(i).getPrice() * counts[i]);
 
             productDatas.add(productData);
             productPrices += productsList.get(i).getPrice() * counts[i];
         }
 
-        shipPrices = productPrices > 300000 ? 0 : 3000;
+        shipPrices = productPrices > 100000 ? 0 : 3000;
         totalPrices = productPrices + shipPrices;
 
         System.out.println("@@@@확인productDatas : " + productDatas);
 
+        System.out.println(productDatas.get(0));
+        System.out.println(productDatas.get(1));
+
+        model.addAttribute("productDatas", productDatas);
         model.addAttribute("productPrices", productPrices);
         model.addAttribute("shipPrices", shipPrices);
         model.addAttribute("totalPrices", totalPrices);
