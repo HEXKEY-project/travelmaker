@@ -24,6 +24,7 @@ public class MainController {
         model.addAttribute("newProductList", newProductList.get("productList"));
 
         return "/index";
+
     }
 
 //
