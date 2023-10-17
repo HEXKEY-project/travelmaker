@@ -3,17 +3,13 @@ input[typ=text] {
 }
 
 #wrapper {
-
     font-family: 'Noto Sans KR', sans-serif;
     margin: 164px auto;
     width: 960px;
-
 }
 
 #main-title {
-
     margin-bottom: 96px;
-
 }
 
 #sub-title {
