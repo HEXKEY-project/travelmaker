@@ -29,10 +29,10 @@ public class ProductListService {
         List<ProductDTO> productList = productListMapper.selectSuperCateList(categoryCode);
         log.info("productList : {}", productList);
 
-        Map<String, Object> productListAndPaging = new HashMap<>();
-        productListAndPaging.put("productList", productList);
+        Map<String, Object> supProductList = new HashMap<>();
+        supProductList.put("productList", productList);
 
-        return productListAndPaging;
+        return supProductList;
     }
 
     public ProductCategoryDTO selectCategoryName(int categoryCode) {
@@ -43,7 +43,7 @@ public class ProductListService {
     }
 
 
-    public Map<String, Object> selectSubCateList(int categoryCode, int page) {
+    public Map<String, Object> selectSubCateList(int categoryCode) {
 
         int totalCount = productListMapper.selectProductTotalCount(categoryCode);
         log.info("product total count : {}", totalCount);
@@ -51,14 +51,14 @@ public class ProductListService {
         List<ProductDTO> productList = productListMapper.selectSubCateList(categoryCode);
         log.info("productList : {}", productList);
 
-        Map<String, Object> productListAndPaging = new HashMap<>();
-        productListAndPaging.put("productList", productList);
+        Map<String, Object> subProductList = new HashMap<>();
+        subProductList.put("productList", productList);
 
-        return productListAndPaging;
+        return subProductList;
     }
 
 
-    public Map<String, Object> selectLowestCateList(int categoryCode, int page) {
+    public Map<String, Object> selectLowestCateList(int categoryCode) {
 
         int totalCount = productListMapper.selectProductTotalCount(categoryCode);
         log.info("product total count : {}", totalCount);
@@ -66,10 +66,10 @@ public class ProductListService {
         List<ProductDTO> productList = productListMapper.selectLowestCateList(categoryCode);
         log.info("productList : {}", productList);
 
-        Map<String, Object> productListAndPaging = new HashMap<>();
-        productListAndPaging.put("productList", productList);
+        Map<String, Object> lowProductList = new HashMap<>();
+        lowProductList.put("productList", productList);
 
-        return productListAndPaging;
+        return lowProductList;
     }
 
 
