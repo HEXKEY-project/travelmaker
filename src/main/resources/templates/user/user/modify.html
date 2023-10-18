@@ -2,8 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-<!--    <script type="text/javascript" src="/user/js/user/modify.js"></script>-->
-<!--    <link rel="stylesheet" type="text/css" href="/user/css/user/modify.css">-->
+    <link rel="stylesheet" type="text/css" href="/user/css/user/modify.css">
     <!-- 이메일 자동완성을 위해 추가-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -15,9 +14,8 @@
 
 </head>
 <body>
-<!--<div th:replace="common/user/mypageNav.html"></div>-->
-<!--<div th:replace="common/user/header.html"></div>-->
-
+<div th:replace="common/user/header.html"></div>
+<div th:replace="common/user/mypageNav.html"></div>
 
 <div class="modifyContainer">
     <form action="/user/modify" method="post">
@@ -59,11 +57,11 @@
         </li>
         <li class="telNumber">
             <label>일반전화</label>
-            <p id="tel" th:value="${ #authentication.principal.tel }"></p>
+            <input id="tel" name="tel" type="number" th:value="${ #authentication.principal.tel }">
         </li>
         <li class="phoneNumber">
             <label>휴대전화 *</label>
-            <p id="phone" name="phone" type="number" th:value="${ #authentication.principal.phone }"></p>
+            <input id="phone" name="phone" type="number" th:value="${ #authentication.principal.phone }">
 
         </li>
         <li class="regist-email">
@@ -103,11 +101,28 @@
     $searchZipCode.onclick = function () {
         new daum.Postcode({
             oncomplete: function (data) {
-                document.getElementById("zipCode").value = data.zonecode;
+                document.getElementById("zipCode").value = data.zcode;
                 document.getElementById("address1").value = data.address;
                 document.getElementById("address2").focus();
             }
         }).open();
+    }
+
+
+    // 정보 수정 버튼 클릭 시
+    if(document.getElementById("modifyMember")) {
+        const $update = document.getElementById("modifyMember");
+        $update.onclick = function() {
+            location.href = "/user/user/modify";
+        }
+    }
+
+    // 회원 탈퇴 버튼 클릭 시
+    if(document.getElementById("deleteMember")) {
+        const $update = document.getElementById("deleteMember");
+        $update.onclick = function() {
+            location.href = "/user/delete";
+        }
     }
 
 </script>

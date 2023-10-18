@@ -1,6 +1,9 @@
-.memberNav {
-    position: fixed;
-    transform: translate(-780px, -100px);
+body {
+    margin-top: 10px;
+    margin-left: 80px;
+    display: flex;
+    width: 1920px;
+
 }
 
 ul {

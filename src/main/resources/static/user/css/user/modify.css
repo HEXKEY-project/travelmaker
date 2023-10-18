@@ -1,10 +1,166 @@
-.modifyContainer {
-
-    margin-top: 110px;
+body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1920px;
-    margin-left: 600px;
+}
 
+.modifyContainer {
+    margin-top: 140px;
+}
+
+input{
+    border: 1px solid black;
+}
+
+#memberId, .password, .name, #zipCode, .address, .email {
+    border: 1px solid black;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 12px;
+    height: 45px;
+    width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+/* placeholder 글자 색 설정 */
+input::-webkit-input-placeholder {
+    color: #AAA;
+}
+
+/* 입력 칸 너비, 높이 설정(아이디, 비밀번호, 비밀번호 확인, 이름, 이메일, 주소) */
+#memberId {
+    width: 475px;
+    height: 25px;
+    outline: none;
+}
+.password, .name, .address, .email{
+    width: 550px;
+    height: 25px;
+    outline: none;
+}
+
+/* 여백 설정 */
+#memberId, .password, .name, .joinAddress, .tel, .phone, .sms-yn, .regist-email, .email-yn {
+    margin-top: 20px;
+}
+.address {
+    margin-top: 10px;
+}
+.check-agree {
+    margin-top: 50px;
+}
+
+/* 우편번호, 연락처 입력 칸 설정 */
+#zipCode {
+    height: 25px;
+    width: 170.5px;
+    outline: none;
+}
+
+/* 입력 칸 맞춤 설정 */
+
+#memberId, .email, .tel {
+    margin-left: 60.2px;
+}
+#pwd1, #phone {
+    margin-left: 46.3px;
+}
+#pwd2 {
+    margin-left: 14.5px;
+}
+.name, #zipCode {
+    margin-left: 74px;
+}
+.address {
+    margin-left: 116px;
+}
+.sms-yn, .email-yn {
+    display : flex;
+}
+.s-yn, .e-yn {
+    margin-top: 10px;
+    margin-left: 45.5px;
+}
+
+/* 약관 설정 */
+.police, .private, .promotion {
+    overflow-y: scroll;
+    width: 680px;
+    height: 100px;
+    border: 0.5px solid black;
+    font-size: 12px;
+}
+
+/* 회원가입 설정 */
+#joinBtn {
+    height: 40px;
+    width: 680px;
+    border: 0;
+    color: #fff;
+    border: 1px solid #000;
+    background: black;
+    margin-top: 40px;
+    margin-bottom: 15px;
+
+}
+
+/*transform : 선택 요소의 위치 조정*/
+/* 비밀번호 안내 문구 설정 */
+#pwdMessage {
+    transform: translate(10px, -205px);
+    position: absolute;
+    background: white;
+    z-index: 1;
+    margin-left: 120px;
+    margin-top: 10px;
+    width: 400px;
+    border: 1px solid black;
+}
+#pwdMessage:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: black transparent;
+    border-bottom: 0;
+    margin-left: -5px;
+    margin-bottom: -5px;
+}
+#pwdMessage p {
+    display: inline-block;
+    color: #767676;
+    font-size: 12px;
+    line-height: 1.6em;
+    padding-left: 10px;
+}
+#pwdMessage strong {
+    color: #da5b5b;
+}
+
+/* 아이디, 비밀번호 에러 문구 */
+#idError, #pwdError, #pwdError2 {
+    font-size: 12px;
+    color: red;
+    margin-top: 10px;
+    margin-left: 120px;
+}
+
+/* 주소 검색 버튼 설정 */
+#searchZipCode, #idCheck {
+    height: 31px;
+    margin-left: 10px;
+    border: 1px solid black;
+    background-color: #e7e4e4;
+    padding: 0 10px;
+}
+
+/* 연락처 스핀 버튼 설정 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
