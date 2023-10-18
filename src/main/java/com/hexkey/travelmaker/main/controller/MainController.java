@@ -12,12 +12,4 @@ public class MainController {
 
     }
 
-//
-//    @GetMapping("/")
-//    public String gotoSearch() {
-//
-//        return null;
-//    }
-
-
 }

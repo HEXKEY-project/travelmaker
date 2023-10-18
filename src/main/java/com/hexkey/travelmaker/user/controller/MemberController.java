@@ -9,13 +9,12 @@ import com.hexkey.travelmaker.user.service.MemberMService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-
 
 @Slf4j
 @Controller
@@ -80,11 +79,14 @@ public class MemberController {
         member.setMemberPwd(passwordEncoder.encode(member.getPassword()));
 
         log.info("Request regist member : {}", member);
+        log.info("Request regist address : {}", address);
 
         memberMService.registMember(member, address);
 
         rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.regist"));
 
+        log.info("member info : {}", member);
+        log.info("address info : {}", address);
         return "redirect:/";
 
     };
@@ -101,44 +103,23 @@ public class MemberController {
     @GetMapping("user/foundPwd")
     public void foundPwdPage() {}
 
-//    /* 비밀번호 찾기 결과 */
-//    @PostMapping("/findPwd")
-//    public String findPwdCheck(Model model, @RequestParam String memberName,
-//                               @RequestParam String memberId, MemberDTO dto){
-//
-//        try{
-//            dto.setMemberId(memberId);
-//            dto.setMemberName(memberName);
-//            int search = memberMService.pwdCheck(dto);
-//
-//            if(search == 0){
-//                model.addAttribute("message", "입력 정보가 잘못되었습니다. 다시 입력해주세요.");
-//            }
-//
-//            char[] charSet = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
-//                    'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
-//
-//            String tempPwd="";
-//            int idx = 0;
-//            for (int i = 0; i < 10; i++) {
-//                idx = (int) (charSet.length * Math.random());
-//                tempPwd += charSet[idx];
-//            }
-//
-//            dto.setMemberPwd(tempPwd);
-//            memberMService.pwdUpdate(dto);
-//            model.addAttribute("tempPwd", tempPwd);
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            model.addAttribute("message", "오류가 발생했습니다.");
-//        }
-//        return "member/find_pwd_result";
-//    }
-
     @GetMapping("/user/mypage")
-    public void mypagePage() {}
+    public String mypagePage() {
+
+        return "user/user/mypage";
+
+    }
+
+//    @GetMapping("/user/modify")
+//    public void modifyPage(@AuthenticationPrincipal MemberDTO member) {}
+
+    @GetMapping("/user/modify")
+    public void modifyPage(){}
+//    @GetMapping("nav")
+//    public void navPage(){}
 
 
+    @GetMapping("/user/order")
+    public void orderPage() {}
 
 }
