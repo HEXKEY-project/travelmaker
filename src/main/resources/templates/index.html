@@ -22,7 +22,7 @@
     <div id="new-products">
         <h1 class="area-title">신제품 만나보기 👀</h1>
         <div id="thumbnailArea">
-            <th:block th:each="product : ${newProductList}">
+            <th:block th:each="product, iterStat : ${newProductList}" th:if="${iterStat.index} &lt 8">
                 <div align="center" class="item"
                      th:onclick="|location.href='/product/detail?productSeq=${product.productSeq}'|">
                     <div>
@@ -48,17 +48,21 @@
     <div id="reviews">
         <h1 class="area-title">REVIEW</h1>
         <div id="review-area">
-            <th:block th:each="review : ${ recentReviewList }">
-                <div align="center" class="item"
+            <th:block th:each="review, iterStat : ${ recentReviewList }" th:if="${iterStat.index} &lt 8">
+                <div align="center" class="review"
                      th:onclick="|location.href='#'|">
                     <div>
-                        <th:block th:if="${not #lists.isEmpty(review.fileList)}">
-                            <img th:src="${product.fileList[0].filePath}"
-                                 width="350px"
-                                 height="350px"/>
+                        <th:block th:if="${not #lists.isEmpty(review.reviewAttachList)}">
+                            <img th:src="${review.reviewAttachList[0].filePath}"
+                                 width="300px"
+                                 height="300px"/>
                         </th:block>
                     </div>
-
+<!--                    <div class="review-info">-->
+<!--                        <div class="review-info-content">-->
+<!--                            <img src=""-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
 
             </th:block>
