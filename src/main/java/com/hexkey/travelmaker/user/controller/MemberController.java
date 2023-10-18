@@ -1,6 +1,7 @@
 package com.hexkey.travelmaker.user.controller;
 
 import com.hexkey.travelmaker.common.exception.MemberRegistException;
+import com.hexkey.travelmaker.member.admin.dto.MemberDTO;
 import com.hexkey.travelmaker.user.dto.AddressDTO;
 import com.hexkey.travelmaker.user.dto.MemberInfoDTO;
 import com.hexkey.travelmaker.user.service.AuthenticationService;
@@ -103,7 +104,7 @@ public class MemberController {
     public void foundPwdPage() {}
 
     @GetMapping("/user/mypage")
-    public void mypagePage() {}
+    public void mypagePage(@AuthenticationPrincipal MemberInfoDTO member) {}
 
     @GetMapping("/user/modify")
     public void modifyPage(@AuthenticationPrincipal MemberInfoDTO member) {

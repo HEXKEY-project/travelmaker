@@ -34,8 +34,8 @@ public class SecurityConfiguration {
                 /* 요청에 대한 권한 체크 */
                 .authorizeHttpRequests()
                 .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                /* hasRole에 전달하는 값은 "ROLE_"가 자동으로 앞에 붙는다. */
-                .antMatchers("/user/user/mypage").hasRole("MEMBER")
+                 /* hasRole에 전달하는 값은 "ROLE_"가 자동으로 앞에 붙는다. */
+//                .antMatchers("/member/mypage").hasRole("MEMBER")
 //                .antMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
 //                .antMatchers("/admin/**").hasRole("ADMIN")
                 /* 위에 서술된 패턴 외의 요청은 인증되지 않은 사용자도 요청 허가 */
@@ -56,7 +56,7 @@ public class SecurityConfiguration {
                 .invalidateHttpSession(true)
                 .logoutSuccessUrl("/")
                 .and()
-//                /* 인증, 인가 예외 처리 : 인증이 필요하면 로그인 페이지로 이동하므로 인가 처리만 설정 */
+                /* 인증, 인가 예외 처리 : 인증이 필요하면 로그인 페이지로 이동하므로 인가 처리만 설정 */
 //                .exceptionHandling()
 //                .accessDeniedPage("/error/denied")
 //                .and()
