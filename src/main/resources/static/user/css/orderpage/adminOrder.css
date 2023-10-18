@@ -1,8 +1,24 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-/*#data-container {*/
-/*    display: flex;*/
-/*}*/
+
+
+#main {
+    margin-left: 80px;
+    margin-top: 80px;
+}
+
+#wrap {
+    display: flex;
+}
+
+#mainNav {
+    position: absolute;
+}
+
+#memberBody {
+    margin: 164px auto;
+}
+
 .divContainer {
     display: flex;
     width: 1000px;

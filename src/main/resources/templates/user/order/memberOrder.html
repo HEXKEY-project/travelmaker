@@ -5,7 +5,9 @@
     <title>sdfsd</title>
     <link rel="stylesheet" href="/user/css/orderpage/adminOrder.css">
 </head>
-<body>
+<body id="memberBody">
+
+<div th:replace="common/user/header.html"></div>
 
 <div id="head">
     <div id="title">
@@ -13,9 +15,10 @@
     </div>
     <div id="title-sub">
         <h3>주문 관리</h3>
-
-
     </div>
+
+    <br>
+
     <div id="search">
         <form id="form">
             <div class="search-row">
@@ -85,7 +88,7 @@
 <div id="tail">
 
 </div>
-
+<div th:replace="common/user/footer.html"></div>
 </body>
 
 

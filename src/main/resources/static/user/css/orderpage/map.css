@@ -1,5 +1,12 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+body {
+    align-content: center;
+}
+
+#main {
+    margin: 164px auto;
+}
 .p-span {
     color: #3971FF;
     font-weight: bold;
