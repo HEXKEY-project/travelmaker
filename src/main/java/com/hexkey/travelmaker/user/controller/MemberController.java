@@ -17,8 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-
 @Slf4j
 @Controller
 @RequestMapping("/user")
@@ -82,11 +80,14 @@ public class MemberController {
         member.setMemberPwd(passwordEncoder.encode(member.getPassword()));
 
         log.info("Request regist member : {}", member);
+        log.info("Request regist address : {}", address);
 
         memberMService.registMember(member, address);
 
         rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.regist"));
 
+        log.info("member info : {}", member);
+        log.info("address info : {}", address);
         return "redirect:/";
 
     };
@@ -104,7 +105,7 @@ public class MemberController {
     public void foundPwdPage() {}
 
     @GetMapping("/user/mypage")
-    public void mypagePage() {}
+ public void mypagePage() {}
 
     @GetMapping("/user/modify")
     public void modifyPage(@AuthenticationPrincipal MemberInfoDTO member) {

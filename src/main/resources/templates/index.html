@@ -3,24 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>travelmaker</title>
+    <link rel="stylesheet" href="/user/css/migi/main.css" type="text/css">
 </head>
 <body>
-  <div th:replace="common/user/header.html"></div>
+<div th:replace="common/user/header.html"></div>
 
-  <div class="swiper-container swiper-main">
-      <div class="swiper-wrapper">
-          <div class="swiper-slide" data-swiper-slide-index="0" style="width: 1920px; transition-duration: 600ms; opacity: 1; transform: translate3d(0px,0px,0px);">
-             <a href="/user/event" class="bg">
-                 <img src="/user/images/migi/div.visual_pc.png" style="width: 100%">
-             </a>
-          </div>
-      </div>
-  </div>
+<div id="main-wrapper">
+    <div class="swiper-container swiper-main">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" data-swiper-slide-index="0"
+                 style="width: 1920px; transition-duration: 600ms; opacity: 1; transform: translate3d(0px,0px,0px);">
+                <a href="/user/event" class="bg">
+                    <img src="/user/images/migi/div.visual_pc.png" style="width: 100%">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="new-products">
+        <h1 class="area-title">신제품 만나보기 👀</h1>
+        <div id="thumbnailArea">
+            <th:block th:each="product : ${newProductList}">
+                <div align="center" class="item"
+                     th:onclick="|location.href='/product/detail?productSeq=${product.productSeq}'|">
+                    <div>
+                        <th:block th:if="${not #lists.isEmpty(product.fileList)}">
+                            <img th:src="${product.fileList[0].filePath}"
+                                 width="350px"
+                                 height="350px"/>
+                        </th:block>
+                    </div>
+                    <div class="product-description">
+                        <div class="product-name">
+                            <a th:onclick="|location.href='/product/detail?productSeq=${product.productSeq}'|">
+                                <div th:text="${product.productName}"></div>
+                                <div id="product-price"
+                                     th:text="'₩' + ${#numbers.formatInteger(product.price, 3, 'COMMA')}"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+    <div id="reviews">
+        <h1 class="area-title">REVIEW</h1>
 
 
+    </div>
 
+</div>
 
-  <div th:replace="common/user/footer.html"></div>
-
+<div th:replace="/common/user/footer.html"></div>
 </body>
 </html>

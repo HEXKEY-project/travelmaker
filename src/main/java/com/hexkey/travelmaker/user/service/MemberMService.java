@@ -1,5 +1,6 @@
 package com.hexkey.travelmaker.user.service;
 
+import com.hexkey.travelmaker.common.exception.MemberModifyException;
 import com.hexkey.travelmaker.common.exception.MemberRegistException;
 import com.hexkey.travelmaker.member.admin.dto.MemberDTO;
 import com.hexkey.travelmaker.user.dao.MemberInfoMapper;
@@ -42,7 +43,8 @@ public class MemberMService {
         address.setDefaultYn("Y");
         address.setAddressName("");
 
-        log.info("memberDTO : {} ", member);
+        log.info("memberDTO : {}", member);
+        log.info("addressDTO : {}", address);
 
         int result1 = memberInfoMapper.insertMember(member);
         int result2 = memberInfoMapper.insertMemberAdr(address);
@@ -52,6 +54,16 @@ public class MemberMService {
 
     }
 
+
+    // 회원 정보 수정
+    @Transactional
+    public void modifyMember(MemberMDTO modifyMember) throws MemberModifyException {
+
+        int result = memberMMapper.updateMember(modifyMember);
+
+        if (!(result > 0)) throw new MemberModifyException("회원 정보 수정에 실패했습니다.");
+
+    }
     public void pwdUpdate(MemberDTO dto) {
     }
 
