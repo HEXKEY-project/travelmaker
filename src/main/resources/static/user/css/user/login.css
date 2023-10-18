@@ -14,6 +14,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 75vh;
+    margin-top: 230px;
 }
 
 /* 아이디, 비밀번호 설정 */
