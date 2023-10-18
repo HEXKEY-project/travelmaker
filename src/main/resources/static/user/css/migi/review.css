@@ -106,21 +106,23 @@ hr {
     height: 440px;
 }
 
-#review-detail-text {
+#reviewBody {
     width: 100%;
 }
 
-input[type="text"]::placeholder {
+textarea::placeholder {
     color: initial; /* 포커스 시 기본 색상으로 변경하여 placeholder가 다시 나타나도록 함 */
 
 }
 
-input[type="text"]:focus::placeholder {
+textarea:focus::placeholder {
     color: transparent; /* 투명으로 만들어 placeholder 숨기기 */
 }
 
 textarea {
     width: 800px;
+    height: 430px;
+    resize: none;
 }
 
 #submit-cancel-btn {
