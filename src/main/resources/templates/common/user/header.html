@@ -128,7 +128,7 @@
                 <a class="cate" id="myshop-anonymous" href="/user/user/login">
                     <img src="/user/images/migi/top_myshop.png">
                 </a>
-                <ul class="add-sub-my">
+                <ul class="add-sub-my-a">
                     <li><a href="/user/user/login">로그인</a></li>
                     <li><a href="/user/user/regist">회원가입</a></li>
                     <li><a href="#">주문조회</a></li>
@@ -141,9 +141,8 @@
                     <a class="cate" id="myshop-login" href="/user/user/mypage">
                         <img src="/user/images/migi/top_myshop.png">
                     </a>
-                    <ul class="add-sub-my">
-                        <li><input type="button" value="로그아웃" id="logout"></li>
-                        <li><a href="/user/user/regist">회원가입</a></li>
+                    <ul class="add-sub-my-l">
+                        <li><a id="logout">로그아웃</a> </li>
                         <li><a href="#">주문조회</a></li>
                     </ul>
                 </div>
@@ -258,6 +257,17 @@
 
 
 <script>
+
+    window.onload = function() {
+        if (document.getElementById("logout")) {
+            const $logout = document.getElementById("logout");
+            $logout.onclick = function () {
+                location.href = "/member/logout";
+            }
+        }
+    }
+
+
     const addCate = document.getElementById("carrier");
     const addSubMenus = document.querySelectorAll(".add-sub");
 
@@ -390,53 +400,74 @@
     });
 
     /* myshop */
-    const addMyA = document.getElementById("myshop-anonymous");
-    const addMyL = document.getElementById("myshop-login")
-    const addSubMy = document.querySelectorAll(".add-sub-my");
 
-    addMyA.addEventListener("mouseenter", () => {
-        clearTimeout(timeoutId);
-        addSubMy.forEach((submenu) => {
-            submenu.style.display = "block";
-        });
-    });
+    if (document.getElementById("myshop-anonymous")) {
 
-    addMyA.addEventListener("mouseleave", () => {
-        timeoutId = setTimeout(() => {
-            addSubMy.forEach((submenu) => {
-                submenu.style.display = "none";
-            });
-        }, 150);
-    });
+        const addMyA = document.getElementById("myshop-anonymous");
+        const addSubMyA = document.querySelectorAll(".add-sub-my-a");
 
-    addMyL.addEventListener("mouseenter", () => {
-        clearTimeout(timeoutId);
-        addSubMy.forEach((submenu) => {
-            submenu.style.display = "block";
-        });
-    });
-
-    addMyL.addEventListener("mouseleave", () => {
-        timeoutId = setTimeout(() => {
-            addSubMy.forEach((submenu) => {
-                submenu.style.display = "none";
-            });
-        }, 150);
-    });
-
-    addSubMy.forEach((submenu) => {
-        submenu.addEventListener("mouseenter", () => {
+        addMyA.addEventListener("mouseenter", () => {
             clearTimeout(timeoutId);
-            submenu.style.display = "block";
+            addSubMyA.forEach((submenu) => {
+                submenu.style.display = "block";
+            });
         });
 
-        submenu.addEventListener("mouseleave", () => {
+        addMyA.addEventListener("mouseleave", () => {
             timeoutId = setTimeout(() => {
-                submenu.style.display = "none";
-            }, 150);
+                addSubMyA.forEach((submenu) => {
+                    submenu.style.display = "none";
+                });
+            }, 200);
         });
-    });
 
+
+        addSubMyA.forEach((submenu) => {
+            submenu.addEventListener("mouseenter", () => {
+                clearTimeout(timeoutId);
+                submenu.style.display = "block";
+            });
+
+            submenu.addEventListener("mouseleave", () => {
+                timeoutId = setTimeout(() => {
+                    submenu.style.display = "none";
+                }, 200);
+            });
+        });
+    }
+
+    if (document.getElementById("myshop-login")) {
+        const addMyL = document.getElementById("myshop-login")
+        const addSubMyL = document.querySelectorAll(".add-sub-my-l");
+
+        addMyL.addEventListener("mouseenter", () => {
+            clearTimeout(timeoutId);
+            addSubMyL.forEach((submenu) => {
+                submenu.style.display = "block";
+            });
+        });
+
+        addMyL.addEventListener("mouseleave", () => {
+            timeoutId = setTimeout(() => {
+                addSubMyL.forEach((submenu) => {
+                    submenu.style.display = "none";
+                });
+            }, 200);
+        });
+
+        addSubMyL.forEach((submenu) => {
+            submenu.addEventListener("mouseenter", () => {
+                clearTimeout(timeoutId);
+                submenu.style.display = "block";
+            });
+
+            submenu.addEventListener("mouseleave", () => {
+                timeoutId = setTimeout(() => {
+                    submenu.style.display = "none";
+                }, 200);
+            });
+        });
+    }
 
 
 </script>

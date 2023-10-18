@@ -192,13 +192,13 @@ a{
     background-color: #f0f0f0;
 }
 
-/* myshop */
+/* myshop 로그인 전 */
 
-.add-sub-my {
+.add-sub-my-a {
     display: none;
 }
 
-.add-sub-my {
+.add-sub-my-a {
     transform: translate(-30px, 15px);
     position: absolute;
     background-color: white;
@@ -207,20 +207,52 @@ a{
     z-index: 1;
 }
 
-.add-sub-my li {
+.add-sub-my-a li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.add-sub-my li a {
+.add-sub-my-a li a {
     display: block;
     padding: 5px 10px;
     text-decoration: none;
     color: #333;
 }
 
-.add-sub-my li a:hover {
+.add-sub-my-a li a:hover {
+    background-color: #f0f0f0;
+}
+
+/* myshop 로그인 완료 */
+
+.add-sub-my-l {
+    display: none;
+}
+
+.add-sub-my-l {
+    transform: translate(-30px, 15px);
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+}
+
+.add-sub-my-l li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.add-sub-my-l li a {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.add-sub-my-l li a:hover {
     background-color: #f0f0f0;
 }
 
