@@ -84,7 +84,7 @@
 
     <select id="selectSuperCateList" resultMap="generalProductResultMap">
         SELECT
-            A.PRODUCT_SEQ
+               A.PRODUCT_SEQ
              , A.PRODUCT_NAME
              , A.PRICE
              , A.REGISTERED_DATE

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 조회</title>
+    <link rel="stylesheet" type="text/css" href="/admin/css/product/list.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/admin/js/product/list.js" type="text/javascript"></script>
+</head>
+<body>
+<div th:include="common/admin/header.html"></div>
+<div id="wrapper">
+    <div class="regist-header">
+        <div th:include="common/admin/nav.html"></div>
+    </div>
+    <div class="list_form" id="list_wrapper">
+        <p class="list_title">상품 관리</p>
+        <p class="list_content">상품 조회</p>
+        <form id="searchProduct" method="GET" action="/admin/product/list">
+            <div class="list_tbl">
+                <div class="th"><div class="p">분류선택</div>
+                <div id="categorySelect">
+                    <select class="category_select" id="big_category" name="categoryRoot">
+                        <option>1차 분류</option>
+                        <option value="1">캐리어</option>
+                        <option value="2">가방</option>
+                        <option value="3">여행용품</option>
+                    </select>
+                    <select class="category_select" id="middle_category" name="refCategoryCode" >
+                        <option>2차 분류</option>
+                        <option value="4">하드</option>
+                        <option value="5">소프트</option>
+                        <option value="6">배낭</option>
+                        <option value="7">보조가방</option>
+                        <option value="8">수납|편의</option>
+                        <option value="9">안전|위생</option>
+                        <option value="10">악세서리</option>
+                        <option value="11">액티비티|시즌</option>
+                    </select>
+                    <select class="category_select" id="little_category" name="categoryCode">
+                        <option>3차 분류</option>
+                        <option value="12">기내(21형 이하)</option>
+                        <option value="13">중형(22~26형)</option>
+                        <option value="14">대형(27형 이상)</option>
+                        <option value="15">기내(21형 이하)</option>
+                        <option value="16">중형(22~26형)</option>
+                        <option value="17">대형(27형 이상)</option>
+                        <option value="18">여행배낭</option>
+                        <option value="19">배낭용품</option>
+                        <option value="20">백팩</option>
+                        <option value="21">접이식|폴딩백</option>
+                        <option value="22">보스턴|더플백</option>
+                        <option value="23">크로스|숄더백</option>
+                        <option value="24">도난방지 백</option>
+                        <option value="25">기타 백</option>
+                        <option value="26">트래블팩|파우치</option>
+                        <option value="27">안대|목베개</option>
+                        <option value="28">와이파이|유심</option>
+                        <option value="29">간편식품</option>
+                        <option value="30">편의용품</option>
+                        <option value="31">캐리어커버|벨트</option>
+                        <option value="32">안전복대|지갑</option>
+                        <option value="33">자물쇠|와이어</option>
+                        <option value="34">보안|구급용품</option>
+                        <option value="35">뷰티케어</option>
+                        <option value="36">여권커버|네임택</option>
+                        <option value="37">전자|전기용품</option>
+                        <option value="38">여행아이템</option>
+                        <option value="39">여행문구</option>
+                        <option value="40">기념품</option>
+                        <option value="41">캠핌|등산</option>
+                        <option value="42">골프</option>
+                        <option value="43">래쉬가드</option>
+                        <option value="44">아쿠아슈즈</option>
+                        <option value="45">스웜</option>
+                    </select>
+                </div>
+                </div>
+            </div>
+            <div class="th"><div class="p">검색어</div>
+                <div id="searchWord">상품명
+                    <input type="text" id="searchValue" name="productName">
+                </div>
+            </div>
+
+            <div class="th"><div class="p">판매가</div>
+                <div id="productPrice">
+                    <input type="number" min="0" step="100" name="firstPrice" class="price1">
+                    ~
+                    <input type="number" min="0" step="100" name="secondPrice" class="price2">
+                </div>
+            </div>
+            <div class="th"><div class="p">등록일</div>
+                <div id="registDateBox">
+                    <input type="date" id="registDate" name="registDate">
+                </div>
+            </div>
+            <button type="submit" id="search" name="search">상품 조회</button>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>
