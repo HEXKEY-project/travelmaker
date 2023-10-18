@@ -11,10 +11,17 @@
     <!-- 주소 API -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+    <script>
+        const message = '[[${message}]]';
+        message && alert(message);
+    </script>
+
 </head>
 <body>
 
-<div>
+<div th:replace="common/user/header.html"></div>
+
+<div class="registContainer">
     <h2 align="center">REGISTER</h2>
     <form action="/user/regist" method="post">
         <ul>
@@ -63,23 +70,9 @@
                 <input class="phone" id="phone" name="phone" type="number" required>
 
             </li>
-            <li class="sms-yn">
-                <label>SMS<br>수신여부 *</label>
-                <div class="s-yn">
-                    <input type="radio" name="smsYn" value="Y" checked><label>수신함</label>
-                    <input type="radio" name="smsYn" value="N"><label>수신안함</label>
-                </div>
-            </li>
             <li class="regist-email">
-                <lavel>이메일 *</lavel>
-                <input class="email" id="email" name="email" onkeyup="autoEmail('email', this.value)" autocomplete="off" required>
-            </li>
-            <li class="email-yn">
-                <label>이메일<br>수신여부 *</label>
-                <div class="e-yn">
-                    <input type="radio" name="emailYn" value="Y" checked><label>수신함</label>
-                    <input type="radio" name="emailYn" value="N"><label>수신안함</label>
-                </div>
+                <label>이메일 *</label>
+                <input class="email" id="email" name="email" type="email" onkeyup="autoEmail('email', this.value)" autocomplete="off" required>
             </li>
         </ul>
 
@@ -166,14 +159,14 @@
                 </div>
             </li>
             <li>
-                <label>SMS 수신을 동의하십니까? </label>
-                <input type="checkbox" id="promotion1" name="promotionYn" value="Y" class="optionalCheck"><label for="promotion1">동의함</label><br>
-                <input type="hidden" id="promo1" name="promotionYn" value="N">
+                <label for="smsCheckbox">SMS 수신을 동의하십니까? </label>
+                <input type="checkbox" id="smsCheckbox" name="smsYn" value="Y" class="optionalCheck"><label for="smsCheckbox">동의함</label><br>
+                <input type="hidden" name="smsYn" value="N">
             </li>
             <li>
-                <label>이메일 수신을 동의하십니까? </label>
-                <input type="checkbox" id="promotion2" name="promotionYn" value="Y" class="optionalCheck"><label for="promotion2">동의함</label><br><br><br>
-                <input type="hidden" id="promo2" name="promotionYn" value="N">
+                <label for="emailCheckbox">이메일 수신을 동의하십니까? </label>
+                <input type="checkbox" id="emailCheckbox" name="emailYn" value="Y" class="optionalCheck"><label for="emailCheckbox">동의함</label><br>
+                <input type="hidden" name="emailYn" value="N">
             </li>
         </ul>
 

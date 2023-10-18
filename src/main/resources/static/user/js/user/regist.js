@@ -1,16 +1,10 @@
 window.onload = function() {
 
-    if (document.getElementById("regist")) {
-        const $regist = document.getElementById("regist");
-        $regist.onclick = function () {
-            location.href = "/user/regist";
-        }
-    }
-
     // 아이디 중복 확인
     if (document.getElementById("idCheck")) {
 
         const $duplication = document.getElementById("idCheck");
+        const $memberId = document.getElementById("memberId");
 
         $duplication.onclick = function () {
 
@@ -35,6 +29,16 @@ window.onload = function() {
         }
 
     }
+
+    if (document.getElementById("regist")) {
+        const $regist = document.getElementById("regist");
+        $regist.onclick = function () {
+            location.href = "/user/regist";
+        }
+    }
+
+
+
 }
 
 // 이메일 자동 완성
@@ -145,6 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         checkAllCheckbox.checked = allChecked;
+
     }
 
     checkAllCheckbox.addEventListener('change', function () {
@@ -157,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         updateCheckAllCheckbox();
+
     });
 
     for (let i = 0; i < requiredCheck.length; i++) {
@@ -171,88 +177,19 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // 회원가입 버튼 클릭 시 필수 항목 관련 알림창
-    joinBtn.addEventListener("click", function () {
-
-        const joinBtn = document.getElementById("joinBtn");
-        const idField = document.getElementById("id");
-        const pwd1Field = document.getElementById("pwd1");
-        const pwd2Field = document.getElementById("pwd2");
-        const pwdConfirmField = document.getElementsByClassName("password")
-        const nameField = document.getElementById("name");
-        const address1Fild = document.getElementById("address1")
-        const address2Fild = document.getElementById("address2")
-        const phoneFields = document.getElementsById("phone");
-        const emailField = document.getElementById("email");
-        const agreePolicy = document.getElementById("policy1");
-        const agreePrivate = document.getElementById("private1");
-
-        if (idField.value.trim() === "") {
-            alert("아이디 항목은 필수 입력값입니다.");
-            return false;
-        }
-
-        if (pwd1Field.value.trim() === "") {
-            alert("비밀번호 항목은 필수 입력값입니다.");
-            return false;
-        }
-
-        if (pwd2Field.value.trim() === "") {
-            alert("비밀번호 항목은 필수 입력값입니다.");
-            return false;
-        }
-
-        if (nameField.value.trim() === "") {
-            alert("이름 항목은 필수 입력값입니다.");
-            return false;
-        }
-
-        if (address2Fild.value.trim() === "") {
-            alert("주소를 입력해주세요");
-            return false;
-        }
-
-        for (let i = 0; i < phoneFields.length; i++) {
-            const phoneField = phoneFields[i];
-            if (phoneField.value.trim() === "") {
-                alert("휴대전화를 입력하세요.");
-                return false;
-            }
-            if (phoneField.value.trim().length < 4) {
-                alert("올바른 휴대전화 번호를 입력하세요.");
-                return false;
-            }
-        }
-
-        if (emailField.value.trim() === "") {
-            alert("이메일을 입력하세요.");
-            return false;
-        }
-
-        if (!agreePolicy.checked) {
-            alert("이용약관에 동의하세요");
-            return false;
-        }
-
-        if (!agreePrivate.checked) {
-            alert("개인정보 수집 및 이용 방침에 동의하세요.");
-            return false;
-        }
-
-        if (address1Fild.value.trim() === "") {
-            alert("주소를 입력해주세요");
-            event.preventDefault();
-            return false;
-        }
-
-        if (pwd1Field.value.trim() !== pwd2Field.value.trim()) {
-            alert("비밀번호가 일치하지 않습니다.");
-            event.preventDefault();
-            return false;
-
-
-        }
-    });
-
 });
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    var smsCheckbox = document.getElementById("promotion1");
+    var smsHiddenInput = document.getElementById("promo1");
+    smsCheckbox.addEventListener("change", function() {
+        smsHiddenInput.value = this.checked ? "Y" : "N";
+    });
+
+    var emailCheckbox = document.getElementById("promotion2");
+    var emailHiddenInput = document.getElementById("promo2");
+    emailCheckbox.addEventListener("change", function() {
+        emailHiddenInput.value = this.checked ? "Y" : "N";
+    });
+});

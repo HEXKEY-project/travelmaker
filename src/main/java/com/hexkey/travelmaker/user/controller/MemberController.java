@@ -1,6 +1,7 @@
 package com.hexkey.travelmaker.user.controller;
 
 import com.hexkey.travelmaker.common.exception.MemberRegistException;
+import com.hexkey.travelmaker.member.admin.dto.MemberDTO;
 import com.hexkey.travelmaker.user.dto.AddressDTO;
 import com.hexkey.travelmaker.user.dto.MemberMDTO;
 import com.hexkey.travelmaker.user.service.AuthenticationService;
@@ -8,16 +9,13 @@ import com.hexkey.travelmaker.user.service.MemberMService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 @Slf4j
 @Controller
 @RequestMapping("/user")
@@ -72,8 +70,8 @@ public class MemberController {
     }
 
     @PostMapping("/regist")
-    public String registMember(AddressDTO address, MemberMDTO member, String zipCode, String address1, String address2)
-            throws MemberRegistException {
+    public String registMember(AddressDTO address, MemberMDTO member, String zipCode, String address1, String address2,
+                               RedirectAttributes rttr) throws MemberRegistException {
 
         address.setPostalCode(Integer.parseInt(zipCode));
         address.setDefaultAdr(address1);
@@ -81,21 +79,47 @@ public class MemberController {
         member.setMemberPwd(passwordEncoder.encode(member.getPassword()));
 
         log.info("Request regist member : {}", member);
+        log.info("Request regist address : {}", address);
 
         memberMService.registMember(member, address);
 
-        return "redirect:/user/user/login";
+        rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.regist"));
+
+        log.info("member info : {}", member);
+        log.info("address info : {}", address);
+        return "redirect:/";
 
     };
 
-//     protected Authentication createNewAuthcentication(String memberId) {
-//
-//        UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);
-//        UsernamePasswordAuthenticationToken newAuth
-//        = new UsernamePasswordAuthenticationToken(newPrincipal, newPrincipal.getPassword(), newPrincipal.getAuthorities());
-//
-//        return newAuth;
-//
-//    }
+    @GetMapping("/user/findId")
+    public void findIdPage() {}
+
+    @GetMapping("user/foundId")
+    public void foundIdPage() {}
+
+    @GetMapping("user/findPwd")
+    public void findPwdPage() {}
+
+    @GetMapping("user/foundPwd")
+    public void foundPwdPage() {}
+
+    @GetMapping("/user/mypage")
+    public String mypagePage() {
+
+        return "user/user/mypage";
+
+    }
+
+//    @GetMapping("/user/modify")
+//    public void modifyPage(@AuthenticationPrincipal MemberDTO member) {}
+
+    @GetMapping("/user/modify")
+    public void modifyPage(){}
+//    @GetMapping("nav")
+//    public void navPage(){}
+
+
+    @GetMapping("/user/order")
+    public void orderPage() {}
 
 }

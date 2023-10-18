@@ -24,14 +24,7 @@ public class MainController {
         model.addAttribute("newProductList", newProductList.get("productList"));
 
         return "/index";
+
     }
-
-//
-//    @GetMapping("/")
-//    public String gotoSearch() {
-//
-//        return null;
-//    }
-
 
 }
