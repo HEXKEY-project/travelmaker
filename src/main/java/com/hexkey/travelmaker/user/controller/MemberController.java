@@ -105,7 +105,7 @@ public class MemberController {
     public void foundPwdPage() {}
 
     @GetMapping("/user/mypage")
- public void mypagePage() {}
+    public void mypagePage() {}
 
     @GetMapping("/user/modify")
     public void modifyPage(@AuthenticationPrincipal MemberInfoDTO member) {
