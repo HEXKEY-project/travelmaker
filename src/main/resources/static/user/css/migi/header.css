@@ -64,11 +64,11 @@ a{
     font-weight: bolder;
 }
 
-.add-sub {
+.sub {
     display: none;
 }
 
-.add-sub {
+.sub {
     transform: translate(-50px, 44px);
     position: absolute;
     background-color: white;
@@ -77,12 +77,12 @@ a{
     z-index: 1;
 }
 
-.add-sub li {
+.sub li {
     list-style: none;
     padding: 0;
 }
 
-.add-sub li a {
+.sub li a {
     display: block;
     padding: 5px 10px;
     text-decoration: none;
@@ -90,17 +90,17 @@ a{
     color: #565656;
 }
 
-.add-sub li a:hover {
+.sub li a:hover {
     background-color: #f0f0f0;
 }
 
 /* ---- 가방 ---- */
 
-.add-sub-bags {
+.sub-bags {
     display: none;
 }
 
-.add-sub-bags {
+.sub-bags {
     transform: translate(-20px, 44px);
     position: absolute;
     background-color: white;
@@ -109,12 +109,12 @@ a{
     z-index: 1;
 }
 
-.add-sub-bags li {
+.sub-bags li {
     list-style: none;
     padding: 0;
 }
 
-.add-sub-bags li a {
+.sub-bags li a {
     display: block;
     padding: 5px 10px;
     text-decoration: none;
@@ -122,17 +122,17 @@ a{
     color: #565656;
 }
 
-.add-sub-bags li a:hover {
+.sub-bags li a:hover {
     background-color: #f0f0f0;
 }
 
 /* ---- 여행용품 ---- */
 
-.add-sub-items {
+.sub-items {
     display: none;
 }
 
-.add-sub-items {
+.sub-items {
     transform: translate(-40px, 44px);
     position: absolute;
     background-color: white;
@@ -142,12 +142,12 @@ a{
     margin-bottom: 4px;
 }
 
-.add-sub-items li {
+.sub-items li {
     list-style: none;
     padding: 0;
 }
 
-.add-sub-items li a {
+.sub-items li a {
     display: block;
     padding: 5px 10px;
     text-decoration: none;
@@ -155,18 +155,18 @@ a{
     color: #565656;
 }
 
-.add-sub-items li a:hover {
+.sub-items li a:hover {
     background-color: #f0f0f0;
 }
 
 
 /* ---- 커뮤니티 ---- */
 
-.add-sub-com {
+.sub-com {
     display: none;
 }
 
-.add-sub-com {
+.sub-com {
     transform: translate(-20px, 44px);
     position: absolute;
     background-color: white;
@@ -175,30 +175,30 @@ a{
     z-index: 1;
 }
 
-.add-sub-com li {
+.sub-com li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.add-sub-com li a {
+.sub-com li a {
     display: block;
     padding: 5px 10px;
     text-decoration: none;
     color: #333;
 }
 
-.add-sub-com li a:hover {
+.sub-com li a:hover {
     background-color: #f0f0f0;
 }
 
-/* myshop */
+/* myshop 로그인 전 */
 
-.add-sub-my {
+.sub-my-a {
     display: none;
 }
 
-.add-sub-my {
+.sub-my-a {
     transform: translate(-30px, 15px);
     position: absolute;
     background-color: white;
@@ -207,20 +207,52 @@ a{
     z-index: 1;
 }
 
-.add-sub-my li {
+.sub-my-a li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.add-sub-my li a {
+.sub-my-a li a {
     display: block;
     padding: 5px 10px;
     text-decoration: none;
     color: #333;
 }
 
-.add-sub-my li a:hover {
+.sub-my-a li a:hover {
+    background-color: #f0f0f0;
+}
+
+/* myshop 로그인 완료 */
+
+.sub-my-l {
+    display: none;
+}
+
+.sub-my-l {
+    transform: translate(-30px, 15px);
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+}
+
+.sub-my-l li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sub-my-l li a {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.sub-my-l li a:hover {
     background-color: #f0f0f0;
 }
 
