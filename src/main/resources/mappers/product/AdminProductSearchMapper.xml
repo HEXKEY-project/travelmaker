@@ -39,20 +39,68 @@
         <result property="reviewCode" column="REVIEW_CODE"/>
         <result property="filePath" column="FILE_PATH"/>
     </resultMap>
-
-    <select id="searchProduct" resultMap="ProductDetailResultMap">
+    <select id="searchProduct" resultMap="ProductDetailResultMap" parameterType="hashmap">
         SELECT
-               A.PRODUCT_SEQ
-             , A.PRODUCT_NAME
-             , A.PRICE
-             , A.REGISTERED_DATE
-             , A.MODIFIED_DATE
-             , B.CATEGORY_CODE
-             , B.CATEGORY_NAME
+              B.CATEGORY_ROOT,
+              A.PRODUCT_SEQ,
+              A.PRODUCT_NAME,
+              A.PRICE,
+              A.REGISTERED_DATE,
+              A.MODIFIED_DATE,
+              B.CATEGORY_CODE,
+              B.CATEGORY_NAME,
+              B.REF_CATEGORY_CODE
           FROM TBL_PRODUCT A
-        LEFT JOIN TBL_PRODUCT_CATEGORY B ON(A.CATEGORY_CODE = B.CATEGORY_CODE)
-      <!--  <if test="categoryName == '캐리어'">
-        </if>-->
+          JOIN (SELECT
+                      CONNECT_BY_ROOT CATEGORY_CODE AS CATEGORY_ROOT,
+                      CATEGORY_CODE,
+                      CATEGORY_NAME,
+                      REF_CATEGORY_CODE
+                 FROM TBL_PRODUCT_CATEGORY
+                START WITH ref_CATEGORY_CODE IS NULL
+                CONNECT BY REF_CATEGORY_CODE = PRIOR CATEGORY_CODE) B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)
+        <where>
+            <!-- productName 조건 -->
+            <if test="productName != null and productName != ''">
+                AND A.PRODUCT_NAME LIKE '%' || #{ productName } || '%'
+            </if>
 
+            <!-- categoryCode 조건-->
+            <if test="categoryCode == 'categoryCode'">
+                AND B.CATEGORY_CODE = #{ categoryCode }
+            </if>
+
+             <!--refCategoryCode 조건-->
+            <if test="refCategoryCode == 'refCategoryCode'">
+                AND B.REF_CATEGORY_CODE = #{ refCategoryCode }
+            </if>
+
+             <!--categoryRoot 조건-->
+            <if test="categoryRoot == 'categoryRoot'">
+                AND B.CATEGORY_ROOT = #{ categoryRoot }
+            </if>
+
+            <!-- 가격 범위 조건-->
+            <if test="firstPrice != null and secondPrice != null">
+                <![CDATA[ AND A.PRICE >= #{ firstPrice } AND A.PRICE <= #{ secondPrice }
+                ]]>
+            </if>
+
+             <!--등록일 조건-->
+           <!-- <if test="registDate == 'registDate'">
+                AND A.REGISTERED_DATE = #{ registDate }
+            </if>-->
+        </where>
+
+        <!--<where>
+            <if test="searchCondition == '주문자 명'">
+                UPPER(S.RECIPENT) LIKE '%' || UPPER(#{ searchValue }) || '%'
+            </if>
+            <if test="orderDate1 != '' and orderDate2 != '' ">
+                <![CDATA[
+                AND ORDER_DATE >= TO_DATE('${orderDate1}', 'YY-MM-DD') AND ORDER_DATE <= TO_DATE('${orderDate2}', 'YY-MM-DD')
+                ]]>
+            </if>
+        </where>-->
     </select>
 </mapper>

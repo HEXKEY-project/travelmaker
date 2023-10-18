@@ -17,17 +17,17 @@
     <div class="list_form" id="list_wrapper">
         <p class="list_title">상품 관리</p>
         <p class="list_content">상품 조회</p>
-        <form name="list" id="searchProduct" method="get" action="/admin/product/list">
+        <form id="searchProduct" method="GET" action="/admin/product/list">
             <div class="list_tbl">
                 <div class="th"><div class="p">분류선택</div>
                 <div id="categorySelect">
-                    <select class="category_select" id="big_category" name="categoryCode">
+                    <select class="category_select" id="big_category" name="categoryRoot">
                         <option>1차 분류</option>
                         <option value="1">캐리어</option>
                         <option value="2">가방</option>
                         <option value="3">여행용품</option>
                     </select>
-                    <select class="category_select" id="middle_category" name="categoryCode">
+                    <select class="category_select" id="middle_category" name="refCategoryCode" >
                         <option>2차 분류</option>
                         <option value="4">하드</option>
                         <option value="5">소프트</option>
@@ -80,15 +80,15 @@
             </div>
             <div class="th"><div class="p">검색어</div>
                 <div id="searchWord">상품명
-                    <input type="text" id="searchValue" name="searchValue">
+                    <input type="text" id="searchValue" name="productName">
                 </div>
             </div>
 
             <div class="th"><div class="p">판매가</div>
                 <div id="productPrice">
-                    <input type="number" min="0" step="100" name="price1" class="price">
+                    <input type="number" min="0" step="100" name="price1" class="firstPrice">
                     ~
-                    <input type="number" min="0" step="100" name="price2" class="price">
+                    <input type="number" min="0" step="100" name="price2" class="secondPrice">
                 </div>
             </div>
             <div class="th"><div class="p">등록일</div>
