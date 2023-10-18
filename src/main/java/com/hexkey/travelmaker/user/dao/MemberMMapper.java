@@ -22,4 +22,5 @@ public interface MemberMMapper {
 
     int pwdCheck(MemberDTO dto);
 
+    int updateMember(MemberMDTO modifyMember);
 }

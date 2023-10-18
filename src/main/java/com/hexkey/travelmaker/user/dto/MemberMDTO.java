@@ -31,7 +31,7 @@ public class MemberMDTO implements UserDetails {
     private String memberStatus;    // 회원 상태
     private List<MemberRoleDTO> memberRoleList;
     // 한 멤버는 여러 권한을 가질 수 있다.
-    private List<AddressDTO> addressList;
+    private AddressDTO address;
 
     @Override
     @JsonIgnore
