@@ -57,9 +57,9 @@ public class MemberMService {
 
     // 회원 정보 수정
     @Transactional
-    public void modifyMember(MemberMDTO modifyMember) throws MemberModifyException {
+    public void modifyMember(MemberInfoDTO modifyMember) throws MemberModifyException {
 
-        int result = memberMMapper.updateMember(modifyMember);
+        int result = memberInfoMapper.updateMember(modifyMember);
 
         if (!(result > 0)) throw new MemberModifyException("회원 정보 수정에 실패했습니다.");
 
