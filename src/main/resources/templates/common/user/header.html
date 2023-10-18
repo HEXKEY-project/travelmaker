@@ -24,9 +24,9 @@
 
             <li><a href=#>BEST</a></li>
 
-            <li class="add-cate">
-                <a class="cate" id="carrier" href="/user/product/list/supList?categoryCode=1">캐리어</a>
-                <ul class="add-sub">
+            <li class="add-cate" >
+                <a class="cate" id="carrier" data-submenu="sub" href="/user/product/list/supList?categoryCode=1">캐리어</a>
+                <ul class="sub">
                     <ul style="display: inline-block; float: left">
                         <li class="sub_a"><a id="4" href="/user/product/list/subList?categoryCode=4">하드</a></li>
                         <li><a id="12" href="/user/product/list/lowestList?categoryCode=12">기내 (21형 이하)</a></li>
@@ -43,8 +43,8 @@
             </li>
 
             <li class="add-cate">
-                <a class="cate" id="bags" href="/user/product/list/supList?categoryCode=2">가방</a>
-                <ul class="add-sub-bags">
+                <a class="cate" id="bags" data-submenu="sub-bags" href="/user/product/list/supList?categoryCode=2">가방</a>
+                <ul class="sub-bags">
                     <ul style="display: inline-block; float: left">
                         <li class="sub_a"><a href="/user/product/list/subList?categoryCode=6">배낭</a></li>
                         <li><a href="/user/product/list/lowestList?categoryCode=18">여행 배낭</a></li>
@@ -63,8 +63,8 @@
             </li>
 
             <li class="add-cate">
-                <a id="items" href="/user/product/list/supList?categoryCode=3">여행용품</a>
-                <ul class="add-sub-items">
+                <a id="items" data-submenu="sub-items" href="/user/product/list/supList?categoryCode=3">여행용품</a>
+                <ul class="sub-items">
                     <ul style="display: inline-block; float: left">
                         <li class="sub_a"><a href="/user/product/list/subList?categoryCode=8">수납 | 편의</a></li>
                         <li><a href="/user/product/list/lowestList?categoryCode=26">트래블팩 | 파우치</a></li>
@@ -103,11 +103,11 @@
             <li><a href=#>이벤트</a></li>
 
             <li class="add-cate">
-                <a class="cate" id="community" href=#>커뮤니티</a>
-                <ul class="add-sub-com">
+                <a class="cate" id="community" data-submenu="sub-com" href=#>커뮤니티</a>
+                <ul class="sub-com">
                     <li class="sub_a"><a href="#">게시판</a></li>
                     <li><a href="#">ABOUT US</a></li>
-                    <li><a href="/community/notices/list?page=1">NOTICE</a></li>
+                    <li><a href="/community/notices/list">NOTICE</a></li>
                     <li><a href="/community/faq/list">FAQ</a></li>
                     <li><a href="/community/qna/list">Q&A</a></li>
                 </ul>
@@ -118,17 +118,17 @@
         <div class="right-buttons-justify">
 
             <div class="store">
-                <a href="/map/map">
+                <a href=#>
                     <img src="/user/images/migi/top_store.png">
                 </a>
             </div>
 
             <th:block sec:authorize="isAnonymous()">
             <div class="myshop">
-                <a class="cate" id="myshop-anonymous" href="/user/user/login">
+                <a class="cate" id="myshop-anonymous" data-submenu="sub-my-a" href="/user/user/login">
                     <img src="/user/images/migi/top_myshop.png">
                 </a>
-                <ul class="add-sub-my">
+                <ul class="sub-my-a">
                     <li><a href="/user/user/login">로그인</a></li>
                     <li><a href="/user/user/regist">회원가입</a></li>
                     <li><a href="#">주문조회</a></li>
@@ -138,12 +138,11 @@
 
             <th:block sec:authorize="isAuthenticated()">
                 <div class="myshop">
-                    <a class="cate" id="myshop-login" href="/user/user/mypage">
+                    <a class="cate" id="myshop-login" data-submenu="sub-my-l" href="/user/user/mypage">
                         <img src="/user/images/migi/top_myshop.png">
                     </a>
-                    <ul class="add-sub-my">
-                        <li><input type="button" value="로그아웃" id="logout"></li>
-                        <li><a href="/user/user/regist">회원가입</a></li>
+                    <ul class="sub-my-l">
+                        <li><a id="logout">로그아웃</a> </li>
                         <li><a href="#">주문조회</a></li>
                     </ul>
                 </div>
@@ -161,7 +160,6 @@
             </div>
         </div>
     </div>
-
     <div id="keyword-search" class="slide-search">
         <a href="#" id="closeBtn" class="closebtn" onclick="closeSlide()">
             <img src="/user/images/migi/search_close.png">
@@ -194,8 +192,76 @@
             </div>
         </div>
     </div>
+</div>
 
-    <script>
+<script>
+
+    window.onload = function() {
+        if (document.getElementById("logout")) {
+            const $logout = document.getElementById("logout");
+            $logout.onclick = function () {
+                location.href = "/member/logout";
+            }
+        }
+    }
+
+    const menuElements = document.querySelectorAll("[data-submenu]");
+
+    function handleMouseEnter(menu, submenus) {
+        clearTimeout(timeoutId);
+        if (activeMenu !== menu) {
+            if (activeMenu) {
+                const activeSubMenuId = activeMenu.getAttribute("data-submenu");
+                console.log(activeSubMenuId)
+                const activeSubmenus = document.querySelectorAll("." + activeSubMenuId);
+                activeSubmenus.forEach(hideSubMenu);
+            }
+            activeMenu = menu;
+        }
+        submenus.forEach(showSubMenu);
+    }
+
+    function showSubMenu(submenu) {
+        submenu.style.display = "block";
+    }
+
+    function hideSubMenu(submenu) {
+        submenu.style.display = "none";
+    }
+
+    menuElements.forEach((menu) => {
+        const submenuId = menu.getAttribute("data-submenu");
+        const submenus = document.querySelectorAll("." + submenuId);
+
+        menu.addEventListener("mouseenter", () => {
+            handleMouseEnter(menu, submenus);
+        });
+
+        menu.addEventListener("mouseleave", () => {
+            timeoutId = setTimeout(() => {
+                submenus.forEach(hideSubMenu);
+            }, 150);
+        });
+
+        submenus.forEach((submenu) => {
+            submenu.addEventListener("mouseenter", () => {
+                clearTimeout(timeoutId);
+                showSubMenu(submenu);
+            });
+
+            submenu.addEventListener("mouseleave", () => {
+                timeoutId = setTimeout(() => {
+                    hideSubMenu(submenu);
+                }, 150);
+            });
+        });
+    });
+
+    let activeMenu = null;
+    let timeoutId = null;
+</script>
+
+<script>
         const searchBtn = document.getElementById("searchBtn");
         const slide = document.getElementById("keyword-search");
         let currentY = -350;
@@ -244,202 +310,7 @@
             }
             animate();
         }
-
-        function submitSearch() {
-
-        }
-
     </script>
-
-
-</div>
-
-
-
-
-<script>
-    const addCate = document.getElementById("carrier");
-    const addSubMenus = document.querySelectorAll(".add-sub");
-
-    let timeoutId;
-
-    addCate.addEventListener("mouseenter", () => {
-        clearTimeout(timeoutId);
-        addSubMenus.forEach((submenu) => {
-            submenu.style.display = "block";
-        });
-    });
-
-    addCate.addEventListener("mouseleave", () => {
-        timeoutId = setTimeout(() => {
-            addSubMenus.forEach((submenu) => {
-                submenu.style.display = "none";
-            });
-        }, 300);
-    });
-
-    addSubMenus.forEach((submenu) => {
-        submenu.addEventListener("mouseenter", () => {
-            clearTimeout(timeoutId);
-            submenu.style.display = "block";
-        });
-
-        submenu.addEventListener("mouseleave", () => {
-            timeoutId = setTimeout(() => {
-                submenu.style.display = "none";
-            }, 300);
-        });
-    });
-
-    /* bags */
-    const addBags = document.getElementById("bags");
-    const addSubBags = document.querySelectorAll(".add-sub-bags");
-
-    addBags.addEventListener("mouseenter", () => {
-        clearTimeout(timeoutId);
-        addSubBags.forEach((submenu) => {
-            submenu.style.display = "block";
-        });
-    });
-
-    addBags.addEventListener("mouseleave", () => {
-        timeoutId = setTimeout(() => {
-            addSubBags.forEach((submenu) => {
-                submenu.style.display = "none";
-            });
-        }, 150);
-    });
-
-    addSubBags.forEach((submenu) => {
-        submenu.addEventListener("mouseenter", () => {
-            clearTimeout(timeoutId);
-            submenu.style.display = "block";
-        });
-
-        submenu.addEventListener("mouseleave", () => {
-            timeoutId = setTimeout(() => {
-                submenu.style.display = "none";
-            }, 150);
-        });
-    });
-
-
-    /* items */
-    const addItems = document.getElementById("items");
-    const addSubItems = document.querySelectorAll(".add-sub-items");
-
-    addItems.addEventListener("mouseenter", () => {
-        clearTimeout(timeoutId);
-        addSubItems.forEach((submenu) => {
-            submenu.style.display = "block";
-        });
-    });
-
-    addItems.addEventListener("mouseleave", () => {
-        timeoutId = setTimeout(() => {
-            addSubItems.forEach((submenu) => {
-                submenu.style.display = "none";
-            });
-        }, 150);
-    });
-
-    addSubItems.forEach((submenu) => {
-        submenu.addEventListener("mouseenter", () => {
-            clearTimeout(timeoutId);
-            submenu.style.display = "block";
-        });
-
-        submenu.addEventListener("mouseleave", () => {
-            timeoutId = setTimeout(() => {
-                submenu.style.display = "none";
-            }, 150);
-        });
-    });
-
-
-    /* community */
-    const addCom = document.getElementById("community");
-    const addSubCom = document.querySelectorAll(".add-sub-com");
-
-    addCom.addEventListener("mouseenter", () => {
-        clearTimeout(timeoutId);
-        addSubCom.forEach((submenu) => {
-            submenu.style.display = "block";
-        });
-    });
-
-    addCom.addEventListener("mouseleave", () => {
-        timeoutId = setTimeout(() => {
-            addSubCom.forEach((submenu) => {
-                submenu.style.display = "none";
-            });
-        }, 150);
-    });
-
-    addSubCom.forEach((submenu) => {
-        submenu.addEventListener("mouseenter", () => {
-            clearTimeout(timeoutId);
-            submenu.style.display = "block";
-        });
-
-        submenu.addEventListener("mouseleave", () => {
-            timeoutId = setTimeout(() => {
-                submenu.style.display = "none";
-            }, 150);
-        });
-    });
-
-    /* myshop */
-    const addMyA = document.getElementById("myshop-anonymous");
-    const addMyL = document.getElementById("myshop-login")
-    const addSubMy = document.querySelectorAll(".add-sub-my");
-
-    addMyA.addEventListener("mouseenter", () => {
-        clearTimeout(timeoutId);
-        addSubMy.forEach((submenu) => {
-            submenu.style.display = "block";
-        });
-    });
-
-    addMyA.addEventListener("mouseleave", () => {
-        timeoutId = setTimeout(() => {
-            addSubMy.forEach((submenu) => {
-                submenu.style.display = "none";
-            });
-        }, 150);
-    });
-
-    addMyL.addEventListener("mouseenter", () => {
-        clearTimeout(timeoutId);
-        addSubMy.forEach((submenu) => {
-            submenu.style.display = "block";
-        });
-    });
-
-    addMyL.addEventListener("mouseleave", () => {
-        timeoutId = setTimeout(() => {
-            addSubMy.forEach((submenu) => {
-                submenu.style.display = "none";
-            });
-        }, 150);
-    });
-
-    addSubMy.forEach((submenu) => {
-        submenu.addEventListener("mouseenter", () => {
-            clearTimeout(timeoutId);
-            submenu.style.display = "block";
-        });
-
-        submenu.addEventListener("mouseleave", () => {
-            timeoutId = setTimeout(() => {
-                submenu.style.display = "none";
-            }, 150);
-        });
-    });
-
-
-
-</script>
 
 </body>
 </html>
