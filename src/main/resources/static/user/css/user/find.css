@@ -1,0 +1,40 @@
+body {
+    margin-top: 164px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1920px;
+}
+
+div>label {
+    font-size: 12px;
+}
+
+.findId1, .findPassword {
+    border: none;
+    border-bottom: 1px solid #CCC;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 12px;
+    height: 45px;
+    width: 100%;
+}
+
+#findIdBtn, #findPwdBtn {
+    height: 40px;
+    width: 300px;
+    color: #fff;
+    border: 1px solid #000;
+    background: black;
+    margin-bottom: 15px;
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.footer {
+    flex-shrink: 0;
+}
