@@ -13,6 +13,8 @@
         <result property="refOptionCode" column="REF_OPTION_CODE"/>
     </resultMap>
 
+
+
     <resultMap id="selectProductRM" type="com.hexkey.travelmaker.order.orderpage.dto.ProductDTO">
         <id property="productSeq" column="PRODUCT_SEQ"/>
         <result property="productName" column="PRODUCT_NAME"/>

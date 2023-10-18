@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexkey.travelmaker.order.orderpage.dao.AdminOrderMapper">
+
+
+    <resultMap id="adminOrderSelectDTO" type="com.hexkey.travelmaker.order.orderpage.dto.AdminOrderSelectDTO">
+
+        <result property="orderCode" column="ORDER_CODE"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="orderStatus" column="ORDER_STATUS"/>
+        <result property="totalPrice" column="TOTAL_PRICE"/>
+        <result property="recipent" column="RECIPENT"/>
+        <result property="phone" column="PHONE"/>
+
+    </resultMap>
+
+
+    <select id="selectAdminOrder" resultMap="adminOrderSelectDTO">
+        SELECT
+        O.*,
+        S.*
+        FROM TBL_ORDER O
+        JOIN TBL_SHIPMENT S ON (O.ORDER_CODE = S.ORDER_CODE)
+
+        <where>
+            <if test="searchCondition == '주문자 명'">
+                UPPER(S.RECIPENT) LIKE '%' || UPPER(#{ searchValue }) || '%'
+            </if>
+            <if test="orderDate1 != '' and orderDate2 != '' ">
+                <![CDATA[
+                AND ORDER_DATE >= TO_DATE('${orderDate1}', 'YY-MM-DD') AND ORDER_DATE <= TO_DATE('${orderDate2}', 'YY-MM-DD')
+                ]]>
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

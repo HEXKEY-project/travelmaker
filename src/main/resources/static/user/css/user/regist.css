@@ -148,11 +148,6 @@ input::-webkit-input-placeholder {
     margin-left: 120px;
 }
 
-/* radio 색상 설정 */
-[type="radio"] {
-    accent-color: black;
-}
-
 /* 주소 검색 버튼 설정 */
 #searchZipCode, #idCheck {
     height: 31px;

@@ -1,10 +1,7 @@
 package com.hexkey.travelmaker.order.orderpage.service;
 
-import com.hexkey.travelmaker.order.orderpage.dto.OrderFormDTO;
-import com.hexkey.travelmaker.order.orderpage.dto.ProductDTO;
+import com.hexkey.travelmaker.order.orderpage.dto.*;
 import com.hexkey.travelmaker.order.orderpage.dao.OrderPageMapper;
-import com.hexkey.travelmaker.order.orderpage.dto.OrderDTO;
-import com.hexkey.travelmaker.order.orderpage.dto.ShipDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,15 +19,6 @@ public class OrderPageService {
     @Autowired
     public OrderPageService(OrderPageMapper orderPageMapper) {
         this.orderPageMapper = orderPageMapper;
-    }
-
-
-    public Map<String, Object> selectAdminOrder(String searchCondition, String searchValue, String orderDate1, String orderDate2) {
-
-        List<OrderDTO> orderDTO = orderPageMapper.selectAdminOrder(searchCondition, searchValue, orderDate1, orderDate2);
-        Map<String, Object> selectAdminOrderMap = new HashMap<>();
-        selectAdminOrderMap.put("orderDTO", orderDTO);
-        return selectAdminOrderMap;
     }
 
 
@@ -62,6 +50,7 @@ public class OrderPageService {
 
         System.out.println(orderFormDTO);
 
+
         Long result = orderPageMapper.insertFormOrder(orderFormDTO);
 
         System.out.println(orderFormDTO);
@@ -72,6 +61,27 @@ public class OrderPageService {
 
         Long currentCode = orderFormDTO.getOrderCode();
         System.out.println("currentCode : " + currentCode);
+        System.out.println("orderFormDTO : " + orderFormDTO);
+        System.out.println("size : " + orderFormDTO.getOptionCodes().size());
+
+        for (int i = 0; i < orderFormDTO.getOptionCodes().size(); i++) {
+            OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
+
+            orderDetailDTO.setOrderCode(currentCode);
+            System.out.println("orderDetailDTO2" + orderDetailDTO);
+            orderDetailDTO.setOptionCode(Long.parseLong(orderFormDTO.getOptionCodes().get(i)));
+            System.out.println("orderDetailDTO2" + orderDetailDTO);
+            orderDetailDTO.setProductCount(Long.parseLong(orderFormDTO.getCounts().get(i)));
+            System.out.println("orderDetailDTO2" + orderDetailDTO);
+            orderDetailDTO.setAllProductPrice(Long.parseLong(orderFormDTO.getProductPrices().get(i)));
+            System.out.println("orderDetailDTO2" + orderDetailDTO);
+
+            int result2 = orderPageMapper.insertFormDetail(orderDetailDTO);
+
+        }
+
+        int resultPay = orderPageMapper.insertPayment(orderFormDTO);
+
 
         return currentCode;
 

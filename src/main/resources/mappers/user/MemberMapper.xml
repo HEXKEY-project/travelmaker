@@ -44,6 +44,7 @@
         <result property="desc" column="AUTHORITY_DESC"/>
     </resultMap>
 
+
     <resultMap id="addressMap" type="com.hexkey.travelmaker.user.dto.AddressDTO">
         <id property="memberCode" column="REF_MEMBER_CODE"/>
         <result property="addressCode" column="ADDRESS_CODE"/>
@@ -77,7 +78,7 @@
         )
         VALUES
             (
-                SEQ_MEMBER_CODE.NEXTVAL
+              SEQ_MEMBER_CODE.NEXTVAL
             , #{ memberName }
             , #{ phone }
             , #{ email }
@@ -110,7 +111,7 @@
         )
         VALUES
             (
-                SEQ_ADDRESS_CODE.NEXTVAL
+              SEQ_ADDRESS_CODE.NEXTVAL
             , #{ addressName }
             , #{ postalCode }
             , SEQ_MEMBER_CODE.CURRVAL
@@ -124,19 +125,19 @@
     <insert id="insertMemberRole">
         INSERT INTO TBL_MEMBER_AUTHORITY
         (
-            AUTHORITY_CODE
+          AUTHORITY_CODE
         , MEMBER_CODE
         )
         VALUES
             (
-                1
+              1
             , SEQ_MEMBER_CODE.CURRVAL
             )
     </insert>
 
     <select id="findByMemberId" resultMap="memberResultMap">
         SELECT
-            A.MEMBER_CODE
+               A.MEMBER_CODE
              , A.MEMBER_NAME
              , A.PHONE
              , A.EMAIL
@@ -174,17 +175,17 @@
 
     <select id="findId" parameterType="String" resultType="String">
         SELECT MEMBER_ID
-        FROM TBL_MEMBER
-        WHERE MEMBER_NAME = #{ memberName }
-          AND (PHONE = #{ phone }
+          FROM TBL_MEMBER
+         WHERE MEMBER_NAME = #{ memberName }
+           AND (PHONE = #{ phone }
             OR EMAIL = #{ email })
     </select>
 
     <select id="findPwd">
         SELECT MEMBER_ID
-        FROM TBL_MEMBER
-        WHERE MEMBER_STAT = 'Y'
-          AND MEMBER_ID = #{ memberId }
+          FROM TBL_MEMBER
+         WHERE MEMBER_STAT = 'Y'
+           AND MEMBER_ID = #{ memberId }
     </select>
 
 </mapper>

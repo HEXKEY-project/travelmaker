@@ -44,12 +44,6 @@ window.onload = function () {
     );
 
     toggleContent(
-        document.getElementById("pay_kind_h2"),
-        document.getElementById("pay_kind_body"),
-        document.getElementById("pay_kind_h2_span")
-    );
-
-    toggleContent(
         document.getElementById("point_h2"),
         document.getElementById("point_body"),
         document.getElementById("point_h2_span")

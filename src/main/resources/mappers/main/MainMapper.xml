@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexkey.travelmaker.main.dao.MainMapper">
+
+    <resultMap id="generalProductResultMap" type="com.hexkey.travelmaker.product.regist.dto.ProductDTO">
+        <id property="productSeq" column="PRODUCT_SEQ"/>
+        <result property="productName" column="PRODUCT_NAME"/>
+        <result property="price" column="PRICE"/>
+        <result property="registDate" column="REGISTERED_DATE"/>
+        <result property="modifyDate" column="MODIFIED_DATE"/>
+        <result property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="serialNo" column="SERIAL_NO"/>
+        <result property="status" column="ORDERABLE_STATUS"/>
+
+        <association property="productCategory" resultMap="ProductCategoryResultMap"/>
+        <collection property="productOption" resultMap="ProductOptionResultMap"/>
+        <collection property="fileList" resultMap="FileResultMap"/>
+    </resultMap>
+
+    <resultMap type="com.hexkey.travelmaker.product.regist.dto.ProductCategoryDTO" id="ProductCategoryResultMap">
+        <id property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
+    </resultMap>
+
+    <resultMap type="com.hexkey.travelmaker.product.regist.dto.ProductOptionDTO" id="ProductOptionResultMap">
+        <id property="optionCode" column="OPTION_CODE"/>
+        <result property="optionName" column="OPTION_NAME"/>
+        <result property="productSeq" column="PRODUCT_SEQ"/>
+        <result property="refOptionCode" column="REF_OPTION_CODE"/>
+    </resultMap>
+
+    <resultMap type="com.hexkey.travelmaker.product.regist.dto.FileDTO" id="FileResultMap">
+        <id property="fileCode" column="FILE_CODE"/>
+        <result property="fileType" column="FILE_TYPE"/>
+        <result property="originalName" column="ORIGIN_FILE_NAME"/>
+        <result property="savedName" column="SAVED_FILE_NAME"/>
+        <result property="savePath" column="SAVE_PATH"/>
+        <result property="noticeCode" column="NOTICE_CODE"/>
+        <result property="productSeq" column="PRODUCT_SEQ"/>
+        <result property="reviewCode" column="REVIEW_CODE"/>
+        <result property="filePath" column="FILE_PATH"/>
+    </resultMap>
+
+    <resultMap id="reviewResultMap" type="com.hexkey.travelmaker.review.dto.ReviewDTO">
+        <id property="reviewCode" column="REVIEW_CODE"/>
+        <result property="orderCode" column="ORDER_CODE"/>
+        <result property="reviewBody" column="REVIEW_BODY"/>
+        <result property="registeredDate" column="REGISTERED_DATE"/>
+        <result property="reviewStatus" column="REVIEW_STATUS"/>
+        <collection property="reviewAttachList" resultMap="reviewAttachResultMap"/>
+    </resultMap>
+
+    <resultMap id="reviewAttachResultMap" type="com.hexkey.travelmaker.review.dto.ReviewAttachDTO">
+        <id property="fileCode" column="FILE_CODE"/>
+        <result property="fileType" column="FILE_TYPE"/>
+        <result property="originalName" column="ORIGIN_FILE_NAME"/>
+        <result property="savedName" column="SAVED_FILE_NAME"/>
+        <result property="savePath" column="SAVE_PATH"/>
+        <result property="reviewCode" column="REVIEW_CODE"/>
+        <result property="filePath" column="FILE_PATH"/>
+    </resultMap>
+
+    <select id="selectNewProductList" resultMap="generalProductResultMap">
+        SELECT
+               A.PRODUCT_SEQ
+             , A.PRODUCT_NAME
+             , A.PRICE
+             , A.REGISTERED_DATE
+             , A.MODIFIED_DATE
+             , A.CATEGORY_CODE
+             , A.SERIAL_NO
+             , A.ORDERABLE_STATUS
+             , B.FILE_TYPE
+             , B.FILE_PATH
+             , B.SAVED_FILE_NAME
+             , C.CATEGORY_CODE
+             , C.REF_CATEGORY_CODE
+             , C.CATEGORY_NAME
+        FROM TBL_PRODUCT A
+                 JOIN TBL_FILE B ON (A.PRODUCT_SEQ = B.PRODUCT_SEQ)
+                 JOIN TBL_PRODUCT_CATEGORY C ON (A.CATEGORY_CODE = C.CATEGORY_CODE)
+       WHERE B.FILE_TYPE = 'productImage'
+    ORDER BY A.REGISTERED_DATE DESC
+    FETCH FIRST 8 ROWS ONLY
+    </select>
+
+    <select id="selectRecentReviewList" resultMap="reviewResultMap">
+        SELECT
+            A.REVIEW_CODE
+             , A.REVIEW_BODY
+             , A.RATING
+             , A.REGISTERED_DATE
+             , A.REVIEW_STATUS
+             , B.FILE_PATH
+        FROM TBL_REVIEW A
+        JOIN TBL_FILE B ON(A.REVIEW_CODE = B.REVIEW_CODE)
+        ORDER BY A.REGISTERED_DATE DESC
+            FETCH FIRST 10 ROWS ONLY
+    </select>
+
+</mapper>

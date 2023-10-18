@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,11 +29,73 @@ public class OrderPageController {
         this.orderPageService = orderPageService;
     }
 
+    @GetMapping("/")
+    public String orderMain () {
+        return "orderMain";
+    }
+
 
     //----------------------------- 고객 파트 ------------------------------------//
     @PostMapping("/order/orderForm")
     @ResponseBody
-    public Long orderForm(@ModelAttribute OrderFormDTO orderFormDTO) {
+    public Long orderForm(@ModelAttribute OrderFormDTO orderFormDTO,
+                          @RequestParam(required = false) String optionCode_1,
+                          @RequestParam(required = false) String optionCode_2,
+                          @RequestParam(required = false) String optionCode_0,
+                          @RequestParam(required = false) String count_1,
+                          @RequestParam(required = false) String count_2,
+                          @RequestParam(required = false) String count_0,
+                          @RequestParam(required = false) String productPrice_1,
+                          @RequestParam(required = false) String productPrice_2,
+                          @RequestParam(required = false) String productPrice_0,
+                          @RequestHeader("Merchant-Uid") String merchantUid) {
+
+        List<String> optionCodesList = new ArrayList<>();
+        List<String> countList = new ArrayList<>();
+        List<String> productPriceList = new ArrayList<>();
+
+        if (optionCode_0 != null) {
+            optionCodesList.add(optionCode_0);
+        }
+        if (optionCode_1 != null) {
+            optionCodesList.add(optionCode_1);
+        }
+        if (optionCode_2 != null) {
+            optionCodesList.add(optionCode_2);
+        }
+
+        if (count_0 != null) {
+            countList.add(count_0);
+        }
+        if (count_1 != null) {
+            countList.add(count_1);
+        }
+        if (count_2 != null) {
+            countList.add(count_2);
+        }
+
+        if (productPrice_0 != null) {
+            productPriceList.add(productPrice_0);
+        }
+        if (productPrice_1 != null) {
+            productPriceList.add(productPrice_1);
+        }
+        if (productPrice_2 != null) {
+            productPriceList.add(productPrice_2);
+        }
+
+        orderFormDTO.setOptionCodes(optionCodesList);
+        orderFormDTO.setCounts(countList);
+        orderFormDTO.setProductPrices(productPriceList);
+
+        orderFormDTO.setPayApiCode(merchantUid);
+        orderFormDTO.setPayStatus("승인");
+
+        log.info("체크 1 {}", orderFormDTO.getOptionCodes());
+        log.info("체크 2 {}", orderFormDTO.getCounts());
+        log.info("체크 3 {}", orderFormDTO.getProductPrices());
+
+        log.info("merchantUid : {}", merchantUid); //
         log.info("orderFormDTO : {}", orderFormDTO);
 
         LocalDate currentDate = LocalDate.now();
@@ -48,7 +111,6 @@ public class OrderPageController {
 
         orderFormDTO.setTotalPrice(totalPrice);
         orderFormDTO.setOrderDate(today);
-
 
         Long currentCode = orderPageService.insertFormOrder(orderFormDTO);
         log.info("currentCode : {}", currentCode);
@@ -107,32 +169,9 @@ public class OrderPageController {
 
     //----------------------------- 관리자 파트 ------------------------------------//
 
-    @GetMapping("/admin/order")
-    public String adminOrder(Model model) {
 
-        Map<String, Object> selectAdminOrderMap = orderPageService.selectAdminOrder("0", "0", "", "");
 
-        model.addAttribute("orderDTOs", selectAdminOrderMap.get("orderDTO"));
 
-        return "admin/order/adminOrder";
-    }
-
-    @PostMapping("/admin/order")
-    public String adminOrder(@RequestParam(required = false) String searchCondition,
-                             @RequestParam(required = false) String searchValue,
-                             @RequestParam(required = false) String orderDate1,
-                             @RequestParam(required = false) String orderDate2,
-                             Model model) {
-
-        log.info("{}", orderDate1);
-        log.info("{}", orderDate2);
-
-        Map<String, Object> selectAdminOrderMap = orderPageService.selectAdminOrder(searchCondition, searchValue, orderDate1, orderDate2);
-
-        model.addAttribute("orderDTOs", selectAdminOrderMap.get("orderDTO"));
-
-        return "admin/order/adminOrder";
-    }
 
 
 }

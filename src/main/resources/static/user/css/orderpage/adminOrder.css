@@ -1,5 +1,46 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+/*#data-container {*/
+/*    display: flex;*/
+/*}*/
+.divContainer {
+    display: flex;
+    width: 1000px;
+    text-align: center;
+}
+.divSpace {
+    flex-grow: 0.3;
+    flex-basis: 0;
+}
+.a {
+    flex-grow: 0.5;
+    flex-basis: 0;
+}
+.b {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.c {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.d {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.e {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.f {
+     flex-grow: 1;
+    flex-basis: 0;
+ }
+.g {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
 
 #test {
     background-color: black;
@@ -49,7 +90,7 @@
     background-color: #e1e1e1;
 }
 
-.tr-head, .tr {
+.tr-head, .tr{
     display: flex;
     width: 1000px;
     border-bottom: 1px solid #727272;

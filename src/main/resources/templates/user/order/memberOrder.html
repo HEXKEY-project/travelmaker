@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sdfsd</title>
+    <link rel="stylesheet" href="/user/css/orderpage/adminOrder.css">
+</head>
+<body>
+
+<div id="head">
+    <div id="title">
+        <h2>주문,배송 관리</h2>
+    </div>
+    <div id="title-sub">
+        <h3>주문 관리</h3>
+
+
+    </div>
+    <div id="search">
+        <form id="form">
+            <div class="search-row">
+                <div class="columns">분류 선택</div>
+                <div class="columns">
+                    <select name="searchCondition">
+                        <option>주문자 명</option>
+                    </select>
+                </div>
+                <div class="columns">
+                    <input name="searchValue" type="text">
+                </div>
+            </div>
+            <div class="search-row">
+                <div class="columns">주문일자</div>
+                <div class="columns">
+                    <input name="orderDate1" type="date">
+                </div>
+                <p> -</p>
+                <div class="columns">
+                    <input name="orderDate2" type="date">
+                </div>
+            </div>
+            <br>
+            <div id="search-div">
+                <input id="search-button" type="submit" value="주문 조회">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div id="body">
+    <div class="table">
+        <div>
+            <h3>주문 목록</h3>
+        </div>
+        <div class="tr-head">
+            <div class="th"></div>
+            <div class="th">No.</div>
+            <div class="th">주문일자</div>
+            <div class="th">등록번호</div>
+            <div class="th">주문자명</div>
+            <div class="th">결제금액</div>
+            <div class="th">휴대전화</div>
+            <div class="th">주문상태</div>
+        </div>
+        <div class="tr" th:each="adminOrderSelectDTO : ${ adminOrderSelectDTOList }">
+            <div class="td"><input type="checkbox"></div>
+            <div class="td" th:text="${ 1 }"></div>
+            <div class="td" th:text="${#dates.format(adminOrderSelectDTO.orderDate, 'yyyy-MM-dd')}"></div>
+            <div class="td" th:text="${ adminOrderSelectDTO.orderCode }"></div>
+            <div class="td" th:text="${ adminOrderSelectDTO.recipent }"></div>
+            <div class="td" th:text="${ adminOrderSelectDTO.totalPrice }"></div>
+            <div class="td" th:text="${ adminOrderSelectDTO.phone }"></div>
+            <div class="td" th:text="${ adminOrderSelectDTO.orderStatus }"></div>
+        </div>
+        <div id="data-container">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="tail">
+
+</div>
+
+</body>
+
+
+<script>
+    var form = document.getElementById('form');
+    var formData;
+    var dataContainer = document.getElementById('data-container'); // 결과를 출력할 요소
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        formData = new FormData(form);
+
+        fetch('/order/member', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json', // JSON 응답을 예상
+            },
+        })
+            .then(res => res.json())
+            .then(res => {
+
+                console.log(res)
+
+                dataContainer.innerHTML = ''; // 결과를 출력하기 전에 요소를 비웁니다.
+                console.log(res)
+                res.forEach((item, index) => {
+
+                    const orderDate = new Date(item.orderDate);
+                    const year = orderDate.getFullYear();
+                    const month = orderDate.getMonth() + 1; // 월은 0부터 시작하므로 1을 더합니다.
+                    const day = orderDate.getDate();
+
+                    const formattedDate = `${year}-${month}-${day}`;
+
+
+                    const container = document.createElement('div');
+                    container.className = 'divContainer';
+
+                    const div00 = document.createElement('div');
+                    div00.className = 'divSpace'
+
+                    const div = document.createElement('div');
+                    div.textContent = index + 1; // 아이템 순번
+                    div.className = 'a'
+
+                    const div1 = document.createElement('div');
+                    div1.textContent = formattedDate;
+                    div1.className = 'b'
+
+                    const div2 = document.createElement('div');
+                    div2.textContent = item.orderCode;
+                    div2.className = 'c'
+
+                    const div3 = document.createElement('div');
+                    div3.textContent = item.recipent;
+                    div3.className = 'd'
+
+                    const div4 = document.createElement('div');
+                    div4.textContent = item.totalPrice + '원';
+                    div4.className = 'e'
+
+                    const div5 = document.createElement('div');
+                    div5.textContent = item.phone;
+                    div5.className = 'f'
+
+                    const div6 = document.createElement('div');
+                    div6.textContent = item.orderStatus;
+                    div6.className = 'g'
+
+                    container.appendChild(div00);
+                    container.appendChild(div);
+                    container.appendChild(div1);
+                    container.appendChild(div2);
+                    container.appendChild(div3);
+                    container.appendChild(div4);
+                    container.appendChild(div5);
+                    container.appendChild(div6);
+
+                    dataContainer.appendChild(container);
+                });
+            });
+    });
+</script>
+</script>
+</html>

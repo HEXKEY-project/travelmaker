@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                 /* 요청에 대한 권한 체크 */
                 .authorizeHttpRequests()
                 .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                /* hasRole에 전달하는 값은 "ROLE_"가 자동으로 앞에 붙는다. */
+                 /* hasRole에 전달하는 값은 "ROLE_"가 자동으로 앞에 붙는다. */
 //                .antMatchers("/member/mypage").hasRole("MEMBER")
 //                .antMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
 //                .antMatchers("/admin/**").hasRole("ADMIN")
