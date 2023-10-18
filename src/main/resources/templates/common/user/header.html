@@ -15,7 +15,7 @@
 
     <div class="upper-buttons-justify">
         <div class="main-logo">
-            <a href="/main">
+            <a href="/">
                 <img src="/user/images/migi/main_logo.png">
             </a>
         </div>
@@ -125,7 +125,7 @@
 
             <th:block sec:authorize="isAnonymous()">
             <div class="myshop">
-                <a class="cate" id="myshopA" href="/user/user/login">
+                <a class="cate" id="myshop-anonymous" href="/user/user/login">
                     <img src="/user/images/migi/top_myshop.png">
                 </a>
                 <ul class="add-sub-my">
@@ -137,15 +137,16 @@
             </th:block>
 
             <th:block sec:authorize="isAuthenticated()">
-            <div class="myshop">
-                <a class="cate" id="myshopL" href="/user/user/mypage">
-                    <img src="/user/images/migi/top_myshop.png">
-                </a>
-                <ul class="add-sub-my">
-                    <li><input type="button" value="로그아웃" id="logout"></li>
-                    <li><a href="#">주문조회</a></li>
-                </ul>
-            </div>
+                <div class="myshop">
+                    <a class="cate" id="myshop-login" href="/user/user/mypage">
+                        <img src="/user/images/migi/top_myshop.png">
+                    </a>
+                    <ul class="add-sub-my">
+                        <li><input type="button" value="로그아웃" id="logout"></li>
+                        <li><a href="/user/user/regist">회원가입</a></li>
+                        <li><a href="#">주문조회</a></li>
+                    </ul>
+                </div>
             </th:block>
 
             <div class="cart">
@@ -306,7 +307,7 @@
             addSubBags.forEach((submenu) => {
                 submenu.style.display = "none";
             });
-        }, 300);
+        }, 150);
     });
 
     addSubBags.forEach((submenu) => {
@@ -318,7 +319,7 @@
         submenu.addEventListener("mouseleave", () => {
             timeoutId = setTimeout(() => {
                 submenu.style.display = "none";
-            }, 300);
+            }, 150);
         });
     });
 
@@ -339,7 +340,7 @@
             addSubItems.forEach((submenu) => {
                 submenu.style.display = "none";
             });
-        }, 300);
+        }, 150);
     });
 
     addSubItems.forEach((submenu) => {
@@ -351,7 +352,7 @@
         submenu.addEventListener("mouseleave", () => {
             timeoutId = setTimeout(() => {
                 submenu.style.display = "none";
-            }, 300);
+            }, 150);
         });
     });
 
@@ -372,7 +373,7 @@
             addSubCom.forEach((submenu) => {
                 submenu.style.display = "none";
             });
-        }, 300);
+        }, 150);
     });
 
     addSubCom.forEach((submenu) => {
@@ -384,12 +385,13 @@
         submenu.addEventListener("mouseleave", () => {
             timeoutId = setTimeout(() => {
                 submenu.style.display = "none";
-            }, 300);
+            }, 150);
         });
     });
 
     /* myshop */
-    const addMyA = document.getElementById("myshopA");
+    const addMyA = document.getElementById("myshop-anonymous");
+    const addMyL = document.getElementById("myshop-login")
     const addSubMy = document.querySelectorAll(".add-sub-my");
 
     addMyA.addEventListener("mouseenter", () => {
@@ -404,25 +406,8 @@
             addSubMy.forEach((submenu) => {
                 submenu.style.display = "none";
             });
-        }, 300);
+        }, 150);
     });
-
-    addSubMy.forEach((submenu) => {
-        submenu.addEventListener("mouseenter", () => {
-            clearTimeout(timeoutId);
-            submenu.style.display = "block";
-        });
-
-        submenu.addEventListener("mouseleave", () => {
-            timeoutId = setTimeout(() => {
-                submenu.style.display = "none";
-            }, 300);
-        });
-    });
-
-    /* myshop */
-    const addMyL = document.getElementById("myshopL");
-    const addSubMy = document.querySelectorAll(".add-sub-my");
 
     addMyL.addEventListener("mouseenter", () => {
         clearTimeout(timeoutId);
@@ -436,7 +421,7 @@
             addSubMy.forEach((submenu) => {
                 submenu.style.display = "none";
             });
-        }, 300);
+        }, 150);
     });
 
     addSubMy.forEach((submenu) => {
@@ -448,7 +433,7 @@
         submenu.addEventListener("mouseleave", () => {
             timeoutId = setTimeout(() => {
                 submenu.style.display = "none";
-            }, 300);
+            }, 150);
         });
     });
 
