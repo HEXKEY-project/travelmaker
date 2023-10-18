@@ -47,7 +47,22 @@
     </div>
     <div id="reviews">
         <h1 class="area-title">REVIEW</h1>
+        <div id="review-area">
+            <th:block th:each="review : ${ recentReviewList }">
+                <div align="center" class="item"
+                     th:onclick="|location.href='#'|">
+                    <div>
+                        <th:block th:if="${not #lists.isEmpty(review.fileList)}">
+                            <img th:src="${product.fileList[0].filePath}"
+                                 width="350px"
+                                 height="350px"/>
+                        </th:block>
+                    </div>
 
+                </div>
+
+            </th:block>
+        </div>
 
     </div>
 
