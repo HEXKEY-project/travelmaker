@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
 @Getter @Setter @ToString
-public class MemberMDTO implements UserDetails {
+public class MemberInfoDTO implements UserDetails {
 
     private int memberCode;         // 회원 코드
     private String memberName;      // 회원 이름
@@ -31,7 +31,7 @@ public class MemberMDTO implements UserDetails {
     private String memberStatus;    // 회원 상태
     private List<MemberRoleDTO> memberRoleList;
     // 한 멤버는 여러 권한을 가질 수 있다.
-    private List<AddressDTO> addressList;
+    private AddressDTO address;
 
     @Override
     @JsonIgnore
@@ -73,7 +73,5 @@ public class MemberMDTO implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
 
 }

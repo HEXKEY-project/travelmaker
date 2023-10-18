@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <script type="text/javascript" src="/user/js/user/find.js"></script>
+    <link rel="stylesheet" type="text/css" href="/user/css/user/find.css">
+</head>
+<body>
+
+<div th:replace="common/user/header.html"></div>
+
+<div class="findIdContainer">
+    <h2 align="center">FORGOT ID</h2><br><br>
+    <form action="findMember" id="findMemberIdWay" method="post">
+        <div class="findIdWay">
+            <input type="radio" name="findId" value="email" onclick="findMember('email')" checked><label> 이메일</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="findId" value="phone" onclick="findMember('phone')"><label> 휴대폰번호</label>
+        </div><br>
+        <div>
+            <label>이름</label><br>
+            <input type="text" class="findId1" id="findIdName" name="memberName" required>
+        </div>
+        <div id="findIdByEmail"><br>
+            <label>이메일</label><br>
+            <input type="email" class="findId1" id="findIdEmail" name="email" required>
+        </div>
+        <div id="findIdByPhone" style="display:none;"><br>
+            <label>휴대폰번호</label><br>
+            <input type="number" class="findId1" id="findIdPhone" name="phone" required>
+        </div><br>
+        <div>
+            <button type="submit" id="findIdBtn" onclick="findMemberId()">확인</button>
+        </div>
+    </form>
+</div>
+
+<!--<div th:replace="common/user/footer.html"></div>-->
+
+</body>
+</html>

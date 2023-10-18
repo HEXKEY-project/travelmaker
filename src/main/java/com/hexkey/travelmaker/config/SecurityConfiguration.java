@@ -44,7 +44,7 @@ public class SecurityConfiguration {
                 /* 로그인 설정 */
                 .formLogin()
                 .loginPage("/user/user/login")
-                .defaultSuccessUrl("/main")
+                .defaultSuccessUrl("/")
                 .failureForwardUrl("/user/user/loginfail")
                 .usernameParameter("memberId")
                 .passwordParameter("memberPwd")

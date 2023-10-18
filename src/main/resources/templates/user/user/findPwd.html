@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <script type="text/javascript" src="/user/js/user/find.js"></script>
+    <link rel="stylesheet" type="text/css" href="/user/css/user/find.css">
+</head>
+<body>
+
+<div th:replace="common/user/header.html"></div>
+
+<div class="findIdContainer">
+    <h2 align="center">FORGOT PASSWORD</h2><br><br>
+    <form action="findMemberPassword" id="findMemberIdWay" method="post">
+        <div class="findPwdWay">
+            <input type="radio" name="findPwd" value="email" onclick="findMemberPassword('email')" checked><label> 이메일</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="findPwd" value="phone" onclick="findMemberPassword('phone')"><label> 휴대폰번호</label>
+        </div><br>
+        <div>
+            <label>아이디</label><br>
+            <input type="text" class="findPassword" id="findId" name="memberId" required>
+        </div><br>
+        <div>
+            <label>이름</label><br>
+            <input type="text" class="findPassword" id="findIdName" name="memberName" required>
+        </div>
+        <div id="findPwdByEmail"><br>
+            <label>이메일</label><br>
+            <input type="email" class="findPassword" id="findIdEmail" name="email" required>
+        </div>
+        <div id="findPwdByPhone" style="display:none;"><br>
+            <label>휴대폰번호</label><br>
+            <input type="number" class="findPassword" id="findIdPhone" name="phone" required>
+        </div><br>
+        <div>
+            <button type="submit" id="findPwdBtn" onclick="findMemberPwd()">확인</button>
+        </div>
+    </form>
+</div>
+
+</div>
+
+</body>
+</html>

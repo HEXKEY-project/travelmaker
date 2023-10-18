@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hexkey.travelmaker.user.dao.MemberMMapper">
+<mapper namespace="com.hexkey.travelmaker.user.dao.MemberInfoMapper">
 
     <select id="selectMemberById" resultType="string">
         SELECT MEMBER_ID
@@ -11,7 +11,7 @@
           AND MEMBER_ID = #{ memberId }
     </select>
 
-    <resultMap id="memberResultMap" type="com.hexkey.travelmaker.user.dto.MemberMDTO">
+    <resultMap id="memberResultMap" type="com.hexkey.travelmaker.user.dto.MemberInfoDTO">
         <id property="memberCode" column="MEMBER_CODE"/>
         <result property="memberName" column="MEMBER_NAME"/>
         <result property="phone" column="PHONE"/>
@@ -28,8 +28,8 @@
         <result property="tel" column="TEL"/>
         <result property="joinDay" column="JOIN_DAY"/>
         <result property="memberStatus" column="MEMBER_STATUS"/>
+        <association property="address" resultMap="addressMap"/>
         <collection property="memberRoleList" resultMap="memberRoleResultMap"/>
-        <collection property="addressList" resultMap="addressListMap"/>
     </resultMap>
 
     <resultMap id="memberRoleResultMap" type="com.hexkey.travelmaker.user.dto.MemberRoleDTO">
@@ -44,7 +44,7 @@
         <result property="desc" column="AUTHORITY_DESC"/>
     </resultMap>
 
-    <resultMap id="addressListMap" type="com.hexkey.travelmaker.user.dto.AddressDTO">
+    <resultMap id="addressMap" type="com.hexkey.travelmaker.user.dto.AddressDTO">
         <id property="memberCode" column="REF_MEMBER_CODE"/>
         <result property="addressCode" column="ADDRESS_CODE"/>
         <result property="addressName" column="ADDRESS_NAME"/>
@@ -58,7 +58,7 @@
     <insert id="insertMember">
         INSERT INTO TBL_MEMBER
         (
-            MEMBER_CODE
+          MEMBER_CODE
         , MEMBER_NAME
         , PHONE
         , EMAIL
@@ -100,7 +100,7 @@
     <insert id="insertMemberAdr">
         INSERT INTO TBL_ADDRESS
         (
-            ADDRESS_CODE
+          ADDRESS_CODE
         , ADDRESS_NAME
         , POSTAL_CODE
         , MEMBER_CODE
@@ -113,7 +113,7 @@
                 SEQ_ADDRESS_CODE.NEXTVAL
             , #{ addressName }
             , #{ postalCode }
-            , #{ memberCode }
+            , SEQ_MEMBER_CODE.CURRVAL
             , #{ defaultAdr }
             , #{ optionalAdr }
             , #{ defaultYn }

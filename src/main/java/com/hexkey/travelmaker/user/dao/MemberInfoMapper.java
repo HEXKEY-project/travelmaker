@@ -2,21 +2,21 @@ package com.hexkey.travelmaker.user.dao;
 
 import com.hexkey.travelmaker.member.admin.dto.MemberDTO;
 import com.hexkey.travelmaker.user.dto.AddressDTO;
-import com.hexkey.travelmaker.user.dto.MemberMDTO;
+import com.hexkey.travelmaker.user.dto.MemberInfoDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface MemberMMapper {
+public interface MemberInfoMapper {
 
     String selectMemberById(String memberId);
 
-    int insertMember(MemberMDTO member);
+    int insertMember(MemberInfoDTO member);
 
     int insertMemberRole();
 
     int insertMemberAdr(AddressDTO address);
 
-    MemberMDTO findByMemberId(String memberId);
+    MemberInfoDTO findByMemberId(String memberId);
 
     String findId(String memberName, String phone);
 
