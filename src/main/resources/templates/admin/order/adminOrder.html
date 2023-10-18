@@ -63,15 +63,15 @@
             <div class="th">휴대전화</div>
             <div class="th">주문상태</div>
         </div>
-        <div class="tr" th:each="orderDTO : ${ orderDTOs }">
+        <div class="tr" th:each="adminOrderSelectDTO : ${ adminOrderSelectDTOList }">
             <div class="td"><input type="checkbox"></div>
-            <div class="td" th:text="${ orderDTO.orderCode }"></div>
-            <div class="td" th:text="${ orderDTO.orderDate }"></div>
-            <div class="td" th:text="${ orderDTO.orderCode }"></div>
-            <div class="td" th:text="${ orderDTO.memberDTO.memberName }"></div>
-            <div class="td" th:text="${ orderDTO.totalPrice }"></div>
-            <div class="td" th:text="${ orderDTO.memberDTO.phone }"></div>
-            <div class="td" th:text="${ orderDTO.orderStatus }"></div>
+            <div class="td" th:text="${ 1 }"></div>
+            <div class="td" th:text="${#dates.format(adminOrderSelectDTO.orderDate, 'yyyy-MM-dd')}"></div>
+            <div class="td" th:text="${ adminOrderSelectDTO.orderCode }"></div>
+            <div class="td" th:text="${ adminOrderSelectDTO.recipent }"></div>
+            <div class="td" th:text="${ adminOrderSelectDTO.totalPrice }"></div>
+            <div class="td" th:text="${ adminOrderSelectDTO.phone }"></div>
+            <div class="td" th:text="${ adminOrderSelectDTO.orderStatus }"></div>
         </div>
 
     </div>

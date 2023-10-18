@@ -9,9 +9,9 @@ import lombok.ToString;
 @ToString
 public class OrderDetailDTO {
 
-    private long orderCode;
-    private long productCount;
-    private long allProductPrice;
-    private long optionCode;
+    private Long orderCode;
+    private Long productCount;
+    private Long allProductPrice;
+    private Long optionCode;
 
 }

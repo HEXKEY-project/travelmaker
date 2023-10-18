@@ -1,8 +1,14 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-#temp {
-      margin-left: 20px;
+#picture {
+      width: 100px;
+      height: 100px;
 }
+
+#contents_product {
+      display: flex;
+}
+
 
 .star {
       color: #3971FF;

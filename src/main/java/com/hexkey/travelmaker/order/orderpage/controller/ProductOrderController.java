@@ -2,14 +2,18 @@ package com.hexkey.travelmaker.order.orderpage.controller;
 
 import com.hexkey.travelmaker.order.orderpage.dto.ProductDTO;
 import com.hexkey.travelmaker.order.orderpage.dto.ProductOptionDTO;
+import com.hexkey.travelmaker.order.orderpage.dto.CodeAndCountDTO;
 import com.hexkey.travelmaker.order.orderpage.service.ProductOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -23,31 +27,59 @@ public class ProductOrderController {
 
 
     @PostMapping("/order/page")
-    public String orderPage(@RequestParam int optionCode,
-                            @RequestParam int count,
+    public String orderPage(@ModelAttribute CodeAndCountDTO codeAndCountDTO,
                             Model model) {
+        System.out.println("codeAndCountDTO는 뭐냐 : " + codeAndCountDTO);
 
-        List<Object> selectProducts = productOrderService.selectProducts(optionCode);
+        List<CodeAndCountDTO> codeAndCountList = codeAndCountDTO.getCodeAndCountList();
 
-        ProductOptionDTO selectProductOption = (ProductOptionDTO) selectProducts.get(0);
-        ProductDTO selectProduct = (ProductDTO) selectProducts.get(1);
+        int[] optionCodes = new int[codeAndCountList.size()];
+        int[] counts = new int[codeAndCountList.size()];
 
-        String productName = selectProduct.getProductName();
-        String optionName = selectProductOption.getOptionName();
-        int price = selectProduct.getPrice();
+        for (int i = 0; i < codeAndCountList.size(); i++) {
+            CodeAndCountDTO codeAndCount = codeAndCountList.get(i);
+            optionCodes[i] = codeAndCount.getOptionCode();
+            counts[i] = codeAndCount.getCount();
 
-        int productPrice = price * count;
-        int shipPrice = (productPrice >= 50000) ? 0 : 3000;
-        int totalPrice = productPrice + shipPrice;
+            System.out.println(optionCodes[i] +" : " + counts[i]);
+        }
+///////////////////////////////////////
+        List<Object> OptionsAndProducts = productOrderService.selectProducts(optionCodes);
 
-        model.addAttribute("productName", productName);
-        model.addAttribute("optionName", optionName);
-        model.addAttribute("count", count);
-        model.addAttribute("price", price);
+        List<ProductOptionDTO> optionsList = (List<ProductOptionDTO>)OptionsAndProducts.get(0);
+        List<ProductDTO> productsList = (List<ProductDTO>)OptionsAndProducts.get(1);
 
-        model.addAttribute("productPrice", productPrice);
-        model.addAttribute("shipPrice", shipPrice);
-        model.addAttribute("totalPrice", totalPrice);
+        List<Map<String, Object>> productDatas = new ArrayList<>();
+        int productPrices = 0;
+        int shipPrices = 0;
+        int totalPrices = 0;
+        int optionCode = 0;
+
+        for (int i = 0; i < counts.length; i++) {
+            Map<String, Object> productData = new HashMap<>();
+
+            productData.put("productName", productsList.get(i).getProductName());
+            productData.put("optionName", optionsList.get(i).getOptionName());
+            productData.put("count", counts[i]);
+            productData.put("optionCode", optionsList.get(i).getOptionCode());
+            productData.put("productPrice",  productsList.get(i).getPrice() * counts[i]);
+
+            productDatas.add(productData);
+            productPrices += productsList.get(i).getPrice() * counts[i];
+        }
+
+        shipPrices = productPrices > 100000 ? 0 : 3000;
+        totalPrices = productPrices + shipPrices;
+
+        System.out.println("@@@@확인productDatas : " + productDatas);
+
+        System.out.println(productDatas.get(0));
+        System.out.println(productDatas.get(1));
+
+        model.addAttribute("productDatas", productDatas);
+        model.addAttribute("productPrices", productPrices);
+        model.addAttribute("shipPrices", shipPrices);
+        model.addAttribute("totalPrices", totalPrices);
 
         return "user/order/page";
 
