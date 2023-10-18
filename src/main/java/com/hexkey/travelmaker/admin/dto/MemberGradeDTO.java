@@ -1,4 +1,4 @@
-package com.hexkey.travelmaker.member.admin.dto;
+package com.hexkey.travelmaker.admin.dto;
 
 
 import lombok.Getter;

@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hexkey.travelmaker.member.admin.dao.MemberMapper">
+<mapper namespace="com.hexkey.travelmaker.admin.dao.MemberMapper">
 
 
-    <resultMap type="com.hexkey.travelmaker.member.admin.dto.MemberDTO" id="memberResultMap">
+    <resultMap type="com.hexkey.travelmaker.admin.dto.MemberDTO" id="memberResultMap">
         <id property="memberCode" column="MEMBER_CODE"/>
         <result property="memberName" column="MEMBER_NAME"/>
         <result property="phone" column="PHONE"/>
@@ -21,12 +21,24 @@
         <result property="loginType" column="LOGIN_TYPE"/>
         <result property="tell" column="TEL"/>
         <result property="joinDay" column="JOIN_DAY"/>
-        <collection property="gradeCode" resultMap="MemberGradeResultMap"/>
+        <result property="memberStatus" column="MEMBER_STATUS"/>
+        <association property="gradeCode" resultMap="MemberGradeResultMap"/>
     </resultMap>
-    <resultMap type="com.hexkey.travelmaker.member.admin.dto.MemberGradeDTO" id="MemberGradeResultMap">
+    <resultMap type="com.hexkey.travelmaker.admin.dto.MemberGradeDTO" id="MemberGradeResultMap">
         <id property="gradeCode" column="GRADE_CODE"/>
         <result property="gradeName" column="GRADE_NAME"/>
         <result property="mileageRate" column="MILEAGE_RATE"/>
+    </resultMap>
+    
+    <resultMap id="MemberPointResultMap" type="com.hexkey.travelmaker.admin.dto.MileageDTO">
+        <id property="mileageCode" column="MILEAGE_CODE"/>
+        <result property="mileage" column="MILEAGE"/>
+        <result property="mileageType" column="MILEAGE_TYPE"/>
+        <result property="memberCode" column="MEMBER_CODE"/>
+        <result property="orderCode" column="ORDER_CODE"/>
+        <result property="reviewCode" column="REVIEW_CODE"/>
+        <result property="occuredType" column="OCCURED_TYPE"/>
+        <result property="occuredDate" column="OCCURED_DATE"/>
     </resultMap>
 
     <select id="findAllMemberList" resultMap="memberResultMap">
@@ -77,6 +89,7 @@
             <if test=" searchDate   != null and ! searchDate .equals('') ">
                 AND   TO_CHAR(C.JOIN_DAY, 'YYYY-MM-DD') = #{ searchDate }
             </if>
+            AND C.MEMBER_STATUS = 'Y'
         </trim>
         )B
         <![CDATA[
@@ -114,8 +127,105 @@
             <if test=" searchDate   != null and ! searchDate .equals('') ">
                 AND TO_CHAR(A.JOIN_DAY, 'YYYY-MM-DD') = #{ searchDate }
             </if>
+            AND A.MEMBER_STATUS = 'Y'
         </trim>
     </select>
 
+    <update id="deleteMember" >
+
+        UPDATE
+            TBL_MEMBER
+        SET MEMBER_STATUS = 'N'
+        WHERE MEMBER_STATUS = 'Y'
+          AND MEMBER_CODE = #{ memberCode }
+
+    </update>
+
+    <select id="selectMemberDetail" resultMap="memberResultMap">
+
+        SELECT
+               MEMBER_CODE
+             , MEMBER_ID
+             , MEMBER_PWD
+             , MEMBER_NAME
+             , EMAIL
+             , GRADE_CODE
+             , MILEAGE
+             ,  TEL
+             ,  PHONE
+             , SMS_YN
+             , EMAIL_YN
+        FROM  TBL_MEMBER A
+        WHERE  MEMBER_STATUS = 'Y'
+          AND  MEMBER_CODE = #{ memberCode }
+
+    </select>
+
+    <update id="adminPwUpdate">
+
+        UPDATE
+            TBL_MEMBER
+        SET MEMBER_PWD = #{ memberPwd }
+        WHERE MEMBER_STATUS = 'Y'
+          AND MEMBER_CODE = #{ memberCode }
+
+    </update>
+
+    <update id="adminMemberUpdate" >
+
+        UPDATE
+            TBL_MEMBER
+        SET GRADE_CODE = #{ gradeCode.gradeCode },
+            TEL = #{ tell },
+            PHONE = #{ phone },
+            SMS_YN = #{ smsYn },
+            EMAIL_YN = #{ emailYn }
+        WHERE MEMBER_STATUS = 'Y'
+          AND MEMBER_CODE = #{ memberCode }
+
+    </update>
+
+    <update id="memberGradeRemove">
+
+        UPDATE TBL_MEMBER t
+        SET t.GRADE_CODE = 1
+        WHERE t.MEMBER_CODE = #{ memberCode }
+
+    </update>
+
+    <insert id="insertPoint">
+        INSERT
+        INTO TBL_MILEAGE
+        (
+              MILEAGE_CODE
+             ,MEMBER_CODE
+            ,MILEAGE_TYPE
+            ,MILEAGE
+            ,OCCURED_TYPE
+            ,OCCURED_DATE
+        )
+        VALUES
+            (
+                 SEQ_MILEAGE_CODE.NEXTVAL
+                ,#{ memberCode }
+                ,#{ mileageType }
+                ,#{ mileage }
+                ,#{ occuredType }
+                ,SYSDATE
+            )
+    </insert>
+
+    <update id="updateMemberPoint">
+        UPDATE TBL_MEMBER
+        SET MILEAGE = MILEAGE + #{ mileage }
+        WHERE MEMBER_CODE = #{ memberCode }
+    </update>
+
+    <update id="deductMemberPoint">
+        UPDATE TBL_MEMBER
+        SET MILEAGE = MILEAGE - #{ mileage }
+        WHERE MEMBER_CODE = #{ memberCode }
+        AND MILEAGE >= #{ mileage }
+    </update>
 
 </mapper>
