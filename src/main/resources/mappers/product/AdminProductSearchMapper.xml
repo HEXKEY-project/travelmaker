@@ -65,31 +65,30 @@
                 AND A.PRODUCT_NAME LIKE '%' || #{ productName } || '%'
             </if>
 
-            <!-- categoryCode 조건-->
-            <if test="categoryCode == 'categoryCode'">
-                AND B.CATEGORY_CODE = #{ categoryCode }
-            </if>
+<!--            &lt;!&ndash; categoryCode 조건&ndash;&gt;-->
+<!--            <if test="categoryCode == 'categoryCode'">-->
+<!--                AND B.CATEGORY_CODE = #{ categoryCode }-->
+<!--            </if>-->
 
-             <!--refCategoryCode 조건-->
-            <if test="refCategoryCode == 'refCategoryCode'">
-                AND B.REF_CATEGORY_CODE = #{ refCategoryCode }
-            </if>
+<!--             &lt;!&ndash;refCategoryCode 조건&ndash;&gt;-->
+<!--            <if test="refCategoryCode == 'refCategoryCode'">-->
+<!--                AND B.REF_CATEGORY_CODE = #{ refCategoryCode }-->
+<!--            </if>-->
 
-             <!--categoryRoot 조건-->
-            <if test="categoryRoot == 'categoryRoot'">
-                AND B.CATEGORY_ROOT = #{ categoryRoot }
-            </if>
+<!--             &lt;!&ndash;categoryRoot 조건&ndash;&gt;-->
+<!--            <if test="categoryRoot == 'categoryRoot'">-->
+<!--                AND B.CATEGORY_ROOT = #{ categoryRoot }-->
+<!--            </if>-->
 
-            <!-- 가격 범위 조건-->
+<!--             가격 범위 조건-->
             <if test="firstPrice != null and secondPrice != null">
-                <![CDATA[ AND A.PRICE >= #{ firstPrice } AND A.PRICE <= #{ secondPrice }
-                ]]>
+                AND PRICE BETWEEN #{ firstPrice } AND #{ secondPrice }
             </if>
 
              <!--등록일 조건-->
-           <!-- <if test="registDate == 'registDate'">
-                AND A.REGISTERED_DATE = #{ registDate }
-            </if>-->
+<!--           <if test="registDate == 'registDate'">-->
+<!--                AND A.REGISTERED_DATE = #{ registDate }-->
+<!--            </if>-->
         </where>
 
         <!--<where>
