@@ -1,6 +1,7 @@
 package com.hexkey.travelmaker.user.controller;
 
 import com.hexkey.travelmaker.common.exception.MemberRegistException;
+import com.hexkey.travelmaker.member.admin.dto.MemberDTO;
 import com.hexkey.travelmaker.user.dto.AddressDTO;
 import com.hexkey.travelmaker.user.dto.MemberMDTO;
 import com.hexkey.travelmaker.user.service.AuthenticationService;
@@ -8,16 +9,14 @@ import com.hexkey.travelmaker.user.service.MemberMService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
+
 @Slf4j
 @Controller
 @RequestMapping("/user")
@@ -72,8 +71,8 @@ public class MemberController {
     }
 
     @PostMapping("/regist")
-    public String registMember(AddressDTO address, MemberMDTO member, String zipCode, String address1, String address2)
-            throws MemberRegistException {
+    public String registMember(AddressDTO address, MemberMDTO member, String zipCode, String address1, String address2,
+                               RedirectAttributes rttr) throws MemberRegistException {
 
         address.setPostalCode(Integer.parseInt(zipCode));
         address.setDefaultAdr(address1);
@@ -84,18 +83,62 @@ public class MemberController {
 
         memberMService.registMember(member, address);
 
-        return "redirect:/user/user/login";
+        rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.regist"));
+
+        return "redirect:/";
 
     };
 
-//     protected Authentication createNewAuthcentication(String memberId) {
+    @GetMapping("/user/findId")
+    public void findIdPage() {}
+
+    @GetMapping("user/foundId")
+    public void foundIdPage() {}
+
+    @GetMapping("user/findPwd")
+    public void findPwdPage() {}
+
+    @GetMapping("user/foundPwd")
+    public void foundPwdPage() {}
+
+//    /* 비밀번호 찾기 결과 */
+//    @PostMapping("/findPwd")
+//    public String findPwdCheck(Model model, @RequestParam String memberName,
+//                               @RequestParam String memberId, MemberDTO dto){
 //
-//        UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);
-//        UsernamePasswordAuthenticationToken newAuth
-//        = new UsernamePasswordAuthenticationToken(newPrincipal, newPrincipal.getPassword(), newPrincipal.getAuthorities());
+//        try{
+//            dto.setMemberId(memberId);
+//            dto.setMemberName(memberName);
+//            int search = memberMService.pwdCheck(dto);
 //
-//        return newAuth;
+//            if(search == 0){
+//                model.addAttribute("message", "입력 정보가 잘못되었습니다. 다시 입력해주세요.");
+//            }
 //
+//            char[] charSet = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+//                    'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+//
+//            String tempPwd="";
+//            int idx = 0;
+//            for (int i = 0; i < 10; i++) {
+//                idx = (int) (charSet.length * Math.random());
+//                tempPwd += charSet[idx];
+//            }
+//
+//            dto.setMemberPwd(tempPwd);
+//            memberMService.pwdUpdate(dto);
+//            model.addAttribute("tempPwd", tempPwd);
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            model.addAttribute("message", "오류가 발생했습니다.");
+//        }
+//        return "member/find_pwd_result";
 //    }
+
+    @GetMapping("/user/mypage")
+    public void mypagePage() {}
+
+
 
 }

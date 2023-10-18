@@ -26,6 +26,7 @@ public class MainController {
         model.addAttribute("recentReviewList", reviewList.get("reviewList"));
 
         return "/index";
+
     }
 
 //
