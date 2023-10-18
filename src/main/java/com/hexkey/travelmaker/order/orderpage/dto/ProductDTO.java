@@ -13,7 +13,7 @@ public class ProductDTO {
     String registeredDate;
     String modifiedDate;
     int categoryCode;
-    int serialNo;
+    String serialNo;
     String orderableStatus;
 
 }

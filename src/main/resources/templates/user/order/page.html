@@ -15,7 +15,7 @@
 <form id="orderFormDTO" name="orderFormDTO">
     <div class="main" id="main">
         <div id="title">
-            <h2><span id="title_h2_span"> </span> 트래블 메이커</h2>
+            <h2><a href="javascript:history.back()"><span id="title_h2_span"></span></a>트래블 메이커</h2>
         </div>
         <div id="sub_title">
             <h2>주문/결제</h2>
@@ -103,9 +103,9 @@
                                         <option value="019">019</option>
                                     </select>
                                     -
-                                    <input class="input_phone" type="number" name="phone2" required>
+                                    <input class="input_phone" type="text" name="phone2" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                     -
-                                    <input class="input_phone" type="number" name="phone3" required>
+                                    <input class="input_phone" type="text" name="phone3" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                 </td>
                             </tr>
                             <tr>
@@ -189,7 +189,7 @@
                 <div id="discount_body">
                     <div class="contents" id="contents_discount">
                         적립금사용
-                        <input id="discountInput" type="number">
+                        <input id="discountInput" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                         <input id="point_use_button" type="button" name="full" value="전액 사용">
                     </div>
                     <div>

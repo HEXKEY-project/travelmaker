@@ -48,7 +48,7 @@ public class OrderPageService {
 
     public Long insertFormOrder(OrderFormDTO orderFormDTO) {
 
-        System.out.println(orderFormDTO);
+        System.out.println("###체크 : " + orderFormDTO);
 
 
         Long result = orderPageMapper.insertFormOrder(orderFormDTO);
@@ -76,11 +76,16 @@ public class OrderPageService {
             orderDetailDTO.setAllProductPrice(Long.parseLong(orderFormDTO.getProductPrices().get(i)));
             System.out.println("orderDetailDTO2" + orderDetailDTO);
 
+
             int result2 = orderPageMapper.insertFormDetail(orderDetailDTO);
+            System.out.println("@@@@@@@@@@@insertFormDetail결과" + result2);
+
 
         }
 
         int resultPay = orderPageMapper.insertPayment(orderFormDTO);
+        System.out.println("@@@@@@@@@@@insertPayment결과" + resultPay);
+
 
 
         return currentCode;

@@ -8,6 +8,7 @@ import java.util.List;
 @Mapper
 public interface AdminOrderMapper {
 
-    List<AdminOrderSelectDTO> selectAdminOrder(String searchCondition, String searchValue, String orderDate1, String orderDate2);
+    List<AdminOrderSelectDTO> selectAdminOrder(String searchCondition, String searchValue, String orderDate1, String orderDate2, String memberName);
 
+    List<AdminOrderSelectDTO> selectMemberOrder(String searchCondition, String searchValue, String orderDate1, String orderDate2, String memberName);
 }
