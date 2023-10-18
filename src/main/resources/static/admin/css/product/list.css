@@ -212,3 +212,4 @@ div {
     border-radius: var(--borderRadius, 4px);
     border: 1px solid var(--components-input-outlined-enabled-border, rgba(0, 0, 0, 0.23));
 }
+

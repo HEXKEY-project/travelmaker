@@ -99,7 +99,13 @@
             <button type="submit" id="search" name="search">상품 조회</button>
         </form>
 
+        <div id="listContent">
+            <th:block th:each="index : ${ #numbers.sequence(0, productList.size() - 1)}">
+            <div th:text="${productList.get(index).productName}"></div>
+            </th:block>
+        </div>
     </div>
+
 </div>
 </body>
 </html>
