@@ -17,6 +17,12 @@ body {
     margin-top: 230px;
 }
 
+.findIdPwd {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    margin-left: -20px;
+}
+
 /* 아이디, 비밀번호 설정 */
 .id, .pwd {
     border: none;

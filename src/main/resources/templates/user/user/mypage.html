@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <script type="text/javascript" src="/user/js/user/mypage.js"></script>
     <link rel="stylesheet" type="text/css" href="/user/css/user/mypage.css">
 
 </head>
@@ -11,6 +10,7 @@
 <div th:replace="common/user/header.html"></div>
 
 <div class="mypageContainer">
+
     <h2 align="center">MY PAGE</h2><br><br>
     <p>&nbsp;&nbsp;&nbsp;나의 주문 처리 현황</p>
     <hr class="hr">
@@ -30,17 +30,25 @@
     </div>
     <hr class="hr">
     <div class="category">
-        <button type="button" class="leftCategory" id="myOrder" onclick="window.location.href='/order/member'"><span>ORDER</span>&nbsp;&nbsp;&nbsp;&nbsp;주문 내역 조회</button>
+        <button type="button" class="leftCategory" id="myOrder"><span>ORDER</span>&nbsp;&nbsp;&nbsp;&nbsp;주문 내역 조회</button>
         <button type="button" class="rightCategory" id="myInfo"><span>MY INFO</span>&nbsp;&nbsp;&nbsp;&nbsp;회원 정보</button><br>
         <button type="button" class="leftCategory" id="myAddress"><span>ADDRESS</span>&nbsp;&nbsp;&nbsp;&nbsp;배송지 관리</button>
         <button type="button" class="rightCategory" id="myReview"><span>MY REVIEW</span>&nbsp;&nbsp;&nbsp;&nbsp;후기</button><br>
         <button type="button" class="leftCategory" id="myMileage"><span>MILEAGE</span>&nbsp;&nbsp;&nbsp;&nbsp;적립금</button>
-
     </div>
-
 
 </div>
 
 </body>
+
+<script>
+    // 마이페이지 -> 회원 정보 이동
+    if (document.getElementById("myInfo")) {
+        const $update = document.getElementById("myInfo");
+        $update.onclick = function () {
+            location.href = "/user/user/modify";
+        }
+    }
+</script>
 
 </html>
