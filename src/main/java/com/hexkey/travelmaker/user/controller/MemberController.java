@@ -1,15 +1,16 @@
 package com.hexkey.travelmaker.user.controller;
 
 import com.hexkey.travelmaker.common.exception.MemberRegistException;
-import com.hexkey.travelmaker.member.admin.dto.MemberDTO;
 import com.hexkey.travelmaker.user.dto.AddressDTO;
-import com.hexkey.travelmaker.user.dto.MemberMDTO;
+import com.hexkey.travelmaker.user.dto.MemberInfoDTO;
 import com.hexkey.travelmaker.user.service.AuthenticationService;
 import com.hexkey.travelmaker.user.service.MemberMService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,7 +56,7 @@ public class MemberController {
 //    }
 
     @PostMapping("idCheck")
-    public ResponseEntity<String> checkDuplication(@RequestBody MemberMDTO member) {
+    public ResponseEntity<String> checkDuplication(@RequestBody MemberInfoDTO member) {
 
         log.info("Request Check ID : {}", member.getMemberId());
 
@@ -70,7 +71,7 @@ public class MemberController {
     }
 
     @PostMapping("/regist")
-    public String registMember(AddressDTO address, MemberMDTO member, String zipCode, String address1, String address2,
+    public String registMember(AddressDTO address, MemberInfoDTO member, String zipCode, String address1, String address2,
                                RedirectAttributes rttr) throws MemberRegistException {
 
         address.setPostalCode(Integer.parseInt(zipCode));
@@ -104,22 +105,39 @@ public class MemberController {
     public void foundPwdPage() {}
 
     @GetMapping("/user/mypage")
-    public String mypagePage() {
-
-        return "user/user/mypage";
-
-    }
-
-//    @GetMapping("/user/modify")
-//    public void modifyPage(@AuthenticationPrincipal MemberDTO member) {}
+    public void mypagePage() {}
 
     @GetMapping("/user/modify")
-    public void modifyPage(){}
-//    @GetMapping("nav")
-//    public void navPage(){}
+    public void modifyPage(@AuthenticationPrincipal MemberInfoDTO member) {
+        log.info("Member info :{}", member);
+    }
 
 
-    @GetMapping("/user/order")
-    public void orderPage() {}
+//    public void modifyPage(MemberInfoDTO modifyMember, @AuthenticationPrincipal MemberInfoDTO loginMember,
+//                           AddressDTO address, String zipCode, String defaultAdr, String optionalAdr,
+//                           RedirectAttributes rttr) {
+//
+//        address.setZipCode(zipCode);
+//        modifyMember.setDefaultAdr(defaultAdr);
+//        modifyMember.setOptionAdr(optionalAdr);
+//        modifyMember.setMemberCode(loginMember.getMemberCode());
+//
+//        log.info("modifyMember request Member : {}", modifyMember);
+//
+//        memberMService.modifyMember(modifyMember);
+//
+//        /* 로그인 시 저장 된 Authentication 객체를 변경 된 정보로 교체한다. */
+//        SecurityContextHolder.getContext().setAuthentication(createNewAuthentication(loginMember.getMemberId()));
+//
+//        rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.modify"));
+//
+//        return "redirect:/user/user/mypage";
+//
+//
+//    }
+
+    private Authentication createNewAuthentication(String memberId) {
+        return null;
+    }
 
 }

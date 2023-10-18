@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <script type="text/javascript" src="/user/js/user/find.js"></script>
+    <link rel="stylesheet" type="text/css" href="/user/css/user/find.css">
+</head>
+<body>
+
+<div th:replace="common/user/header.html"></div>
+
+<div class="foundIdContainer">
+    <h2 align="center">FORGOT ID</h2><br><br>
+    <form action="/user/user/findId" method="post">
+    <div id="findIdResult" align="center">
+        <c:choose>
+            <c:when test="${empty result}">
+                <p th:text="${findIdError}"></p>
+            </c:when>
+            <c:otherwise>
+                <p th:text="'회원님의 아이디는 ' + ${result} + '입니다.'"></p>
+            </c:otherwise>
+        </c:choose>
+    </div>
+</div>
+
+</body>
+</html>

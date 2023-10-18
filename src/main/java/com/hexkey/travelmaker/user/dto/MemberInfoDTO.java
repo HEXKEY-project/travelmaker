@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
 @Getter @Setter @ToString
-public class MemberMDTO implements UserDetails {
+public class MemberInfoDTO implements UserDetails {
 
     private int memberCode;         // 회원 코드
     private String memberName;      // 회원 이름
@@ -73,7 +73,5 @@ public class MemberMDTO implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
 
 }

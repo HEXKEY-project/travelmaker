@@ -3,9 +3,9 @@ package com.hexkey.travelmaker.user.service;
 import com.hexkey.travelmaker.common.exception.MemberModifyException;
 import com.hexkey.travelmaker.common.exception.MemberRegistException;
 import com.hexkey.travelmaker.member.admin.dto.MemberDTO;
-import com.hexkey.travelmaker.user.dao.MemberMMapper;
+import com.hexkey.travelmaker.user.dao.MemberInfoMapper;
 import com.hexkey.travelmaker.user.dto.AddressDTO;
-import com.hexkey.travelmaker.user.dto.MemberMDTO;
+import com.hexkey.travelmaker.user.dto.MemberInfoDTO;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,16 +16,16 @@ import java.util.Date;
 @Slf4j
 public class MemberMService {
 
-    private MemberMMapper memberMMapper;
+    private MemberInfoMapper memberInfoMapper;
 
-    public MemberMService(MemberMMapper memberMMapper) {
-        this.memberMMapper = memberMMapper;
+    public MemberMService(MemberInfoMapper memberInfoMapper) {
+        this.memberInfoMapper = memberInfoMapper;
     }
 
     // 아이디 중복 확인
     public boolean selectMemberById(String memberId) {
 
-        String result = memberMMapper.selectMemberById(memberId);
+        String result = memberInfoMapper.selectMemberById(memberId);
 
         return result != null;
 
@@ -33,7 +33,7 @@ public class MemberMService {
 
     // 회원가입
     @Transactional
-    public void registMember(MemberMDTO member, AddressDTO address) throws MemberRegistException {
+    public void registMember(MemberInfoDTO member, AddressDTO address) throws MemberRegistException {
 
         member.setMileage(0);
         member.setGradeCode(1);
@@ -46,9 +46,9 @@ public class MemberMService {
         log.info("memberDTO : {}", member);
         log.info("addressDTO : {}", address);
 
-        int result1 = memberMMapper.insertMember(member);
-        int result2 = memberMMapper.insertMemberAdr(address);
-        int result3 = memberMMapper.insertMemberRole();
+        int result1 = memberInfoMapper.insertMember(member);
+        int result2 = memberInfoMapper.insertMemberAdr(address);
+        int result3 = memberInfoMapper.insertMemberRole();
 
         if (!(result1 > 0 && result2 > 0 && result3 > 0)) throw new MemberRegistException("회원가입에 실패했습니다.");
 
@@ -57,9 +57,9 @@ public class MemberMService {
 
     // 회원 정보 수정
     @Transactional
-    public void modifyMember(MemberMDTO modifyMember) throws MemberModifyException {
+    public void modifyMember(MemberInfoDTO modifyMember) throws MemberModifyException {
 
-        int result = memberMMapper.updateMember(modifyMember);
+        int result = memberInfoMapper.updateMember(modifyMember);
 
         if (!(result > 0)) throw new MemberModifyException("회원 정보 수정에 실패했습니다.");
 
@@ -68,7 +68,10 @@ public class MemberMService {
     }
 
     public int pwdCheck(MemberDTO dto) {
-        return memberMMapper.pwdCheck(dto);
+        return memberInfoMapper.pwdCheck(dto);
+    }
+
+    public void modifyMember(MemberDTO modifyMember) {
     }
 
 //     아이디 찾기
