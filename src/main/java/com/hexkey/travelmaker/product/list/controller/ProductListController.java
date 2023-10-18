@@ -23,15 +23,14 @@ public class ProductListController {
     }
 
     @GetMapping("/supList")
-    public String selectSuperCateList(@RequestParam("categoryCode") int categoryCode, @RequestParam(defaultValue = "1") int page, Model model) {
+    public String selectSuperCateList(@RequestParam("categoryCode") int categoryCode, Model model) {
 
-        Map<String, Object> supCateProductListAndPaging = productListService.selectSuperCateList(categoryCode, page);
+        Map<String, Object> supCateProductList = productListService.selectSuperCateList(categoryCode);
 
         ProductCategoryDTO categoryName = productListService.selectCategoryName(categoryCode);
 
-        model.addAttribute("paging", supCateProductListAndPaging.get("paging"));
         model.addAttribute("categoryCode", categoryCode);
-        model.addAttribute("productList", supCateProductListAndPaging.get("productList"));
+        model.addAttribute("productList", supCateProductList.get("productList"));
         model.addAttribute("superCategoryName", categoryName);
 
         return "/user/product/list/supList";
@@ -40,12 +39,11 @@ public class ProductListController {
     @GetMapping("/subList")
     public String selectSubCategoryList(@RequestParam("categoryCode") int categoryCode, @RequestParam(defaultValue = "1") int page, Model model) {
 
-        Map<String, Object> productListAndPaging = productListService.selectSubCateList(categoryCode, page);
+        Map<String, Object> productList = productListService.selectSubCateList(categoryCode);
         ProductCategoryDTO subCategoryName = productListService.selectCategoryName(categoryCode);
 
-        model.addAttribute("paging", productListAndPaging.get("paging"));
         model.addAttribute("categoryCode", categoryCode);
-        model.addAttribute("productList", productListAndPaging.get("productList"));
+        model.addAttribute("productList", productList.get("productList"));
         model.addAttribute("subCategoryName", subCategoryName);
 
         return "/user/product/list/subList";
@@ -54,12 +52,11 @@ public class ProductListController {
     @GetMapping("/lowestList")
     public String selectLowestCategoryList(@RequestParam("categoryCode") int categoryCode, @RequestParam(defaultValue = "1") int page, Model model) {
 
-        Map<String, Object> productListAndPaging = productListService.selectLowestCateList(categoryCode, page);
+        Map<String, Object> productList = productListService.selectLowestCateList(categoryCode);
         ProductCategoryDTO lowestCategoryName = productListService.selectCategoryName(categoryCode);
 
-        model.addAttribute("paging", productListAndPaging.get("paging"));
         model.addAttribute("categoryCode", categoryCode);
-        model.addAttribute("productList", productListAndPaging.get("productList"));
+        model.addAttribute("productList", productList.get("productList"));
         model.addAttribute("lowestCategoryName", lowestCategoryName);
 
         return "/user/product/list/lowestList";

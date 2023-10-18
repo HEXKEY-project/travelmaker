@@ -11,21 +11,20 @@
 <div class="wrapper" style="margin-top: 164px">
     <h1 align="center" th:text="${subCategoryName.getCategoryName()}"></h1>
     <div id="thumbnailArea">
-        <th:block th:each="productList : ${productList}">
-            <div align="center" class="item" th:onclick="|location.href='/product/detail?productSeq=${productList.productSeq}'|">
+        <th:block th:each="product : ${productList}">
+            <div align="center" class="item" th:onclick="|location.href='/product/detail?productSeq=${product.productSeq}'|">
                 <div>
-                    <th:block th:if="${not #lists.isEmpty(productList.fileList)}">
-                            <img th:if="${productList.fileList[0].fileType == 'productImage'}"
-                                 th:src="${productList.fileList[0].filePath}"
+                    <th:block th:if="${not #lists.isEmpty(product.fileList)}">
+                            <img th:src="${product.fileList[0].filePath}"
                                  width="350px"
                                  height="350px"/>
                     </th:block>
                 </div>
             <div class="product-description">
                 <div class="product-name">
-                    <a th:onclick="|location.href='/product/detail?productSeq=${productList.productSeq}'|">
-                        <div th:text="${productList.productName}"></div>
-                        <div id="product-price" th:text="'₩' + ${#numbers.formatInteger(productList.price, 0, 'POINT')}"></div>
+                    <a th:onclick="|location.href='/product/detail?productSeq=${product.productSeq}'|">
+                        <div th:text="${product.productName}"></div>
+                        <div id="product-price" th:text="'₩' + ${#numbers.formatInteger(product.price, 3, 'COMMA')}"></div>
                     </a>
                 </div>
             </div>

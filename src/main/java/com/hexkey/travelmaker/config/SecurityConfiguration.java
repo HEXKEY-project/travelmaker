@@ -35,7 +35,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 /* hasRole에 전달하는 값은 "ROLE_"가 자동으로 앞에 붙는다. */
-                .antMatchers("/member/mypage").hasRole("MEMBER")
+                .antMatchers("/user/user/mypage").hasRole("MEMBER")
 //                .antMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
 //                .antMatchers("/admin/**").hasRole("ADMIN")
                 /* 위에 서술된 패턴 외의 요청은 인증되지 않은 사용자도 요청 허가 */
@@ -44,7 +44,7 @@ public class SecurityConfiguration {
                 /* 로그인 설정 */
                 .formLogin()
                 .loginPage("/user/user/login")
-                .defaultSuccessUrl("/main")
+                .defaultSuccessUrl("/")
                 .failureForwardUrl("/user/user/loginfail")
                 .usernameParameter("memberId")
                 .passwordParameter("memberPwd")

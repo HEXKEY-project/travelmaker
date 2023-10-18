@@ -90,7 +90,7 @@
                                 <div class="product-name">
                                     <a th:onclick="|location.href='/product/detail?productSeq=${searchResultList.productSeq}'|">
                                         <div th:text="${searchResultList.productName}"></div>
-                                        <div id="product-price" th:text="'₩' + ${#numbers.formatInteger(searchResultList.price, 0, 'POINT')}"></div>
+                                        <div id="product-price" th:text="'₩' + ${#numbers.formatInteger(searchResultList.price, 3, 'COMMA')}"></div>
                                     </a>
                                 </div>
                             </div>
