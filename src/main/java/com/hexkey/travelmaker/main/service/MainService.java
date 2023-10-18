@@ -2,6 +2,7 @@ package com.hexkey.travelmaker.main.service;
 
 import com.hexkey.travelmaker.main.dao.MainMapper;
 import com.hexkey.travelmaker.product.regist.dto.ProductDTO;
+import com.hexkey.travelmaker.review.dto.ReviewDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -31,4 +32,17 @@ public class MainService {
 
         return newProductList;
     }
+
+    public Map<String, Object> selectRecentReviewList() {
+
+        List<ReviewDTO> reviewList = mainMapper.selectRecentReviewList();
+
+        Map<String, Object> recentReviewList = new HashMap<>();
+
+        recentReviewList.put("reviewList", reviewList);
+
+        return recentReviewList;
+    }
+
+
 }

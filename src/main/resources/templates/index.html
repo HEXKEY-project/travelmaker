@@ -18,34 +18,39 @@
                 </a>
             </div>
         </div>
-
-        <div id="new-products">
-            <h1 class="area-title">신제품 만나보기 👀</h1>
-            <div id="thumbnailArea">
-                <th:block th:each="product : ${newProductList}">
-                    <div align="center" class="item"
-                         th:onclick="|location.href='/product/detail?productSeq=${product.productSeq}'|">
-                        <div>
-                            <th:block th:if="${not #lists.isEmpty(product.fileList)}">
-                                <img th:src="${product.fileList[0].filePath}"
-                                     width="350px"
-                                     height="350px"/>
-                            </th:block>
-                        </div>
-                        <div class="product-description">
-                            <div class="product-name">
-                                <a th:onclick="|location.href='/product/detail?productSeq=${product.productSeq}'|">
-                                    <div th:text="${product.productName}"></div>
-                                    <div id="product-price"
-                                         th:text="'₩' + ${#numbers.formatInteger(product.price, 3, 'COMMA')}"></div>
-                                </a>
-                            </div>
+    </div>
+    <div id="new-products">
+        <h1 class="area-title">신제품 만나보기 👀</h1>
+        <div id="thumbnailArea">
+            <th:block th:each="product : ${newProductList}">
+                <div align="center" class="item"
+                     th:onclick="|location.href='/product/detail?productSeq=${product.productSeq}'|">
+                    <div>
+                        <th:block th:if="${not #lists.isEmpty(product.fileList)}">
+                            <img th:src="${product.fileList[0].filePath}"
+                                 width="350px"
+                                 height="350px"/>
+                        </th:block>
+                    </div>
+                    <div class="product-description">
+                        <div class="product-name">
+                            <a th:onclick="|location.href='/product/detail?productSeq=${product.productSeq}'|">
+                                <div th:text="${product.productName}"></div>
+                                <div id="product-price"
+                                     th:text="'₩' + ${#numbers.formatInteger(product.price, 3, 'COMMA')}"></div>
+                            </a>
                         </div>
                     </div>
-                </th:block>
-            </div>
+                </div>
+            </th:block>
         </div>
     </div>
+    <div id="reviews">
+        <h1 class="area-title">REVIEW</h1>
+
+
+    </div>
+
 </div>
 
 <div th:replace="/common/user/footer.html"></div>

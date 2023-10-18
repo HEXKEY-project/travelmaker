@@ -44,6 +44,25 @@
         <result property="filePath" column="FILE_PATH"/>
     </resultMap>
 
+    <resultMap id="reviewResultMap" type="com.hexkey.travelmaker.review.dto.ReviewDTO">
+        <id property="reviewCode" column="REVIEW_CODE"/>
+        <result property="orderCode" column="ORDER_CODE"/>
+        <result property="reviewBody" column="REVIEW_BODY"/>
+        <result property="registeredDate" column="REGISTERED_DATE"/>
+        <result property="reviewStatus" column="REVIEW_STATUS"/>
+        <collection property="reviewAttachList" resultMap="reviewAttachResultMap"/>
+    </resultMap>
+
+    <resultMap id="reviewAttachResultMap" type="com.hexkey.travelmaker.review.dto.ReviewAttachDTO">
+        <id property="fileCode" column="FILE_CODE"/>
+        <result property="fileType" column="FILE_TYPE"/>
+        <result property="originalName" column="ORIGIN_FILE_NAME"/>
+        <result property="savedName" column="SAVED_FILE_NAME"/>
+        <result property="savePath" column="SAVE_PATH"/>
+        <result property="reviewCode" column="REVIEW_CODE"/>
+        <result property="filePath" column="FILE_PATH"/>
+    </resultMap>
+
     <select id="selectNewProductList" resultMap="generalProductResultMap">
         SELECT
                A.PRODUCT_SEQ
@@ -66,6 +85,20 @@
        WHERE B.FILE_TYPE = 'productImage'
     ORDER BY A.REGISTERED_DATE DESC
     FETCH FIRST 8 ROWS ONLY
+    </select>
+
+    <select id="selectRecentReviewList" resultMap="reviewResultMap">
+        SELECT
+            A.REVIEW_CODE
+             , A.REVIEW_BODY
+             , A.RATING
+             , A.REGISTERED_DATE
+             , A.REVIEW_STATUS
+             , B.FILE_PATH
+        FROM TBL_REVIEW A
+        JOIN TBL_FILE B ON(A.REVIEW_CODE = B.REVIEW_CODE)
+        ORDER BY A.REGISTERED_DATE DESC
+            FETCH FIRST 10 ROWS ONLY
     </select>
 
 </mapper>

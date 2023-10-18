@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +15,7 @@
 
     <div class="upper-buttons-justify">
         <div class="main-logo">
-            <a href="/main">
+            <a href="/">
                 <img src="/user/images/migi/main_logo.png">
             </a>
         </div>
@@ -121,16 +122,33 @@
                     <img src="/user/images/migi/top_store.png">
                 </a>
             </div>
+
+            <th:block sec:authorize="isAnonymous()">
             <div class="myshop">
-                <a class="cate" id="myshop" href=#>
+                <a class="cate" id="myshop-anonymous" href="/user/user/login">
                     <img src="/user/images/migi/top_myshop.png">
                 </a>
                 <ul class="add-sub-my">
-                    <li><a href="#">로그인</a></li>
+                    <li><a href="/user/user/login">로그인</a></li>
                     <li><a href="/user/user/regist">회원가입</a></li>
                     <li><a href="#">주문조회</a></li>
                 </ul>
             </div>
+            </th:block>
+
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="myshop">
+                    <a class="cate" id="myshop-login" href="/user/user/mypage">
+                        <img src="/user/images/migi/top_myshop.png">
+                    </a>
+                    <ul class="add-sub-my">
+                        <li><input type="button" value="로그아웃" id="logout"></li>
+                        <li><a href="/user/user/regist">회원가입</a></li>
+                        <li><a href="#">주문조회</a></li>
+                    </ul>
+                </div>
+            </th:block>
+
             <div class="cart">
                 <a href=#>
                     <img src="/user/images/migi/top_cart.png">
@@ -289,7 +307,7 @@
             addSubBags.forEach((submenu) => {
                 submenu.style.display = "none";
             });
-        }, 300);
+        }, 150);
     });
 
     addSubBags.forEach((submenu) => {
@@ -301,7 +319,7 @@
         submenu.addEventListener("mouseleave", () => {
             timeoutId = setTimeout(() => {
                 submenu.style.display = "none";
-            }, 300);
+            }, 150);
         });
     });
 
@@ -322,7 +340,7 @@
             addSubItems.forEach((submenu) => {
                 submenu.style.display = "none";
             });
-        }, 300);
+        }, 150);
     });
 
     addSubItems.forEach((submenu) => {
@@ -334,7 +352,7 @@
         submenu.addEventListener("mouseleave", () => {
             timeoutId = setTimeout(() => {
                 submenu.style.display = "none";
-            }, 300);
+            }, 150);
         });
     });
 
@@ -355,7 +373,7 @@
             addSubCom.forEach((submenu) => {
                 submenu.style.display = "none";
             });
-        }, 300);
+        }, 150);
     });
 
     addSubCom.forEach((submenu) => {
@@ -367,27 +385,43 @@
         submenu.addEventListener("mouseleave", () => {
             timeoutId = setTimeout(() => {
                 submenu.style.display = "none";
-            }, 300);
+            }, 150);
         });
     });
 
     /* myshop */
-    const addMy = document.getElementById("myshop");
+    const addMyA = document.getElementById("myshop-anonymous");
+    const addMyL = document.getElementById("myshop-login")
     const addSubMy = document.querySelectorAll(".add-sub-my");
 
-    addMy.addEventListener("mouseenter", () => {
+    addMyA.addEventListener("mouseenter", () => {
         clearTimeout(timeoutId);
         addSubMy.forEach((submenu) => {
             submenu.style.display = "block";
         });
     });
 
-    addMy.addEventListener("mouseleave", () => {
+    addMyA.addEventListener("mouseleave", () => {
         timeoutId = setTimeout(() => {
             addSubMy.forEach((submenu) => {
                 submenu.style.display = "none";
             });
-        }, 300);
+        }, 150);
+    });
+
+    addMyL.addEventListener("mouseenter", () => {
+        clearTimeout(timeoutId);
+        addSubMy.forEach((submenu) => {
+            submenu.style.display = "block";
+        });
+    });
+
+    addMyL.addEventListener("mouseleave", () => {
+        timeoutId = setTimeout(() => {
+            addSubMy.forEach((submenu) => {
+                submenu.style.display = "none";
+            });
+        }, 150);
     });
 
     addSubMy.forEach((submenu) => {
@@ -399,7 +433,7 @@
         submenu.addEventListener("mouseleave", () => {
             timeoutId = setTimeout(() => {
                 submenu.style.display = "none";
-            }, 300);
+            }, 150);
         });
     });
 
