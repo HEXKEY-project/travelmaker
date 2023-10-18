@@ -16,12 +16,14 @@ public class MainController {
         this.mainService = mainService;
     }
 
-    @GetMapping("/main")
+    @GetMapping("/")
     public String getMain(Model model) {
 
         Map<String, Object> newProductList = mainService.selectNewProductList();
+        Map<String, Object> reviewList = mainService.selectRecentReviewList();
 
         model.addAttribute("newProductList", newProductList.get("productList"));
+        model.addAttribute("recentReviewList", reviewList.get("reviewList"));
 
         return "/index";
 
