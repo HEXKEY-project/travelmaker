@@ -7,6 +7,7 @@ import com.hexkey.travelmaker.community.notices.dto.NoticesDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,6 @@ public class AdminNoticesService {
 
     public AdminNoticesService(NoticesMapper noticesMapper){
         this.noticesMapper=noticesMapper;}
-
 
     public Map<String, Object> selectAdminNotices(Map<String, String> searchMap, int page) {
         /* 1. 전체 게시글 수 확인 (검색어가 있는 경우 포함) => 페이징 처리를 위해 */
@@ -44,4 +44,20 @@ public class AdminNoticesService {
 
         return noticesListAndPaging;
     }
+
+    public void registNotices(NoticesDTO notices) {
+        noticesMapper.insertNotices(notices);
+    }
+    @Transactional
+    public void deleteNotices(List<Integer> code) {noticesMapper.deleteNotices(code);
+    }
+    @Transactional
+    public NoticesDTO noticeDetail(Long no) { return noticesMapper.selectNoticesDetail(no);
+    }
+
+    public void updateNotices(NoticesDTO notices) {
+        noticesMapper.updateNotices(notices);
+
+    }
+
 }

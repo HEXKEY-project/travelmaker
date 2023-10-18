@@ -26,7 +26,7 @@
 <div id="paging" align="center" style="margin-top: 40px; font-size: 32px;">
 
     <th:block
-            th:if="${ paging.searchCondition == null  || paging.searchValue == null }">
+            th:if="${ paging.searchCondition == 'all'  || paging.searchValue == null }">
         <!-- 맨 앞으로 이동 -->
         <button class="pagingButton" th:onclick="'location.href=\'/community/notices/list?page=1\''">《</button>
 
@@ -67,9 +67,9 @@
         <button class="searchButton" type="submit">검색</button>
     </form>
     <script>
-        let noticesSearchForm = document.getElementById("searchForm");
+        let noticesSearchForm = document.getElementById('#searchForm');
         noticesSearchForm.addEventListener("submit", function (e){
-            let msgNotices = document.getElementById("searchValue");
+            let msgNotices = document.getElementById('#searchValue');
             if(msgNotices.value.length==0){
                 alert('검색어를 입력해주세요.');
                 e.preventDefault();

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CommunityController {
 
     @GetMapping("/faq/list")
-    public String faqList(){ return "user/zeesang/community/faqList"; }
+    public String faqList(){ return "user/zeesang/community/faq/faqList"; }
 
     @GetMapping("/qna/list")
     public String qnaList(){return "user/zeesang/community/qnaList";}

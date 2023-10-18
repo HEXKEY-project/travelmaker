@@ -63,6 +63,9 @@
         , C.MODIFIED_DATE
         FROM TBL_NOTICE C
         <where>
+            <if test="searchCondition == null">
+                
+            </if>
             <if test="searchCondition == 'all'">
                 C.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
                 OR C.NOTICE_BODY LIKE '%' || #{ searchValue } || '%'
@@ -88,7 +91,8 @@
 
     <select id="selectNoticesDetail" resultMap="noticesList">
         SELECT
-            A.NOTICE_TITLE
+               A.NOTICE_CODE
+             , A.NOTICE_TITLE
              , A.NOTICE_BODY
              , A.REGISTERED_DATE
              , A.MODIFIED_DATE
@@ -98,6 +102,48 @@
         WHERE STATUS_YN = 'Y'
           AND NOTICE_CODE = #{ code }
     </select>
+
+    <insert id="insertNotices">
+        INSERT
+        INTO TBL_NOTICE
+            (
+                NOTICE_CODE
+    , NOTICE_BODY
+    , NOTICE_TITLE
+    , STATUS_YN
+    , NOTICE_CATEGORY_CODE
+    , REGISTERED_DATE
+    )
+        VALUES
+            (
+                  SEQ_NOTICES.NEXTVAL
+                , #{ body }
+                , #{ title }
+                , 'Y'
+                , #{ categoryCode }
+                , SYSDATE
+            )
+    </insert>
+
+    <update id="deleteNotices">
+
+
+        UPDATE TBL_NOTICE
+        SET
+            STATUS_YN = 'N'
+        WHERE NOTICE_CODE IN <foreach collection="code" item="item" separator="," open="(" close=")">#{item}</foreach>
+
+    </update>
+
+    <update id="updateNotices" >
+        UPDATE TBL_NOTICE
+        SET
+                 NOTICE_BODY = #{ body }
+                , NOTICE_TITLE = #{ title }
+                , NOTICE_CATEGORY_CODE = #{ categoryCode }
+                , MODIFIED_DATE = SYSDATE
+        WHERE NOTICE_CODE = #{ code }
+    </update>
 
 </mapper>
 
