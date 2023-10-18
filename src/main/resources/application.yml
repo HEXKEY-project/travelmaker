@@ -15,6 +15,9 @@ spring:
       max-request-size: 100MB
       location: C:/Lecture/SubProjectMerge
 
+    session:
+      timeout: 60m
+
 # Mybatis config
 mybatis:
   mapper-locations: mappers/**/*.xml

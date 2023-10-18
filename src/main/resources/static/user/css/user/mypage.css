@@ -11,6 +11,10 @@ body {
     margin-bottom: 10px;
 }
 
+ul {
+    list-style: none;
+}
+
 .shippingContainer, .category, .category {
     font-size: 13px;
 }
