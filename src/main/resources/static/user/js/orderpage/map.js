@@ -6,6 +6,9 @@ window.onload = function () {
     const $roadview = document.getElementById('roadview');
 
     $map1.addEventListener("click", function() {
+
+        console.log("확인합니다")
+
         $roadview.style.display = 'none'
         $map.style.display = 'block'
 
