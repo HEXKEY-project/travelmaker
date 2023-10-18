@@ -1,0 +1,150 @@
+input[typ=text] {
+    vertical-align: top;
+}
+
+#wrapper {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 164px auto;
+    width: 960px;
+}
+
+#main-title {
+    margin-bottom: 96px;
+}
+
+#sub-title {
+    margin-top: 44px;
+    margin-left: 8px;
+}
+
+#sub-title > h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+#sub-title > h2 {
+    font-weight: normal;
+    color: #575757;
+    margin-bottom: 44px;
+}
+
+hr {
+    color: #353535;
+}
+
+#thumbnail-img >img {
+    float: left;
+    margin-top: 16px;
+    width: 296px;
+    height: 296px;
+}
+
+#product-grade {
+    display: block;
+    font-size: 24px;
+    letter-spacing: -0.05em;
+    padding-top: 120px;
+    padding-bottom: 144px;
+}
+
+#star-grade{
+    width: fit-content;
+    display: block;
+    direction: rtl;
+    border:0;
+}
+#star-grade legend{
+    text-align: right;
+}
+#star-grade input[type=radio]{
+    display: none;
+}
+#star-grade label{
+    font-size: 1.3em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+#star-grade label:hover{
+    text-shadow: 0 0 0 rgb(0, 117, 189);
+}
+#star-grade label:hover ~ label{
+    text-shadow: 0 0 0 rgb(0, 117, 189);
+}
+#star-grade input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgb(0, 117, 189);
+}
+
+#review-detail {
+    margin-bottom: 40px;
+}
+
+#detail-form {
+    margin-top: 40px;
+    font-size: 16px;
+    margin-left: 24px;
+    margin-right: 24px;
+    float: left;
+}
+
+#attach-img {
+    margin-left: 24px;
+    margin-right: 24px;
+    float: left;
+    font-size: 16px;
+}
+
+.content-input {
+    margin-top: 36px;
+    margin-bottom: 36px;
+}
+
+#review-detail > fieldset {
+    margin-top: 40px;
+    vertical-align: top;
+    text-align: left;
+    width: 800px;
+    height: 440px;
+}
+
+#reviewBody {
+    width: 100%;
+}
+
+textarea::placeholder {
+    color: initial; /* 포커스 시 기본 색상으로 변경하여 placeholder가 다시 나타나도록 함 */
+
+}
+
+textarea:focus::placeholder {
+    color: transparent; /* 투명으로 만들어 placeholder 숨기기 */
+}
+
+textarea {
+    width: 800px;
+    height: 430px;
+    resize: none;
+}
+
+#submit-cancel-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    gap: 24px;
+}
+
+.btn-cancel, .btn-submit{
+    width: 160px;
+    height: 56px;
+    border-radius: 5px;
+}
+
+.btn-cancel {
+    color: #454545;
+    border: 1px solid #454545;
+}
+
+.btn-submit {
+    color: rgb(0, 117, 189);
+    border: 1px solid rgb(0, 117, 189);;
+}

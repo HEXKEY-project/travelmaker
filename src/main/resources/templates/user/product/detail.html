@@ -2,28 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${product.productName}"></title>
     <link rel="stylesheet" type="text/css" href="/user/css/product/detail.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/user/js/product/detail.js" type="text/javascript"></script>
+
 </head>
 <body>
 <div id="wrapper">
     <div th:replace="common/user/header.html"></div>
     <div id="product_contents">
         <div id="titleImgArea">
-          <!--<th:block th:each="index : ${ #numbers.sequence(1, product.fileList.size())}" th:if="${ product.fileList.size() > 0 }">
-            <img id="productImg" th:src="${ product.fileList[index].savePath }">
-            <img src="/static/user/images/productdetail/_ButtonBase_left.png" alt="이전이미지">
-            <img src="/static/user/images/productdetail/_ButtonBase_right.png" alt="다음이미지">
-          </th:block>-->
+            <div id="thumbnailArea"></div>
+            <img id="leftButtonImg" src="/user/images/productdetail/_ButtonBase_left.png" alt="이전이미지"
+                 onclick="showPreviousImage()">
+            <img id="rightButtonImg" src="/user/images/productdetail/_ButtonBase_right.png" alt="다음이미지"
+                 onclick="showNextImage()">
         </div>
-        <div>
-            <!--<div id="product_title" th:text="${product.productName}"></div>
-            <div id="product_price" th:text="'₩' + ${product.price}"></div>-->
-            <div id="option">옵션
-                <select id="productOpt">
-                    <option>- [필수]옵션 선택 -</option>
-                    <option>-----------------</option>
-                </select>
+        <div id="product_info">
+            <div id="product_title" th:text="${product.productName}"></div>
+            <div id="product_price" th:text="'₩ ' + ${#numbers.formatInteger(product.price, 3, 'COMMA')}"></div>
+            <div id="optContent">
+                <div id="option">
+                    <span th:text="${product.productOption[0].optionName}"></span>
+                    <select id="productOpt" onchange="updateAddOpt()">
+                        <option selected
+                                th:text="'-[필수] ' + ${product.productOption[0].optionName + ' 선택-'} ">
+                        </option>
+                        <option disabled>-----------------</option>
+                        <option disabled id="optKind"
+                                th:text="${product.productOption[0].optionName}"></option>
+                        <th:block th:each="optName : ${ #numbers.sequence(1, product.productOption.size() - 1)}">
+                            <option th:text="'&nbsp;&nbsp;' + ${product.productOption[optName].optionName}"
+                                    th:name="${product.productOption[optName].optionCode}"
+                                    th:value="${product.productOption[optName].optionName}">
+                            </option>
+                        </th:block>
+                    </select>
+                    <img id="iconArrow" src="/user/images/productdetail/iconArrow.png">
+                </div>
             </div>
             <div id="optAddLine">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -32,13 +50,247 @@
                 </svg>
                 <div id="optAddLineContent">위 옵션선택 박스를 선택하시면 아래에 상품이 추가됩니다.</div>
             </div>
-
             <svg xmlns="http://www.w3.org/2000/svg" width="560" height="2" viewBox="0 0 560 2" fill="none">
                 <path d="M0 1H560" stroke="#BDBDBD"/>
             </svg>
+            <div id="addOpt"></div>
+            <div id="payInfo">
+                <div>아래 <span>구매하기</span> 버튼을 통해 결제페이지에서</div>
+                <div>상품별 적립금을 적용할 수 있습니다</div>
+            </div>
+            <div id="sumPrice">TOTAL ₩</div>
+            <div id="BtnArea">
+                <button type="submit" id="basketBtn" onclick="sendBasket()" >장바구니</button>
+                <button type="button" id="BuyBtn" onclick="sendBuy()">구매하기</button>
+            </div>
+
         </div>
+
+    </div>
+    <div id="smallImgArea">
+        <th:block th:if="${ product.fileList.size() > 1}"
+                  th:each="index : ${ #numbers.sequence(0, product.fileList.size() - 1)}"
+        >
+            <img class="thumbnailImg" th:if="${ product.fileList[index].fileType == 'productImage'}"
+                 th:src="${ product.fileList[index].filePath }">
+        </th:block>
+    </div>
+    <div id="productContentWrapper">
+        <div id="productDetail">DETAIL</div>
+        <div id="productReview">REVIEW</div>
+        <div id="productQnA">Q&A</div>
+    </div>
+    <div id="productContentImg">
+        <th:block th:if="${ product.fileList.size() > 1}"
+                  th:each="index : ${ #numbers.sequence(0, product.fileList.size() - 1)}"
+        >
+            <div class="contentImg"><img th:if="${ product.fileList[index].fileType == 'productContent'}"
+                                         th:src="${ product.fileList[index].filePath }"></div>
+        </th:block>
     </div>
     <div th:replace="common/user/footer.html"></div>
 </div>
+
+<!-- 좌우 화살표 버튼 클릭시 이미지 이전 인덱스와 다음 인덱스 이동 -->
+<script>
+    // 현재 보이는 이미지의 인덱스를 추적하는 변수
+    let currentImageIndex = 0;
+
+    // 이미지 요소들을 가져옵니다.
+    const thumbnailImages = document.querySelectorAll('.thumbnailImg');
+    const thumbnailArea = document.getElementById('thumbnailArea');
+
+    function showPreviousImage() {
+        if (currentImageIndex > 0) {
+            currentImageIndex--; // 이전 이미지 인덱스로 이동
+            thumbnailArea.innerHTML = `<img src="${thumbnailImages[currentImageIndex].src}" alt="상세 이미지" style="width: 706px; height: 695px; flex-shrink: 0;">`;
+        }
+    }
+
+    function showNextImage() {
+        if (currentImageIndex < thumbnailImages.length - 1) {
+            currentImageIndex++; // 다음 이미지 인덱스로 이동
+            thumbnailArea.innerHTML = `<img src="${thumbnailImages[currentImageIndex].src}" alt="상세 이미지" style="width: 706px; height: 695px; flex-shrink: 0;">`;
+        }
+    }
+
+</script>
+<!-- 옵션 선택시 생성 -->
+<script>
+
+    /* 옵션이 중복되게 안나오기 위해 set 이용 */
+  const addedOptions = new Set();
+  /* 가격 0으로 초기화 */
+  let totalSum = 0;
+
+  function updateAddOpt() {
+      const selectElement = document.getElementById('productOpt');
+
+      const selectedOption = selectElement.options[selectElement.selectedIndex].value;
+      const selectedOptionCode = selectElement.options[selectElement.selectedIndex].getAttribute('name');
+
+      /* 옵션 선택 할때 3번째부터 옵션 선택시 생성하기 위해 인덱스 2보다 클때로 조건 설정 */
+      if (selectElement.selectedIndex > 2) {
+          /* 상품가격을 ₩와 콤마가 들어갔기에 기존 숫자표시로만 온전히 가져오기 위해
+          * */
+          const productPrice = document.getElementById('product_price').textContent.replace(/[^0-9.-]+/g, "");
+          const productTitle = document.getElementById('product_title').textContent;
+
+          if (!addedOptions.has(selectedOption)) {
+              addedOptions.add(selectedOption);
+
+              const newProductElement = document.createElement('div');
+              newProductElement.setAttribute("class", "selectedProductName");
+              newProductElement.textContent = productTitle;
+              newProductElement.style.display = "flex";
+
+              const newOptionElement = document.createElement('div');
+              newOptionElement.setAttribute("class", "selectedProductOption");
+              newOptionElement.setAttribute("name", selectedOptionCode);
+              newOptionElement.textContent = '-' + selectedOption;
+
+              const newProductCount = document.createElement('input');
+              newProductCount.setAttribute("type", "number");
+              newProductCount.setAttribute("name", "basketCount");
+              newProductCount.setAttribute("min", "1");
+              newProductCount.setAttribute("step", "1");
+              newProductCount.setAttribute("value", "1");
+
+              const newDeleteBtn = document.createElement('button');
+              newDeleteBtn.textContent = "x";
+
+              const updateProductPrice = () => {
+                  const count = parseInt(newProductCount.value);
+                  const subtotal = productPrice * count;
+                  totalSum += subtotal - parseFloat(newProductCount.dataset.subtotal || 0);
+                  newProductCount.dataset.subtotal = subtotal;
+                  updateTotalPrice();
+              };
+
+              newDeleteBtn.addEventListener("click", function () {
+                  newProductElement.remove();
+                  newOptionElement.remove();
+                  totalSum -= parseFloat(newProductCount.dataset.subtotal || 0);
+                  addedOptions.delete(selectedOption);
+                  updateTotalPrice();
+              });
+
+              newProductCount.addEventListener("change", updateProductPrice);
+
+              newProductElement.appendChild(newDeleteBtn);
+              newProductElement.appendChild(newProductCount);
+
+              const addOptDiv = document.getElementById('addOpt');
+              addOptDiv.appendChild(newProductElement);
+              addOptDiv.appendChild(newOptionElement);
+
+              updateProductPrice();
+          }
+      }
+  }
+
+  function updateTotalPrice() {
+      const sumPrice = document.getElementById('sumPrice');
+      sumPrice.textContent = 'TOTAL ₩ ' + formatPrice(totalSum);
+  }
+
+  function formatPrice(price) {
+      return price.toFixed(0).replace(/\d(?=(\d{3})+($))/g, '$&,');
+  }
+</script>
+
+<!-- 장바구니 Json으로 데이터 전송 -->
+<script>
+    function sendBasket(){
+        // 선택한 옵션들 배열에 담기
+        const selectedProducts = [];
+        // 옵션 선택시 생성되는 div 개수와 div안에 input값 수량을 알아오기 위해 불러온다.
+        const productElements = document.querySelectorAll('.selectedProductName');
+        const optionElements = document.querySelectorAll('.selectedProductOption');
+
+        /* 생성되는 각각의 옵션별로의 옵션코드와 상품수량을 알아오기위해 productElements.length를 이용했다. */
+        for (let i = 0; i < productElements.length; i++) {
+            /* option의 name 속성값에 optionCode를 넣어놔서 각각 옵션의 name 속성을 불러온다. */
+            const optionCode = optionElements[i].getAttribute('name');
+            console.log(optionCode);
+            const count = productElements[i].querySelector('input[name="basketCount"]').value;
+
+            selectedProducts.push(
+                optionCode,
+                count
+            );
+        }
+
+        // JSON 형식으로 데이터를 문자열로 변환
+        const jsonData = JSON.stringify(selectedProducts);
+        console.log(selectedProducts);
+
+        // 서버로 데이터를 전송
+        fetch('/order1/page1', {
+            method: 'POST',
+            body: jsonData,
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        })
+            .then(response => response.text())
+            .then(data => {
+                // 서버 응답에 대한 처리를 수행합니다.
+                console.log(data); // 서버 응답 데이터가 잘 들어왔는지 콘솔로 확인 또는 다른 처리 수행
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+    }
+
+
+</script>
+<!-- 구매하기 Json으로 데이터 전송 -->
+<script>
+    function sendBuy() {
+        // 선택한 옵션들 배열에 담기
+        const selectedProducts = [];
+        // 옵션 선택시 생성되는 div 개수와 div안에 input값 수량을 알아오기 위해 불러온다.
+        const productElements = document.querySelectorAll('.selectedProductName');
+        const optionElements = document.querySelectorAll('.selectedProductOption');
+
+        /* 생성되는 각각의 옵션별로의 옵션코드와 상품수량을 알아오기위해 productElements.length를 이용했다. */
+        for (let i = 0; i < productElements.length; i++) {
+            /* option의 name 속성값에 optionCode를 넣어놔서 각각 옵션의 name 속성을 불러온다. */
+            const optionCode = optionElements[i].getAttribute('name');
+            console.log(optionCode);
+            const count = productElements[i].querySelector('input[name="basketCount"]').value;
+
+            selectedProducts.push(
+                optionCode,
+                count
+            );
+        }
+
+        // JSON 형식으로 데이터를 문자열로 변환
+        const jsonData = JSON.stringify(selectedProducts);
+        console.log(selectedProducts);
+
+        // 서버로 데이터를 전송
+        fetch('/order1/page1', {
+            method: 'POST',
+            body: jsonData,
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        })
+            .then(response => response.text())
+            .then(data => {
+                // 서버 응답에 대한 처리를 수행합니다.
+                console.log(data); // 서버 응답 데이터가 잘 들어왔는지 콘솔로 확인 또는 다른 처리 수행
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+</script>
+
 </body>
 </html>

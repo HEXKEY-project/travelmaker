@@ -37,21 +37,52 @@
         <result property="fileType" column="FILE_TYPE"/>
         <result property="originalName" column="ORIGIN_FILE_NAME"/>
         <result property="savedName" column="SAVED_FILE_NAME"/>
-        <result property="filePath" column="FILE_PATH"/>
+        <result property="savePath" column="SAVE_PATH"/>
         <result property="noticeCode" column="NOTICE_CODE"/>
         <result property="productSeq" column="PRODUCT_SEQ"/>
         <result property="reviewCode" column="REVIEW_CODE"/>
-        <result property="qnaCode" column="QNA_CODE"/>
+        <result property="filePath" column="FILE_PATH"/>
     </resultMap>
 
 
     <select id="selectProductTotalCount" resultType="_int" parameterType="hashmap">
         SELECT
-               COUNT(*)
-          FROM TBL_PRODUCT
+            COUNT(CATEGORY_CODE)
+        FROM (SELECT
+                     A.CATEGORY_CODE
+                   , B.REF_CATEGORY_CODE
+                FROM TBL_PRODUCT A
+                JOIN TBL_PRODUCT_CATEGORY B ON(A.CATEGORY_CODE = B.CATEGORY_CODE)
+             )
+        WHERE REF_CATEGORY_CODE IN (SELECT
+                                        CATEGORY_CODE
+                                    FROM TBL_PRODUCT_CATEGORY
+                                    WHERE REF_CATEGORY_CODE = #{categoryCode})
     </select>
 
-    <select id="selectProductList" resultMap="generalProductResultMap">
+    <select id="selectSubCateTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT
+            COUNT(CATEGORY_CODE)
+        FROM (SELECT
+                  A.CATEGORY_CODE
+                   , B.REF_CATEGORY_CODE
+              FROM TBL_PRODUCT A
+                       JOIN TBL_PRODUCT_CATEGORY B ON(A.CATEGORY_CODE = B.CATEGORY_CODE)
+             )
+        WHERE CATEGORY_CODE IN (SELECT
+                                        CATEGORY_CODE
+                                    FROM TBL_PRODUCT_CATEGORY
+                                    WHERE REF_CATEGORY_CODE = #{categoryCode})
+    </select>
+
+    <select id="selectCategoryName" resultMap="ProductCategoryResultMap">
+        SELECT
+            CATEGORY_NAME
+        FROM TBL_PRODUCT_CATEGORY
+        WHERE CATEGORY_CODE  = #{ categoryCode }
+    </select>
+
+    <select id="selectSuperCateList" resultMap="generalProductResultMap">
         SELECT
             A.PRODUCT_SEQ
              , A.PRODUCT_NAME
@@ -65,6 +96,7 @@
              , B.FILE_PATH
              , B.SAVED_FILE_NAME
              , C.REF_CATEGORY_CODE
+             , C.CATEGORY_NAME
         FROM TBL_PRODUCT A
                  JOIN TBL_FILE B ON (A.PRODUCT_SEQ = B.PRODUCT_SEQ)
                  JOIN TBL_PRODUCT_CATEGORY C ON (A.CATEGORY_CODE = C.CATEGORY_CODE)
@@ -72,5 +104,59 @@
                                           CATEGORY_CODE
                                       FROM TBL_PRODUCT_CATEGORY
                                       WHERE REF_CATEGORY_CODE = #{ categoryCode })
+          AND B.FILE_TYPE = 'productImage'
     </select>
+
+    <select id="selectSubCateList" resultMap="generalProductResultMap">
+        SELECT
+            A.PRODUCT_SEQ
+             , A.PRODUCT_NAME
+             , A.PRICE
+             , A.REGISTERED_DATE
+             , A.MODIFIED_DATE
+             , A.CATEGORY_CODE
+             , A.SERIAL_NO
+             , A.ORDERABLE_STATUS
+             , B.FILE_TYPE
+             , B.FILE_PATH
+             , B.SAVED_FILE_NAME
+             , C.CATEGORY_CODE
+             , C.REF_CATEGORY_CODE
+             , C.CATEGORY_NAME
+        FROM TBL_PRODUCT A
+                 JOIN TBL_FILE B ON (A.PRODUCT_SEQ = B.PRODUCT_SEQ)
+                 JOIN TBL_PRODUCT_CATEGORY C ON (A.CATEGORY_CODE = C.CATEGORY_CODE)
+        WHERE C.CATEGORY_CODE IN (SELECT
+                                      CATEGORY_CODE
+                                  FROM TBL_PRODUCT_CATEGORY
+                                  WHERE REF_CATEGORY_CODE = #{ categoryCode })
+          AND B.FILE_TYPE = 'productImage'
+    </select>
+
+    <select id="selectLowestCateList" resultMap="generalProductResultMap">
+        SELECT
+            A.PRODUCT_SEQ
+             , A.PRODUCT_NAME
+             , A.PRICE
+             , A.REGISTERED_DATE
+             , A.MODIFIED_DATE
+             , A.CATEGORY_CODE
+             , A.SERIAL_NO
+             , A.ORDERABLE_STATUS
+             , B.FILE_TYPE
+             , B.FILE_PATH
+             , B.SAVED_FILE_NAME
+             , C.CATEGORY_CODE
+             , C.REF_CATEGORY_CODE
+             , C.CATEGORY_NAME
+        FROM TBL_PRODUCT A
+                 JOIN TBL_FILE B ON (A.PRODUCT_SEQ = B.PRODUCT_SEQ)
+                 JOIN TBL_PRODUCT_CATEGORY C ON (A.CATEGORY_CODE = C.CATEGORY_CODE)
+        WHERE C.CATEGORY_CODE IN (SELECT
+                                      CATEGORY_CODE
+                                  FROM TBL_PRODUCT_CATEGORY
+                                  WHERE CATEGORY_CODE = #{ categoryCode })
+          AND B.FILE_TYPE = 'productImage'
+    </select>
+
 </mapper>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +15,7 @@
 
     <div class="upper-buttons-justify">
         <div class="main-logo">
-            <a href=#>
+            <a href="/">
                 <img src="/user/images/migi/main_logo.png">
             </a>
         </div>
@@ -24,38 +25,81 @@
             <li><a href=#>BEST</a></li>
 
             <li class="add-cate">
-                <a class="cate" id="carrier" href="/user/product/list?categoryCode=1">캐리어</a>
+                <a class="cate" id="carrier" href="/user/product/list/supList?categoryCode=1">캐리어</a>
                 <ul class="add-sub">
-                    <li class="sub_a"><a id="4" href=#>하드</a></li>
-                    <li><a id="12" href=#>기내 (21형 이하)</a></li>
-                    <li><a id="13" href=#>중형 (22~26형)</a></li>
-                    <li><a id="14" href=#>대형 (27형 이상)</a></li>
-                    <br>
-                    <li class="sub_a"><a id="5" href=#>소프트</a></li>
-                    <li><a id="15" href=#>기내 (21형 이하)</a></li>
-                    <li><a id="16" href=#>중형 (22~26형)</a></li>
-                    <li><a id="17" href=#>대형 (27형 이상)</a></li>
+                    <ul style="display: inline-block; float: left">
+                        <li class="sub_a"><a id="4" href="/user/product/list/subList?categoryCode=4">하드</a></li>
+                        <li><a id="12" href="/user/product/list/lowestList?categoryCode=12">기내 (21형 이하)</a></li>
+                        <li><a id="13" href="/user/product/list/lowestList?categoryCode=13">중형 (22~26형)</a></li>
+                        <li><a id="14" href="/user/product/list/lowestList?categoryCode=14">대형 (27형 이상)</a></li>
+                    </ul>
+                    <ul style="display: inline-block; float: left">
+                        <li class="sub_a"><a id="5" href="/user/product/list/subList?categoryCode=5">소프트</a></li>
+                        <li><a id="15" href="/user/product/list/lowestList?categoryCode=15">기내 (21형 이하)</a></li>
+                        <li><a id="16" href="/user/product/list/lowestList?categoryCode=16">중형 (22~26형)</a></li>
+                        <li><a id="17" href="/user/product/list/lowestList?categoryCode=17">대형 (27형 이상)</a></li>
+                    </ul>
                 </ul>
             </li>
 
             <li class="add-cate">
-                <a class="cate" id="bags" href="/user/product/list?categoryCode=2">가방</a>
+                <a class="cate" id="bags" href="/user/product/list/supList?categoryCode=2">가방</a>
                 <ul class="add-sub-bags">
-                    <li class="sub_a"><a href="#">배낭</a></li>
-                    <li><a href="#">여행 배낭</a></li>
-                    <li><a href="#">배낭 용품</a></li>
-                    <li><a href="#">백팩</a></li>
-                    <br>
-                    <li class="sub_a"><a href="#">보조가방</a></li>
-                    <li><a href="#">접이식 | 폴딩백</a></li>
-                    <li><a href="#">보스턴 | 더플백</a></li>
-                    <li><a href="#">크로스 | 숄더백</a></li>
-                    <li><a href="#">도난방지백</a></li>
-                    <li><a href="#">기타 백</a></li>
+                    <ul style="display: inline-block; float: left">
+                        <li class="sub_a"><a href="/user/product/list/subList?categoryCode=6">배낭</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=18">여행 배낭</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=19">배낭 용품</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=20">백팩</a></li>
+                    </ul>
+                    <ul style="display: inline-block; float: left">
+                        <li class="sub_a"><a href="#">보조가방</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=21">접이식 | 폴딩백</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=22">보스턴 | 더플백</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=23">크로스 | 숄더백</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=24">도난방지백</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=25">기타 백</a></li>
+                    </ul>
                 </ul>
             </li>
 
-            <li><a href=#>여행용품</a></li>
+            <li class="add-cate">
+                <a id="items" href="/user/product/list/supList?categoryCode=3">여행용품</a>
+                <ul class="add-sub-items">
+                    <ul style="display: inline-block; float: left">
+                        <li class="sub_a"><a href="/user/product/list/subList?categoryCode=8">수납 | 편의</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=26">트래블팩 | 파우치</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=27">안대 | 목베개</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=28">와이파이 | 유심</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=29">간편식품</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=30">편의용품</a></li>
+                    </ul>
+                    <ul style="display: inline-block; float: left">
+                        <li class="sub_a"><a href="/user/product/list/subList?categoryCode=9">안전 | 위생</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=31">캐리어커버 | 벨트</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=32">안전복대 | 지갑</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=33">자물쇠 | 와이어</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=34">보안 | 구급용품</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=35">뷰티케어</a></li>
+                    </ul>
+                    <ul style="display: inline-block; float: left">
+                        <li class="sub_a"><a href="/user/product/list/subList?categoryCode=10">악세서리</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=36">여권커버 | 네임택</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=37">전자 | 전기용품</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=38">여행 아이템</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=39">여행 문구</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=40">기념품</a></li>
+                    </ul>
+                    <ul style="display: inline-block; float: left">
+                        <li class="sub_a"><a href="/user/product/list/subList?categoryCode=11">액티비티 | 시즌</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=41">캠핑 | 등산</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=42">골프</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=43">래쉬가드</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=44">아쿠아슈즈</a></li>
+                        <li><a href="/user/product/list/lowestList?categoryCode=45">스윔</a></li>
+                    </ul>
+                </ul>
+            </li>
+
             <li><a href=#>이벤트</a></li>
 
             <li class="add-cate">
@@ -74,20 +118,37 @@
         <div class="right-buttons-justify">
 
             <div class="store">
-                <a href=#>
+                <a href="/map/map">
                     <img src="/user/images/migi/top_store.png">
                 </a>
             </div>
+
+            <th:block sec:authorize="isAnonymous()">
             <div class="myshop">
-                <a class="cate" id="myshop" href=#>
+                <a class="cate" id="myshop-anonymous" href="/user/user/login">
                     <img src="/user/images/migi/top_myshop.png">
                 </a>
                 <ul class="add-sub-my">
-                    <li><a href="#">로그인</a></li>
-                    <li><a href="#">회원가입</a></li>
+                    <li><a href="/user/user/login">로그인</a></li>
+                    <li><a href="/user/user/regist">회원가입</a></li>
                     <li><a href="#">주문조회</a></li>
                 </ul>
             </div>
+            </th:block>
+
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="myshop">
+                    <a class="cate" id="myshop-login" href="/user/user/mypage">
+                        <img src="/user/images/migi/top_myshop.png">
+                    </a>
+                    <ul class="add-sub-my">
+                        <li><input type="button" value="로그아웃" id="logout"></li>
+                        <li><a href="/user/user/regist">회원가입</a></li>
+                        <li><a href="#">주문조회</a></li>
+                    </ul>
+                </div>
+            </th:block>
+
             <div class="cart">
                 <a href=#>
                     <img src="/user/images/migi/top_cart.png">
@@ -107,12 +168,12 @@
         </a>
 
         <div class="search-inner">
-            <form id="searchForm" action="/search.html" method="get" target="_self">
+            <form id="searchForm" action="/user/search" method="get" target="_self">
                 <fieldset title="검색어를 입력해주세요.">
-                    <input id="keyword" name="keyword" class="inputTypeText" placeholder="검색어를 입력하세요."
+                    <input id="searchValue" name="searchValue" class="inputTypeText" placeholder="검색어를 입력하세요."
                            value="검색어를 입력하세요." type="text">
                     <input type="image" src="/user/images/migi/top_search.png" class="btn-src" alt="검색이미지"
-                           onclick="submitSearch(this); return false">
+                           onclick.href="/user/search">
                 </fieldset>
             </form>
 
@@ -183,6 +244,11 @@
             }
             animate();
         }
+
+        function submitSearch() {
+
+        }
+
     </script>
 
 
@@ -241,7 +307,7 @@
             addSubBags.forEach((submenu) => {
                 submenu.style.display = "none";
             });
-        }, 300);
+        }, 150);
     });
 
     addSubBags.forEach((submenu) => {
@@ -253,9 +319,43 @@
         submenu.addEventListener("mouseleave", () => {
             timeoutId = setTimeout(() => {
                 submenu.style.display = "none";
-            }, 300);
+            }, 150);
         });
     });
+
+
+    /* items */
+    const addItems = document.getElementById("items");
+    const addSubItems = document.querySelectorAll(".add-sub-items");
+
+    addItems.addEventListener("mouseenter", () => {
+        clearTimeout(timeoutId);
+        addSubItems.forEach((submenu) => {
+            submenu.style.display = "block";
+        });
+    });
+
+    addItems.addEventListener("mouseleave", () => {
+        timeoutId = setTimeout(() => {
+            addSubItems.forEach((submenu) => {
+                submenu.style.display = "none";
+            });
+        }, 150);
+    });
+
+    addSubItems.forEach((submenu) => {
+        submenu.addEventListener("mouseenter", () => {
+            clearTimeout(timeoutId);
+            submenu.style.display = "block";
+        });
+
+        submenu.addEventListener("mouseleave", () => {
+            timeoutId = setTimeout(() => {
+                submenu.style.display = "none";
+            }, 150);
+        });
+    });
+
 
     /* community */
     const addCom = document.getElementById("community");
@@ -273,7 +373,7 @@
             addSubCom.forEach((submenu) => {
                 submenu.style.display = "none";
             });
-        }, 300);
+        }, 150);
     });
 
     addSubCom.forEach((submenu) => {
@@ -285,27 +385,43 @@
         submenu.addEventListener("mouseleave", () => {
             timeoutId = setTimeout(() => {
                 submenu.style.display = "none";
-            }, 300);
+            }, 150);
         });
     });
 
     /* myshop */
-    const addMy = document.getElementById("myshop");
+    const addMyA = document.getElementById("myshop-anonymous");
+    const addMyL = document.getElementById("myshop-login")
     const addSubMy = document.querySelectorAll(".add-sub-my");
 
-    addMy.addEventListener("mouseenter", () => {
+    addMyA.addEventListener("mouseenter", () => {
         clearTimeout(timeoutId);
         addSubMy.forEach((submenu) => {
             submenu.style.display = "block";
         });
     });
 
-    addMy.addEventListener("mouseleave", () => {
+    addMyA.addEventListener("mouseleave", () => {
         timeoutId = setTimeout(() => {
             addSubMy.forEach((submenu) => {
                 submenu.style.display = "none";
             });
-        }, 300);
+        }, 150);
+    });
+
+    addMyL.addEventListener("mouseenter", () => {
+        clearTimeout(timeoutId);
+        addSubMy.forEach((submenu) => {
+            submenu.style.display = "block";
+        });
+    });
+
+    addMyL.addEventListener("mouseleave", () => {
+        timeoutId = setTimeout(() => {
+            addSubMy.forEach((submenu) => {
+                submenu.style.display = "none";
+            });
+        }, 150);
     });
 
     addSubMy.forEach((submenu) => {
@@ -317,7 +433,7 @@
         submenu.addEventListener("mouseleave", () => {
             timeoutId = setTimeout(() => {
                 submenu.style.display = "none";
-            }, 300);
+            }, 150);
         });
     });
 

@@ -1,0 +1,46 @@
+body {
+    width: 100%;
+    height: fit-content;
+}
+
+.wrapper h1 {
+    margin: 0 auto 80px;
+}
+
+#thumbnailArea {
+    max-width: 1540px;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item {
+    margin: 20px;
+    cursor: pointer;
+}
+
+.product-description {
+    font-size: 12px;
+    position: relative;
+    margin: 16px auto;
+    width: 350px;
+    white-space: normal;
+    word-break: keep-all;
+}
+
+.product-name {
+    text-align: left;
+    padding: 4px 0;
+    font-weight: 500;
+    color: #767676;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    font-size: 14px;
+}
+
+.product-name #product-price {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}

@@ -86,7 +86,7 @@ fieldset {
     padding: 5px 10px 0 0;
 }
 
-.search-box #category_no {
+.search-box #categoryCode {
     width: 400px;
     height: 24px;
 }
@@ -96,13 +96,14 @@ fieldset {
     border: 1px solid #d5d5d5;
 }
 
-.search-box #search_type {
+.search-box #searchCondition {
     margin: 1px 1px 1px 0;
     width: 120px;
     height: 24px;
 }
 
-.search-box #keyword {
+.search-box #searchValue {
+    font-size: 0.9em;
     width: 278px;
     height: 24px;
     margin: 1px;
@@ -128,17 +129,17 @@ fieldset {
     color: #757575;
 }
 
-.search-box #product_price1 {
+.search-box #productPrice1 {
     width: 191px;
     margin: 0px 5px 0 0;
 }
 
-.search-box #product_price2 {
+.search-box #productPrice2 {
     width: 191px;
     margin: 0 0 0 5px;
 }
 
-.search-box #order_by {
+.search-box #orderBy {
     width: 400px;
     height: 24px;
 }
@@ -164,23 +165,61 @@ fieldset {
     margin: 30px auto;
 }
 
-.noData {
+#noData {
     padding: 48px 0;
     text-align: center;
     line-height: 1.8em;
 }
 
-.noData > strong{
-    display: block;
+#noData > .warning{
+    font-weight: bold;
 }
 
-.noData ul {
+#noData ul {
     text-align: center;
     display: inline-block;
     margin: 10px 0 0;
 }
 
-.noData li {
+#noData li {
     display: block;
     text-align: center;
+}
+
+#thumbnailArea {
+    max-width: 1540px;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item {
+    margin: 20px;
+    cursor: pointer;
+}
+
+.product-description {
+    font-size: 12px;
+    position: relative;
+    margin: 16px auto;
+    width: 350px;
+    white-space: normal;
+    word-break: keep-all;
+}
+
+.product-name {
+    text-align: left;
+    padding: 4px 0;
+    font-weight: 500;
+    color: #767676;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    font-size: 14px;
+}
+
+.product-name #product-price {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
 }

@@ -1,8 +1,7 @@
 package com.hexkey.travelmaker.product.list.service;
 
-import com.hexkey.travelmaker.common.migi.paging.Pagenation;
-import com.hexkey.travelmaker.common.migi.paging.SelectCriteria;
 import com.hexkey.travelmaker.product.list.dao.ProductListMapper;
+import com.hexkey.travelmaker.product.regist.dto.ProductCategoryDTO;
 import com.hexkey.travelmaker.product.regist.dto.ProductDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,23 +21,56 @@ public class ProductListService {
     }
 
 
-    public Map<String, Object> selectCateList(int categoryCode, int page) {
+    public Map<String, Object> selectSuperCateList(int categoryCode) {
 
-        int totalCount = productListMapper.selectProductTotalCount();
+        int totalCount = productListMapper.selectProductTotalCount(categoryCode);
         log.info("product total count : {}", totalCount);
 
-        int limit = 9;
-        int buttonAmount = 5;
-        SelectCriteria selectCriteria = Pagenation.getSelectCriteria(page, totalCount, limit, buttonAmount);
-        log.info("product list selectCriteria : {}", selectCriteria);
-
-        List<ProductDTO> productList = productListMapper.selectProductList(categoryCode, selectCriteria);
+        List<ProductDTO> productList = productListMapper.selectSuperCateList(categoryCode);
         log.info("productList : {}", productList);
 
-        Map<String, Object> productListAndPaging = new HashMap<>();
-        productListAndPaging.put("paging", selectCriteria);
-        productListAndPaging.put("productList", productList);
+        Map<String, Object> supProductList = new HashMap<>();
+        supProductList.put("productList", productList);
 
-        return productListAndPaging;
+        return supProductList;
     }
+
+    public ProductCategoryDTO selectCategoryName(int categoryCode) {
+
+        ProductCategoryDTO superCategoryName =  productListMapper.selectCategoryName(categoryCode);
+
+        return superCategoryName;
+    }
+
+
+    public Map<String, Object> selectSubCateList(int categoryCode) {
+
+        int totalCount = productListMapper.selectProductTotalCount(categoryCode);
+        log.info("product total count : {}", totalCount);
+
+        List<ProductDTO> productList = productListMapper.selectSubCateList(categoryCode);
+        log.info("productList : {}", productList);
+
+        Map<String, Object> subProductList = new HashMap<>();
+        subProductList.put("productList", productList);
+
+        return subProductList;
+    }
+
+
+    public Map<String, Object> selectLowestCateList(int categoryCode) {
+
+        int totalCount = productListMapper.selectProductTotalCount(categoryCode);
+        log.info("product total count : {}", totalCount);
+
+        List<ProductDTO> productList = productListMapper.selectLowestCateList(categoryCode);
+        log.info("productList : {}", productList);
+
+        Map<String, Object> lowProductList = new HashMap<>();
+        lowProductList.put("productList", productList);
+
+        return lowProductList;
+    }
+
+
 }

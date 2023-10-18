@@ -15,91 +15,100 @@
                 <h1>상품검색</h1>
             </div>
 
-            <form id="search-form" action="searchForm.html" method="get" target="_self">
+            <form id="search-form" action="/user/searchForm" method="get" target="_self">
                 <div class="search-box">
                     <fieldset>
                     <legend>상품검색</legend>
 
                     <div class="item">
                         <strong>상품분류</strong>
-                        <select id="category_no">
-                            <option value="0" selected="selected">상품분류 선택</option>
-                            <option value="82">캐리어</option>
-                            <option value="92">가방</option>
-                            <option value="101">여행용품</option>
+                        <select id="categoryCode" name="categoryCode">
+                            <option selected="selected">상품분류 선택</option>
+                            <option value="1">캐리어</option>
+                            <option value="2">가방</option>
+                            <option value="3">여행용품</option>
                         </select>
                     </div>
 
                     <div class="item overview">
                         <strong>검색조건</strong>
-                        <select id="search_type" name="search_type">
-                            <option value="product_name">상품명</option>
-                            <option value="product_code">상품코드</option>
-                            <option value="ma_product_code">자체상품코드</option>
-                            <option value="prd_model">모델명</option>
-                            <option value="prd_brand">브랜드명</option>
+                        <select id="searchCondition" name="searchCondition">
+                            <option value="productName">상품명</option>
+                            <option value="productSeq">상품코드</option>
                         </select>
-                        <input type="text" id="keyword" name="keyword" class="inputTypeText" placeholder size="15">
+                        <input type="text" id="searchValue" th:value="${searchValue}" name="searchValue" class="inputTypeText" placeholder size="15">
                     </div>
 
                     <div class="search-hotkeyword">
                         <strong>인기검색어</strong>
                         <p>
-                            <a href="search-form.html?keyword=캐리어">캐리어  </a>
-                            <a href="search-form.html?keyword=캐리어커버">캐리어커버  </a>
-                            <a href="search-form.html?keyword=캐리어벨트">캐리어벨트  </a>
-                            <a href="search-form.html?keyword=와이어">와이어  </a>
-                            <a href="search-form.html?keyword=배낭">배낭  </a>
-                            <a href="search-form.html?keyword=도난방지">도난방지  </a>
-                            <a href="search-form.html?keyword=복대">복대  </a>
-                            <a href="search-form.html?keyword=네임택">네임택  </a>
-                            <a href="search-form.html?keyword=여권케이스">여권케이스  </a>
-                            <a href="search-form.html?keyword=목베개">목베개</a>
+                            <a href="search?searchValue=캐리어">캐리어  </a>
+                            <a href="search?searchValue=캐리어커버">캐리어커버  </a>
+                            <a href="search?searchValue=캐리어벨트">캐리어벨트  </a>
+                            <a href="search?searchValue=와이어">와이어  </a>
+                            <a href="search?searchValue=배낭">배낭  </a>
+                            <a href="search?searchValue=도난방지">도난방지  </a>
+                            <a href="search?searchValue=복대">복대  </a>
+                            <a href="search?searchValue=네임택">네임택  </a>
+                            <a href="search?searchValue=여권케이스">여권케이스  </a>
+                            <a href="search?searchValue=목베개">목베개</a>
                         </p>
                     </div>
 
                     <div class="item">
                         <strong>판매가격대</strong>
-                        <input id="product_price1" name="product_price1" size="16" type="text">
+                        <input id="productPrice1" name="productPrice1" size="16" type="text">
                          ~
-                        <input id="product_price2" name="product_price2" size="16" type="text">
-                    </div>
-
-                    <div class="item">
-                        <strong>검색정렬기준</strong>
-                        <select id="order_by" name="order_by">
-                            <option value selected="selected">::: 기준선택 :::</option>
-                            <option value="recent">신상품 순</option>
-                            <option value="name">상품명순</option>
-                            <option value="priceasc">낮은가격 순</option>
-                            <option value="price">높은가격 순</option>
-                            <option value="manu_name">제조사 순</option>
-                            <option value="review">사용후기 순</option>
-                        </select>
+                        <input id="productPrice2" name="productPrice2" size="16" type="text">
                     </div>
                     <p class="button">
                         <button type="submit" class="btnSubmitFix">검색</button>
                     </p>
                     </fieldset>
+
+
                 </div>
                 <div class="searchResult">
                     <p class="record">
-                        <strong>0</strong>
+                        <strong>[[${totalCount}]]</strong>
                         개의 상품을 찾았습니다.
                     </p>
-                    <ul class="search-orderby listType">
-                        <li rel style class="btn_order"></li>
-                    </ul>
                 </div>
-                <div class="noData">
-                    <strong class="warning">검색결과가 없습니다.</strong>
-                    <strong>정확한 검색어 인지 확인하시고 다시 검색해 주세요.</strong>
-                    <ul>
-                        <li>검색어의 입력이 정확한지 확인해 보세요.</li>
-                        <li>두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요.</li>
-                        <li>검색 옵션을 다시 확인해 보세요.</li>
-                    </ul>
+
+                <div id="thumbnailArea">
+                    <th:block th:each="searchResultList : ${searchResultList}">
+                        <div align="center" class="item" th:onclick="|location.href='/product/detail?productSeq=${searchResultList.productSeq}'|">
+                            <div>
+                                <th:block th:if="${not #lists.isEmpty(searchResultList.fileList)}">
+                                    <img th:if="${searchResultList.fileList[0].fileType == 'productImage'}"
+                                         th:src="${searchResultList.fileList[0].filePath}"
+                                         width="296px"
+                                         height="296px"/>
+                                </th:block>
+                            </div>
+                            <div class="product-description">
+                                <div class="product-name">
+                                    <a th:onclick="|location.href='/product/detail?productSeq=${searchResultList.productSeq}'|">
+                                        <div th:text="${searchResultList.productName}"></div>
+                                        <div id="product-price" th:text="'₩' + ${#numbers.formatInteger(searchResultList.price, 3, 'COMMA')}"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
                 </div>
+
+
+<!--                <div id="noData">-->
+<!--                    <ul>-->
+<!--                        <li class="warning">검색결과가 없습니다.</li>-->
+<!--                        <li class="warning">정확한 검색어 인지 확인하시고 다시 검색해 주세요.</li>-->
+<!--                        <li>검색어의 입력이 정확한지 확인해 보세요.</li>-->
+<!--                        <li>두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요.</li>-->
+<!--                        <li>검색 옵션을 다시 확인해 보세요.</li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+
             </form>
         </div>
     </div>
@@ -109,13 +118,44 @@
 <script>
 
     window.addEventListener('DOMContentLoaded', function () {
-        // 현재 URL에서 'keyword' 파라미터 값을 가져옵니다.
+        // 현재 URL에서 'searchValue' 파라미터 값을 가져옵니다.
         const urlParams = new URLSearchParams(window.location.search);
-        const keywordValue = urlParams.get('keyword');
+        const categoryCode = urlParams.get('categoryCode');
+        const searchCondition = urlParams.get('searchCondition');
+        const searchValue = urlParams.get('searchValue');
+        const productPrice1 = urlParams.get('productPrice1');
+        const productPrice2 = urlParams.get('productPrice2');
 
-        // 'keyword' 파라미터가 존재하고 값이 비어 있지 않다면 값을 'keyword' 입력 필드에 설정합니다.
-        if (keywordValue !== null && keywordValue.trim() !== '') {
-            document.getElementById("keyword").value = keywordValue;
+        // 파라미터가 존재하고 값이 비어 있지 않다면 값을 입력 필드에 설정합니다.
+        if (categoryCode !== null && categoryCode.trim() !== '') {
+
+            document.getElementById("categoryCode").value = categoryCode;
+
+        }
+
+        if (searchCondition !== null && searchCondition.trim() !== '') {
+
+            document.getElementById("searchCondition").value = searchCondition;
+
+        }
+
+        if (searchValue !== null && searchValue.trim() !== '') {
+
+            console.log(searchValue)
+            document.getElementById("searchValue").value = searchValue;
+
+        }
+
+        if (productPrice1 !== null && productPrice1.trim() !== '') {
+
+            document.getElementById("productPrice1").value = productPrice1;
+
+        }
+
+        if (productPrice2 !== null && productPrice2.trim() !== '') {
+
+            document.getElementById("productPrice2").value = productPrice2;
+
         }
     });
 
