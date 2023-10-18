@@ -9,6 +9,7 @@
     <!-- adminMemberList스타일-->
     <link href="/admin/css/mingyo-member/style1.css" rel="stylesheet" type="text/css">
     <script src="/admin/js/member/event.js" type="text/javascript"></script>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
     <!--header 영역-->
@@ -18,7 +19,7 @@
         <!--nav영역 -->
         <div class="headerBar" th:replace="common/admin/nav.html"></div>
 
-        <div class="memberList">
+        <div class="memberList" >
             <div class="memberListtTitle">
                 <h1>회원 관리</h1>
             </div>
@@ -75,16 +76,16 @@
                 </div>
                 <div class="memberButton">
                     <div>
-                        <button type="submit" class="btnSubmit" >회원정보 삭제 </button>
+                        <button type="submit" class="btnSubmit" id="memberInfoDeletion">회원정보 삭제 </button>
+                    </div>
+<!--                    <div>-->
+<!--                        <button type="submit" class="btnSubmit" >회원정보 수정 </button>-->
+<!--                    </div>-->
+                    <div>
+                        <button type="submit" class="btnSubmit" id="memberGradeRemove" >회원등급 해제 </button>
                     </div>
                     <div>
-                        <button type="submit" class="btnSubmit" >회원정보 수정 </button>
-                    </div>
-                    <div>
-                        <button type="submit" class="btnSubmit " >회원등급 해제 </button>
-                    </div>
-                    <div>
-                        <button type="submit" class="btnSubmit " >적립금 일괄지급 </button>
+                        <button type="submit" class="btnSubmit" id="memberPointManager">적립금 지급 </button>
                     </div>
                 </div>
             </div>
@@ -92,7 +93,7 @@
             <hr>
                 <div class="memberListTitleBox2">
                     <div class="imgBox">
-                        <img class="menu_title" src="/admin/images/mingyo-member/hidden.svg" alt="hidden_img">
+                         <input class="allCheck" name="allCheck" type="checkbox" id="allCheck">
                     </div>
                     <div class="nember">
                         no
@@ -119,36 +120,38 @@
             </div>
             <div class="memberListTitleBox1">
                 <hr>
-                <div class="memberListTitleBox3" th:each="memberList, test: ${memberList}">
-                    <div class="imgBox">
-                        <input type="checkbox" class="xxx">
-                    </div>
+                <div class="memberListView" th:each="member, test: ${memberList}" th:onclick="popup(event,[[${member.memberCode}]])">
+                            <div class="imgBox">
+                                <input class="rowCheck" name="rowCheck" type="checkbox" th:attr="data-memberCode=${member.memberCode}">
+                            </div>
                     <!-- 번호 = 전체 게시물 개수 - (현재 페이지 * 페이지당 게시물 개수) - 나열 인덱스 -->
-                    <div th:text="${paging.totalCount - (paging.page * paging.limit)- test.index + paging.limit}">
-                    </div>
-                    <div th:text="${#dates.format(memberList.joinDay, 'yyyy-MM-dd')}">
-                    </div>
-                    <div th:text="${memberList.memberName}">
-                    </div>
-                    <div th:text="${memberList.memberId}">
-                    </div>
-                    <div th:text="${memberList.gradeCode.gradeName}"></div>
-                    <div class="phoneNember" th:text="${memberList.phone}"></div>
-                    <div class="orderBtn">
-                        <button type="submit" class="btnSubmit" >주문 </button>
-                    </div>
-                    <div>
-                        <button type="submit" class="btnSubmit " >적립금 </button>
-                    </div>
+                            <div th:text="${paging.totalCount - (paging.page * paging.limit)- test.index + paging.limit}">
+                            </div>
+                            <div th:text="${#dates.format(member.joinDay, 'yyyy-MM-dd')}">
+                            </div>
+                            <div th:text="${member.memberName}">
+                            </div>
+                            <div th:text="${member.memberId}">
+                            </div>
+                            <div th:text="${member.gradeCode.gradeName}"></div>
+                            <div class="phoneNember" th:text="${member.phone}"></div>
+                            <div class="orderBtn">
+                                <button type="submit" class="btnSubmit" >주문 </button>
+                            </div>
+                            <div>
+                                <button type="submit" class="btnSubmit " >적립금 </button>
+                            </div>
+                        </div>
                 </div>
                 <hr>
                 <!-- 페이징 바 -->
                 <div id="paging" align="center" style="margin-top: 20px; height: 50px">
-                    <th:block
-                            th:if="${ paging.memberGradeList != null and paging.searchValueId != null and paging.searchDate != null }">
+<!--                    <th:block-->
+<!--                            th:if="${ paging.memberGradeList != null and paging.searchValueId != null and paging.searchDate != null }">-->
                     <!--  맨 앞으로 이동-->
                     <button
-                            th:onclick="'location.href=\'/admin/adminMemberList?page=1&memberGradeList='+ @{${paging.memberGradeList}} + '&searchValueId=' + @{${paging.searchValueId}} +'&searchDate=' + @{${paging.searchDate}} +'\''">&lt;&lt;</button>
+                            th:onclick="'location.href=\'/admin/adminMemberList?page=1&memberGradeList='+ @{${paging.memberGradeList}} + '&searchValueId=' + @{${paging.searchValueId}} +'&searchDate=' + @{${paging.searchDate}} +'\''"
+                            th:disabled="${ paging.page <= 1 }">&lt;&lt;</button>
 
                     <!-- 이전 페이지로 이동 -->
                     <button
@@ -171,9 +174,10 @@
 
                     <!-- 맨 끝으로 이동 -->
                     <button
-                            th:onclick="'location.href=\'/admin/adminMemberList?page=' + @{${paging.maxPage}} + '&memberGradeList=' + @{${paging.memberGradeList}} + '&searchValueId=' + @{${paging.searchValueId}} +'&searchDate=' + @{${paging.searchDate}} +'\''">>></button>
+                            th:onclick="'location.href=\'/admin/adminMemberList?page=' + @{${paging.maxPage}} + '&memberGradeList=' + @{${paging.memberGradeList}} + '&searchValueId=' + @{${paging.searchValueId}} +'&searchDate=' + @{${paging.searchDate}} +'\''"
+                            th:disabled="${ paging.page >= paging.maxPage }">>></button>
 
-                    </th:block>
+<!--                    </th:block>-->
                 </div>
             </div>
 
