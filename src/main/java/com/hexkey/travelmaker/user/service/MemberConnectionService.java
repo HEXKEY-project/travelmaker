@@ -14,11 +14,11 @@ import java.util.Date;
 
 @Service
 @Slf4j
-public class MemberMService {
+public class MemberConnectionService {
 
     private MemberInfoMapper memberInfoMapper;
 
-    public MemberMService(MemberInfoMapper memberInfoMapper) {
+    public MemberConnectionService(MemberInfoMapper memberInfoMapper) {
         this.memberInfoMapper = memberInfoMapper;
     }
 
