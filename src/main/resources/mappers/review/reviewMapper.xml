@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexkey.travelmaker.review.dao.ReviewMapper">
+
+    <insert id="insertReview">
+        INSERT
+        INTO TBL_REVIEW
+        (
+          REVIEW_CODE
+        , ORDER_CODE
+        , REVIEW_BODY
+        , RATING
+        , REGISTERED_DATE
+        , REVIEW_STATUS
+        )
+        VALUES
+        (
+          SEQ_REVIEW_CODE.NEXTVAL
+        , 1
+        , #{ reviewBody }
+        , #{ rating }
+        , SYSDATE
+        , 'Y'
+        )
+    </insert>
+
+    <insert id="insertReviewAttachImage">
+        INSERT
+        INTO TBL_FILE
+        (
+          FILE_CODE
+        , FILE_TYPE
+        , ORIGIN_FILE_NAME
+        , SAVED_FILE_NAME
+        , SAVE_PATH
+        , REVIEW_CODE
+        , FILE_PATH
+        )
+        VALUES
+        (
+          SEQ_FILE_CODE.NEXTVAL
+        , #{ fileType }
+        , #{ originalName }
+        , #{ savedName }
+        , #{ savePath }
+        , SEQ_REVIEW_CODE.CURRVAL
+        , #{ filePath }
+        )
+    </insert>
+
+
+</mapper>

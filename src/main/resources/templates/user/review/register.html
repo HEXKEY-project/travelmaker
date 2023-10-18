@@ -29,24 +29,24 @@
         <div id="product-grade">
             트래블메이트 트롤리 파트너
             <fieldset id="star-grade">
-                <input type="radio" name="reviewStar" value="5" id="rate1"><label
-                    for="rate1">★</label>
-                <input type="radio" name="reviewStar" value="4" id="rate2"><label
-                    for="rate2">★</label>
-                <input type="radio" name="reviewStar" value="3" id="rate3"><label
-                    for="rate3">★</label>
-                <input type="radio" name="reviewStar" value="2" id="rate4"><label
-                    for="rate4">★</label>
-                <input type="radio" name="reviewStar" value="1" id="rate5"><label
+                <input type="radio" name="rating" value="5" id="rate5"><label
                     for="rate5">★</label>
+                <input type="radio" name="rating" value="4" id="rate4"><label
+                    for="rate4">★</label>
+                <input type="radio" name="rating" value="3" id="rate3"><label
+                    for="rate3">★</label>
+                <input type="radio" name="rating" value="2" id="rate2"><label
+                    for="rate2">★</label>
+                <input type="radio" name="rating" value="1" id="rate1"><label
+                    for="rate1">★</label>
             </fieldset>
         </div>
         <div id="review-detail">
             <hr>
             <h2 id="detail-form">상세 리뷰</h2>
             <fieldset>
-                <input id="review-detail-text" type="text"
-                       placeholder="다른 고객님들에게 도움이 될 수 있도록 솔직한 평가를 남겨 주세요.(제품과 무관한 리뷰의 경우 무통보 삭제될 수 있습니다.)">
+                <textarea id="reviewBody" name="reviewBody" placeholder="다른 고객님들에게 도움이 될 수 있도록 솔직한 평가를 남겨 주세요.
+(제품과 무관한 리뷰의 경우 무통보 삭제될 수 있습니다.)"></textarea>
             </fieldset>
         </div>
         <hr>
@@ -57,7 +57,7 @@
         </div>
         <hr>
         <div id="submit-cancel-btn">
-            <button class="btn-cancel" type="button" onclick="location.href='/user/index'">취소하기</button>
+            <button class="btn-cancel" type="button" onclick="location.href='/main'">취소하기</button>
             <button class="btn-submit" type="submit">등록하기</button>
         </div>
     </form>
