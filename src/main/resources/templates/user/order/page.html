@@ -143,9 +143,9 @@
                     <div>
                         <div class="contents" id="contents_product" th:each="productData : ${productDatas}">
                             <div id="picture">
-                                <input class="optionCodes" name="optionCode" th:value="${ productData.get('optionCode')}">
-                                <input class="counts" name="count" th:value="${ productData.get('count')}">
-                                <input class="productPrices" name="productPrice" th:value="${ productData.get('productPrice')}">
+                                <input type="hidden" class="optionCodes" name="optionCode" th:value="${ productData.get('optionCode')}">
+                                <input type="hidden" class="counts" name="count" th:value="${ productData.get('count')}">
+                                <input type="hidden" class="productPrices" name="productPrice" th:value="${ productData.get('productPrice')}">
                             </div>
                             <div>
                                 <div id="div1">
@@ -348,22 +348,7 @@
                             console.log("currentCode 반환값" + res)
                             location.href = `/order/orderSuccess?res=${res}`;
                         });
-                    ////
 
-                    axios({
-                        url: "/order/orderSuccess",
-                        method: "post",
-                        headers: {"Content-Type": "application/json"},
-                        data: {
-                            imp_uid: rsp.imp_uid,
-                            merchant_uid: rsp.merchant_uid
-                        }
-                    }).then((data) => {
-                        console.log(data);
-                        console.log("아임포트 결제 성공");
-
-                        // location.href = "/order/orderSuccess"
-                    })
                 } else {
                     alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
                 }

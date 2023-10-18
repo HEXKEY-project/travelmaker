@@ -41,12 +41,16 @@ public class AdminOrderController {
                              @RequestParam(required = false) String orderDate2,
                              Model model) {
 
-        log.info("{}", orderDate1);
-        log.info("{}", orderDate2);
+        log.info("searchCondition : {}", searchCondition);
+        log.info("searchValue : {}", searchValue);
+        log.info("orderDate1 : {}", orderDate1);
+        log.info("orderDate2 : {}", orderDate2);
 
         Map<String, Object> selectAdminOrderMap = adminOrderService.selectAdminOrder(searchCondition, searchValue, orderDate1, orderDate2);
 
-        model.addAttribute("AdminOrderSelectDTOList", selectAdminOrderMap.get("AdminOrderSelectDTOList"));
+        log.info("selectAdminOrderMap : {}", selectAdminOrderMap.get("adminOrderSelectDTOList"));
+
+        model.addAttribute("adminOrderSelectDTOList", selectAdminOrderMap.get("adminOrderSelectDTOList"));
 
         return "admin/order/adminOrder";
     }
