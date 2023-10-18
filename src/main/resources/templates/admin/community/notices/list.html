@@ -7,6 +7,22 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/admin/js/product/regist.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script>
+        $(document).ready(function(){
+        $("input[name=ckall]").click(function(){
+            if($("input[name=ckall]").prop("checked")){
+                $("input[name=chkid]").prop("checked",true);
+            }else{
+                $("input[name=chkid]").prop("checked",false);
+            }
+        });
+        $("input[name=chkid]").click(function (){
+            $("input[name=ckall]").prop("checked",false);
+        });
+        });
+    </script>
 
 </head>
 <body style="width: 1920px;">
@@ -44,15 +60,15 @@
         <div>
             <div style="text-align: center; width: 1436px; display: flex;justify-content: flex-start; margin-top: 40px;">
             <p class="adminNotices_content2">공지사항 목록</p>
-                <button class="searchButton2" type="submit" style="display :inline-block; margin-right: 8px;" align="right" onclick="location.href='write'">공지사항 작성</button>
-            <button class="searchButton2" type="submit" style="display :inline-block; margin-right: 8px;" align="right">공지사항 수정</button>
-                <button class="searchButton2" type="submit" style="display :inline-block;" align="right">공지사항 삭제</button>
+                <button id="deleteButton" class="searchButton2" type="button" style="display :inline-block; margin-right: 8px;" align="right" >공지사항 삭제</button>
+                <button class="searchButton2" type="button" style="display :inline-block;" align="right" onclick="location.href='regist'">공지사항 작성</button>
+<!--                <button id="updateButton" class="searchButton2" type="button" style="display :inline-block; margin-right: 8px;" align="right">공지사항 수정</button>-->
             </div>
             <div class="adminNotices_tbl">
                 <table class="tal_adminNotices">
                     <tbody>
                     <tr>
-                        <th><input type="checkbox" id="cbAll"></th>
+                        <th><input type="checkbox" name="ckall" id="checkAll" class="chk"></th>
                         <th class="th_content">번호</th>
                         <th class="th_content">분류</th>
                         <th class="th_content3"></th>
@@ -62,14 +78,14 @@
                         <th class="th_content">수정일</th>
                     </tr>
                     <tr class="tr2">
-                        <table class="tal_adminNotices2" th:each="notices ,test : ${ noticesList }">
-                        <th class="th2"><input type="checkbox" class="cb"></th>
-                        <th class="th2 th_content" th:text="${paging.totalCount - (paging.page * paging.limit)- test.index + paging.limit}"/>
-                        <th class="th2 th_content" th:text="${ notices.category.name }" th:if="${notices.category.code}==1" style="color:crimson"/>
-                            <th class="th2 th_content" th:text="${ notices.category.name }" th:if="${notices.category.code}==2"/>
-                            <th class="th2 th_content" th:text="${ notices.category.name }" th:if="${notices.category.code}==3" style="color:#0075BD"/>
-                        <th class="th_content3" style="background-color: white"></th>
-                        <th colspan=4 class="th2 th_content2" align="left" th:text="${ notices.title }"/>
+                        <table class="tal_adminNotices2" th:each="notices ,test : ${ noticesList }")>
+                        <th class="th2"><input type="checkbox" class="cb" name="chkid" th:value="${notices.code}" ></th>
+                        <th class="th2 th_content" th:text="${paging.totalCount - (paging.page * paging.limit)- test.index + paging.limit}" th:onclick="|location.href='/admin/notices/detail?no=${notices.code}'|"/>
+                        <th class="th2 th_content" th:text="${ notices.category.name }" th:if="${notices.category.code}==1" style="color:crimson" th:onclick="|location.href='/admin/notices/detail?no=${notices.code}'|"/>
+                            <th class="th2 th_content" th:text="${ notices.category.name }" th:if="${notices.category.code}==2" th:onclick="|location.href='/admin/notices/detail?no=${notices.code}'|"/>
+                            <th class="th2 th_content" th:text="${ notices.category.name }" th:if="${notices.category.code}==3" style="color:#0075BD" th:onclick="|location.href='/admin/notices/detail?no=${notices.code}'|"/>
+                        <th class="th_content3" style="background-color: white" th:onclick="|location.href='/admin/notices/datail?no=${notices.code}'|"></th>
+                        <th colspan=4 class="th2 th_content2" align="left" th:text="${ notices.title }" th:onclick="|location.href='/admin/notices/detail?no=${notices.code}'|"/>
                         <th class="th2 th_content">작성자</th>
                         <th class="th2 th_content" th:text="${ #dates.format(notices.registeredDate, 'yyyy.MM.dd') }"/>
                         <th class="th2 th_content" th:text="${ #dates.format(notices.registeredDate, 'yyyy.MM.dd') }" th:if="${ notices.modifiedDate }!=null"></th>
@@ -117,5 +133,73 @@
 
     </div>
 </div>
+<script>
+    const ndb = document.querySelector("#deleteButton");
+    const cb = document.querySelectorAll(".cb")
+
+    const checkbox = document.querySelectorAll(".cb")
+    let box = []
+    ndb.onclick = function (){
+
+        checkbox.forEach((a)=>{
+            if(a.checked){
+                box.push(a.value);
+            }
+        })
+        console.log(box);
+        console.log(JSON.stringify(box));
+            if(box.length===0){
+                alert("선택된 공지사항이 없습니다.")
+            } else {
+            var confirm_val = confirm(box.length+"개의 공지 사항을 정말 삭제하시겠습니까?");
+            if (confirm_val) {
+                fetch("/admin/notices/delete",{
+                    method:'POST',
+                    headers:{'Content-Type': 'application/json;charset=UTF-8'},
+                    body: JSON.stringify(box)
+                })
+                    .then(result=>result.text())
+                    .then(result => console.log(result))
+                    .then(result => window.location.reload());
+                location.href = "/admin/notices/list?page=1";
+            } else {
+                return box = [];
+            }}
+    }
+
+</script>
+
+<!--<script>-->
+<!--    const nub = document.querySelector("#updateButton");-->
+<!--    const checkbox2 = document.querySelectorAll(".cb")-->
+
+<!--    nub.onclick=function (){-->
+<!--        let box2 = $("input[name='chkid']:checked").val()-->
+<!--        let box3 = $("input[name='chkid']:checked").length;-->
+
+<!--        if(box3==1){-->
+<!--            var confirm_val2 = confirm("선택하신 공지사항을 수정하시겠습니까?");-->
+<!--            if (confirm_val2){-->
+<!--                fetch("/admin/notices/update",{-->
+<!--                    method:'GET',-->
+<!--                    headers:{'Content-Type': 'application/json;charset=UTF-8'},-->
+<!--                    body: JSON.stringify(box2)-->
+<!--                })-->
+<!--                    .then(result=>result.text())-->
+<!--                    .then(result => console.log(result))-->
+<!--                    .then(result=> window.location.reload());-->
+
+<!--                location.href="/admin/notices/update?code="+ $("input[name='chkid']:checked").val();-->
+
+
+<!--            }else{-->
+<!--                return box="";-->
+<!--            }-->
+<!--        } else if(box3>1){-->
+<!--            alert("하나의 공지사항만 선택가능합니다.")-->
+<!--        } else { alert("선택된 공지사항이 없습니다.") }-->
+<!--    }-->
+<!--    -->
+<!--</script>-->
 </body>
 </html>

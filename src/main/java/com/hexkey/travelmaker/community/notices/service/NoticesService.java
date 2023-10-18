@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,5 +49,8 @@ public class NoticesService {
 
     public NoticesDTO selectNoticesdDetail(Long no) {
         return noticesMapper.selectNoticesDetail(no);
+    }
+
+    public void aaa(Long no) { noticesMapper.aaa(no);
     }
 }

@@ -15,4 +15,12 @@ public interface NoticesMapper {
     int selectTotalCount(Map<String, String> searchMap);
 
     NoticesDTO selectNoticesDetail(Long no);
+
+    void insertNotices(NoticesDTO notices);
+
+    int deleteNotices( List<Integer> code);
+
+    void updateNotices(NoticesDTO notices);
+
+    void aaa(Long no);
 }

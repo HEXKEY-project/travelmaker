@@ -22,3 +22,4 @@ public class NoticesDTO {
     private String statusYN;
 
 }
+

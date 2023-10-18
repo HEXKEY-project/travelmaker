@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +30,6 @@ public class NoticesController {
                                 @RequestParam(required = false) String searchCondition,
                                 @RequestParam(required = false) String searchValue,
                                 Model model) {
-
         Map<String, String> searchMap = new HashMap<>();
         searchMap.put("searchCondition", searchCondition);
         searchMap.put("searchValue", searchValue);
@@ -44,11 +44,13 @@ public class NoticesController {
     }
 
     @GetMapping("/datail")
-    public String getBoardDetail(@RequestParam Long no, Model model) {
+
+    public String getBoardDetail(@RequestParam Long no, Model model){
 
         NoticesDTO noticesDetail = noticesService.selectNoticesdDetail(no);
         model.addAttribute("noticesD", noticesDetail);
 
         return "user/zeesang/community/notices/noticesDetail";
     }
+
 }

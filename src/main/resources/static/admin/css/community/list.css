@@ -103,13 +103,14 @@ input {
 
 .tal_adminNotices {
     width: 1436px;
-    height: 74px;
+    height: 72px;
     border-collapse: collapse;
     border-spacing: 1px;
+    box-sizing: content-box;
 }
 .tal_adminNotices2 {
     width: 1436px;
-    height: 74px;
+    height: 72px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     border-spacing: 1px;
 }
@@ -282,7 +283,7 @@ table th {
     background-color: #F5F5F5;
 }
 
-.th2{
+.th2 {
     width: 102px;
     background-color: white;
 }

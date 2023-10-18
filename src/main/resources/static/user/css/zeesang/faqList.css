@@ -4,21 +4,64 @@ body {
     margin-top: 164px;
 }
 
-.faqListLineTop{
+body{-ms-overflow-style:none; }
+body::-webkit-scrollbar { display:none; }
+
+.faqListLineFirst{
     margin-top: 40px;
     margin-bottom: 0;
     width: 852px;
+    height: auto;
+    border-top: 1px solid black;
     border-bottom: 1px solid black;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    /*text-align: left;*/
 }
 
 .faqListLine{
-    margin-top: 94px;
-    margin-bottom: 0;
-}
-
-.faqListTitle{
-    margin-top: 94px;
-    margin-bottom: 0;
+    margin-top: auto;
     width: 852px;
+    height: 94px;
+    border-bottom: 1px solid #B3B3B3;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.faqListLineBottom{
     border-bottom: 1px solid black;
 }
+
+.faqListLine:first-child{
+    border:none;
+    margin-top: auto;
+    width: 852px;
+    height: 94px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.noticesCategory{
+    padding-left: 24px;
+    width: 120px;
+    font-weight: bolder;
+}
+
+.noticesListLineFirst{
+    margin-top: 40px;
+    margin-bottom: 0;
+    width: 852px;
+    height: auto;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    /*text-align: left;*/
+}
+
+
