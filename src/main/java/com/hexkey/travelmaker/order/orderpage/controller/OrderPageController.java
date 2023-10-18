@@ -29,7 +29,7 @@ public class OrderPageController {
         this.orderPageService = orderPageService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/order")
     public String orderMain () {
         return "orderMain";
     }

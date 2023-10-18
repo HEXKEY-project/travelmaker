@@ -5,83 +5,92 @@
     <title>sdfsd</title>
     <link rel="stylesheet" href="/user/css/orderpage/adminOrder.css">
 </head>
-<body>
+<body id="mainBody">
 
-<div id="head">
-    <div id="title">
-        <h2>주문,배송 관리</h2>
-    </div>
-    <div id="title-sub">
-        <h3>주문 관리</h3>
+<div>
+    <div id="mainHeader" th:replace="common/admin/header.html"></div>
+    <div id="wrap">
+        <div id="mainNav" th:replace="common/admin/nav.html"></div>
 
-
-    </div>
-    <div id="search">
-        <form action="/admin/order" method="post">
-            <div class="search-row">
-                <div class="columns">분류 선택</div>
-                <div class="columns">
-                    <select name="searchCondition">
-                        <option>주문자 명</option>
-                    </select>
+        <div id="main">
+            <div id="head">
+                <div id="title">
+                    <h2>주문,배송 관리</h2>
                 </div>
-                <div class="columns">
-                    <input name="searchValue" type="text">
+                <div id="title-sub">
+                    <h3>주문 관리</h3>
+
+                    <br>
+
+                </div>
+                <div id="search">
+                    <form action="/admin/order" method="post">
+                        <div class="search-row">
+                            <div class="columns">분류 선택</div>
+                            <div class="columns">
+                                <select name="searchCondition">
+                                    <option>주문자 명</option>
+                                </select>
+                            </div>
+                            <div class="columns">
+                                <input name="searchValue" type="text">
+                            </div>
+                        </div>
+                        <div class="search-row">
+                            <div class="columns">주문일자</div>
+                            <div class="columns">
+                                <input name="orderDate1" type="date">
+                            </div>
+                            <p> -</p>
+                            <div class="columns">
+                                <input name="orderDate2" type="date">
+                            </div>
+                        </div>
+                        <br>
+                        <div id="search-div">
+                            <input id="search-button" type="submit" value="주문 조회">
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="search-row">
-                <div class="columns">주문일자</div>
-                <div class="columns">
-                    <input name="orderDate1" type="date">
+
+
+            <div id="body">
+                <div class="table">
+                    <div>
+                        <h3>주문 목록</h3>
+                    </div>
+                    <div class="tr-head">
+                        <div class="th"></div>
+                        <div class="th">No.</div>
+                        <div class="th">주문일자</div>
+                        <div class="th">등록번호</div>
+                        <div class="th">주문자명</div>
+                        <div class="th">결제금액</div>
+                        <div class="th">휴대전화</div>
+                        <div class="th">주문상태</div>
+                    </div>
+                    <div class="tr" th:each="adminOrderSelectDTO : ${ adminOrderSelectDTOList }">
+                        <div class="td"><input type="checkbox"></div>
+                        <div class="td" th:text="${ 1 }"></div>
+                        <div class="td" th:text="${#dates.format(adminOrderSelectDTO.orderDate, 'yyyy-MM-dd')}"></div>
+                        <div class="td" th:text="${ adminOrderSelectDTO.orderCode }"></div>
+                        <div class="td" th:text="${ adminOrderSelectDTO.recipent }"></div>
+                        <div class="td" th:text="${ adminOrderSelectDTO.totalPrice }"></div>
+                        <div class="td" th:text="${ adminOrderSelectDTO.phone }"></div>
+                        <div class="td" th:text="${ adminOrderSelectDTO.orderStatus }"></div>
+                    </div>
+
                 </div>
-                <p> -</p>
-                <div class="columns">
-                    <input name="orderDate2" type="date">
-                </div>
+
             </div>
-            <br>
-            <div id="search-div">
-                <input id="search-button" type="submit" value="주문 조회">
-            </div>
-        </form>
+        </div>
+
+
+        <div id="tail">
+
+        </div>
     </div>
 </div>
-
-
-<div id="body">
-    <div class="table">
-        <div>
-            <h3>주문 목록</h3>
-        </div>
-        <div class="tr-head">
-            <div class="th"></div>
-            <div class="th">No.</div>
-            <div class="th">주문일자</div>
-            <div class="th">등록번호</div>
-            <div class="th">주문자명</div>
-            <div class="th">결제금액</div>
-            <div class="th">휴대전화</div>
-            <div class="th">주문상태</div>
-        </div>
-        <div class="tr" th:each="adminOrderSelectDTO : ${ adminOrderSelectDTOList }">
-            <div class="td"><input type="checkbox"></div>
-            <div class="td" th:text="${ 1 }"></div>
-            <div class="td" th:text="${#dates.format(adminOrderSelectDTO.orderDate, 'yyyy-MM-dd')}"></div>
-            <div class="td" th:text="${ adminOrderSelectDTO.orderCode }"></div>
-            <div class="td" th:text="${ adminOrderSelectDTO.recipent }"></div>
-            <div class="td" th:text="${ adminOrderSelectDTO.totalPrice }"></div>
-            <div class="td" th:text="${ adminOrderSelectDTO.phone }"></div>
-            <div class="td" th:text="${ adminOrderSelectDTO.orderStatus }"></div>
-        </div>
-
-    </div>
-
-</div>
-
-
-<div id="tail">
-
-</div>
-
 </body>
 </html>
