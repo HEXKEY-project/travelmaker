@@ -108,7 +108,6 @@ public class ProductOrderController {
             productData.put("count", counts[i]);
             productData.put("optionCode", optionsList.get(i).getOptionCode());
             productData.put("productPrice",  productsList.get(i).getPrice() * counts[i]);
-
             productDatas.add(productData);
             productPrices += productsList.get(i).getPrice() * counts[i];
         }
@@ -119,7 +118,6 @@ public class ProductOrderController {
         System.out.println("@@@@확인productDatas : " + productDatas);
 
         System.out.println(productDatas.get(0));
-        System.out.println(productDatas.get(1));
 
         model.addAttribute("productDatas", productDatas);
         model.addAttribute("productPrices", productPrices);

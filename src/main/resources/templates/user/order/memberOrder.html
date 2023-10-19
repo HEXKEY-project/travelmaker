@@ -11,10 +11,9 @@
 
 <div id="head">
     <div id="title">
-        <h2>주문,배송 관리</h2>
+        <h2>내 주문 조회</h2>
     </div>
     <div id="title-sub">
-        <h3>주문 관리</h3>
     </div>
 
     <br>
@@ -25,7 +24,8 @@
                 <div class="columns">분류 선택</div>
                 <div class="columns">
                     <select name="searchCondition">
-                        <option>주문자 명</option>
+                        <option>주문자ID</option>
+                        <option>주문번호</option>
                     </select>
                 </div>
                 <div class="columns">
@@ -60,8 +60,8 @@
             <div class="th"></div>
             <div class="th">No.</div>
             <div class="th">주문일자</div>
-            <div class="th">등록번호</div>
-            <div class="th">주문자명</div>
+            <div class="th">주문번호</div>
+            <div class="th">주문자ID</div>
             <div class="th">결제금액</div>
             <div class="th">휴대전화</div>
             <div class="th">주문상태</div>
@@ -73,7 +73,7 @@
             <div class="td" th:text="${ adminOrderSelectDTO.orderCode }"></div>
             <div class="td" th:text="${ adminOrderSelectDTO.memberName }"></div>
             <div class="td" th:text="${ adminOrderSelectDTO.totalPrice }"></div>
-            <div class="td" th:text="${ adminOrderSelectDTO.phone }"></div>
+            <div class="td" th:text="${adminOrderSelectDTO.phone }"></div>
             <div class="td" th:text="${ adminOrderSelectDTO.orderStatus }"></div>
         </div>
         <div id="data-container">
@@ -153,7 +153,7 @@
                     div4.className = 'e'
 
                     const div5 = document.createElement('div');
-                    div5.textContent = item.phone;
+                    div5.textContent = '0'+ item.phone;
                     div5.className = 'f'
 
                     const div6 = document.createElement('div');

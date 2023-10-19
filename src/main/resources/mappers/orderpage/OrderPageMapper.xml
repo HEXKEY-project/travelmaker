@@ -62,7 +62,7 @@
         JOIN TBL_MEMBER M ON (O.MEMBER_CODE = M.MEMBER_CODE)
 
         <where>
-            <if test="searchCondition == '주문자 명'">
+            <if test="searchCondition == '주문자ID'">
                 UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{ searchValue }) || '%'
             </if>
             <if test="orderDate1 != '' and orderDate2 != ''">
@@ -171,7 +171,7 @@
         ,#{ orderCode }
         ,#{ addressNew }
         ,#{ addressDetail }
-        ,TO_NUMBER('${ phone2 }' || '${ phone3 }','9999999999999')
+        ,TO_NUMBER('${ phone1 }' || '${ phone2 }' || '${ phone3 }','9999999999999')
         ,#{ memo }
         )
     </insert>
