@@ -25,8 +25,11 @@
         JOIN TBL_SHIPMENT S ON (O.ORDER_CODE = S.ORDER_CODE)
 
         <where>
-            <if test="searchCondition == '주문자 명'">
+            <if test="searchCondition == '주문자ID'">
                 UPPER(S.RECIPENT) LIKE '%' || UPPER(#{ searchValue }) || '%'
+            </if>
+            <if test="searchCondition == '주문번호'">
+                AND O.ORDER_CODE LIKE '%' || #{ searchValue } || '%'
             </if>
             <if test="orderDate1 != '' and orderDate2 != '' ">
                 <![CDATA[
@@ -49,8 +52,11 @@
         JOIN TBL_SHIPMENT S ON (O.ORDER_CODE = S.ORDER_CODE)
 
         <where>
-            <if test="searchCondition == '주문자 명'">
-                UPPER(S.RECIPENT) LIKE '%' || UPPER(#{ searchValue }) || '%'
+            <if test="searchCondition == '주문자ID'">
+                UPPER(O.MEMBER_NAME) LIKE '%' || UPPER(#{ searchValue }) || '%'
+            </if>
+            <if test="searchCondition == '주문번호'">
+                AND O.ORDER_CODE LIKE '%' || #{ searchValue } || '%'
             </if>
             <if test="orderDate1 != '' and orderDate2 != '' ">
                 <![CDATA[

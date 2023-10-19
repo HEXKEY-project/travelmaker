@@ -23,11 +23,15 @@
     </div>
 
     <form id="reviewRegisterForm" action="/review/register" method="post" enctype="multipart/form-data">
+        <th:block>
         <div id="thumbnail-img">
-            <img src="/admin/images/productimage/0f2a150257604338bbd5ed8249a3dfdd.jpg">
+            <img th:src="${orderedProduct.fileList[0].filePath}">
         </div>
+        </th:block>
         <div id="product-grade">
-            트래블메이트 트롤리 파트너
+            <p th:text="'주문번호 : ' + ${#dates.format(orderInfo.getOrderDate(), 'yy-MM-dd')} + '-' + ${orderInfo.getOrderCode()}"></p>
+            <p th:text="${orderedProduct.getProductName()}"></p>
+            <input type="hidden" id="orderCode" name="orderCode" th:value="${orderInfo.getOrderCode()}"/>
             <fieldset id="star-grade">
                 <input type="radio" name="rating" value="5" id="rate5"><label
                     for="rate5">★</label>

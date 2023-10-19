@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexkey.travelmaker.community.qna.dao.QnAMapper">
+    <resultMap id="qnaList" type="com.hexkey.travelmaker.community.qna.dto.QnADTO">
+        <id property="code" column="QNA_CODE"/>
+        <result property="title" column="QNA_TITLE"/>
+        <result property="body" column="QNA_BODY"/>
+        <result property="lockYN" column="LOCK_YN"/>
+        <result property="registeredDate" column="QNA_DATE"/>
+        <result property="modifiedDate" column="MODIFIED_DATE"/>
+        <result property="deleteDate" column="DELETED_DATE"/>
+        <result property="statusYN" column="STATUS_YN"/>
+        <result property="refQnACode" column="REF_QNA_CODE"/>
+        <result property="qnaType" column="QNA_TYPE"/>
+        <association property="member" resultMap="memberResultMap"/>
+        <association property="productSeq" resultMap="generalProductResultMap"/>
+        <association property="fileList" resultMap="generalProductResultMap"/>
+    </resultMap>
+
+    <resultMap id="memberResultMap" type="com.hexkey.travelmaker.user.dto.MemberInfoDTO">
+        <id property="memberCode" column="MEMBER_CODE"/>
+        <result property="memberName" column="MEMBER_NAME"/>
+        <result property="memberId" column="MEMBER_ID"/>
+        <result property="gradeCode" column="GRADE_CODE"/>
+        <result property="memberStatus" column="MEMBER_STATUS"/>
+<!--        <collection property="memberRoleList" resultMap="memberRoleResultMap"/>-->
+    </resultMap>
+
+    <resultMap id="memberRoleResultMap" type="com.hexkey.travelmaker.user.dto.MemberRoleDTO">
+        <id property="memberCode" column="REF_MEMBER_CODE"/>
+        <id property="authorityCode" column="REF_AUTHORITY_CODE"/>
+        <association property="authority" resultMap="authorityResultMap"/>
+    </resultMap>
+
+    <resultMap id="generalProductResultMap" type="com.hexkey.travelmaker.product.regist.dto.ProductDTO">
+        <id property="productSeq" column="PRODUCT_SEQ"/>
+        <result property="productName" column="PRODUCT_NAME"/>
+    </resultMap>
+
+    <resultMap type="com.hexkey.travelmaker.product.regist.dto.ProductOptionDTO" id="ProductOptionResultMap">
+        <id property="optionCode" column="OPTION_CODE"/>
+        <result property="optionName" column="OPTION_NAME"/>
+        <result property="productSeq" column="PRODUCT_SEQ"/>
+        <result property="refOptionCode" column="REF_OPTION_CODE"/>
+    </resultMap>
+
+    <resultMap type="com.hexkey.travelmaker.product.regist.dto.ProductCategoryDTO" id="ProductCategoryResultMap">
+        <id property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
+    </resultMap>
+
+    <resultMap type="com.hexkey.travelmaker.product.regist.dto.FileDTO" id="FileResultMap">
+        <id property="fileCode" column="FILE_CODE"/>
+        <result property="fileType" column="FILE_TYPE"/>
+        <result property="originalName" column="ORIGIN_FILE_NAME"/>
+        <result property="savedName" column="SAVED_FILE_NAME"/>
+        <result property="savePath" column="SAVE_PATH"/>
+        <result property="noticeCode" column="NOTICE_CODE"/>
+        <result property="productSeq" column="PRODUCT_SEQ"/>
+        <result property="reviewCode" column="REVIEW_CODE"/>
+        <result property="filePath" column="FILE_PATH"/>
+    </resultMap>
+
+    <select id="selectTotalCount" resultType="_int" parameterType="hashmap">
+        SELECT
+        COUNT(*)
+        FROM TBL_QNA
+<!--        <where>-->
+<!--            <if test="searchCondition == 'all'">-->
+<!--                NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'-->
+<!--                AND NOTICE_BODY LIKE '%' || #{ searchValue } || '%'-->
+<!--            </if>-->
+<!--            <if test="searchCondition == 'title'">-->
+<!--                NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'-->
+<!--            </if>-->
+<!--            <if test="searchCondition == 'body'">-->
+<!--                NOTICE_BODY LIKE '%' || #{ searchValue } || '%'-->
+<!--            </if>-->
+<!--            AND STATUS_YN = 'Y'-->
+<!--        </where>-->
+    </select>
+
+    <select id="selectQnA" resultMap="qnaList">
+        SELECT
+        A.QNA_CODE
+        , A.QNA_TITLE
+        , A.QNA_BODY
+        , A.LOCK_YN
+        , A.QNA_DATE
+        , A.QNA_TYPE
+        , A.MEMBER_CODE
+        , A.PRODUCT_SEQ
+        , B.MEMBER_ID
+        , C.PRODUCT_NAME
+        FROM TBL_QNA A
+        JOIN TBL_MEMBER B ON (A.MEMBER_CODE=B.MEMBER_CODE)
+        JOIN TBL_PRODUCT C ON (A.PRODUCT_SEQ=C.PRODUCT_SEQ)
+        left JOIN TBL_FILE D ON (C.PRODUCT_SEQ=D.PRODUCT_SEQ)
+
+    </select>
+
+
+
+
+</mapper>

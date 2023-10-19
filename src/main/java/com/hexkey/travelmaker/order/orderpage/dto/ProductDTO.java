@@ -15,5 +15,6 @@ public class ProductDTO {
     int categoryCode;
     String serialNo;
     String orderableStatus;
+    String filePath;
 
 }

@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <title>공지사항 보기&수정</title>
     <link rel="stylesheet" type="text/css" href="/admin/css/community/write.css">
-    <script type="text/javascript" src="/libs/workspace/js/service/HuskyEZCreator.js" charset="utf-8"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
-    <script src="/summernote-0.8.18-dist/summernote-lite.js"></script>
-    <script src="/summernote-0.8.18-dist/lang/summernote-ko-KR.min.js"></script>
+    <script src="/summernote/summernote-lite.js"></script>
+    <script src="/summernote/summernote-ko-KR.min.js"></script>
 
-    <link rel="stylesheet" href="/summernote-0.8.18-dist/summernote-lite.css">
+    <link rel="stylesheet" href="/summernote/summernote-lite.css">
     <!--    <script>-->
     <!--        function save(){-->
     <!--            oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);-->
@@ -129,12 +128,12 @@
 </script>
 
 <script th:inline="javascript">
-    const btnChange = document.getElementById('registButton','registButton2')
+    const btnChange = document.getElementById('registButton')
     const btnChange2 = document.querySelector('.sss')
-
 
     btnChange.addEventListener('click',()=>{
         if(btnChange2.id==='registButton'){
+
             alert("공지사항을 수정합니다.")
             $('#adminWrite_titleHS2').show();
             $('#adminWrite_titleHS1').hide();
@@ -146,12 +145,12 @@
         } else if(btnChange2.id==='registButton2'){
 
             var confirm_val3 = confirm("공지사항을 수정하시겠습니까?");
-            if (confirm_val3) {
+            if(confirm_val3){
                 btnChange2.type="submit"
                 $('#txtContent').summernote('disable');
                 window.location.reload();
             }
-    }
+        }
     })
 </script>
 </body>

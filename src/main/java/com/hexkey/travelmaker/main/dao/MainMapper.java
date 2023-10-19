@@ -13,4 +13,7 @@ public interface MainMapper {
     List<ProductDTO> selectNewProductList();
 
     List<ReviewDTO> selectRecentReviewList();
+
+//    List<ProductDTO> selectOrderedProductList();
+
 }

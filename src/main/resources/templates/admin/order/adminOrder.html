@@ -29,7 +29,8 @@
                             <div class="columns">분류 선택</div>
                             <div class="columns">
                                 <select name="searchCondition">
-                                    <option>주문자 명</option>
+                                    <option>주문자ID</option>
+                                    <option>주문번호</option>
                                 </select>
                             </div>
                             <div class="columns">
@@ -64,20 +65,21 @@
                         <div class="th"></div>
                         <div class="th">No.</div>
                         <div class="th">주문일자</div>
-                        <div class="th">등록번호</div>
-                        <div class="th">주문자명</div>
+                        <div class="th">주문번호</div>
+                        <div class="th">주문자ID</div>
                         <div class="th">결제금액</div>
                         <div class="th">휴대전화</div>
                         <div class="th">주문상태</div>
+                        <div></div>
                     </div>
-                    <div class="tr" th:each="adminOrderSelectDTO : ${ adminOrderSelectDTOList }">
-                        <div class="td"><input type="checkbox"></div>
-                        <div class="td" th:text="${ 1 }"></div>
+                    <div class="tr" th:each="adminOrderSelectDTO, iterStat : ${ adminOrderSelectDTOList }">
+                        <div class="td"></div>
+                        <div class="td" th:text="${ iterStat.index + 1 }"></div>
                         <div class="td" th:text="${#dates.format(adminOrderSelectDTO.orderDate, 'yyyy-MM-dd')}"></div>
                         <div class="td" th:text="${ adminOrderSelectDTO.orderCode }"></div>
                         <div class="td" th:text="${ adminOrderSelectDTO.memberName }"></div>
-                        <div class="td" th:text="${ adminOrderSelectDTO.totalPrice }"></div>
-                        <div class="td" th:text="${ adminOrderSelectDTO.phone }"></div>
+                        <div class="td" th:text="${ adminOrderSelectDTO.totalPrice + '원'}"></div>
+                        <div class="td" th:text="${'0'+ adminOrderSelectDTO.phone }"></div>
                         <div class="td" th:text="${ adminOrderSelectDTO.orderStatus }"></div>
                     </div>
 
@@ -93,4 +95,5 @@
     </div>
 </div>
 </body>
+
 </html>

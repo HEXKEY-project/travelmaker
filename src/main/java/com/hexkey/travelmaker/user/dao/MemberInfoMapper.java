@@ -18,11 +18,4 @@ public interface MemberInfoMapper {
 
     MemberInfoDTO findByMemberId(String memberId);
 
-    String findId(String memberName, String phone);
-
-    int pwdCheck(MemberDTO dto);
-
-    int updateMember(MemberInfoDTO modifyMember);
-
-    int deleteMember(MemberInfoDTO member);
 }
