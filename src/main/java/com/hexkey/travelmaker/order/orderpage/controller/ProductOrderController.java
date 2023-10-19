@@ -119,7 +119,6 @@ public class ProductOrderController {
         System.out.println("@@@@확인productDatas : " + productDatas);
 
         System.out.println(productDatas.get(0));
-        System.out.println(productDatas.get(1));
 
         model.addAttribute("productDatas", productDatas);
         model.addAttribute("productPrices", productPrices);

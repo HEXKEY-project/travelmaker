@@ -2,7 +2,7 @@ package com.hexkey.travelmaker.user.controller;
 
 import com.hexkey.travelmaker.common.exception.MemberModifyException;
 import com.hexkey.travelmaker.common.exception.MemberRegistException;
-import com.hexkey.travelmaker.admin.dto.MemberDTO;
+import com.hexkey.travelmaker.common.exception.MemberRemoveException;
 import com.hexkey.travelmaker.user.dto.AddressDTO;
 import com.hexkey.travelmaker.user.dto.MemberInfoDTO;
 import com.hexkey.travelmaker.user.service.AuthenticationService;
