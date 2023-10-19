@@ -13,10 +13,10 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
-      location: C:/Lecture/SubProjectMerge
+      location: C:/travelmaker
 
     session:
-      timeout: 60m
+      timeout: 600m
 
 # Mybatis config
 mybatis:
