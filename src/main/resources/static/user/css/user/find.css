@@ -1,9 +1,21 @@
 body {
     margin-top: 164px;
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
     align-items: center;
     width: 1920px;
+}
+
+.findIdContainer {
+    width: 300px;
+    margin: 230px auto;
+    display: block;
+}
+
+.findPwdContainer {
+    width: 300px;
+    margin: 187px auto;
+    display: block;
 }
 
 div>label {
