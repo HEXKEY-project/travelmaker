@@ -1,6 +1,6 @@
 #main-wrapper {
     position: inherit;
-    height: 2000px;
+    height: 2500px;
 }
 
 .swiper-main {
@@ -22,6 +22,8 @@
 .area-title {
     margin-bottom: 24px;
 }
+
+/* 신제품 목록 관련 */
 
 #new-products {
     display: block;
@@ -65,4 +67,25 @@
     font-size: 18px;
     font-weight: bold;
     letter-spacing: 0.05em;
+}
+
+
+/* reviews */
+
+#reviews {
+    display: block;
+    width: 1580px;
+    margin: 64px auto;
+}
+
+#review-area {
+    max-width: 1580px;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    /*flex-wrap: wrap;*/
+}
+
+.review {
+    margin: 10px;
 }

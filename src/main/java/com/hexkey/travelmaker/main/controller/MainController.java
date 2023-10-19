@@ -1,12 +1,14 @@
 package com.hexkey.travelmaker.main.controller;
 
 import com.hexkey.travelmaker.main.service.MainService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Map;
 
+@Slf4j
 @Controller
 public class MainController {
 
@@ -24,6 +26,8 @@ public class MainController {
 
         model.addAttribute("newProductList", newProductList.get("productList"));
         model.addAttribute("recentReviewList", reviewList.get("reviewList"));
+
+        log.info("recentReviewList : {}", reviewList);
 
         return "/index";
 

@@ -84,17 +84,18 @@
                  JOIN TBL_PRODUCT_CATEGORY C ON (A.CATEGORY_CODE = C.CATEGORY_CODE)
        WHERE B.FILE_TYPE = 'productImage'
     ORDER BY A.REGISTERED_DATE DESC
-    FETCH FIRST 8 ROWS ONLY
     </select>
 
     <select id="selectRecentReviewList" resultMap="reviewResultMap">
         SELECT
-            A.REVIEW_CODE
+               A.REVIEW_CODE
              , A.REVIEW_BODY
              , A.RATING
              , A.REGISTERED_DATE
              , A.REVIEW_STATUS
+             , B.FILE_TYPE
              , B.FILE_PATH
+             , B.SAVED_FILE_NAME
         FROM TBL_REVIEW A
         JOIN TBL_FILE B ON(A.REVIEW_CODE = B.REVIEW_CODE)
         ORDER BY A.REGISTERED_DATE DESC
