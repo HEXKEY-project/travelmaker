@@ -1,5 +1,7 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+
+
 html{
     font-family: 'Noto Sans KR', sans-serif;
     background-color: #F1F3F4;
@@ -90,6 +92,7 @@ hr {
     justify-content: center;
     align-items : center;
     color: white;
+    cursor: pointer;
 }
 
 

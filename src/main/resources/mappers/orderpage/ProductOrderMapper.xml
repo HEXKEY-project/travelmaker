@@ -24,6 +24,7 @@
         <result property="categoryCode" column="CATEGORY_CODE"/>
         <result property="serialNo" column="SERIAL_NO"/>
         <result property="orderableStatus" column="ORDERABLE_STATUS"/>
+        <result property="filePath" column="FILE_PATH"/>
     </resultMap>
 
     <select id="selectProductOption" resultMap="selectProductOptionRM">
@@ -37,7 +38,7 @@
         SELECT
         *
         FROM TBL_PRODUCT
-        WHERE PRODUCT_SEQ = #{ productSeq }
+        WHERE PRODUCT_SEQ = ${ productSeq }
     </select>
 
 
