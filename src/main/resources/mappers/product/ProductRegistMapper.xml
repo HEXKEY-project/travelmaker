@@ -54,6 +54,7 @@
         , CATEGORY_CODE
         , SERIAL_NO
         , ORDERABLE_STATUS
+        , REGISTERED_DATE
         )
         VALUES
         (
@@ -63,6 +64,7 @@
         , #{ productCategory.categoryCode }
         , #{ serialNo }
         , #{ status }
+        , TO_DATE(SYSDATE, 'YY-MM-DD')
         )
     </insert>
 

@@ -34,6 +34,8 @@ public class AdminProductSearchController {
         List<ProductDTO> selectConditionList = adminProductSearchService.searchProduct(searchCondition);
         log.info("------selectConditionList : {}", selectConditionList);
 
+        model.addAttribute("productList", selectConditionList);
+
         return "/admin/product/list";
     }
 
