@@ -14,7 +14,13 @@
 }
 /* 영역옆으로 오게하기 */
 .Main{
+    height: auto;
+    width: 1920px;
     display: flex;
+}
+
+div{
+    display: block;
 }
 /* 회원목록 영역잡기*/
 .Main > .memberList {
