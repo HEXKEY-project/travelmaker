@@ -145,6 +145,7 @@ public class MemberListController {
         model.addAttribute("member",member);
         return "admin/user/adminPointDetail";
     }
+
     /* 회원 적립금*/
     @PostMapping("/adminPointDetail")
     public ResponseEntity<String> adminPointDetail(@RequestBody MileageDTO mileage){
@@ -162,5 +163,6 @@ public class MemberListController {
             return ResponseEntity.ok(result);
         }
     }
+
 
 }

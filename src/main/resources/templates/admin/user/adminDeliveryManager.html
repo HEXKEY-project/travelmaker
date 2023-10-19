@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>배송관리</title>
+    <link rel="stylesheet" type="text/css" href="/admin/css/mingyo-member/deliveryManager.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/admin/js/product/list.js" type="text/javascript"></script>
+</head>
+<body>
+<div th:include="common/admin/header.html"></div>
+<div id="wrapper">
+    <div class="regist-header">
+        <div th:include="common/admin/nav.html"></div>
+    </div>
+    <div class="adminNotices_body" id="adminNotices_wrapper">
+        <p class="adminNotices_title">주문,배송관리</p>
+        <p class="adminNotices_content">배송관리</p>
+        <div class="adminNotices_tbl">
+            <table class="tal_adminNotices">
+                <tbody>
+                <tr>
+                    <th class="th_content">주문상태</th>
+                    <td colspan="3">
+                            <select class="searchCondition" id="searchCondition" name="searchCondition">
+                                <option value="1">전체</option>
+                                <option value="2">배송준비</option>
+                                <option value="3">배송중</option>
+                                <option value="4">배송완료</option>
+                            </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th_content">취소상태</th>
+                    <td colspan="3">
+                            <select class="searchCondition" id="searchCondition1" name="searchCondition">
+                                <option value="1">취소</option>
+                                <option value="2">환불</option>
+                                <option value="3">교환</option>
+                                <option value="4">반품</option>
+                            </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th_content">날짜상태</th>
+                    <td colspan="3">
+                            <input type="date" class="registDate" name="registDate" > ~
+                            <input type="date" class="endDate" name="endDate">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <button class="searchButton" type="submit"> 주문조회 </button>
+        </div>
+
+        <div style="padding-top: 20px">
+            <h2>배송 현황목록</h2>
+
+            <div class="adminNotices_tbl">
+                <table class="tal_adminNotices">
+                    <tbody>
+                    <tr>
+                        <th><input type="checkbox" name="ckall" id="checkAll" class="chk"></th>
+                        <th class="th_content">번호</th>
+                        <th class="th_content">주문일자</th>
+                        <th class="th_content">주문번호</th>
+                        <th class="th_content">주문자명</th>
+                        <th class="th_content">결제금액</th>
+                        <th class="th_content">휴대전화</th>
+                        <th class="th_content">배송상태</th>
+                    </tr>
+<!--                    <tr class="tr2">-->
+<!--                        <table class="tal_adminNotices2" th:each="notices ,test : ${ noticesList }")>-->
+<!--                            <th class="th2"><input type="checkbox" class="cb" name="chkid" th:value="${notices.code}" ></th>-->
+<!--                            <th class="th2 th_content" th:text="${paging.totalCount - (paging.page * paging.limit)- test.index + paging.limit}" th:onclick="|location.href='/admin/notices/detail?no=${notices.code}'|"/>-->
+<!--                            <th class="th2 th_content" th:text="${ notices.category.name }" th:if="${notices.category.code}==1" style="color:crimson" th:onclick="|location.href='/admin/notices/detail?no=${notices.code}'|"/>-->
+<!--                            <th class="th2 th_content" th:text="${ notices.category.name }" th:if="${notices.category.code}==2" th:onclick="|location.href='/admin/notices/detail?no=${notices.code}'|"/>-->
+<!--                            <th class="th2 th_content" th:text="${ notices.category.name }" th:if="${notices.category.code}==3" style="color:#0075BD" th:onclick="|location.href='/admin/notices/detail?no=${notices.code}'|"/>-->
+<!--                            <th class="th_content3" style="background-color: white" th:onclick="|location.href='/admin/notices/datail?no=${notices.code}'|"></th>-->
+<!--                            <th colspan=4 class="th2 th_content2" align="left" th:text="${ notices.title }" th:onclick="|location.href='/admin/notices/detail?no=${notices.code}'|"/>-->
+<!--                            <th class="th2 th_content">작성자</th>-->
+<!--                            <th class="th2 th_content" th:text="${ #dates.format(notices.registeredDate, 'yyyy.MM.dd') }"/>-->
+<!--                            <th class="th2 th_content" th:text="${ #dates.format(notices.registeredDate, 'yyyy.MM.dd') }" th:if="${ notices.modifiedDate }!=null"></th>-->
+<!--                            <th class="th2 th_content" th:text="ㅡ" th:if="${ notices.modifiedDate }==null"></th>-->
+<!--                        </table>-->
+<!--                    </tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
