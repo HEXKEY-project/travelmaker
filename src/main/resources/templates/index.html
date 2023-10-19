@@ -22,7 +22,7 @@
     <div id="new-products">
         <h1 class="area-title">신제품 만나보기 👀</h1>
         <div id="thumbnailArea">
-            <th:block th:each="product : ${newProductList}">
+            <th:block th:each="product, iterStat : ${newProductList}" th:if="${iterStat.index} &lt 8">
                 <div align="center" class="item"
                      th:onclick="|location.href='/product/detail?productSeq=${product.productSeq}'|">
                     <div>
@@ -47,7 +47,38 @@
     </div>
     <div id="reviews">
         <h1 class="area-title">REVIEW</h1>
+        <div id="review-area">
+            <th:block th:each="review, iterStat : ${ recentReviewList }" th:if="${iterStat.index} &lt 8">
+                <div align="center" class="review"
+                     th:onclick="|location.href='#'|">
+                    <div>
+                        <th:block th:if="${not #lists.isEmpty(review.reviewAttachList)}">
+                            <img th:src="${review.reviewAttachList[0].filePath}"
+                                 width="300px"
+                                 height="300px"/>
+                        </th:block>
+                    </div>
+                    <div class="review-info">
+                        <div class="review-info-product">
+                            <img style="width: 40px; height: 40px;"
+                                    src="/admin/images/productimage/0f2a150257604338bbd5ed8249a3dfdd.jpg">
+                            <div class="review-info-product-data">
+                                <div class="review-info-product-name">
+                                    트래블메이트 트롤리 파트너
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-rating-body">
+                            <div class="rating">
+                                <img src="/user/images/migi/Star.png">
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </th:block>
+        </div>
 
     </div>
 
