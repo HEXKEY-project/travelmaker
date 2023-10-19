@@ -71,9 +71,9 @@ public class ReviewController {
                     ReviewAttachDTO fileInfo = new ReviewAttachDTO();
                     fileInfo.setOriginalName(originalFileName);
                     fileInfo.setSavedName(savedFileName);
-                    fileInfo.setSavePath("/user/images/reviewImages");
+                    fileInfo.setSavePath("/user/images/reviewImages/");
                     fileInfo.setFileType("reviewImage");
-                    fileInfo.setFilePath("/user/images/reviewImages" + savedFileName);
+                    fileInfo.setFilePath("/user/images/reviewImages/" + savedFileName);
 
                     reviewAttachImage.add(fileInfo);
                 }
@@ -90,7 +90,5 @@ public class ReviewController {
 
         return "redirect:/";
     }
-
-
 
 }
