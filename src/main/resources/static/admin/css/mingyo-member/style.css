@@ -19,6 +19,7 @@ li{list-style:none}
 /* dep1 a태그 */
 a{
     text-decoration:none;
+    color: black;
 }
 /* dep1  img태그  */
 .menu_title{
@@ -53,35 +54,77 @@ a{
     color: black;
     font-size: 16px;
 }
-/* 사이드메뉴바  2차메뉴 공간 */
-.dep2 {
+ /*사이드메뉴바  2차메뉴 공간 */
+ /*회원관리*/
+.dep2-1{
     padding-left: 45px;
     height: 0;
     overflow: hidden;
 }
+/* 상품관리*/
+.dep2-2{
+    padding-left: 45px;
+    height: 0;
+    overflow: hidden;
+}
+/* 주문&배송관리*/
+.dep2-3{
+    padding-left: 45px;
+    height: 0;
+    overflow: hidden;
+}
+/* 글관리*/
+.dep2-4{
+    padding-left: 45px;
+    height: 0;
+    overflow: hidden;
+}
+
 /* 사이드메뉴바 제목 마우스 댔을때 반응 */
 .menu_wrap ul > li:hover > h3 {
     display: block;
     background-color: #E9ECEF;
     color: black;
 }
-/* 사이드메뉴바 제목 마우스 댔을때 반응 */
-.dep1 > li:hover .dep2 {
 
-     height: 150px;
-     transition-duration: 1s;
-
+/* 사이드메뉴바 제목 마우스 댔을때 반응 (회원관리)*/
+.dep1 > li:hover > .dep2-1{
+     height: 50px;
+     transition-duration: 0.5s;
+}
+/* 사이드메뉴바 제목 마우스 댔을때 반응 (상품관리)*/
+.dep1 > li:hover > .dep2-2{
+    height: 150px;
+    transition-duration: 1s;
+}
+/* 사이드메뉴바 제목 마우스 댔을때 반응 (주문&배송관리)*/
+.dep1 > li:hover > .dep2-3{
+    height: 100px;
+    transition-duration: 1s;
+}
+/* 사이드메뉴바 제목 마우스 댔을때 반응 (글관리)*/
+.dep1 > li:hover > .dep2-4{
+    height: 150px;
+    transition-duration: 1s;
+}
+/* 사이드메뉴바 2차메뉴 마우스 댔을때 반응*/
+.dep1 > li > .dep2-1 > li:hover {
+    background-color: #E9ECEF;
 }
 
 /* 사이드메뉴바 2차메뉴 마우스 댔을때 반응*/
- .dep2 > li:hover {
+.dep1 > li > .dep2-2 > li:hover {
     background-color: #E9ECEF;
 }
 /* 사이드메뉴바 2차메뉴 마우스 댔을때 반응*/
-.dep2 > li:hover > a {
-    color: #0075BD;
-
+.dep1 > li > .dep2-3 > li:hover {
+    background-color: #E9ECEF;
 }
+/* 사이드메뉴바 2차메뉴 마우스 댔을때 반응*/
+ .dep1 > li > .dep2-4 > li:hover {
+    background-color: #E9ECEF;
+}
+
 
 
 
