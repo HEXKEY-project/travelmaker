@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" type="text/css" href="/user/css/mypage/reviewList.css">
+  <link rl="stylesheet" href="/user/css/migi/header.css"/>
+  <link rl="stylesheet" href="/user/css/mypage/mypageNav.css"/>
+
+</head>
+<body>
+
+<div th:replace="common/user/header.html"></div>
+
+<div id="nav">
+    <div th:replace="common/user/mypageNav.html"></div>
+</div>
+
+<div class="reviewListContainer">
+    <form action="/user/review" method="post">
+
+        <div class="writeReview">
+            <p class="myReview" id="writeable" href="">&nbsp;&nbsp;&nbsp;&nbsp;작성 가능한 후기</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <p class="myReview" id="written" href="">작성한 후기</p>
+        </div>
+
+        <hr class="hr">
+
+        <div class="writeReview">
+            <ul>
+                <li>일자</li> <li>주문 번호</li> <li>후기 내용</li>
+            </ul>
+        </div>
+
+        <hr class="hr">
+
+
+
+    </form>
+</div>
+
+<div id="footer">
+<!--<div th:replace="/common/user/footer.html"></div>-->
+</div>
+
+</body>
+</html>

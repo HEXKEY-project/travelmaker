@@ -1,0 +1,39 @@
+.writeReview {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.myReview {
+    font-size: 17px;
+}
+
+.reviewListContainer {
+    display: block;
+    margin: 100px auto auto 200px;
+}
+
+#footer {
+    display: block;
+}
+
+#nav {
+    margin-top: 85px;
+    margin-left: -35px;
+}
+
+
+.hr {
+    width: 1020px;
+}
+
+.writeReview ul {
+    display: flex;
+    list-style-type: none;
+}
+.writeReview li {
+    margin-left: 80px;
+    margin-right: 200px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

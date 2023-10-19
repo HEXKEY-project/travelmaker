@@ -6,6 +6,8 @@ import com.hexkey.travelmaker.review.dto.ReviewDTO;
 import com.hexkey.travelmaker.review.dto.ReviewOrderDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ReviewMapper {
 
@@ -17,4 +19,7 @@ public interface ReviewMapper {
 
     void insertReviewAttachImage(ReviewAttachDTO reviewAttachImage);
 
+    int selectTotalCount(MemberInfoDTO loginMember);
+
+    List<ReviewDTO> selectReviewList(SelectCriteria selectCriteria);
 }

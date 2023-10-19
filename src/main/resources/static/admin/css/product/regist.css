@@ -6,6 +6,10 @@ html {
     font-family: Roboto;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 a {
     text-decoration: none;
 }
