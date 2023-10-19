@@ -18,20 +18,26 @@
 <div class="reviewListContainer">
     <form action="/user/review" method="post">
 
-        <div class="writeReview">
-            <p class="myReview" id="writeable" href="">&nbsp;&nbsp;&nbsp;&nbsp;작성 가능한 후기</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <p class="myReview" id="written" href="">작성한 후기</p>
-        </div>
+        <table align="center" class="reviewList">
+            <tr>
+                <th class="orderDay">일자</th>
+                <th class="orderNum">주문 번호</th>
+                <th class="orderRe">후기 작성</th>
+            </tr>
 
-        <hr class="hr">
+            <tr th:each="review : ${reviewList}" th:unless="${#lists.isEmpty(reviewList)}">
+                <td class="orderDay" th:text="${#dates.format(review.revCreatedDate, 'yyyy.MM.dd')}"></td>
+                <td class="orderNum" th:text="${review.resCode}"></td>
+                <td class="orderRe" th:text="${review.revScore}"></td>
+            </tr>
 
-        <div class="writeReview">
-            <ul>
-                <li>일자</li> <li>주문 번호</li> <li>후기 내용</li>
-            </ul>
-        </div>
-
-        <hr class="hr">
+            <tr class="res_history_box" th:each="resHistory : ${ reservationList }" th:unless="${#lists.isEmpty(reservationList)}">
+                <td class="col" id="col1" th:text="${ resHistory.reserveCode }" th:onclick="|location.href='/member/reservationDetail?reserveCode=${resHistory.reserveCode}'|"></td>
+                <td class="col" id="col2" th:text="${ #strings.substring(resHistory.startDateTime, 0, 11) }"></td>
+                <td class="col" id="col3" th:text="${ #strings.substring(resHistory.reserveAppDate, 0, 11) }"></td>
+                <td class="col" id="col4" th:text="${ resHistory.petSitter.memberInfo.nickName }" th:onclick="|location.href='/member/reservationDetail?reserveCode=${resHistory.reserveCode}'|"></td>
+            </tr>
+        </table>
 
 
 
