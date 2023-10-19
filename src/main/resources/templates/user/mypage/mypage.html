@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" href="/user/css/user/mypage.css">
+    <link rel="stylesheet" type="text/css" href="/user/css/mypage/mypage.css">
 
 </head>
 <body>
@@ -39,6 +39,8 @@
 
 </div>
 
+<div th:replace="/common/user/footer.html"></div>
+
 </body>
 
 <script>
@@ -46,7 +48,15 @@
     if (document.getElementById("myInfo")) {
         const $update = document.getElementById("myInfo");
         $update.onclick = function () {
-            location.href = "/user/user/modify";
+            location.href = "/user/modify";
+        }
+    }
+
+    // 마이페이지 -> 후기 이동
+    if (document.getElementById("myReview")) {
+        const $update = document.getElementById("myReview");
+        $update.onclick = function () {
+            location.href = "/user/reviewList";
         }
     }
 </script>
