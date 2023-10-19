@@ -19,4 +19,11 @@
 <p align="center">- 사회적 거리두기 해제 등에 따른 외부 활동 증가와 온라인 장보기 시장의 지속적 증가의 영향</p>
 <p align="center">- 따라서 프로젝트로 “여행 관련 종합 상품 판매” 쇼핑몰을 제작 하기로 결정</p>
 
-<h1 align="center">  :two_men_holding_hands: 팀원 소개</h1>
+<h2 align="center">  :two_men_holding_hands: 팀원 소개</h2>
+
+|                                         상품&재고                                          |                                         장바구니&결제                                           |                                        로그인&회원가입                                           |                                         회원관리&배송관리                                          |                                       공지사항                                        |                                        메인화면&리뷰                                          |       
+| :--------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: | 
+| <img src="https://avatars.githubusercontent.com/u/49346677?v=4" width=400px alt="김김"/> | <img src="https://avatars.githubusercontent.com/u/56033755?v=4" width=400px alt="바다"/> | <img src="https://avatars.githubusercontent.com/u/58401309?v=4" width=400px alt="삭정"/> | <img src="https://avatars.githubusercontent.com/u/43775108?v=4" width=400px alt="샐리"> | <img src="https://avatars.githubusercontent.com/u/45230497?v=4" width=400px alt="썬"> | <img src="https://avatars.githubusercontent.com/u/61097373?v=4" width=400px alt="유조"> |
+|                       [오형민](https://github.com/tributetothemoon)                        |                            [김용민](https://github.com/xrabcde)                            |                            [황주희](https://github.com/sakjung)                            |                          [정민교](https://github.com/dusdn1702)                           |                         [김지상](https://github.com/SunYoungKwon)                         |                            [김미경](https://github.com/yujo11)                            |                 
+
+
