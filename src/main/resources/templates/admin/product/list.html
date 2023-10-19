@@ -86,26 +86,79 @@
 
             <div class="th"><div class="p">판매가</div>
                 <div id="productPrice">
-                    <input type="number" min="0" step="100" name="firstPrice" class="price1">
+                    <input type="number" min="0" step="100" name="firstPrice" class="price">
+                    원
                     ~
-                    <input type="number" min="0" step="100" name="secondPrice" class="price2">
+                    <input type="number" min="0" step="100" name="secondPrice" class="price">
+                    원
                 </div>
             </div>
             <div class="th"><div class="p">등록일</div>
                 <div id="registDateBox">
-                    <input type="date" id="registDate" name="registDate">
+                    <input type="date"  name="firstRegistDate">
+                    ~
+                    <input type="date"  name="secondRegistDate">
                 </div>
             </div>
             <button type="submit" id="search" name="search">상품 조회</button>
         </form>
-
+        <div id="listWrap">
+            <p>상품 목록</p>
         <div id="listContent">
-            <th:block th:each="index : ${ #numbers.sequence(0, productList.size() - 1)}">
-            <div th:text="${productList.get(index).productName}"></div>
-            </th:block>
+            <div id="productList">
+                <div id="count" class="productTh">No.
+                    <th:block
+                            th:if="${productList.size() > 0}"
+                            th:each="index : ${ #numbers.sequence(0, productList.size() - 1)}">
+                        <div class="line" th:text="${index + 1}"></div>
+                    </th:block>
+                </div>
+                <div id="productCode" class="productTh">상품코드
+                    <th:block
+                            th:if="${productList.size() > 0}"
+                            th:each="index : ${ #numbers.sequence(0, productList.size() - 1)}">
+                        <div class="line" th:text="${productList.get(index).productSeq}"></div>
+                    </th:block>
+                </div>
+                <div id="productName" class="productTh">상품명
+                    <th:block
+                            th:if="${productList.size() > 0}"
+                            th:each="index : ${ #numbers.sequence(0, productList.size() - 1)}">
+                        <div class="line" id="productTitle" th:text="${productList.get(index).productName}"></div>
+                    </th:block>
+                </div>
+                <div id="productSerial" class="productTh">시리얼 넘버
+                    <th:block
+                            th:if="${productList.size() > 0}"
+                            th:each="index : ${ #numbers.sequence(0, productList.size() - 1)}">
+                        <div class="line" th:text="${productList.get(index).serialNo}"></div>
+                    </th:block>
+                </div>
+                <div id="price" class="productTh">판매가
+                    <th:block
+                            th:if="${productList.size() > 0}"
+                            th:each="index : ${ #numbers.sequence(0, productList.size() - 1)}">
+                        <div class="line" th:text="${#numbers.formatInteger(productList.get(index).price, 3, 'COMMA')} + ' 원'"></div>
+                    </th:block>
+                </div>
+                <div id="firstCateogory" class="productTh">카테고리(3차 분류)
+                    <th:block
+                            th:if="${productList.size() > 0}"
+                            th:each="index : ${ #numbers.sequence(0, productList.size() - 1)}">
+                        <div class="line" th:text="${productList.get(index).categoryCode}"></div>
+                    </th:block>
+                </div>
+                <div id="productRegistDate" class="productTh">등록일
+                    <th:block
+                            th:if="${productList.size() > 0}"
+                            th:each="index : ${ #numbers.sequence(0, productList.size() - 1)}">
+                        <div class="line" th:text="${#dates.format(productList.get(index).registDate, 'yyyy-MM-dd')}"></div>
+                    </th:block>
+                </div>
+            </div>
         </div>
     </div>
-
+    </div>
 </div>
 </body>
 </html>

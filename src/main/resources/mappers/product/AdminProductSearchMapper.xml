@@ -47,6 +47,7 @@
               A.PRICE,
               A.REGISTERED_DATE,
               A.MODIFIED_DATE,
+              A.SERIAL_NO,
               B.CATEGORY_CODE,
               B.CATEGORY_NAME,
               B.REF_CATEGORY_CODE
@@ -64,15 +65,53 @@
             <if test="productName != null and productName != ''">
                 AND A.PRODUCT_NAME LIKE '%' || #{ productName } || '%'
             </if>
-            <if test="refCategoryCode == 'refCategoryCode'">
-                AND B.REF_CATEGORY_CODE = #{ refCategoryCode }
+            <!-- categoryRoot 조건 -->
+            <choose>
+                <when test="categoryRoot == '1차 분류' or categoryRoot == null or categoryRoot == ''">
+                </when>
+                <otherwise>
+                    AND B.CATEGORY_ROOT = #{ categoryRoot }
+                </otherwise>
+            </choose>
+            <!--refCategoryCode 조건-->
+            <choose>
+                <when test="refCategoryCode == '2차 분류' or refCategoryCode == null or refCategoryCode == ''">
+                </when>
+                <otherwise>
+                    AND B.REF_CATEGORY_CODE = #{ refCategoryCode }
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="categoryCode == '3차 분류' or categoryCode == null or categoryCode == ''">
+                </when>
+                <otherwise>
+                    AND B.CATEGORY_CODE = #{ categoryCode }
+                </otherwise>
+            </choose>
+            <!-- 원하는 가격대 조회 -->
+            <if test="firstPrice != null or secondPrice != null">
+                <![CDATA[
+                AND (
+                (#{firstPrice} IS NULL AND #{secondPrice} IS NULL)
+                 OR (#{firstPrice} IS NULL AND PRICE <= #{secondPrice})
+                 OR (#{secondPrice} IS NULL AND PRICE >= #{firstPrice})
+                 OR (PRICE BETWEEN #{firstPrice} AND #{secondPrice})
+                )
+                ]]>
             </if>
-
-         <!--   <if test="firstPrice != null and secondPrice != null">
-                AND PRICE BETWEEN #{ firstPrice } AND #{ secondPrice }
-            </if>-->
-
+            <!-- 원하는 상품등록 날짜 조회 -->
+            <if test="firstRegistDate != null or secondRegistDate != null">
+                <![CDATA[
+              AND (
+                     (#{firstRegistDate} IS NULL AND #{secondRegistDate} IS NULL)
+                     OR (#{firstRegistDate} IS NULL AND REGISTERED_DATE <= #{secondRegistDate})
+                     OR (#{secondRegistDate} IS NULL AND REGISTERED_DATE >= #{firstRegistDate})
+                     OR (REGISTERED_DATE BETWEEN #{firstRegistDate} AND #{secondRegistDate})
+                   )
+                ]]>
+            </if>
         </where>
+
 
     </select>
 </mapper>
