@@ -1,14 +1,18 @@
 package com.hexkey.travelmaker.review.controller;
 
+import com.hexkey.travelmaker.product.regist.dto.ProductDTO;
 import com.hexkey.travelmaker.review.dto.ReviewAttachDTO;
 import com.hexkey.travelmaker.review.dto.ReviewDTO;
+import com.hexkey.travelmaker.review.dto.ReviewOrderDTO;
 import com.hexkey.travelmaker.review.service.ReviewService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -32,8 +36,17 @@ public class ReviewController {
     private String IMAGE_DIR;
 
     @GetMapping("/register")
-    public String registerReview() {
+    public String registerReview(@RequestParam("orderCode") int orderCode, Model model) {
 
+        log.info("orderCode : {}", orderCode);
+
+        ProductDTO orderedProduct = reviewService.selectOrderedProduct(orderCode);
+        ReviewOrderDTO orderInfo = reviewService.selectOrderInfo(orderCode);
+
+        log.info("orderInfo : {}", orderInfo);
+
+        model.addAttribute("orderedProduct", orderedProduct);
+        model.addAttribute("orderInfo", orderInfo);
 
         return "/user/review/register";
     }
