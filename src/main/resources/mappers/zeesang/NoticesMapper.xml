@@ -63,9 +63,6 @@
         , C.MODIFIED_DATE
         FROM TBL_NOTICE C
         <where>
-            <if test="searchCondition == null">
-                
-            </if>
             <if test="searchCondition == 'all'">
                 C.NOTICE_TITLE LIKE '%' || #{ searchValue } || '%'
                 OR C.NOTICE_BODY LIKE '%' || #{ searchValue } || '%'
@@ -131,6 +128,7 @@
         UPDATE TBL_NOTICE
         SET
             STATUS_YN = 'N'
+            ,DELETED_DATE = SYSDATE
         WHERE NOTICE_CODE IN <foreach collection="code" item="item" separator="," open="(" close=")">#{item}</foreach>
 
     </update>

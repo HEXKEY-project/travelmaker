@@ -4,22 +4,172 @@ body {
     margin-top: 164px;
 }
 
-
-.qnaListLineTop{
+.qnaListLineFirst{
     margin-top: 40px;
     margin-bottom: 0;
     width: 852px;
+    height: auto;
+    border-top: 1px solid black;
     border-bottom: 1px solid black;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    /*text-align: left;*/
 }
 
 .qnaListLine{
-    margin-top: 94px;
-    margin-bottom: 0;
+    margin-top: auto;
+    width: 852px;
+    height: 94px;
+    border-top: 1px solid #B3B3B3;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
-.qnaListTitle{
-    margin-top: 94px;
-    margin-bottom: 0;
+.qnaListLine:first-child{
+    border:none;
+    margin-top: auto;
     width: 852px;
-    border-bottom: 1px solid black;
+    height: 94px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.searchCategory{
+    margin-top: 160px;
+    text-align:center;
+}
+
+#searchValue input:focus {
+    border-color: black;
+    outline: none;
+    border-radius: 0;
+}
+
+.searchButton {
+    width: 62px;
+    height: 40px;
+    padding: 8px;
+    border: 0;
+    border-radius: 2px;
+    font-size: 16px;
+    margin: auto;
+    background-color: #0075BD;
+    color: white;
+    display:inline-block;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+#searchCondition{
+    width: 72px;
+    border: 1px solid black;
+    border-radius: 0;
+    height: 40px;
+    padding: 0px;
+    font-size: 16px;
+    margin: 0 auto;
+    display:inline-block;
+    vertical-align: middle;
+    text-indent: 4px;
+}
+
+#searchCondition:focus{
+    border-color: black;
+    outline: none;
+    border-radius: 0;
+}
+#searchValue{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+#searchValue{
+    width: 268px;
+    border: 1px solid black;
+    border-radius: 0;
+    height: 40px;
+    padding: 0px;
+    font-size: 16px;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    text-indent: 8px;
+}
+
+.searchButton button{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+#searchCondition {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    appearance: menulist-button;
+}
+
+input::-ms-clear,
+input::-ms-reveal{
+    display:none;width:0;height:0;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration{
+    display:none;
+}
+
+.pagingButton{
+    border: 0;
+    padding: 0px 8px 0px 8px;
+    font-size: 16px;
+    background-color: white;
+}
+.qnaDate{
+    padding-right: 24px;
+    width: 120px;
+}
+
+.noticesCategory{
+    padding-left: 24px;
+    width: 120px;
+    font-weight: bolder;
+}
+
+.qnaId{
+    padding-right: 40px;
+    width: 80px;
+
+}
+
+.qnaTitle{
+    padding:0px 60px 0px 60px;
+    width: 240px;
+}
+
+.qnaTitle p{
+    width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break:break-all
+}
+
+.qnaNumber{
+    padding-left: 24px;
+    width: 80px;
+    font-weight: bolder;
+}
+
+.qnaProductSeq{
+    padding-left: 24px;
+    width: 120px;
 }

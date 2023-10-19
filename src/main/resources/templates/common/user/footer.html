@@ -30,8 +30,8 @@
             <li>
                 <a href=#>고객센터</a>|
             </li>
-            <li>
-                <a href=#>관리자페이지로이동</a>
+            <li th:if="${isAdmin}">
+                <a href="/admin/adminMemberList">관리자페이지로 이동</a>
             </li>
         </ul>
 

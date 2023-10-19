@@ -1,5 +1,6 @@
 package com.hexkey.travelmaker.review.dto;
 
+import com.hexkey.travelmaker.product.regist.dto.ProductDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,5 +19,6 @@ public class ReviewDTO {
     private Date deletedDate;
     private String reviewStatus;
     private List<ReviewAttachDTO> reviewAttachList;
+    private List<ProductDTO> orderedProductInfoList;
 
 }

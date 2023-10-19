@@ -188,4 +188,33 @@
            AND MEMBER_ID = #{ memberId }
     </select>
 
+    <update id="updateMember">
+        UPDATE TBL_MEMBER
+           SET MEMBER_PWD = #{ memberPwd }
+             , TEL = #{ tel }
+             , PHONE = #{ phone }
+             , EMAIL = #{ email }
+             , SMS_YN = #{ smsYn }
+             , EMAIL_YN = #{ emailYn }
+         WHERE MEMBER_STATUS = 'Y'
+           AND MEMBER_CODE = #{ memberCode }
+    </update>
+
+    <update id="updateAddress">
+        UPDATE TBL_ADDRESS
+        SET
+                  POSTAL_CODE = #{ postalCode }
+                , DEFAULT_ADR = #{ defaultAdr }
+                , OPTIONAL_ADR = #{ optionalAdr }
+        WHERE MEMBER_CODE = #{ memberCode }
+    </update>
+
+
+    <update id="deleteMember">
+        UPDATE TBL_MEMBER
+           SET MEMBER_STATUS = 'N'
+         WHERE MEMBER_STATUS = 'Y'
+           AND MEMBER_ID = #{ memberId }
+    </update>
+
 </mapper>

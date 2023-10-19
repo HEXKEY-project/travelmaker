@@ -1,8 +1,6 @@
 package com.hexkey.travelmaker.user.controller;
 
-import com.hexkey.travelmaker.common.exception.MemberModifyException;
 import com.hexkey.travelmaker.common.exception.MemberRegistException;
-import com.hexkey.travelmaker.common.exception.MemberRemoveException;
 import com.hexkey.travelmaker.user.dto.AddressDTO;
 import com.hexkey.travelmaker.user.dto.MemberInfoDTO;
 import com.hexkey.travelmaker.user.service.AuthenticationService;
@@ -10,11 +8,6 @@ import com.hexkey.travelmaker.user.service.MemberConnectionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -37,26 +30,27 @@ public class MemberController {
         this.authenticationService = authenticationService;
     }
 
-    @GetMapping("/user/login")
-    public void loginPage() {}
+    @GetMapping("/login")
+    public String loginPage() {
+
+        return "/user/user/login";
+
+    }
 
     @PostMapping("/user/loginfail")
     public String loginFailed(RedirectAttributes rttr) {
 
         rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("error.login"));
-        return "redirect:/user/user/login";
+        return "redirect:/user/login";
 
     }
 
-    @GetMapping("/user/regist")
-    public void registPage() {}
+    @GetMapping("/regist")
+    public String registPage() {
 
-//    @GetMapping("/regist")
-//    public String registPage() {
-//
-//        return "/user/user/regist";
-//
-//    }
+        return "/user/user/regist";
+
+    }
 
     @PostMapping("idCheck")
     public ResponseEntity<String> checkDuplication(@RequestBody MemberInfoDTO member) {
@@ -75,12 +69,15 @@ public class MemberController {
 
     @PostMapping("/regist")
     public String registMember(AddressDTO address, MemberInfoDTO member, String zipCode, String address1, String address2,
+                               @RequestParam(defaultValue = "N") String smsYn, @RequestParam(defaultValue = "N") String emailYn,
                                RedirectAttributes rttr) throws MemberRegistException {
 
         address.setPostalCode(Integer.parseInt(zipCode));
         address.setDefaultAdr(address1);
         address.setOptionalAdr(address2);
         member.setMemberPwd(passwordEncoder.encode(member.getPassword()));
+        member.setSmsYn(smsYn);
+        member.setEmailYn(emailYn);
 
         log.info("Request regist member : {}", member);
         log.info("Request regist address : {}", address);
@@ -95,70 +92,17 @@ public class MemberController {
 
     };
 
-    @GetMapping("/user/findId")
-    public void findIdPage() {}
+    @GetMapping("/findId")
+    public String findIdPage() {
 
-    @GetMapping("user/foundId")
-    public void foundIdPage() {}
-
-    @GetMapping("user/findPwd")
-    public void findPwdPage() {}
-
-    @GetMapping("user/foundPwd")
-    public void foundPwdPage() {}
-
-    @GetMapping("/user/mypage")
-    public void mypagePage(@AuthenticationPrincipal MemberInfoDTO member) {}
-
-    @GetMapping("/user/modify")
-    public void modifyPage(@AuthenticationPrincipal MemberInfoDTO member) {
-        log.info("Member info :{}", member);
-    }
-
-    @PostMapping("/update")
-    public String modifyPage(MemberInfoDTO modifyMember, @AuthenticationPrincipal MemberInfoDTO loginMember,
-                             AddressDTO address, String zipCode, String defaultAdr, String optionalAdr,
-                             RedirectAttributes rttr) throws MemberModifyException {
-
-        address.setPostalCode(Integer.parseInt(zipCode));
-        address.setDefaultAdr(defaultAdr);
-        address.setOptionalAdr(optionalAdr);
-
-        log.info("modifyMember request Member : {}", modifyMember);
-
-        memberConnectionService.modifyMember(modifyMember);
-
-        /* 로그인 시 저장 된 Authentication 객체를 변경 된 정보로 교체한다. */
-        SecurityContextHolder.getContext().setAuthentication(createNewAuthentication(loginMember.getMemberId()));
-
-        rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.modify"));
-
-        return "redirect:/user/user/mypage";
+        return "/user/user/findId";
 
     }
 
-    private Authentication createNewAuthentication(String memberId) {
+    @GetMapping("/findPwd")
+    public String findPwdPage() {
 
-        UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);
-        UsernamePasswordAuthenticationToken newAuth
-                = new UsernamePasswordAuthenticationToken(newPrincipal, newPrincipal.getPassword(), newPrincipal.getAuthorities());
-
-        return newAuth;
-
-    }
-
-    @GetMapping("/delete")
-    public String deleteMember(@AuthenticationPrincipal MemberInfoDTO member, RedirectAttributes rttr) throws MemberRemoveException {
-
-        log.info("login member : {}", member);
-
-        memberConnectionService.removeMember(member);
-
-        SecurityContextHolder.clearContext();
-
-        rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.delete"));
-
-        return "redirect:/";
+        return "/user/user/findPwd";
 
     }
 

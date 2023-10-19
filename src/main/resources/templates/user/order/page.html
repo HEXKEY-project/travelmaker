@@ -29,7 +29,7 @@
                 <div id="ship_body">
 
                     <div class="select" id="select_ship">
-                        <input type="radio" id="address_select_default" name="selectDefault" value="Y">
+                        <input type="radio" id="address_select_default" name="selectDefault" value="Y" checked>
                         <label>기본 배송지</label>
                         <input type="radio" id="addr_select_new" name="selectDefault" value="N">
                         <label>새로운 배송지</label>
@@ -143,11 +143,12 @@
                     <div>
                         <div class="contents" id="contents_product" th:each="productData : ${productDatas}">
                             <div id="picture">
+                                <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEKZzRT4kw6nrrEhL7BGt0BfMn7A_9ltSPMex8hsACtQ&s" alt="이미지"></div>
                                 <input type="hidden" class="optionCodes" name="optionCode" th:value="${ productData.get('optionCode')}">
                                 <input type="hidden" class="counts" name="count" th:value="${ productData.get('count')}">
                                 <input type="hidden" class="productPrices" name="productPrice" th:value="${ productData.get('productPrice')}">
                             </div>
-                            <div>
+                            <div id="picture-side">
                                 <div id="div1">
                                     <div th:text="${'상품이름 : ' +  productData.get('productName') }"></div>
                                     <input name="productName" type="hidden"
@@ -323,7 +324,7 @@
                 pay_method: 'card',
                 merchant_uid: "IMP" + makeMerchantUid,
                 name: formData.get('productName'),
-                amount: 12,
+                amount: 200,
                 buyer_email: 'kymtlfgdh7@naver.com',
                 buyer_name: formData.get('name'),
                 buyer_tel: '010-4952-9201',
@@ -332,7 +333,7 @@
                 m_redirect_url: '/basket/basket'
             }, function (rsp) { // callback
 
-                if (true) {
+                if (rsp.success) {
                     console.log("페이 true 진입 성공");
 
                     ////
@@ -350,7 +351,7 @@
                         });
 
                 } else {
-                    alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+                    alert(`결제에 실패하였습니다.`);
                 }
             });
         }

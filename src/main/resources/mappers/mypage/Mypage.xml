@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexkey.travelmaker.mypage.dao.MypageMapper">
+
+    <select id="selectMemberById" resultType="string">
+        SELECT MEMBER_ID
+        FROM TBL_MEMBER
+        WHERE MEMBER_STATUS = 'Y'
+          AND MEMBER_ID = #{ memberId }
+    </select>
+
+    <resultMap id="memberResultMap" type="com.hexkey.travelmaker.user.dto.MemberInfoDTO">
+        <id property="memberCode" column="MEMBER_CODE"/>
+        <result property="memberName" column="MEMBER_NAME"/>
+        <result property="phone" column="PHONE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="memberId" column="MEMBER_ID"/>
+        <result property="memberPwd" column="MEMBER_PWD"/>
+        <result property="smsYn" column="SMS_YN"/>
+        <result property="mileage" column="MILEAGE"/>
+        <result property="policyYn" column="POLICY_YN"/>
+        <result property="privateYn" column="PRIVATE_YN"/>
+        <result property="emailYn" column="EMAIL_YN"/>
+        <result property="gradeCode" column="GRADE_CODE"/>
+        <result property="loginType" column="LOGIN_TYPE"/>
+        <result property="tel" column="TEL"/>
+        <result property="joinDay" column="JOIN_DAY"/>
+        <result property="memberStatus" column="MEMBER_STATUS"/>
+        <association property="address" resultMap="addressMap"/>
+        <collection property="memberRoleList" resultMap="memberRoleResultMap"/>
+    </resultMap>
+
+    <resultMap id="memberRoleResultMap" type="com.hexkey.travelmaker.user.dto.MemberRoleDTO">
+        <id property="memberCode" column="REF_MEMBER_CODE"/>
+        <id property="authorityCode" column="REF_AUTHORITY_CODE"/>
+        <association property="authority" resultMap="authorityResultMap"/>
+    </resultMap>
+
+    <resultMap id="authorityResultMap" type="com.hexkey.travelmaker.user.dto.AuthorityDTO">
+        <id property="code" column="REF_AUTHORITY_CODE2"/>
+        <result property="name" column="AUTHORITY_NAME"/>
+        <result property="desc" column="AUTHORITY_DESC"/>
+    </resultMap>
+
+    <resultMap id="addressMap" type="com.hexkey.travelmaker.user.dto.AddressDTO">
+        <id property="memberCode" column="REF_MEMBER_CODE"/>
+        <result property="addressCode" column="ADDRESS_CODE"/>
+        <result property="addressName" column="ADDRESS_NAME"/>
+        <result property="postalCode" column="POSTAL_CODE"/>
+        <result property="defaultAdr" column="DEFAULT_ADR"/>
+        <result property="optionalAdr" column="OPTIONAL_ADR"/>
+        <result property="defaultYn" column="DEFAULT_YN"/>
+    </resultMap>
+
+    <update id="updateMember">
+        UPDATE TBL_MEMBER
+        SET MEMBER_PWD = #{ memberPwd }
+          , TEL = #{ tel }
+          , PHONE = #{ phone }
+          , EMAIL = #{ email }
+          , SMS_YN = #{ smsYn }
+          , EMAIL_YN = #{ emailYn }
+        WHERE MEMBER_STATUS = 'Y'
+          AND MEMBER_CODE = #{ memberCode }
+    </update>
+
+    <update id="updateAddress">
+        UPDATE TBL_ADDRESS
+        SET
+            POSTAL_CODE = #{ postalCode }
+          , DEFAULT_ADR = #{ defaultAdr }
+          , OPTIONAL_ADR = #{ optionalAdr }
+        WHERE MEMBER_CODE = #{ memberCode }
+    </update>
+
+    <update id="deleteMember">
+        UPDATE TBL_MEMBER
+        SET MEMBER_STATUS = 'N'
+        WHERE MEMBER_STATUS = 'Y'
+          AND MEMBER_ID = #{ memberId }
+    </update>
+
+</mapper>
