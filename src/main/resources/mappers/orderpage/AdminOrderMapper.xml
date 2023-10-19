@@ -11,7 +11,7 @@
         <result property="orderDate" column="ORDER_DATE"/>
         <result property="orderStatus" column="ORDER_STATUS"/>
         <result property="totalPrice" column="TOTAL_PRICE"/>
-        <result property="recipent" column="RECIPENT"/>
+        <result property="memberName" column="MEMBER_NAME"/>
         <result property="phone" column="PHONE"/>
 
     </resultMap>
@@ -32,6 +32,38 @@
                 <![CDATA[
                 AND ORDER_DATE >= TO_DATE('${orderDate1}', 'YY-MM-DD') AND ORDER_DATE <= TO_DATE('${orderDate2}', 'YY-MM-DD')
                 ]]>
+            </if>
+            <if test="orderDate1 != '' and orderDate2 != '' ">
+                <![CDATA[
+                AND ORDER_DATE >= TO_DATE('${orderDate1}', 'YY-MM-DD') AND ORDER_DATE <= TO_DATE('${orderDate2}', 'YY-MM-DD')
+                ]]>
+            </if>
+        </where>
+    </select>
+
+    <select id="selectMemberOrder" resultMap="adminOrderSelectDTO">
+        SELECT
+        O.*,
+        S.*
+        FROM TBL_ORDER O
+        JOIN TBL_SHIPMENT S ON (O.ORDER_CODE = S.ORDER_CODE)
+
+        <where>
+            <if test="searchCondition == '주문자 명'">
+                UPPER(S.RECIPENT) LIKE '%' || UPPER(#{ searchValue }) || '%'
+            </if>
+            <if test="orderDate1 != '' and orderDate2 != '' ">
+                <![CDATA[
+                AND ORDER_DATE >= TO_DATE('${orderDate1}', 'YY-MM-DD') AND ORDER_DATE <= TO_DATE('${orderDate2}', 'YY-MM-DD')
+                ]]>
+            </if>
+            <if test="orderDate1 != '' and orderDate2 != '' ">
+                <![CDATA[
+                AND ORDER_DATE >= TO_DATE('${orderDate1}', 'YY-MM-DD') AND ORDER_DATE <= TO_DATE('${orderDate2}', 'YY-MM-DD')
+                ]]>
+            </if>
+            <if test="memberName != null ">
+                AND MEMBER_NAME = #{ memberName }
             </if>
         </where>
     </select>

@@ -23,4 +23,6 @@ public interface MemberInfoMapper {
     int pwdCheck(MemberDTO dto);
 
     int updateMember(MemberInfoDTO modifyMember);
+
+    int deleteMember(MemberInfoDTO member);
 }

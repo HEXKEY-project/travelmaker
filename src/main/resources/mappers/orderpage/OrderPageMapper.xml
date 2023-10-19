@@ -127,6 +127,7 @@
         ,PRODUCT_PRICE
         ,SHIP_PRICE
         ,MILEAGE_DISCOUNT_PRICE
+        ,MEMBER_NAME
         )
         VALUES
         (
@@ -138,6 +139,7 @@
         ,TO_NUMBER('${productPrice}','99999999')
         ,TO_NUMBER('${shipPrice}','99999999')
         ,TO_NUMBER('${discount}','99999999')
+        ,#{ memberName }
         )
     </insert>
 

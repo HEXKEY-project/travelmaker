@@ -50,6 +50,8 @@ public class ProductOrderService {
         for (int i = 0; i < productSeqs.length; i++) {
             int productSeq = productSeqs[i];
 
+            System.out.println("@@@@productSeq확인 = " + productSeq);
+
             ProductDTO selectProduct = productOrderMapper.selectProduct(productSeq);
             System.out.println("selectProduct = " + selectProduct);
 

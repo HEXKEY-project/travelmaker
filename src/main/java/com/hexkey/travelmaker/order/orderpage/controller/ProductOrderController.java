@@ -1,5 +1,8 @@
 package com.hexkey.travelmaker.order.orderpage.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hexkey.travelmaker.order.orderpage.dto.ProductDTO;
 import com.hexkey.travelmaker.order.orderpage.dto.ProductOptionDTO;
 import com.hexkey.travelmaker.order.orderpage.dto.CodeAndCountDTO;
@@ -9,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,11 +32,51 @@ public class ProductOrderController {
 
 
     @PostMapping("/order/page")
-    public String orderPage(@ModelAttribute CodeAndCountDTO codeAndCountDTO,
+    public String orderPage(@RequestParam("selectedOptionsData") String selectedOptionsData,
                             Model model) {
+
+        List<CodeAndCountDTO> codeAndCountList = new ArrayList<>();
+        try {
+            // JSON 데이터를 ObjectMapper를 사용하여 파싱
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode rootNode = objectMapper.readTree(selectedOptionsData);
+
+            // JSON 데이터를 List<CodeAndCountDTO>로 변환
+
+            for (JsonNode node : rootNode) {
+                CodeAndCountDTO dto = new CodeAndCountDTO();
+                dto.setOptionCode(node.get("optionCode").asInt());
+                dto.setCount(node.get("count").asInt());
+                codeAndCountList.add(dto);
+            }
+
+            // 변환된 데이터 사용
+            for (CodeAndCountDTO dto : codeAndCountList) {
+                System.out.println("Option Code: " + dto.getOptionCode());
+                System.out.println("Count: " + dto.getCount());
+                System.out.println("codeAndCountList: " + codeAndCountList);
+            }
+
+
+            // 다른 작업 수행 또는 리다이렉트
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 예외 처리
+        }
+
+        log .info("시작 {}" + selectedOptionsData);
+
+        log.info("@@@codeAndCountList {}" + selectedOptionsData);
+
+        log.info("끝 {}" + selectedOptionsData);
+
+        CodeAndCountDTO codeAndCountDTO = new CodeAndCountDTO();
+        codeAndCountDTO.setCodeAndCountList(codeAndCountList);
+//        (@ModelAttribute CodeAndCountDTO codeAndCountDTO,
+//                Model model)
         System.out.println("codeAndCountDTO는 뭐냐 : " + codeAndCountDTO);
 
-        List<CodeAndCountDTO> codeAndCountList = codeAndCountDTO.getCodeAndCountList();
+///////////////////////////////
 
         int[] optionCodes = new int[codeAndCountList.size()];
         int[] counts = new int[codeAndCountList.size()];

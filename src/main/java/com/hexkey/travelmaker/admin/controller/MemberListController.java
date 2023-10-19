@@ -47,7 +47,7 @@ public class MemberListController {
         model.addAttribute("paging",memberListAndPaging.get("paging"));
         model.addAttribute("memberList",memberListAndPaging.get("memberList"));
 
-        return "admin/adminMemberList";
+        return "admin/user/adminMemberList";
     }
 
     /* 회원 삭제*/
@@ -93,7 +93,7 @@ public class MemberListController {
      MemberDTO member =   memberService.selectMemberDetail(memberCode);
      model.addAttribute("memberList",member);
 
-     return "admin/adminMemberDetail";
+     return "admin/user/adminMemberDetail";
     }
 
     /* 회원정보 수정*/
@@ -117,7 +117,7 @@ public class MemberListController {
         MemberDTO member =   memberService.selectMemberDetail(memberCode);
         model.addAttribute("member",member);
 
-        return "admin/adminPwUpdate";
+        return "admin/user/adminPwUpdate";
     }
 
 
@@ -143,7 +143,7 @@ public class MemberListController {
 
         MemberDTO member = memberService.selectMemberDetail(memberCode);
         model.addAttribute("member",member);
-        return "admin/adminPointDetail";
+        return "admin/user/adminPointDetail";
     }
     /* 회원 적립금*/
     @PostMapping("/adminPointDetail")

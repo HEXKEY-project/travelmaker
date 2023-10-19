@@ -64,26 +64,23 @@ public class MemberConnectionService {
         if (!(result > 0)) throw new MemberModifyException("회원 정보 수정에 실패했습니다.");
 
     }
-    public void pwdUpdate(MemberDTO dto) {
+    public void pwdUpdate(MemberInfoDTO dto) {
     }
 
-    public int pwdCheck(MemberDTO dto) {
-        return memberInfoMapper.pwdCheck(dto);
-    }
-
-    public void modifyMember(MemberDTO modifyMember) {
-    }
-
-//     아이디 찾기
-//    public String findId(String memberName, String phone, String email) {
-//
-//        return memberMMapper.findId(memberName, phone, email);
-//
+//    public int pwdCheck(MemberInfoDTO dto) {
+//        return memberInfoMapper.pwdCheck(dto);
 //    }
-//
-//    // 비밀번호 찾기
-//    public String int findPwd(MemberDTO dto) {
-//
-//    }
+
+
+    public void removeMember(MemberInfoDTO member) throws MemberRemoveException {
+
+        int result = memberInfoMapper.deleteMember(member);
+
+        if (!(result > 0)) {
+            throw new MemberRemoveException("회원 탈퇴에 실패했습니다.");
+        }
+
+    }
+
 
 }
