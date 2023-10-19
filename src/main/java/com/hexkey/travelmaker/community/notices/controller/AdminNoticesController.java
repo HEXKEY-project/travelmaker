@@ -50,7 +50,7 @@ public class AdminNoticesController {
     public String registNotices(NoticesDTO notices)  {
         adminNoticesService.registNotices(notices);
 
-        return "redirect:/admin/notices/list?page=1";
+        return "admin/community/notices/list";
     }
 
     @GetMapping("/detail")
