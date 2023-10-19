@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (joinBtn) {
         joinBtn.addEventListener('click', function() {
-            window.location.href = '/user/user/regist';
+            window.location.href = '/user/regist';
         });
     }
 });

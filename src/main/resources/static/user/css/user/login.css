@@ -9,8 +9,13 @@ li {
     display: block;
 }
 
+.loginContainer {
+    width: 300px;
+    margin: 230px auto;
+    display: block;
+}
+
 body {
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 75vh;
@@ -44,7 +49,7 @@ body {
     color: red;
     font-size: 12px;
     display: block;
-    margin-top: 15px;
+    margin: 15px auto;
     font-weight: bold;
 }
 
