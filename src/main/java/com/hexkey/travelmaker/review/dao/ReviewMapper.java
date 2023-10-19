@@ -19,7 +19,4 @@ public interface ReviewMapper {
 
     void insertReviewAttachImage(ReviewAttachDTO reviewAttachImage);
 
-    int selectTotalCount(MemberInfoDTO loginMember);
-
-    List<ReviewDTO> selectReviewList(SelectCriteria selectCriteria);
 }
