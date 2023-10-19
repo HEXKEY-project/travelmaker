@@ -108,8 +108,8 @@
                     <li class="sub_a"><a href="#">게시판</a></li>
                     <li><a href="#">ABOUT US</a></li>
                     <li><a href="/community/notices/list">NOTICE</a></li>
-                    <li><a href="/community/faq/list">FAQ</a></li>
-                    <li><a href="/community/qna/list">Q&A</a></li>
+                    <li><a href="/community/FAQ/list">FAQ</a></li>
+                    <li><a href="/community/QnA/list">Q&A</a></li>
                 </ul>
             </li>
 
@@ -118,19 +118,19 @@
         <div class="right-buttons-justify">
 
             <div class="store">
-                <a href=#>
+                <a href="/map/map">
                     <img src="/user/images/migi/top_store.png">
                 </a>
             </div>
 
             <th:block sec:authorize="isAnonymous()">
             <div class="myshop">
-                <a class="cate" id="myshop-anonymous" data-submenu="sub-my-a" href="/user/user/login">
+                <a class="cate" id="myshop-anonymous" data-submenu="sub-my-a" href="/user/login">
                     <img src="/user/images/migi/top_myshop.png">
                 </a>
                 <ul class="sub-my-a">
-                    <li><a href="/user/user/login">로그인</a></li>
-                    <li><a href="/user/user/regist">회원가입</a></li>
+                    <li><a href="/user/login">로그인</a></li>
+                    <li><a href="/user/regist">회원가입</a></li>
                     <li><a href="#">주문조회</a></li>
                 </ul>
             </div>
@@ -138,7 +138,7 @@
 
             <th:block sec:authorize="isAuthenticated()">
                 <div class="myshop">
-                    <a class="cate" id="myshop-login" data-submenu="sub-my-l" href="/user/user/mypage">
+                    <a class="cate" id="myshop-login" data-submenu="sub-my-l" href="/user/mypage">
                         <img src="/user/images/migi/top_myshop.png">
                     </a>
                     <ul class="sub-my-l">

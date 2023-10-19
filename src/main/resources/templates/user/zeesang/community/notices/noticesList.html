@@ -5,6 +5,7 @@
     <title>공지사항</title>
     <link href="/user/css/zeesang/styles.css" rel="stylesheet" type="text/css"/>
     <link href="/user/css/zeesang/noticesList.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
 <div th:replace="common/user/header.html"></div>
@@ -13,7 +14,7 @@
 
 <div align="center" class="noticesBody">
     <div class="noticesListLineFirst">
-        <table class="noticesListLine" th:each="notices : ${ noticesList }"  th:onclick="|location.href='/community/notices/datail?no=${notices.code}'|">
+        <table class="noticesListLine" th:each="notices, text : ${ noticesList }"  th:onclick="|location.href='/community/notices/datail?no=${notices.code}'|">
             <td class="noticesCategory" style="color: crimson" th:text="${ notices.category.name }" th:if="${notices.category.code}==1"></td>
             <td class="noticesCategory" th:text="${ notices.category.name }" th:if="${notices.category.code}==2"></td>
             <td class="noticesCategory" style="color:#0075BD" th:text="${ notices.category.name }" th:if="${notices.category.code}==3"></td>
@@ -66,17 +67,19 @@
         <input type="search" id="searchValue" name="searchValue" placeholder="검색어 입력" th:value="${ paging.searchValue }">
         <button class="searchButton" type="submit">검색</button>
     </form>
-    <script>
-        let noticesSearchForm = document.getElementById('#searchForm');
-        noticesSearchForm.addEventListener("submit", function (e){
-            let msgNotices = document.getElementById('#searchValue');
-            if(msgNotices.value.length==0){
-                alert('검색어를 입력해주세요.');
-                e.preventDefault();
-            }
-        })
-    </script>
 </div>
 <div th:replace="/common/user/footer.html"></div>
 </body>
+<script>
+    let noticesSearchForm = document.getElementById('#searchForm');
+
+    noticesSearchForm.addEventListener("submit", function (e){
+
+        let msgNotices = document.getElementById('#searchValue');
+        if(msgNotices.value.length===0){
+            alert('검색어를 입력해주세요.');
+            e.preventDefault();
+        }
+    })
+</script>
 </html>

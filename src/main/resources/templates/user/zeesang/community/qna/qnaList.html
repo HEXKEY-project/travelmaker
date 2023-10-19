@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+    <link href="/user/css/zeesang/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="/user/css/zeesang/qnaList.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div th:replace="common/user/header.html"></div>
+
+<h1 align="center">Q & A</h1>
+
+<div align="center" class="noticesBody">
+    <div class="qnaListLineFirst">
+        <table class="qnaListLine" th:each="qna ,qnaNum : ${ qnaList }"  th:onclick="|location.href='/community/qna/datail?no=${qna.code}'|">
+            <th class="qnaNumber" th:text="${paging.totalCount - (paging.page * paging.limit)- qnaNum.index + paging.limit}"/>
+            <th class="qnaProductSeq" th:text="${ qna.productSeq.productName }"></th>
+            <td class="qnaTitle"><p th:text="${ qna.body }"></p></td>
+            <td class="qnaId" th:text="${ qna.member.memberId }"></td>
+            <td class="qnaDate" th:text="${#dates.format(qna.registeredDate, 'yyyy.MM.dd') }"></td>
+        </table>
+    </div>
+</div>
+
+<div id="paging" align="center" style="margin-top: 40px; font-size: 32px;">
+
+    <th:block
+            th:if="${ paging.searchCondition == 'all'  || paging.searchValue == null }">
+        <!-- 맨 앞으로 이동 -->
+        <button class="pagingButton" th:onclick="'location.href=\'/community/notices/list?page=1\''">《</button>
+
+        <!-- 이전 페이지로 이동 -->
+        <button class="pagingButton"
+                th:onclick="'location.href=\'/community/notices/list?page=' + @{${paging.page - 1}} + '\''"
+                th:disabled="${ paging.page <= 1 }">〈</button>
+
+        <!-- 숫자 버튼 -->
+        <th:block
+                th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+            <button class="pagingButton"
+                    th:onclick="'location.href=\'/community/notices/list?page=' + @{${page}} + '\''"
+                    th:text="${ page }" th:disabled="${ paging.page eq page }">
+            </button>
+        </th:block>
+
+        <!-- 다음 페이지로 이동 -->
+        <button class="pagingButton"
+                th:onclick="'location.href=\'/community/notices/list?page=' + @{${paging.page + 1}} + '\''"
+                th:disabled="${ paging.page >= paging.maxPage }">〉</button>
+
+        <!-- 맨 끝으로 이동 -->
+        <button class="pagingButton"
+                th:onclick="'location.href=\'/community/notices/list?page=' + @{${paging.maxPage}} + '\''">》</button>
+    </th:block>
+
+</div>
+
+<div class="searchCategory" style="margin-top: 40px">
+    <form id="searchForm" style="display: inline-block">
+        <select id="searchCondition" name="searchCondition">
+            <option selected value="all" th:selected="${ paging.searchCondition eq 'all'}">전체</option>
+            <option value="title" th:selected="${ paging.searchCondition eq 'title'}">제목</option>
+            <option value="body" th:selected="${ paging.searchCondition eq 'body'}">내용</option>
+        </select>
+        <input type="search" id="searchValue" name="searchValue" placeholder="검색어 입력" th:value="${ paging.searchValue }">
+        <button class="searchButton" type="submit">검색</button>
+    </form>
+    <script>
+        let noticesSearchForm = document.getElementById('#searchForm');
+        noticesSearchForm.addEventListener("submit", function (e){
+            let msgNotices = document.getElementById('#searchValue');
+            if(msgNotices.value.length==0){
+                alert('검색어를 입력해주세요.');
+                e.preventDefault();
+            }
+        })
+    </script>
+</div>
+<div th:replace="/common/user/footer.html"></div>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/user/css/mypage/modify.css">
+    <!-- 이메일 자동완성을 위해 추가-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- 주소 API -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <link rl="stylesheet" href="/user/css/migi/header.css"/>
+
+</head>
+<body>
+<div th:replace="common/user/header.html"></div>
+<div id="nav">
+    <div th:replace="common/user/mypageNav.html"></div>
+</div>
+
+<div class="modifyContainer">
+    <form action="/user/modify" method="post">
+
+    <ul>
+        <li class="regist-id">
+            <label>아이디 *</label>
+            <p id="memberId" th:text="${ #authentication.principal.memberId }"></p>
+        </li>
+        <li class="pwd">
+            <label for="pwd1">비밀번호 *</label>
+            <input class="password" id="pwd1" name="memberPwd" type="password"
+                   placeholder="(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자 ~ 16자)" maxlength="16" required><br>
+            <div id="pwdError"></div>
+            <div id="pwdMessage" style="display: none;">
+                <p>
+                    <strong>* 비밀번호 입력 조건</strong><br>
+                    - 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자 ~ 16자<br>
+                    - 입력 가능 특수문자: ~ ` ! @ # $ % ^ ( ) * _ - = { } [ ] | ; : < > , . ? /<br>
+                    - 공백 입력 불가능<br>
+                    - 연속된 문자, 숫자 사용 불가능<br>
+                    - 동일한 문자, 숫자를 반복해서 사용 불가능<br>
+                </p>
+            </div>
+            <label for="pwd2">비밀번호 확인 *</label>
+            <input class="password" id="pwd2" name="pwd2" type="password" maxlength="16" required>
+            <div id="pwdError2"></div>
+        </li>
+        <li class="regist-name">
+            <label>이름 *</label>
+            <p id=memberName th:text="${ #authentication.principal.memberName }"></p>
+        </li>
+        <li class="joinAddress">
+            <label for="zipCode">주소 *</label>
+            <input id="zipCode" name="zipCode" type="text" th:value="${ #authentication.principal.address.addressCode }" readonly>
+            <button id="searchZipCode" type="button">주소 검색</button><br>
+            <input class="address" id="address1" name="address1" type="text" th:value="${ #authentication.principal.address.defaultAdr }" readonly required><br>
+            <input class="address" id="address2" name="address2" type="text" th:value="${ #authentication.principal.address.optionalAdr }" required>
+        </li>
+        <li class="telNumber">
+            <label>일반전화</label>
+            <input id="tel" name="tel" type="number" th:value="${ #authentication.principal.tel }">
+        </li>
+        <li class="phoneNumber">
+            <label>휴대전화 *</label>
+            <input id="phone" name="phone" type="number" th:value="${ #authentication.principal.phone }">
+
+        </li>
+        <li class="regist-email">
+            <label>이메일 *</label>
+            <input class="email" id="email" name="email" type="email" onkeyup="autoEmail('email', this.value)" autocomplete="off" th:value="${ #authentication.principal.email }" required>
+        </li>
+    </ul>
+
+    <ul class="check-agree">
+        <li>
+            <label for="smsCheckbox">SMS 수신을 동의하십니까? </label>
+            <input type="checkbox" id="smsCheckbox" name="smsYn" value="Y" class="optionalCheck" th:checked="${ #authentication.principal.smsYn == 'Y'}">
+            <label for="smsCheckbox">동의함</label><br>
+            <input type="hidden" name="smsYn" value="N">
+        </li>
+        <li>
+            <label for="emailCheckbox">이메일 수신을 동의하십니까? </label>
+            <input type="checkbox" id="emailCheckbox" name="emailYn" value="Y" class="optionalCheck" th:checked="${ #authentication.principal.emailYn == 'Y'}">
+            <label for="emailCheckbox">동의함</label><br>
+            <input type="hidden" name="emailYn" value="N">
+        </li>
+    </ul>
+
+        <div class="modifyBtn">
+            <input id="modifyMember" type="submit" value="회원정보수정">
+            <input id="deleteMember" type="button" value="회원탈퇴">
+            <input id="cancelMember" type="button" value="취소">
+        </div>
+
+    </form>
+</div>
+
+<script>
+
+    const $searchZipCode = document.getElementById("searchZipCode");
+
+    $searchZipCode.onclick = function () {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                document.getElementById("zipCode").value = data.zonecode;
+                document.getElementById("address1").value = data.address;
+                document.getElementById("address2").focus();
+            }
+        }).open();
+    }
+
+
+    // 정보 수정 버튼 클릭 시
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("modifyMember")
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+
+            form.submit();
+        });
+    });
+
+
+    // 회원 탈퇴 버튼 클릭 시
+    if(document.getElementById("deleteMember")) {
+        const $update = document.getElementById("deleteMember");
+        $update.onclick = function() {
+            location.href = "/user/delete";
+        }
+    }
+
+    // 취소 버튼 클릭 시
+    if(document.getElementById("cancelMember")) {
+        const $update = document.getElementById("cancelMember");
+        $update.onclick = function() {
+            location.href = "/user/mypage";
+        }
+    }
+
+    // 비밀번호 Caps Lock 활성화 확인
+    function checkCapsLock(event)  {
+        if (event.getModifierState("CapsLock")) {
+            document.getElementById("capsMessage").innerText
+                = "Caps Lock 활성화되어 있습니다."
+        }else {
+            document.getElementById("capsMessage").innerText
+                = ""
+        }
+    }
+
+    // 이메일 자동 완성
+    function autoEmail(a, b) {
+        const mailId = b.split('@');                                                                    // 메일계정의 ID만 받아와서 처리하기 위함
+        const mailList = ['naver.com', 'gmail.com', 'daum.net', 'hanmail.net', 'nate.com'];             // 메일목록
+        const availableCity = new Array;                                                                // 자동완성 키워드 리스트
+        for (var i = 0; i < mailList.length; i++) {
+            availableCity.push(mailId[0] + '@' + mailList[i]);                                          // 입력되는 텍스트와 메일목록을 조합
+        }
+        $("#" + a).autocomplete({
+            source: availableCity,                                                                      // jQuery 자동완성에 목록을 넣어줌
+            focus: function (event, ui) {
+                return false;
+            }
+        });
+    }
+
+    // 비밀번호 형식에 맞춰 작성
+    document.getElementById('pwd1').addEventListener('blur', function () {
+        const password = this.value;
+        const regex = /^(?!.*(.)\1\1)(?!((?:[A-Za-z]+)|(?:[~`!@#$^()*_\-={}[]|;:<>,.?\/]+)|(?:[0-9]+))$)[A-Za-z\d~`!@#$^()*_\-={}[]|;:<>,.?\/]{10,}$/;
+        const isValid = regex.test(password);
+        const messageElement = document.getElementById('pwdError');
+
+        if (password.length >= 10 && isValid) {
+            messageElement.textContent = "";
+        } else if (password.length > 0) {
+            messageElement.textContent = "비밀번호가 형식에 맞지 않습니다.";
+        }
+    });
+
+    // 비밀번호 클릭 시 비밀번호 형식 안내 문구창
+    const pwd1Element = document.getElementById("pwd1");
+    const pwdMessageElement = document.getElementById("pwdMessage");
+
+    pwd1Element.addEventListener("click", function (event) {
+        // event.stopPropagation();
+        pwdMessageElement.style.display = "block";
+    });
+
+    document.addEventListener("click", function (event) {
+        if (event.target !== pwd1Element && event.target !== pwdMessageElement) {
+            pwdMessageElement.style.display = "none";
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Tab") {
+            pwdMessageElement.style.display = "none";
+        }
+    });
+
+    // 비밀번호 일치 확인
+    document.getElementById('pwd1').addEventListener('input', checkPasswords);
+    document.getElementById('pwd2').addEventListener('input', checkPasswords);
+
+    function checkPasswords() {
+        let password1 = document.getElementById('pwd1').value;
+        let password2 = document.getElementById('pwd2').value;
+        let messageElement = document.getElementById('pwdError2')
+
+        if (password1 === password2) {
+            messageElement.textContent = "";
+        } else {
+            messageElement.textContent = "비밀번호가 일치하지 않습니다."
+        }
+
+    }
+
+</script>
+</div>
+
+<!--<div th:replace="/common/user/footer.html"></div>-->
+
+</body>
+</html>

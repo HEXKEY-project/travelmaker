@@ -74,18 +74,50 @@
 
 #reviews {
     display: block;
-    width: 1580px;
+    width: 1700px;
     margin: 64px auto;
 }
 
 #review-area {
-    max-width: 1580px;
+    max-width: 1600px;
     margin: auto;
     justify-content: center;
     display: flex;
-    /*flex-wrap: wrap;*/
+    flex-wrap: wrap;
 }
 
 .review {
+    border: 1px solid #cccccc;
     margin: 10px;
+}
+
+.review-info-product {
+    border-bottom: 1px solid #cccccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.review-info-product-name {
+    font-weight: 600;
+}
+
+.rating {
+    margin: 8px;
+    text-align: left;
+}
+
+#star-rating {
+    margin-top: 4px;
+    display: inline-block;
+    float: left;
+}
+
+.reviewBody {
+    padding: 8px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#review-body {
+    float: left;
 }

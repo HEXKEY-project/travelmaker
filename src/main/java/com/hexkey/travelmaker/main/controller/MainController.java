@@ -24,6 +24,7 @@ public class MainController {
         Map<String, Object> newProductList = mainService.selectNewProductList();
         Map<String, Object> reviewList = mainService.selectRecentReviewList();
 
+
         model.addAttribute("newProductList", newProductList.get("productList"));
         model.addAttribute("recentReviewList", reviewList.get("reviewList"));
 
@@ -32,4 +33,6 @@ public class MainController {
         return "/index";
 
     }
+
+
 }

@@ -50,7 +50,9 @@
         <result property="reviewBody" column="REVIEW_BODY"/>
         <result property="registeredDate" column="REGISTERED_DATE"/>
         <result property="reviewStatus" column="REVIEW_STATUS"/>
+
         <collection property="reviewAttachList" resultMap="reviewAttachResultMap"/>
+        <collection property="orderedProductInfoList" resultMap="generalProductResultMap"/>
     </resultMap>
 
     <resultMap id="reviewAttachResultMap" type="com.hexkey.travelmaker.review.dto.ReviewAttachDTO">
@@ -62,6 +64,8 @@
         <result property="reviewCode" column="REVIEW_CODE"/>
         <result property="filePath" column="FILE_PATH"/>
     </resultMap>
+
+
 
     <select id="selectNewProductList" resultMap="generalProductResultMap">
         SELECT
@@ -88,16 +92,21 @@
 
     <select id="selectRecentReviewList" resultMap="reviewResultMap">
         SELECT
-               A.REVIEW_CODE
+            A.REVIEW_CODE
+             , A.ORDER_CODE
              , A.REVIEW_BODY
              , A.RATING
              , A.REGISTERED_DATE
-             , A.REVIEW_STATUS
              , B.FILE_TYPE
              , B.FILE_PATH
-             , B.SAVED_FILE_NAME
+             , C.OPTION_CODE
+             , D.PRODUCT_SEQ
+             , E.PRODUCT_NAME
         FROM TBL_REVIEW A
-        JOIN TBL_FILE B ON(A.REVIEW_CODE = B.REVIEW_CODE)
+                 JOIN TBL_FILE B ON (A.REVIEW_CODE = B.REVIEW_CODE)
+                 JOIN TBL_ORDER_DETAIL C ON (A.ORDER_CODE = C.ORDER_CODE)
+                 JOIN TBL_PRODUCT_OPTION D ON (C.OPTION_CODE = D.OPTION_CODE)
+                 JOIN TBL_PRODUCT E ON (D.PRODUCT_SEQ = E.PRODUCT_SEQ)
         ORDER BY A.REGISTERED_DATE DESC
             FETCH FIRST 10 ROWS ONLY
     </select>

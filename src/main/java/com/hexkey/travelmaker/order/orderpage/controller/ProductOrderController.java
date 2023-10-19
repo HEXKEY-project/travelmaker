@@ -108,7 +108,6 @@ public class ProductOrderController {
             productData.put("count", counts[i]);
             productData.put("optionCode", optionsList.get(i).getOptionCode());
             productData.put("productPrice",  productsList.get(i).getPrice() * counts[i]);
-
             productDatas.add(productData);
             productPrices += productsList.get(i).getPrice() * counts[i];
         }
