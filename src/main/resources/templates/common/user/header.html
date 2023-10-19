@@ -125,12 +125,12 @@
 
             <th:block sec:authorize="isAnonymous()">
             <div class="myshop">
-                <a class="cate" id="myshop-anonymous" data-submenu="sub-my-a" href="/user/user/login">
+                <a class="cate" id="myshop-anonymous" data-submenu="sub-my-a" href="/user/login">
                     <img src="/user/images/migi/top_myshop.png">
                 </a>
                 <ul class="sub-my-a">
-                    <li><a href="/user/user/login">로그인</a></li>
-                    <li><a href="/user/user/regist">회원가입</a></li>
+                    <li><a href="/user/login">로그인</a></li>
+                    <li><a href="/user/regist">회원가입</a></li>
                     <li><a href="#">주문조회</a></li>
                 </ul>
             </div>
@@ -138,7 +138,7 @@
 
             <th:block sec:authorize="isAuthenticated()">
                 <div class="myshop">
-                    <a class="cate" id="myshop-login" data-submenu="sub-my-l" href="/user/user/mypage">
+                    <a class="cate" id="myshop-login" data-submenu="sub-my-l" href="/user/mypage">
                         <img src="/user/images/migi/top_myshop.png">
                     </a>
                     <ul class="sub-my-l">

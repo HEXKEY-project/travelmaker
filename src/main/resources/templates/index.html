@@ -60,18 +60,20 @@
                     </div>
                     <div class="review-info">
                         <div class="review-info-product">
-                            <img style="width: 40px; height: 40px;"
-                                    src="/admin/images/productimage/0f2a150257604338bbd5ed8249a3dfdd.jpg">
                             <div class="review-info-product-data">
                                 <div class="review-info-product-name">
-                                    트래블메이트 트롤리 파트너
+                                    <p th:text="${review.orderedProductInfoList[0].productName}"></p>
                                 </div>
                             </div>
                         </div>
                         <div class="review-rating-body">
                             <div class="rating">
-                                <img src="/user/images/migi/Star.png">
-
+                                <img id="star-rating" src="/user/images/migi/Star.png">
+                                <p th:text="${review.rating} + '점'"></p>
+                                <div class="reviewBody">
+                                <p id="review-body" th:text="${review.reviewBody}"></p>
+                                <p id="registeredDate" th:text="${#dates.format(review.registeredDate, 'yy-MM-dd')}"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
