@@ -418,3 +418,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+function registConfirm(){
+
+    if(confirm("상품등록을 하시겠습니까?")){
+        alert("상품등록을 완료하였습니다 !")
+    } else {
+        alert("상품등록에 실패하였습니다 !")
+    }
+}
