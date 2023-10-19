@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+body{
+    width: 1920px;
+    overflow-x: hidden;
+}
 html {
     font-size: 14px;
     display: block;
@@ -83,6 +86,7 @@ div {
 :root {
     --components-input-outlined-enabled-border: rgba(0, 0, 0, 0.23);
     --text-disabled : rgba(0, 0, 0, 0.38);
+    --divider : rgba(0, 0, 0, 0.12);
 }
 
 .list_tbl select {
@@ -137,7 +141,7 @@ div {
 
 #productPrice {
     margin-left: 16px;
-    margin-top: 16px;
+    margin-top: 25px;
 }
 #productPrice select {
     width: 184px;
@@ -206,9 +210,96 @@ div {
 }
 
 .price {
-    width: 180px;
-    height: 40px;
+    width: 100px;
+    height: 20px;
 
     border-radius: var(--borderRadius, 4px);
     border: 1px solid var(--components-input-outlined-enabled-border, rgba(0, 0, 0, 0.23));
+}
+
+#productList {
+    display: flex;
+    width: 1436px;
+}
+
+.productTh {
+    height: 70px;
+    text-align: center;
+    line-height: 6;
+    gap: var(--1, 8px);
+    flex-shrink: 0;
+    background: #F5F5F5;
+
+    border-bottom: 1px solid var(--divider, rgba(0, 0, 0, 0.12));
+}
+
+#productTitle {
+    max-width: 330px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#listWrap {
+    margin-top: 80px;
+}
+
+#listWrap p {
+    color: #191919;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Noto Sans;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+#productList {
+     margin-top: 27px;
+
+}
+
+#searchProduct {
+    margin-top: 26px;
+
+}
+
+.list_content {
+    margin-top: 16px;
+}
+
+#count {
+    width: 102px;
+
+}
+
+#productCode {
+    width: 205px;
+
+}
+
+#productName {
+    width: 205px;
+}
+
+#productSerial {
+    width: 205px;
+
+}
+
+#price {
+    width: 205px;
+}
+
+#firstCateogory {
+    width: 205px;
+
+}
+
+#productRegistDate {
+    width: 205px;
+}
+
+.line {
+    border-bottom: 1px solid var(--divider, rgba(0, 0, 0, 0.12));
 }

@@ -8,6 +8,8 @@ import java.util.List;
 
 @Getter @Setter @ToString
 public class OrderFormDTO {
+    private String memberName;
+
     private List<String> optionCodes;
     private List<String> counts;
     private List<String> productPrices;

@@ -71,7 +71,7 @@
             <div class="td" th:text="${ 1 }"></div>
             <div class="td" th:text="${#dates.format(adminOrderSelectDTO.orderDate, 'yyyy-MM-dd')}"></div>
             <div class="td" th:text="${ adminOrderSelectDTO.orderCode }"></div>
-            <div class="td" th:text="${ adminOrderSelectDTO.recipent }"></div>
+            <div class="td" th:text="${ adminOrderSelectDTO.memberName }"></div>
             <div class="td" th:text="${ adminOrderSelectDTO.totalPrice }"></div>
             <div class="td" th:text="${ adminOrderSelectDTO.phone }"></div>
             <div class="td" th:text="${ adminOrderSelectDTO.orderStatus }"></div>
@@ -145,7 +145,7 @@
                     div2.className = 'c'
 
                     const div3 = document.createElement('div');
-                    div3.textContent = item.recipent;
+                    div3.textContent = item.memberName;
                     div3.className = 'd'
 
                     const div4 = document.createElement('div');

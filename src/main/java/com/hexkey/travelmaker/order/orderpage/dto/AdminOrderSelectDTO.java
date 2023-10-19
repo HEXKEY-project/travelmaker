@@ -13,7 +13,7 @@ public class AdminOrderSelectDTO {
     private Date orderDate;
     private String orderStatus;
     private int totalPrice;
-    private String recipent;
+    private String memberName;
     private int phone;
 
 

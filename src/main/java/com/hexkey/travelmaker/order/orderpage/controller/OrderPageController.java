@@ -8,6 +8,9 @@ import com.hexkey.travelmaker.order.orderpage.service.OrderPageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -84,6 +87,9 @@ public class OrderPageController {
             productPriceList.add(productPrice_2);
         }
 
+
+
+
         orderFormDTO.setOptionCodes(optionCodesList);
         orderFormDTO.setCounts(countList);
         orderFormDTO.setProductPrices(productPriceList);
@@ -112,8 +118,25 @@ public class OrderPageController {
         orderFormDTO.setTotalPrice(totalPrice);
         orderFormDTO.setOrderDate(today);
 
+        ///////////////////principal/////////////////////
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info("$$$authentication : {}", authentication);
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        log.info("$$$userDetails : {}", userDetails);
+
+        String username = userDetails.getUsername();
+        log.info("$$$username : {}", username);
+
+        orderFormDTO.setMemberName(username);
+
+        log.info("$$$orderFormDTO : {}", orderFormDTO);
+
+        ///////////////////principal/////////////////////
+
         Long currentCode = orderPageService.insertFormOrder(orderFormDTO);
         log.info("currentCode : {}", currentCode);
+
 
 
         return currentCode;
