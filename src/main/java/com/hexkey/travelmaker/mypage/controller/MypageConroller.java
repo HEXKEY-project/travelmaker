@@ -1,5 +1,6 @@
 package com.hexkey.travelmaker.mypage.controller;
 
+import com.hexkey.travelmaker.admin.dto.MemberDTO;
 import com.hexkey.travelmaker.common.exception.MemberModifyException;
 import com.hexkey.travelmaker.common.exception.MemberRemoveException;
 import com.hexkey.travelmaker.mypage.service.MypageService;
@@ -15,10 +16,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -77,7 +82,7 @@ public class MypageConroller {
 
         rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.modify"));
 
-        return "redirect:/mypage/mypage";
+        return "redirect:/user/mypage";
 
     }
 
@@ -107,23 +112,16 @@ public class MypageConroller {
 
     }
 
-    // 마이페이지 내 후기
-//    @GetMapping("/reviewList")
-//    public String reviewListPage(@RequestParam(defaultValue = "1") int page,
-//                                 @AuthenticationPrincipal MemberInfoDTO loginMember, Model model) {
-//
-//        log.info("reviewList page : {}", page);
-//
-//        Map<String, Object> reviewListAndPaging = reviewService.selectReviewList(page, loginMember);
-//        model.addAttribute("paging", reviewListAndPaging.get("paging"));
-//        model.addAttribute("reviewList", reviewListAndPaging.get("reviewList"));
-//
-//        return "/user/review/reviewList";
-//
-//    }
 
     @GetMapping("/reviewList")
-    public String reviewListPage() {
+    public String reviewListPage(@RequestParam(defaultValue = "1") int page,
+                                 @AuthenticationPrincipal MemberDTO loginMember, Model model) {
+
+        log.info("reviewListPage : {}", page);
+
+//        Map<String, Object> reviewListAndPaging = MypageService.selectReviewList(page, loginMember);
+//        model.addAttribute("paging", reviewListAndPaging.get("paging"));
+//        model.addAttribute("reviewList", reviewListAndPaging.get("reviewList"));
 
         return "/user/mypage/reviewList";
 
