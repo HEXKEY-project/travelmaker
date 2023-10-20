@@ -74,15 +74,15 @@
 
     <ul class="check-agree">
         <li>
-            <label for="smsCheckbox">SMS 수신을 동의하십니까? </label>
+            <label id="SMSagree" for="smsCheckbox">SMS 수신을 동의하십니까? </label>
             <input type="checkbox" id="smsCheckbox" name="smsYn" value="Y" class="optionalCheck" th:checked="${ #authentication.principal.smsYn == 'Y'}">
-            <label for="smsCheckbox">동의함</label><br>
+            <label for="smsCheckbox">&nbsp;&nbsp;&nbsp;&nbsp;동의함</label><br>
             <input type="hidden" name="smsYn" value="N">
         </li>
         <li>
-            <label for="emailCheckbox">이메일 수신을 동의하십니까? </label>
+            <label id="emailAgree" for="emailCheckbox">이메일 수신을 동의하십니까? </label>
             <input type="checkbox" id="emailCheckbox" name="emailYn" value="Y" class="optionalCheck" th:checked="${ #authentication.principal.emailYn == 'Y'}">
-            <label for="emailCheckbox">동의함</label><br>
+            <label for="emailCheckbox">&nbsp;&nbsp;&nbsp;&nbsp;동의함</label><br>
             <input type="hidden" name="emailYn" value="N">
         </li>
     </ul>
