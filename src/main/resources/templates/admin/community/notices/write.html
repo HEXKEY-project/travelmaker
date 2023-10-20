@@ -109,12 +109,34 @@
         </div>
             <div style="text-align: center; width: 1436px; display: flex;justify-content: flex-end; margin-top: 16px;">
                 <button class="searchButton2" type="reset" style="display :inline-block; margin-right: 8px;" align="right" onclick="location.href='list'">작성취소</button>
-                <button id="registButton" class="searchButton2" type="submit" style="display :inline-block; margin-right: 8px;" align="right">작성하기</button>
+                <button id="registButton" class="searchButton2" type="button" style="display :inline-block; margin-right: 8px;" align="right">작성하기</button>
             </div>
     </form>
 </div>
     </div>
 </div>
+    <script th:inline="javascript">
+    const btnChange = document.getElementById('registButton')
+
+    btnChange.addEventListener('click',()=>{
+
+
+            if($.trim($(".inputSelect").val())===''){
+                alert("제목을 입력해주세요.");
+                return false;
+            } else if($.trim($("#txtContent").val())===''){
+                alert("내용을 입력해주세요.")
+                return false;
+            } else if($("#searchCondition").val()==='null'){
+                alert("분류를 선택해주세요.")
+                return false;
+            } else {
+                var confirm_val3 = confirm("공지사항을 작성하시겠습니까?");
+                if(confirm_val3){$("#noticesRegistForm").submit();} else {return false;}
+            }
+
+    })
+</script>
 </body>
 </html>
 
