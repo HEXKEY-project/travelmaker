@@ -1,6 +1,6 @@
 #main-wrapper {
     position: inherit;
-    height: 2500px;
+    height: 100%;
 }
 
 .swiper-main {
@@ -74,12 +74,12 @@
 
 #reviews {
     display: block;
-    width: 1700px;
+    width: 1620px;
     margin: 64px auto;
 }
 
 #review-area {
-    max-width: 1600px;
+    max-width: 100%;
     margin: auto;
     justify-content: center;
     display: flex;
@@ -113,11 +113,15 @@
 }
 
 .reviewBody {
-    padding: 8px 0px;
+    padding: 8px 0;
     display: flex;
     justify-content: space-between;
 }
 
 #review-body {
     float: left;
+    width: 200px;
+    white-space : nowrap;
+    overflow : hidden;
+    text-overflow: ellipsis;
 }
