@@ -129,12 +129,13 @@
 </script>
 
 <script th:inline="javascript">
-    const btnChange = document.getElementById('registButton','registButton2')
+    const btnChange = document.getElementById('registButton')
     const btnChange2 = document.querySelector('.sss')
-
-
+    
     btnChange.addEventListener('click',()=>{
+
         if(btnChange2.id==='registButton'){
+
             alert("공지사항을 수정합니다.")
             $('#adminWrite_titleHS2').show();
             $('#adminWrite_titleHS1').hide();
@@ -143,15 +144,23 @@
             $(".inputSelect").removeAttr("disabled");
             btnChange.textContent = "수정완료";
             btnChange.setAttribute('id', "registButton2")
-        } else if(btnChange2.id==='registButton2'){
+        } else {
 
-            var confirm_val3 = confirm("공지사항을 수정하시겠습니까?");
-            if (confirm_val3) {
-                btnChange2.type="submit"
-                $('#txtContent').summernote('disable');
-                window.location.reload();
+            if($.trim($(".inputSelect").val())===''){
+                alert("제목을 입력해주세요.");
+                return false;
+            } else if($.trim($("#txtContent").val())===''){
+                alert("내용을 입력해주세요.")
+                return false;
+            } else if($("#searchCondition").val()==='null'){
+                alert("분류를 선택해주세요.")
+                return false;
+            } else {
+                var confirm_val3 = confirm("공지사항을 수정하시겠습니까?");
+                if(confirm_val3){$("#noticesUpdateForm").submit();} else {return false;}
             }
-    }
+
+        }
     })
 </script>
 </body>
