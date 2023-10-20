@@ -46,6 +46,7 @@
 
     <resultMap id="reviewResultMap" type="com.hexkey.travelmaker.review.dto.ReviewDTO">
         <id property="reviewCode" column="REVIEW_CODE"/>
+        <result property="rating" column="RATING"/>
         <result property="orderCode" column="ORDER_CODE"/>
         <result property="reviewBody" column="REVIEW_BODY"/>
         <result property="registeredDate" column="REGISTERED_DATE"/>
