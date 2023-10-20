@@ -21,6 +21,9 @@
             <td class="noticesTitle"><p th:text="${ notices.title }"></p></td>
             <td class="noticesDate" th:text="${#dates.format(notices.registeredDate, 'yyyy.MM.dd') }"></td>
         </table>
+         <table class="noticesListLine" th:if="${noticesList==null} or ${noticesList.size()==0}">
+            <th class="noticesTitle">공지사항이 없습니다.</th>
+        </table>
     </div>
 </div>
 
