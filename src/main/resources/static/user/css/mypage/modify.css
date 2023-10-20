@@ -4,30 +4,48 @@ body {
     align-items: center;
 }
 
-.modifyContainer {
-    display: block;
-    margin: 100px auto;
-}
-
 #nav {
-    margin-top: -400px;
-    margin-left: -35px;
+    position: fixed;
+    transform: translate(-880px, -120px);
 }
 
 input{
+    margin-left: 32px;
     border: 1px solid black;
 }
 
-.password, #memberName, #zipCode, .address, .email, #phone, #tel, #memberId {
+#memberId, #memberName {
+    font-size: 12px;
+    border: 1px solid black;
+    margin-left: 138px;
+    width: 570px;
+    height: 25px;
+}
+
+.password, .address, .email, #phone, #tel {
     border: 1px solid black;
     box-sizing: border-box;
     outline: none;
     font-size: 12px;
     height: 25px;
-    width: 100%;
+    width: 570px;
 }
 
-ul {
+#zipCode {
+    border: 1px solid black;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 12px;
+    height: 25px;
+    width: 150px;
+}
+
+.optionalCheck {
+    margin-left: -40px;
+}
+
+
+ul, li {
     list-style: none;
 }
 
@@ -36,59 +54,40 @@ input::-webkit-input-placeholder {
     color: #AAA;
 }
 
-/* 입력 칸 너비, 높이 설정(아이디, 비밀번호, 비밀번호 확인, 이름, 이메일, 주소) */
-#memberId {
-    width: 475px;
-    height: 25px;
-    outline: none;
-}
-.password, .name, .address, .email{
-    width: 550px;
-    height: 25px;
-    outline: none;
+.modifyContainer {
+    margin: 164px auto;
+    position: inherit;
+    width: 728px;
+    display: block;
 }
 
-/* 여백 설정 */
-#memberId, .password, .name, .joinAddress, #tel, #phone, .sms-yn, .regist-email, .email-yn {
-    margin-top: 20px;
+ul, li {
+    list-style: none;
 }
+
+label {
+    float: left;
+    display: inline-block;
+    width: 106px;
+}
+
 .address {
-    margin-top: 10px;
-}
-.check-agree {
-    margin-top: 50px;
+    margin-top: 8px;
+    margin-left: 138px;
 }
 
-/* 우편번호, 연락처 입력 칸 설정 */
-#zipCode {
-    height: 25px;
-    width: 170.5px;
-    outline: none;
+#SMSagree {
+    display: inline-block;
+    width: auto;
 }
 
-/* 입력 칸 맞춤 설정 */
+#emailAgree {
+    display: inline-block;
+    width: auto;
+}
 
-#memberId, .email, #tel {
-    margin-left: 60.2px;
-}
-#pwd1, #phone {
-    margin-left: 46.3px;
-}
-#pwd2 {
-    margin-left: 14.5px;
-}
-.name, #zipCode {
-    margin-left: 74px;
-}
-.address {
-    margin-left: 116px;
-}
-.sms-yn, .email-yn {
-    display : flex;
-}
-.s-yn, .e-yn {
-    margin-top: 10px;
-    margin-left: 45.5px;
+.modifyBtn {
+    display: flex;
 }
 
 /* 하단 버튼 설정 */
@@ -99,8 +98,6 @@ input::-webkit-input-placeholder {
     color: #fff;
     border: 1px solid #000;
     background: black;
-    /*margin-top: 40px;*/
-    /*margin-bottom: 15px;*/
 }
 
 #cancelMember {
