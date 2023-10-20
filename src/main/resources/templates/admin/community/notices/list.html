@@ -91,6 +91,9 @@
                         <th class="th2 th_content" th:text="${ #dates.format(notices.registeredDate, 'yyyy.MM.dd') }" th:if="${ notices.modifiedDate }!=null"></th>
                             <th class="th2 th_content" th:text="ㅡ" th:if="${ notices.modifiedDate }==null"></th>
                         </table>
+                        <table class="tal_adminNotices2" th:if="${noticesList==null} or ${noticesList.size()==0}">
+                            <th class="th2 th_content">공지사항이 없습니다.</th>
+                        </table>
                     </tr>
                     </tbody>
                 </table>
@@ -99,8 +102,7 @@
 
         <div id="paging" align="right" style="margin-top: 16px;">
 
-            <th:block>
-<!--                    th:if="${ paging.searchCondition == null  || paging.searchValue == null }">-->
+            <th:block th:if="${ paging.searchCondition == 'all'  || paging.searchValue == null }">
                 <!-- 맨 앞으로 이동 -->
                 <button class="pagingButton" th:onclick="'location.href=\'/admin/notices/list?page=1\''">《</button>
 
